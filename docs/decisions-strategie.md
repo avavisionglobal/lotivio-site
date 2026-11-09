@@ -15,6 +15,12 @@ Format d'une entrée :
 
 ---
 
+## 2026-11-09 — Hero : variante 2 retenue, déclinaisons 2B et 2C ; page mobile
+- Décision : la variante 2 du hero (photo + cartes de l'app) est retenue comme base. Deux déclinaisons proposées dans le même style (2B bandeau photo, 2C photo qui devient code). Une version mobile 390 px de la page est livrée dans Figma, avec une échelle typographique mobile dédiée.
+- Raison : choix de Diego (« Je préfère celle-ci… garde ceci… fais 2 autres variantes dans le même style ») ; demandes « il me faut aussi la page en version mobile » et « adapter la taille de la typographie […] pour que le responsive soit le mieux fait possible ».
+- Statut : V2 décidée comme base ; choix entre V2, 2B et 2C à faire.
+- Source : conversation Diego / Claude Code, 9 novembre 2026. Figma : 36:2 (variantes), 39:2 (mobile).
+
 ## 2026-11-09 — Trois variantes du hero ; S10 en carte avec module de réservation
 - Décision : trois variantes du premier écran proposées (centrée produit, photo + cartes, sombre + code) pour choix de Diego. S10 devient une carte sombre avec module de réservation intégré (réf. meotis.ch, Fourmula, Script Runner).
 - Raison : Diego « pas encore satisfait à 100 % » du hero ; demande de retravailler S10 à partir de fourmula.ai, meotis.ch et scriptrunner.ai.

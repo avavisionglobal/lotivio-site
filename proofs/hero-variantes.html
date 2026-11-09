@@ -139,32 +139,61 @@ img{display:block;max-width:100%}a{color:inherit;text-decoration:none}
   .v1 .tex,.v3 .tex{display:none}
   .stage1 .frame{grid-template-columns:1fr;transform:none}.side{display:none}
   .v2{grid-template-columns:1fr;padding:110px 20px 30px}.v2 .r{min-height:520px}
-  .f2{top:auto;bottom:200px}.f3{left:20px;right:20px;width:auto}
+  .v2 .r{min-height:640px}.f1{left:16px;right:16px;width:auto}.f2{left:16px;right:16px;width:auto;top:140px}.f3{left:16px;right:16px;bottom:16px;width:auto}
   .v3{padding:120px 20px 0}.v3 .grid{grid-template-columns:1fr}
   .strip{flex-wrap:wrap;gap:16px 26px;margin:50px -20px 0;padding:20px}
   .pill{display:none}
   .row{grid-template-columns:48px 1fr auto}.row .src{display:none}
 }
+
+/* ===== 2B · bandeau photo ===== */
+.v2b{position:relative;min-height:100vh;background:#fff;padding:120px 28px 28px}
+.v2b .top{display:grid;grid-template-columns:1.6fr 1fr;gap:56px;align-items:end;padding:0 36px}
+.v2b .eyb{color:var(--orange);font-size:13px;letter-spacing:.08em;text-transform:uppercase}
+.v2b h1{font-weight:500;font-size:clamp(42px,4.8vw,80px);line-height:.98;letter-spacing:-.05em;margin-top:18px}
+.v2b h1 .g{color:var(--grey)}
+.v2b .sub{font-size:18px;line-height:1.5;color:var(--muted)}
+.v2b .row-b{display:flex;gap:10px;margin-top:24px}
+.band{position:relative;margin-top:44px;height:470px;border-radius:32px;overflow:hidden}
+.band>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 62%}
+.band::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.2),rgba(0,0,0,0) 45%,rgba(0,0,0,.15))}
+.b1{left:32px;top:30px;width:290px}
+.b2{left:50%;top:44px;width:330px;margin-left:-40px}
+.wa2{background:#E9F7E4}.wa2 .bub{font-size:13.5px;line-height:1.4;margin-top:8px;background:#fff;border-radius:12px;padding:9px 11px}
+.wa2 .bub.me{background:#DCF5D6;margin-left:60px}
+.b3{right:32px;bottom:30px;width:320px}
+.b3 .tg,.c2 .tg{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+.b3 .tg span,.c2 .tg span{font-size:12px;border-radius:6px;padding:4px 8px;background:#F3F2EF}
+.b3 .tg .q,.c2 .tg .q{background:#F3E8FF;color:#7B2CBF;font-weight:500}.b3 .tg .h,.c2 .tg .h{background:#E7F9F1;color:#047857;font-weight:500}
+.srcbar{left:32px;bottom:30px;display:flex;align-items:center;gap:18px;padding:13px 18px;border-radius:999px}
+.srcbar .mono{color:var(--muted);margin-right:4px}.srcbar img{width:auto}
+.cnt{right:32px;top:30px;display:flex;align-items:center;gap:12px;background:#141414;color:#fff;padding:12px 16px}
+.cnt .big{font-weight:500;font-size:38px;letter-spacing:-.05em;line-height:1;color:#FF9C61}
+.cnt span:last-child{font-size:13px;line-height:1.3}.cnt em{font-style:normal;color:#9a9a9a}
+/* ===== 2C · la photo devient code ===== */
+.r2c{min-height:700px}
+.asc{position:absolute;inset:0;z-index:1;background:#F7F6F3;overflow:hidden;
+  mask-image:linear-gradient(90deg,#000 0%,#000 34%,transparent 58%);-webkit-mask-image:linear-gradient(90deg,#000 0%,#000 34%,transparent 58%)}
+.tex2{position:absolute;left:0;top:0;font-family:var(--mono);font-size:9px;line-height:9px;letter-spacing:.5px;white-space:pre;color:#9A968E}
+.tex2 b{color:var(--orange);font-weight:400}
+.seam{position:absolute;z-index:3;left:38%;top:50%;transform:translate(-50%,-50%) rotate(-90deg);background:#141414;color:#fff;border-radius:999px;padding:6px 12px;font-size:10px}
+.c1{right:26px;top:30px;width:290px}
+.c2{right:26px;bottom:34px;width:320px}
+.crit{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:10px}
+.crit span{background:#F3F2EF;border-radius:10px;padding:8px 9px;font-weight:500;font-size:15px}
+.crit small{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:400;margin-bottom:2px}
+.phone2{position:absolute;z-index:4;left:44px;bottom:-70px;width:230px;border-radius:32px;overflow:hidden;border:7px solid #141414;box-shadow:0 30px 50px -20px rgba(0,0,0,.5);opacity:0;transform:translateY(30px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.phone2.on{opacity:1;transform:none}
+@media (max-width:1000px){
+  .v2b .top{grid-template-columns:1fr;gap:20px;padding:0}
+  .band{height:620px}.b2{left:20px;top:150px;margin:0}.cnt,.srcbar{display:none}.b3{left:20px;right:20px;width:auto}
+  .asc{display:none}.seam{display:none}.phone2{display:none}.c1{left:20px;right:20px;width:auto}.c2{left:20px;right:20px;width:auto}
+}
 </style>
 </head>
 <body>
 
-<div class="label"><span><b>Variante 1</b> · Centrée produit — réf. Billow, Muse, Vestris</span><span>Fond clair · icônes des sources dans le titre · fenêtre de l'app en grand</span></div>
-<header class="v1">
-  <nav class="nav"><a class="logo" href="#"><img src="assets/lotivio-mark.svg" alt=""><span>lotivio<i>.</i></span></a><div class="pill"><span class="bg"><i></i><i></i></span>Menu<span class="sep"></span><span style="opacity:.7">Produit · IA · Mise en place</span><span class="ch">0%</span></div><a class="btn b-ink" href="#">Réserver une démo</a></nav>
-  <pre class="tex" data-src="assets/photo-lac.jpg" data-w="1" data-r=".36" aria-hidden="true"></pre>
-  <span class="chip"><b>Nouveau</b>Dictée vocale des comptes rendus de visite</span>
-  <h1><span class="ln">Vos acheteurs écrivent <span class="inl" aria-hidden="true"><span style="background-image:url(assets/logos/smg.png)"></span><span style="background-image:url(assets/logos/immobilier-ch.png)"></span><span style="background-image:url(assets/logos/properstar.png)"></span><span style="background-image:url(assets/logos/whatsapp.svg);background-size:70%;background-color:#fff"></span></span> partout.</span><span class="ln">Lotivio les suit tous<span class="o">.</span></span></h1>
-  <p class="sub">Le CRM immobilier des promoteurs et des agences romandes. Les demandes des portails arrivent seules, l'IA qualifie l'acheteur sur WhatsApp, et chaque matin vous savez qui relancer.</p>
-  <div class="row-b"><a class="btn b-or" href="#">Réserver une démo</a><a class="btn b-gh" href="#">Voir le film · 1 min</a></div>
-  <div class="stage1"><div class="frame">
-    <div class="win"><div class="win-bar"><span class="t"><span class="d"></span>demandes_recues — Démo Immobilier NE</span><span class="clk">21:47</span></div><div class="feed" data-feed></div></div>
-    <aside class="side"><span class="mono">Fiche acheteur</span><h3>Nathalie Girard</h3><div class="tags"><span style="background:rgba(173,70,255,.25);color:#D9B4FF">Qualifié</span><span>Meta Ads</span><span>Les Terrasses du Vignoble</span></div>
-      <div class="kv"><div><span>Recherche</span><span>3.5 pièces · Milvignes</span></div><div><span>Budget max</span><span>CHF 1'100'000</span></div><div><span>Brochure</span><span class="hot">Consultée 3×</span></div><div><span>Prochaine étape</span><span>Visite samedi 10:00</span></div></div></aside>
-  </div><div class="fade"></div></div>
-</header>
-
-<div class="label"><span><b>Variante 2</b> · Photo + cartes flottantes — réf. Script Runner, Vestris</span><span>Fond blanc · la résidence · trois cartes de l'app qui arrivent</span></div>
+<div class="label"><span><b>Variante 2</b> · Photo + cartes flottantes — retenue par Diego</span><span>Fond blanc · la résidence · trois cartes de l'app qui arrivent</span></div>
 <header class="v2">
   <nav class="nav"><a class="logo" href="#"><img src="assets/lotivio-mark.svg" alt=""><span>lotivio<i>.</i></span></a><div class="pill"><span class="bg"><i></i><i></i></span>Menu<span class="sep"></span><span style="opacity:.7">Produit · IA · Mise en place</span><span class="ch">0%</span></div><a class="btn b-ink" href="#">Réserver une démo</a></nav>
   <div class="l">
@@ -182,21 +211,42 @@ img{display:block;max-width:100%}a{color:inherit;text-decoration:none}
   </div>
 </header>
 
-<div class="label"><span><b>Variante 3</b> · Sombre + code — réf. Simeon, Vault AI</span><span>Fond noir · trame de code orange · ligne de commande qui synchronise les sources</span></div>
-<header class="v3">
-  <nav class="nav"><a class="logo" href="#"><img src="assets/lotivio-mark.svg" alt=""><span>lotivio<i>.</i></span></a><div class="pill"><span class="bg"><i></i><i></i></span>Menu<span class="sep"></span><span style="opacity:.7">Produit · IA · Mise en place</span><span class="ch">0%</span></div><a class="btn b-or" href="#">Réserver une démo</a></nav>
-  <pre class="tex" data-src="assets/photo-lac.jpg" data-w=".66" aria-hidden="true"></pre>
-  <span class="eyb mono"><i></i>CRM immobilier propulsé par l'IA · Suisse romande</span>
-  <h1><span>Vos acheteurs écrivent partout.</span><span class="g">Lotivio les suit tous<span class="o">.</span></span></h1>
-  <div class="grid">
-    <div>
-      <div class="cli" id="cli" aria-label="Exemple de synchronisation des sources"></div>
-      <div class="row-b"><a class="btn b-or" href="#">Réserver une démo</a><a class="btn b-wl" href="#">Voir le film</a></div>
-    </div>
-    <div class="win"><div class="win-bar"><span class="t"><span class="d"></span>demandes_recues — Démo Immobilier NE</span><span class="clk">21:47</span></div><div class="feed" data-feed></div></div>
+<div class="label"><span><b>Variante 2B</b> · Bandeau photo — même style que la 2</span><span>Titre et texte sur une ligne · résidence en bandeau · cartes et sources posées dessus</span></div>
+<header class="v2b">
+  <nav class="nav"><a class="logo" href="#"><img src="assets/lotivio-mark.svg" alt=""><span>lotivio<i>.</i></span></a><div class="pill"><span class="bg"><i></i><i></i></span>Menu<span class="sep"></span><span style="opacity:.7">Produit · IA · Mise en place</span><span class="ch">0%</span></div><a class="btn b-ink" href="#">Réserver une démo</a></nav>
+  <div class="top">
+    <div><span class="eyb">CRM immobilier · Suisse romande</span>
+      <h1>Vos acheteurs écrivent partout.<br><span class="g">Lotivio les suit <span class="mark" style="color:var(--ink)">tous</span>.</span></h1></div>
+    <div class="rt"><p class="sub">Homegate, immobilier.ch, Properstar, Meta, votre site : chaque demande arrive dans Lotivio. L'IA qualifie l'acheteur sur WhatsApp, et vous savez qui relancer.</p>
+      <div class="row-b"><a class="btn b-or" href="#">Réserver une démo</a><a class="btn b-gh" href="#">Voir le film · 1 min</a></div></div>
   </div>
-  <div class="strip"><span class="mono">Sources branchées</span>
-    <img src="assets/logos/homegate.svg" alt="Homegate" style="height:28px"><img src="assets/logos/immoscout24.svg" alt="ImmoScout24" style="height:36px"><img src="assets/logos/immobilier-ch.svg" alt="immobilier.ch" style="height:19px"><img src="assets/logos/properstar-logo.png" alt="Properstar" style="height:23px"><img src="assets/logos/meta.png" alt="Meta" style="height:21px"><img src="assets/logos/whatsapp.svg" alt="WhatsApp" style="height:28px">
+  <div class="band">
+    <img src="assets/lake-residence.webp" alt="Résidence de démonstration au bord du lac">
+    <div class="fl b1"><div class="h"><span class="mono">Homegate · nouvelle demande</span><time>maintenant</time></div><b>David Grosjean</b><p>Clos des Vergers · Lot A2 · 3.5 pièces</p></div>
+    <div class="fl b2 wa2"><div class="h"><span class="mono">WhatsApp · Assistant</span><time>21:47</time></div><div class="bub">Voici la brochure des Terrasses du Vignoble. Combien de pièces recherchez-vous ?</div><div class="bub me">4.5, plutôt au littoral</div></div>
+    <div class="fl b3"><div class="h"><span class="mono">Fiche acheteur</span><time>Démo</time></div><b>Nathalie Girard</b><p>3.5 pièces · Milvignes · ≤ CHF 1'100'000</p><div class="tg"><span class="q">Qualifié</span><span class="h">Brochure consultée 3×</span></div><div class="pipe"><i class="on"></i><i class="on"></i><i></i><i></i></div></div>
+    <div class="fl b4 srcbar"><span class="mono">7 sources branchées</span><img src="assets/logos/homegate.svg" alt="Homegate" style="height:18px"><img src="assets/logos/immoscout24.svg" alt="ImmoScout24" style="height:24px"><img src="assets/logos/immobilier-ch.svg" alt="immobilier.ch" style="height:12px"><img src="assets/logos/properstar-logo.png" alt="Properstar" style="height:15px"><img src="assets/logos/meta.png" alt="Meta" style="height:13px"><img src="assets/logos/whatsapp.svg" alt="WhatsApp" style="height:18px"></div>
+    <div class="fl b5 cnt"><span class="big" id="cnt">12</span><span>demandes aujourd'hui<br><em>arrivées seules</em></span></div>
+  </div>
+</header>
+
+<div class="label"><span><b>Variante 2C</b> · La photo devient code — même style que la 2</span><span>Moitié gauche de la résidence en trame de code · téléphone WhatsApp · cartes de l'app</span></div>
+<header class="v2 v2c">
+  <nav class="nav"><a class="logo" href="#"><img src="assets/lotivio-mark.svg" alt=""><span>lotivio<i>.</i></span></a><div class="pill"><span class="bg"><i></i><i></i></span>Menu<span class="sep"></span><span style="opacity:.7">Produit · IA · Mise en place</span><span class="ch">0%</span></div><a class="btn b-ink" href="#">Réserver une démo</a></nav>
+  <div class="l">
+    <span class="eyb">CRM immobilier propulsé par l'IA</span>
+    <h1>Vos acheteurs écrivent partout.<br><span class="g">Lotivio les suit <span class="mark" style="color:var(--ink)">tous</span>.</span></h1>
+    <p class="sub">Chaque demande des portails, de Meta et de votre site devient une fiche. L'IA qualifie l'acheteur sur WhatsApp, et chaque matin vous savez qui relancer.</p>
+    <div class="row-b"><a class="btn b-or" href="#">Réserver une démo</a><a class="btn b-gh" href="#">Voir le film · 1 min</a></div>
+    <div class="proof"><div class="ic"><span style="background-image:url(assets/logos/smg.png)"></span><span style="background-image:url(assets/logos/immobilier-ch.png)"></span><span style="background-image:url(assets/logos/properstar.png)"></span><span style="background-image:url(assets/logos/whatsapp.svg);background-size:70%"></span></div><p><b>7 sources branchées</b> · jusqu'à 4 h gagnées par semaine et par agent</p></div>
+  </div>
+  <div class="r r2c">
+    <img src="assets/lake-residence.webp" alt="Résidence de démonstration au bord du lac">
+    <div class="asc"><pre class="tex2" data-src="assets/lake-residence.webp" aria-hidden="true"></pre></div>
+    <span class="seam mono" aria-hidden="true">demande → fiche</span>
+    <div class="fl c1"><div class="h"><span class="mono">immobilier.ch · nouvelle demande</span><time>08:12</time></div><b>Claire Monnier</b><p>Les Terrasses · Attique · 5.5 pièces</p></div>
+    <div class="fl c2"><div class="h"><span class="mono">Fiche acheteur</span><time>Démo</time></div><b>Nathalie Girard</b><div class="crit"><span><small>Pièces</small>3.5</span><span><small>Zone</small>Milvignes</span><span><small>Budget</small>≤ 1,1 mio</span></div><div class="tg"><span class="q">Qualifié</span><span class="h">Relance aujourd'hui</span></div></div>
+    <div class="phone2"><img src="assets/ui-wa.png" alt="Conversation WhatsApp de l'assistant, données de démonstration"></div>
   </div>
 </header>
 
@@ -217,12 +267,19 @@ document.querySelectorAll('[data-feed]').forEach((feed,k)=>{for(let i=0;i<5;i++)
   let n=k,m=47;const clk=feed.closest('.win').querySelector('.clk');
   setInterval(()=>{const d=data[n++%data.length];m=(m+1)%60;const t='21:'+String(m).padStart(2,'0');feed.prepend(row(d,t));if(feed.children.length>7)feed.lastElementChild.remove();clk.textContent=t},2400+k*300)});
 /* variante 2 : cartes qui arrivent */
-document.querySelectorAll('.fl').forEach((c,i)=>setTimeout(()=>c.classList.add('on'),400+i*700));
-/* variante 3 : ligne de commande */
-(function(){const cli=document.getElementById('cli');const lines=[['p','$ '],[null,'lotivio sync --agence demo-immobilier-ne\n'],['dim','  homegate · immoscout24 · immobilier.ch · properstar · meta · site\n'],['ok','✓ '],[null,'12 nouvelles demandes, sans saisie\n'],['ok','✓ '],[null,'brochures envoyées sur WhatsApp\n'],['ok','✓ '],[null,'3 acheteurs qualifiés · 7 relances à traiter\n']];
-  const cur=el('span','cur');cli.append(cur);let i=0;
-  function next(){if(i>=lines.length){setTimeout(()=>{cli.replaceChildren(cur);i=0;next()},4000);return}const[c,t]=lines[i++];cli.insertBefore(c?el('span',c,t):document.createTextNode(t),cur);setTimeout(next,t.endsWith('\n')?600:160)}
-  setTimeout(next,600)})();
+document.querySelectorAll('header').forEach(h=>h.querySelectorAll('.fl').forEach((c,i)=>setTimeout(()=>c.classList.add('on'),400+i*450)));
+/* 2C : trame de code calée sur la photo (même recadrage que object-fit:cover) */
+document.querySelectorAll('pre.tex2').forEach(pre=>{const box=pre.parentElement;const img=new Image();img.src=pre.dataset.src;img.onload=()=>{
+  const W=box.clientWidth,H=box.clientHeight;if(!W||!H)return;const cw=6.1,ch=9,cols=Math.ceil(W/cw),rows=Math.ceil(H/ch);
+  const big=document.createElement('canvas');big.width=W;big.height=H;const g=big.getContext('2d');
+  const sc=Math.max(W/img.width,H/img.height),dw=img.width*sc,dh=img.height*sc;g.drawImage(img,(W-dw)/2,(H-dh)/2,dw,dh);
+  const sm=document.createElement('canvas');sm.width=cols;sm.height=rows;const x=sm.getContext('2d');x.drawImage(big,0,0,cols,rows);
+  const d=x.getImageData(0,0,cols,rows).data,ramp=" .:-=+*#%@";const f=document.createDocumentFragment();let line='';
+  for(let y=0;y<rows;y++){for(let i=0;i<cols;i++){const p=(y*cols+i)*4,l=(d[p]*.3+d[p+1]*.59+d[p+2]*.11)/255,c=ramp[Math.min(9,Math.floor((1-l)*10))];
+    if(c!==' '&&Math.random()<.006){f.append(document.createTextNode(line));line='';f.append(el('b',null,c))}else line+=c}line+='\n'}
+  f.append(document.createTextNode(line));pre.append(f)}});
+setTimeout(()=>document.querySelectorAll('.phone2').forEach(p=>p.classList.add('on')),900);
+(function(){const c=document.getElementById('cnt');if(!c)return;let n=12;setInterval(()=>{n++;c.textContent=n},3200)})();
 </script>
 </body>
 </html>
