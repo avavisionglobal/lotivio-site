@@ -12,7 +12,7 @@
   --ink:#141414; --ink-2:#2a2a2a; --grey:#A3A29E; --muted:#6F6E6A;
   --line:#ECEBE8; --soft:#F5F4F1; --soft-2:#EEECE7; --white:#fff;
   --warm:#F1F0EC; --warm-2:#F7F6F3; --warm-line:#DCDAD4;
-  --orange:#E8762D; --violet:#AD46FF; --green:#0E8345; --blue:#276EF1;
+  --orange:#EB6E2C; --violet:#AD46FF; --green:#0E8345; --blue:#276EF1;
   --sans:'Geist',ui-sans-serif,sans-serif; --mono:'Geist Mono',ui-monospace,monospace; --disp:'Archivo',sans-serif;
   --ease:cubic-bezier(.2,.7,.1,1); --pad:28px;
 }
@@ -397,7 +397,7 @@ a{color:inherit;text-decoration:none}
 
 
 /* ---------- S07B · Pourquoi maintenant : tableau à clés ---------- */
-.why{position:relative;height:220vh;background:#EB6E2C;color:#fff;margin-top:120px}
+.why{position:relative;height:220vh;background:radial-gradient(120% 75% at 50% 0%,#F3874B 0%,#EB6E2C 48%,#D95C1E 100%);color:#fff;margin-top:120px}
 .why-pin{position:sticky;top:0;height:100svh;min-height:780px;overflow:hidden}
 .why-head{position:absolute;left:50%;top:14%;width:min(860px,90vw);transform:translateX(-50%);text-align:center;will-change:transform,opacity}
 .why-head .eyb{font-size:17px;letter-spacing:.06em;text-transform:uppercase}
@@ -405,30 +405,34 @@ a{color:inherit;text-decoration:none}
 .why-head p{font-size:clamp(20px,1.9vw,28px);line-height:1.38;margin-top:30px}
 
 .board{position:absolute;left:50%;top:19%;width:860px;height:560px;transform:translateX(-50%)}
-.board-cap{position:absolute;left:0;right:0;top:-44px;text-align:center;font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;opacity:0;transition:opacity .4s}
+.board-cap{position:absolute;left:0;right:0;top:-40px;text-align:center;font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;opacity:0;transition:opacity .4s}
 .board-cap.on{opacity:.85}
-.rail{position:absolute;left:30px;right:30px;top:0;height:16px;border-radius:8px;opacity:0;transition:opacity .4s;
-  background:linear-gradient(180deg,#5A3A22 0%,#3C2514 55%,#2A190D 100%);box-shadow:0 10px 18px -8px rgba(60,20,0,.55),inset 0 1px 0 rgba(255,255,255,.25)}
+.rail{position:absolute;left:0;right:0;top:0;height:60px;opacity:0;transition:opacity .4s}
 .rail.on{opacity:1}
-.rail i{position:absolute;top:10px;width:10px;height:26px;border-radius:0 0 6px 6px;background:linear-gradient(90deg,#9A9A9A,#EDEDED 45%,#8C8C8C);box-shadow:0 2px 3px rgba(0,0,0,.25)}
-.rail i:nth-child(1){left:calc(150px - 35px)}
-.rail i:nth-child(2){left:calc(400px - 35px)}
-.rail i:nth-child(3){left:calc(650px - 35px)}
-
-.tag{position:absolute;top:22px;width:220px;margin-left:-110px;transform-origin:50% 0;will-change:transform}
+.rail::before{content:"";position:absolute;left:40px;right:40px;top:0;height:32px;border-radius:7px;
+  background:repeating-linear-gradient(90deg,rgba(0,0,0,.05) 0 2px,transparent 2px 11px),linear-gradient(180deg,#8A5A33 0%,#6A4227 50%,#4B2D1A 100%);
+  box-shadow:0 16px 22px -12px rgba(70,20,0,.6),inset 0 1px 0 rgba(255,255,255,.22),inset 0 -2px 0 rgba(0,0,0,.25)}
+.rail .screw{position:absolute;top:12px;width:9px;height:9px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#FFF3C9,#C9A04E 60%,#7C5A1E)}
+.rail .hk{position:absolute;top:0;width:0}
+.rail .hk b{position:absolute;top:7px;left:0;transform:translateX(-50%);min-width:30px;padding:2px 5px;border-radius:2px;text-align:center;
+  font-family:var(--mono);font-weight:500;font-size:9.5px;letter-spacing:.06em;color:#3A2A0C;background:linear-gradient(180deg,#F5DC93,#C99A3E 55%,#B0832C);box-shadow:0 1px 1px rgba(0,0,0,.35)}
+.rail .hk i{position:absolute;top:28px;left:0;transform:translateX(-50%);width:9px;height:30px;border-radius:0 0 6px 6px;background:linear-gradient(90deg,#8E8E8E,#F1F1F1 45%,#8C8C8C);box-shadow:0 3px 4px rgba(0,0,0,.3)}
+.tag{position:absolute;top:40px;width:220px;margin-left:-110px;transform-origin:50% 0;will-change:transform}
 .key{position:absolute;left:-40px;top:-18px;width:200px;height:80px;transform-origin:150px 40px;transform:rotate(-28deg);z-index:3;filter:drop-shadow(0 8px 6px rgba(40,10,0,.35))}
 .t2 .key{transform:rotate(-16deg)}.t3 .key{transform:rotate(-36deg)}
 .t1{left:150px}.t2{left:400px}.t3{left:650px}
 .tag.hang{animation:swing 3.2s ease-in-out infinite alternate}
 .t2.hang{animation-delay:-1.1s}.t3.hang{animation-delay:-2.2s}
 @keyframes swing{from{rotate:-1.6deg}to{rotate:1.6deg}}
-.ring{display:block;width:44px;height:44px;margin:0 auto;border-radius:50%;border:5px solid #CFCFCF;border-top-color:#F2F2F2;border-bottom-color:#9C9C9C;box-shadow:0 2px 4px rgba(0,0,0,.25)}
-.fob{position:relative;margin-top:-12px;height:360px;border-radius:34px 34px 26px 26px;padding:58px 16px 16px;
+.ring{display:block;width:44px;height:44px;margin:0 auto;border-radius:50%;border:4px solid #C6C6C6;border-top-color:#F4F4F4;border-bottom-color:#959595;box-shadow:inset 0 0 0 2px rgba(255,255,255,.55),0 2px 4px rgba(0,0,0,.28)}
+.fob{position:relative;margin-top:-12px;height:392px;border-radius:34px 34px 26px 26px;padding:58px 16px 44px;
   box-shadow:0 30px 40px -24px rgba(70,20,0,.6),inset 0 2px 0 rgba(255,255,255,.25),inset 0 -8px 16px rgba(0,0,0,.18)}
 .fob .hole{position:absolute;left:50%;top:16px;width:26px;height:26px;margin-left:-13px;border-radius:50%;background:#EB6E2C;box-shadow:inset 0 3px 5px rgba(0,0,0,.35)}
 .t1 .fob{background:linear-gradient(160deg,#2E2E2E,#141414 60%)}
 .t2 .fob{background:linear-gradient(160deg,#C27BFF,#9636E8 60%)}
 .t3 .fob{background:linear-gradient(160deg,#25A564,#0B6E3A 60%)}
+.fob .bm{position:absolute;left:0;right:0;bottom:13px;text-align:center;font-family:var(--disp);font-variation-settings:"wdth" 116;font-weight:700;font-size:15px;letter-spacing:-.03em;color:rgba(255,255,255,.9)}
+.fob .bm i{font-style:normal;color:var(--orange)}
 .ins{height:100%;background:#FBFAF6;border-radius:16px;color:var(--ink);padding:16px 14px;display:flex;flex-direction:column;
   box-shadow:inset 0 0 0 1px rgba(0,0,0,.06),inset 0 6px 10px -6px rgba(0,0,0,.18);
   background-image:repeating-linear-gradient(180deg,transparent 0 27px,rgba(39,110,241,.12) 27px 28px)}
@@ -437,7 +441,7 @@ a{color:inherit;text-decoration:none}
 .ins .n small{font-size:14px;letter-spacing:0;font-weight:500;color:var(--muted);margin-bottom:4px}
 .ins .t{font-size:15px;line-height:1.3;margin-top:12px;color:#333}
 
-.why-cta{position:absolute;left:50%;bottom:7%;transform:translate(-50%,16px);background:#fff;color:var(--ink);border-radius:999px;padding:17px 30px;font-size:18px;font-weight:500;opacity:0;transition:opacity .4s,transform .4s;box-shadow:0 20px 30px -20px rgba(80,20,0,.5)}
+.why-cta{position:absolute;left:50%;bottom:6%;transform:translate(-50%,16px);background:#fff;color:var(--ink);font-family:var(--sans);border-radius:999px;padding:17px 30px;font-size:18px;font-weight:500;opacity:0;transition:opacity .4s,transform .4s;box-shadow:0 20px 30px -20px rgba(80,20,0,.5)}
 .why-cta.on{opacity:1;transform:translate(-50%,0)}
 
 @media (max-width:1000px){
@@ -465,6 +469,89 @@ a{color:inherit;text-decoration:none}
 .sc .lgo+.ct{margin-top:14px}
 @media (max-width:1000px){.sources{gap:18px 28px;flex-wrap:wrap}.sources img.lg{max-height:24px}}
 
+
+/* ---------- Couleur de marque #EB6E2C : accents mesurés ---------- */
+::selection{background:#EB6E2C;color:#fff}
+.split>.lab,.ai .lab,.faq .lab{color:var(--orange);font-size:13px;letter-spacing:.07em;text-transform:uppercase}
+.ai .lab{display:block}
+h1 .o,.h2 .o,.final .o{font-style:normal;color:var(--orange)}
+.btn-dark:hover{background:var(--orange)}
+.pill .chip{color:#FF9C61}
+.faq summary::after{color:var(--orange)}
+.faq summary:hover{color:var(--orange)}
+.final .btn-dark{background:var(--orange)}
+.final .btn-dark:hover{background:var(--ink)}
+.foot a:hover{color:var(--orange)}
+.g1{background:linear-gradient(180deg,#E25C25 0%,#EB6E2C 55%,#F08A50 100%)}
+
+/* ---------- S10 · Appel final centré + S11 · footer révélé (réf. Script Runner) ---------- */
+.page{position:relative;z-index:1;background:#fff}
+.final2{text-align:center;padding:200px var(--pad) 220px}
+.final2 h2{font-weight:500;font-size:clamp(44px,5.6vw,92px);letter-spacing:-.045em;line-height:1.02}
+.final2 h2 .o{font-style:normal;color:var(--orange)}
+.final2 p{font-size:clamp(17px,1.4vw,21px);color:var(--muted);margin-top:24px}
+.btn-o{display:inline-flex;margin-top:34px;background:var(--orange);color:#fff;border-radius:999px;padding:15px 28px;font-size:18px;font-weight:500;transition:transform .15s var(--ease),background .15s}
+.btn-o:hover{background:var(--ink)}.btn-o:active{transform:scale(.96)}
+.foot2{position:fixed;left:0;right:0;bottom:0;z-index:0;background:#EB6E2C;color:#fff;overflow:hidden;padding:56px var(--pad) 0;min-height:560px;display:flex;flex-direction:column}
+.f-top{display:grid;grid-template-columns:1.2fr 2fr;gap:40px}
+.f-brand p{font-size:18px;line-height:1.45;max-width:24em;color:rgba(255,255,255,.92)}
+.f-cta{display:inline-flex;gap:8px;margin-top:22px;background:var(--ink);color:#fff;border-radius:999px;padding:13px 22px;font-size:15px;font-weight:500}
+.f-cta:hover{background:#fff;color:var(--ink)}
+.f-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:30px}
+.f-cols h5{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;font-weight:400;color:rgba(255,255,255,.7);margin-bottom:14px}
+.f-cols a{display:block;margin-top:8px;font-size:16px}
+.f-cols a:hover{text-decoration:underline;text-underline-offset:3px}
+.f-legal{display:flex;justify-content:space-between;margin-top:56px;padding-top:16px;border-top:1px solid rgba(255,255,255,.3);color:rgba(255,255,255,.8)}
+.f-word{margin-top:auto;font-family:var(--disp);font-variation-settings:"wdth" 118;font-weight:800;font-size:27.5vw;letter-spacing:-.065em;line-height:.74;white-space:nowrap;
+  transform:translateY(16%);margin-left:-.04em;
+  background:linear-gradient(180deg,rgba(255,255,255,.45) 0%,#fff 38%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.f-word i{font-style:normal;-webkit-text-fill-color:#141414;color:#141414}
+@media (max-width:1000px){
+  .f-top{grid-template-columns:1fr}
+  .f-cols{grid-template-columns:1fr 1fr}
+  .foot2{min-height:0}
+  .final2{padding:130px var(--pad) 150px}
+}
+
+/* ---------- S10 · Appel final : carte + réservation (réf. meotis.ch, Fourmula, Script Runner) ---------- */
+.cta10{padding:140px var(--pad) 160px}
+.cta10-card{position:relative;max-width:1320px;margin:0 auto;border-radius:36px;overflow:hidden;display:grid;grid-template-columns:1fr minmax(380px,500px);gap:56px;align-items:center;padding:72px 64px;color:#fff;
+  background:radial-gradient(70% 90% at 92% 100%,rgba(235,110,44,.55) 0%,rgba(235,110,44,0) 60%),radial-gradient(60% 70% at 0% 0%,rgba(255,255,255,.06),transparent 60%),#141414;
+  box-shadow:0 60px 120px -60px rgba(20,20,20,.6)}
+.cta10-tex{left:-20px;top:-10px;width:70%;color:#3B3936;opacity:.9;mask-image:linear-gradient(90deg,#000 30%,transparent 80%);-webkit-mask-image:linear-gradient(90deg,#000 30%,transparent 80%)}
+.cta10-l{position:relative}
+.cta10 .eyb{color:var(--orange);font-size:13px;letter-spacing:.08em;text-transform:uppercase}
+.cta10 h2{font-weight:500;font-size:clamp(44px,4.8vw,76px);letter-spacing:-.045em;line-height:1;margin-top:18px}
+.cta10 h2 .g{display:block;color:#8F8C86}.cta10 h2 .o{font-style:normal;color:var(--orange)}
+.chk{list-style:none;margin-top:34px;padding-top:24px;border-top:1px solid rgba(255,255,255,.14)}
+.chk li{display:flex;gap:12px;font-size:17px;line-height:1.4;padding:7px 0;color:rgba(255,255,255,.88)}
+.chk li::before{content:"";flex:none;width:18px;height:18px;margin-top:2px;border-radius:50%;background:var(--orange) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3'%3E%3Cpath d='M5 12l5 5 9-10'/%3E%3C/svg%3E") center/11px no-repeat}
+.cta10-mark{display:flex;align-items:center;gap:10px;margin-top:40px;font-family:var(--disp);font-variation-settings:"wdth" 118;font-weight:700;font-size:26px;letter-spacing:-.04em}
+.cta10-mark img{width:30px;height:30px;filter:invert(1)}.cta10-mark i{font-style:normal;color:var(--orange)}
+.cta10-links{display:flex;gap:28px;margin-top:22px;font-size:15px}
+.cta10-links a{border-bottom:1px solid rgba(255,255,255,.3);padding-bottom:2px}.cta10-links a:hover{border-color:var(--orange);color:var(--orange)}
+.book{position:relative;background:#fff;color:var(--ink);border-radius:24px;padding:24px;box-shadow:0 40px 80px -40px rgba(0,0,0,.6)}
+.bk-h{display:flex;align-items:center;gap:12px;padding-bottom:18px;border-bottom:1px solid var(--line)}
+.bk-h .av{width:40px;height:40px;border-radius:12px;background:var(--ink);color:#fff;display:grid;place-items:center;font-family:var(--disp);font-weight:700}
+.bk-h b{display:block;font-weight:600;font-size:16px}.bk-h small{font-size:13px;color:var(--muted)}
+.bk-l{font-size:14px;font-weight:500;margin:18px 0 10px}
+.days{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.days button,.slots button{border:1px solid transparent;background:#F4F3F1;border-radius:12px;font:inherit;cursor:pointer;transition:background .15s,border-color .15s,color .15s}
+.days button{padding:9px 4px;display:flex;flex-direction:column;align-items:center;line-height:1.15}
+.days small{font-size:11.5px;color:var(--muted)}.days b{font-size:20px;font-weight:600;margin:2px 0}
+.days button:hover,.slots button:hover{border-color:#DCDAD4}
+.days button[aria-pressed="true"],.slots button[aria-pressed="true"]{background:#FDEEE2;border-color:var(--orange);color:#B4501A}
+.days button[aria-pressed="true"] small{color:#B4501A}
+.slots{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.slots button{padding:12px 0;font-size:15px;font-weight:500}
+.tz{font-size:12.5px;color:var(--muted);margin-top:12px}
+.go{width:100%;margin-top:16px;border:0;border-radius:14px;padding:15px;font:inherit;font-size:16px;font-weight:500;background:#EDECE9;color:#9A9893;cursor:not-allowed;transition:background .2s,color .2s}
+.go:not([disabled]){background:var(--orange);color:#fff;cursor:pointer}.go:not([disabled]):hover{background:var(--ink)}
+@media (max-width:1000px){
+  .cta10{padding:90px 16px 110px}
+  .cta10-card{grid-template-columns:1fr;padding:40px 22px;gap:36px;border-radius:28px}
+  .cta10-tex{display:none}
+}
 </style>
 </head>
 <body>
@@ -482,11 +569,12 @@ a{color:inherit;text-decoration:none}
     <a class="btn btn-dark" href="#demo">Réserver une démo</a>
   </div>
 </nav>
+<div class="page" id="page">
 
 <!-- S01 · Hero (premier écran) -->
 <header class="bh">
   <pre class="tex" data-src="assets/photo-lac.jpg" data-w=".62" aria-hidden="true"></pre>
-  <h1 class="rv"><span>Vos acheteurs écrivent partout.</span><span>Lotivio les suit tous.</span></h1>
+  <h1 class="rv"><span>Vos acheteurs écrivent partout.</span><span>Lotivio les suit tous<i class="o">.</i></span></h1>
   <div class="bh-grid">
     <div class="rv">
       <p class="lede">Le CRM immobilier des promoteurs et des agences romandes. <strong>Les demandes des portails arrivent seules</strong>, l'IA qualifie l'acheteur sur WhatsApp, et chaque matin vous savez qui relancer. Mis en place avec vous, selon votre façon de vendre.</p>
@@ -526,7 +614,7 @@ a{color:inherit;text-decoration:none}
 <section class="sec">
   <div class="split rv">
     <div class="lab">Ce que Lotivio fait</div>
-    <div class="body"><h2 class="h2">Toutes vos demandes.<span class="g">Un seul endroit.</span></h2></div>
+    <div class="body"><h2 class="h2">Toutes vos demandes.<span class="g">Un seul endroit<i class="o">.</i></span></h2></div>
   </div>
   <div class="bento">
     <article class="bc wide rv">
@@ -567,7 +655,7 @@ a{color:inherit;text-decoration:none}
   <div class="ai rv">
     <div class="l">
       <div>
-        <div style="font-size:13px">L'IA dans Lotivio</div>
+        <div class="lab">L'IA dans Lotivio</div>
         <h2 style="margin-top:22px">L'IA qui</h2>
         <p>Réglée avec vous à la mise en place : vos projets, vos consignes, votre façon de répondre.</p>
       </div>
@@ -745,23 +833,23 @@ a{color:inherit;text-decoration:none}
     </div>
     <div class="board" id="board">
       <div class="board-cap" aria-hidden="true">Le tableau des clés de votre agence</div>
-      <div class="rail" aria-hidden="true"><i></i><i></i><i></i></div>
+      <div class="rail" aria-hidden="true"><span class="screw" style="left:54px"></span><span class="screw" style="right:54px"></span><span class="hk" style="left:150px"><b>A1</b><i></i></span><span class="hk" style="left:275px"><b>A2</b><i></i></span><span class="hk" style="left:400px"><b>B4</b><i></i></span><span class="hk" style="left:525px"><b>C1</b><i></i></span><span class="hk" style="left:650px"><b>C3</b><i></i></span></div>
       <div class="tag t1" data-x="-360" data-y="430" data-r="-64">
         <span class="ring" aria-hidden="true"></span><svg class="key" viewBox="0 0 200 80" aria-hidden="true"><defs><linearGradient id="kg1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F4F4F4"/><stop offset=".5" stop-color="#C2C2C2"/><stop offset="1" stop-color="#8A8A8A"/></linearGradient></defs><g fill="url(#kg1)"><path fill-rule="evenodd" d="M122 40a28 28 0 1 0 56 0a28 28 0 1 0 -56 0zM140 40a10 10 0 1 0 20 0a10 10 0 1 0 -20 0z"/><rect x="108" y="31" width="18" height="18" rx="3"/><rect x="18" y="35" width="94" height="10" rx="2"/><path d="M18 45h8v9h7v-6h7v8h7v-5h7v-6z"/></g></svg>
         <div class="fob"><span class="hole" aria-hidden="true"></span>
-          <div class="ins"><span class="k">Temps gagné</span><span class="n"><small>jusqu'à</small>4 h</span><span class="t">par semaine et par agent</span></div>
+          <span class="bm">lotivio<i>.</i></span><div class="ins"><span class="k">Temps gagné</span><span class="n"><small>jusqu'à</small>4 h</span><span class="t">par semaine et par agent</span></div>
         </div>
       </div>
       <div class="tag t2" data-x="40" data-y="520" data-r="22">
         <span class="ring" aria-hidden="true"></span><svg class="key" viewBox="0 0 200 80" aria-hidden="true"><defs><linearGradient id="kg2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F4F4F4"/><stop offset=".5" stop-color="#C2C2C2"/><stop offset="1" stop-color="#8A8A8A"/></linearGradient></defs><g fill="url(#kg2)"><path fill-rule="evenodd" d="M122 40a28 28 0 1 0 56 0a28 28 0 1 0 -56 0zM140 40a10 10 0 1 0 20 0a10 10 0 1 0 -20 0z"/><rect x="108" y="31" width="18" height="18" rx="3"/><rect x="18" y="35" width="94" height="10" rx="2"/><path d="M18 45h8v9h7v-6h7v8h7v-5h7v-6z"/></g></svg>
         <div class="fob"><span class="hole" aria-hidden="true"></span>
-          <div class="ins"><span class="k">Assistant</span><span class="n">24/7</span><span class="t">répond aux nouveaux acheteurs sur WhatsApp</span></div>
+          <span class="bm">lotivio<i>.</i></span><div class="ins"><span class="k">Assistant</span><span class="n">24/7</span><span class="t">répond aux nouveaux acheteurs sur WhatsApp</span></div>
         </div>
       </div>
       <div class="tag t3" data-x="400" data-y="400" data-r="58">
         <span class="ring" aria-hidden="true"></span><svg class="key" viewBox="0 0 200 80" aria-hidden="true"><defs><linearGradient id="kg3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F4F4F4"/><stop offset=".5" stop-color="#C2C2C2"/><stop offset="1" stop-color="#8A8A8A"/></linearGradient></defs><g fill="url(#kg3)"><path fill-rule="evenodd" d="M122 40a28 28 0 1 0 56 0a28 28 0 1 0 -56 0zM140 40a10 10 0 1 0 20 0a10 10 0 1 0 -20 0z"/><rect x="108" y="31" width="18" height="18" rx="3"/><rect x="18" y="35" width="94" height="10" rx="2"/><path d="M18 45h8v9h7v-6h7v8h7v-5h7v-6z"/></g></svg>
         <div class="fob"><span class="hole" aria-hidden="true"></span>
-          <div class="ins"><span class="k">Sources</span><span class="n">7</span><span class="t">réunies dans une seule file</span></div>
+          <span class="bm">lotivio<i>.</i></span><div class="ins"><span class="k">Sources</span><span class="n">7</span><span class="t">réunies dans une seule file</span></div>
         </div>
       </div>
     </div>
@@ -805,7 +893,7 @@ a{color:inherit;text-decoration:none}
 <!-- S09 · Questions (FAQ) -->
 <section class="sec">
   <div class="faq rv">
-    <div style="padding:18px 0;font-size:13px">Questions</div>
+    <div class="lab" style="padding:18px 0">Questions</div>
     <div class="r">
       <h2 class="h2" style="padding:18px 0 40px">Avant une démo,<span class="g">on nous demande…</span></h2>
       <details open><summary>Où sont stockées les données ?</summary><p>Dans l'Union européenne, à Francfort. Chaque agence est isolée des autres : un agent ne voit que les données de son organisation.</p></details>
@@ -819,23 +907,50 @@ a{color:inherit;text-decoration:none}
 </section>
 
 <!-- S10 · Appel final -->
-<section class="final rv" id="demo">
-  <pre class="tex" data-src="assets/photo-lac.jpg" data-w=".58" aria-hidden="true"></pre>
-  <h2>Voyons comment<span class="g">votre agence travaille.</span></h2>
-  <div class="side"><p>Une démo sur vos vrais projets : vos sources, vos relances, vos réglages.</p><a class="btn btn-dark" href="#">Réserver une démo</a></div>
+<section class="cta10" id="demo">
+  <div class="cta10-card">
+    <pre class="tex cta10-tex" data-src="assets/lake-residence.webp" data-w=".95" data-r=".42" aria-hidden="true"></pre>
+    <div class="cta10-l">
+      <span class="eyb">Démo</span>
+      <h2>Voyons comment<span class="g">votre agence travaille<i class="o">.</i></span></h2>
+      <ul class="chk">
+        <li>Une démonstration à partir de vos projets en cours</li>
+        <li>Vos portails, vos relances, vos réglages</li>
+        <li>Avec l'équipe qui met Lotivio en place, sans engagement</li>
+      </ul>
+      <div class="cta10-mark"><img src="assets/lotivio-mark.svg" alt=""><span>lotivio<i>.</i></span></div>
+      <div class="cta10-links"><a href="#">Écrire à l'équipe <span aria-hidden="true">→</span></a><a href="#">Voir le film <span aria-hidden="true">→</span></a></div>
+    </div>
+    <div class="book" aria-label="Réservation d'une démo (exemple)">
+      <div class="bk-h"><span class="av"><img src="assets/lotivio-mark.svg" alt="" style="width:24px;height:24px;filter:invert(1)"></span><div><b>Démo Lotivio</b><small>Visio · lien envoyé par e-mail</small></div></div>
+      <div class="bk-l">Choisissez un jour</div>
+      <div class="days" id="days"></div>
+      <div class="bk-l">Choisissez une heure</div>
+      <div class="slots" id="slots"><button>09:00</button><button>10:00</button><button>11:00</button><button>14:00</button><button>15:00</button><button>16:00</button></div>
+      <div class="tz">Heure suisse</div>
+      <button class="go" id="bk-go" disabled>Continuer</button>
+    </div>
+  </div>
 </section>
 
-<!-- S11 · Footer -->
-<footer class="foot">
-  <div><a class="logo" href="#"><img src="assets/lotivio-mark.svg" alt=""><span>lotivio<i>.</i></span></a><p style="color:var(--muted);margin-top:14px;max-width:22em;line-height:1.5">Le CRM immobilier des promoteurs et des agences romandes.</p></div>
-  <div><h5>Produit</h5><a href="#">Demandes reçues</a><a href="#">Assistant WhatsApp</a><a href="#">Dictée vocale</a><a href="#">Diffusion</a></div>
-  <div><h5>Agence</h5><a href="#">Mise en place</a><a href="#">Questions</a><a href="#demo">Réserver une démo</a></div>
-  <div><h5>Compte</h5><a href="#">Se connecter</a><a href="#">Confidentialité</a></div>
+</div><!-- /page -->
+
+<!-- S11 · Footer (révélé au défilement) -->
+<footer class="foot2" id="foot2">
+  <div class="f-top">
+    <div class="f-brand">
+      <p>Le CRM immobilier des promoteurs et des agences romandes. Mis en place avec vous, selon votre façon de vendre.</p>
+      <a class="f-cta" href="#demo">Réserver une démo <span aria-hidden="true">→</span></a>
+    </div>
+    <nav class="f-cols" aria-label="Pied de page">
+      <div><h5>Produit</h5><a href="#">Demandes reçues</a><a href="#">Assistant WhatsApp</a><a href="#">Dictée vocale</a><a href="#">Diffusion</a></div>
+      <div><h5>Agence</h5><a href="#mise-en-place">Mise en place</a><a href="#">Questions</a><a href="#demo">Réserver une démo</a></div>
+      <div><h5>Compte</h5><a href="#">Se connecter</a><a href="#">Confidentialité</a></div>
+    </nav>
+  </div>
+  <div class="f-legal mono"><span>© 2026 Lotivio · Ava Vision</span><span>Données de démonstration</span></div>
+  <div class="f-word" aria-hidden="true">lotivio<i>.</i></div>
 </footer>
-<!-- S12 · Trame de points -->
-<div class="dots" aria-hidden="true"></div>
-<!-- S13 · Mentions légales -->
-<div class="legal mono"><span>© 2026 Lotivio · Ava Vision</span><span>Données de démonstration</span></div>
 
 <script>
 function el(tag,cls,text){const e=document.createElement(tag);if(cls)e.className=cls;if(text!=null)e.textContent=text;return e}
@@ -970,9 +1085,23 @@ drawChain();
   addEventListener('scroll',upd,{passive:true});addEventListener('resize',upd);upd();
 })();
 
+/* S11 · footer révélé : la page laisse sous elle la place du footer */
+(function(){const f=document.getElementById('foot2'),p=document.getElementById('page');if(!f||!p)return;
+  const fit=()=>{p.style.marginBottom=f.offsetHeight+'px'};fit();addEventListener('resize',fit);addEventListener('load',fit)})();
+/* S10 · module de réservation (exemple, destination à brancher) */
+(function(){const days=document.getElementById('days');if(!days)return;
+  const jours=['dim.','lun.','mar.','mer.','jeu.','ven.','sam.'],mois=['janv.','févr.','mars','avr.','mai','juin','juil.','août','sept.','oct.','nov.','déc.'];
+  const d=new Date();const list=[];while(list.length<8){d.setDate(d.getDate()+1);if(d.getDay()!==0&&d.getDay()!==6)list.push(new Date(d))}
+  list.forEach(x=>{const b=document.createElement('button');b.setAttribute('aria-pressed','false');b.append(el('small',null,jours[x.getDay()]),el('b',null,String(x.getDate())),el('small',null,mois[x.getMonth()]));days.append(b)});
+  const go=document.getElementById('bk-go');
+  function pick(group){group.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;group.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',x===b?'true':'false'));
+    go.disabled=!(days.querySelector('[aria-pressed="true"]')&&document.querySelector('#slots [aria-pressed="true"]'))})}
+  pick(days);pick(document.getElementById('slots'));
+  document.querySelectorAll('#slots button').forEach(b=>b.setAttribute('aria-pressed','false'));
+})();
 /* Progression + apparitions */
 const pr=document.getElementById('prog');
-addEventListener('scroll',()=>{const p=scrollY/Math.max(1,document.body.scrollHeight-innerHeight);pr.textContent=Math.round(p*100)+'%'},{passive:true});
+addEventListener('scroll',()=>{const p=scrollY/Math.max(1,document.body.scrollHeight-innerHeight);pr.textContent=Math.min(100,Math.round(p*100))+'%'},{passive:true});
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}}),{threshold:.12});
 document.querySelectorAll('.rv').forEach(x=>io.observe(x));
 </script>

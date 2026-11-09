@@ -1,5 +1,23 @@
 # Pistes de design — 9.11.2026
 
+## S01 variantes du hero + S10 carte de réservation (9.11)
+
+- `hero-variantes.html` : trois propositions de premier écran. 1 · Centrée produit (réf. Billow, Muse, Vestris) : titre centré avec les icônes des sources dans la phrase, pastille « Nouveau · Dictée vocale », fenêtre de l'app + fiche acheteur en perspective. 2 · Photo + cartes (réf. Script Runner, Vestris) : titre à gauche avec « tous » surligné, résidence à droite avec trois cartes de l'app (nouvelle demande, message WhatsApp, fiche qualifiée). 3 · Sombre + code (réf. Simeon, Vault AI) : fond noir, trame de code orange, ligne de commande « lotivio sync » qui se tape, file des demandes, logos en blanc. Figma : planche `36:2` à droite de la v6.
+- S10 Appel final : carte sombre arrondie avec trame de code et halo orange (réf. meotis.ch « À vous d'essayer »), titre, trois engagements cochés, marque, liens ; à droite un module de réservation (jour, heure, « Continuer » qui passe en orange). Le module est un exemple : aucune destination branchée. Figma : node `35:2` dans la v6.
+
+## Fin de page façon Script Runner (9.11, v6 mise à jour sur place)
+
+- S10 Appel final : grand titre centré « Voyons comment votre agence travaille. » (point orange), phrase, bouton orange « Réserver une démo ».
+- S11 Footer : bloc orange #EB6E2C fixé sous la page et révélé au défilement (la page passe par-dessus comme un rideau), texte de présentation, bouton noir, trois colonnes de liens, mentions, et « lotivio. » en lettres géantes coupées par le bas (point en noir).
+- Les anciennes S12 (trame de points) et S13 (mentions) sont intégrées au footer.
+- Figma : S10 = node `31:2`, S11 = node `32:2`, insérés dans la v6 `22:2` à la place des anciennes sections. L'effet de révélation ne se voit que dans le navigateur.
+
+## A v6 mise à jour sur place — tableau à clés enrichi, couleur de marque (9.11)
+
+- S07B : barre en bois avec vis et plaquettes en laiton (A1, A2, B4, C1, C3), cinq crochets dont deux vides, anneaux doubles, marque « lotivio. » au bas de chaque porte-clés, mur orange éclairé par le haut.
+- Couleur de marque #EB6E2C (remplace #E8762D partout) : étiquettes de section en orange et en capitales (réf. Script Runner), point orange à la fin de trois titres (hero, S03, S10 ; réf. 1600), bouton de l'appel final orange, survols orange, signes « + » de la FAQ orange, panneau S06.1 recalé sur la teinte. Le reste reste noir et gris.
+- Figma : modifications faites dans la frame v6 existante (`22:2`), sans nouvelle frame. S07B remplacée sur place (node `28:2`), espaceur et sections suivantes décalés de 49 px.
+
 ## A v6 — S07B : tableau à clés au lieu des gélules (9.11)
 
 Retour de Diego : les gélules « ne sont pas top pour de l'immobilier ». Même mécanisme (objets en vrac qui se mettent en place au défilement), objet métier : trois porte-clés d'agence (noir, violet, vert, avec insert papier ligné et une clé) qui tombent en vrac puis se suspendent à un tableau à clés en bois, légende « Le tableau des clés de votre agence », puis bouton « Réserver une démo ». Mêmes chiffres : jusqu'à 4 h, 24/7, 7 sources. Mobile : étiquettes empilées, sans clé ni tableau.
@@ -15,7 +33,7 @@ Figma : v6 = node `22:2` (v5 `19:2` marquée « ancienne »). Corrigé dans Figm
 
 ## Noms des sections (Figma node 12:2 et commentaires du code)
 
-S00 Navigation · S01 Hero · S02 Temps gagné — 4 h · S03 Ce que Lotivio fait · S04 L'IA qui · S05 Parcours — titre · S06 Parcours — 4 panneaux (S06.1 Demande, S06.2 Qualification, S06.3 Relance, S06.4 Vente) · S07 Mise en place · S07B Pourquoi maintenant (tableau à clés) · S08 Pour la direction · S09 Questions · S10 Appel final · S11 Footer · S12 Trame de points · S13 Mentions légales. Les calques « _espace » sont des espaceurs vides créés à l'import.
+S00 Navigation · S01 Hero · S02 Temps gagné — 4 h · S03 Ce que Lotivio fait · S04 L'IA qui · S05 Parcours — titre · S06 Parcours — 4 panneaux (S06.1 Demande, S06.2 Qualification, S06.3 Relance, S06.4 Vente) · S07 Mise en place · S07B Pourquoi maintenant (tableau à clés) · S08 Pour la direction · S09 Questions · S10 Appel final · S11 Footer (révélé au défilement, contient les mentions). Les calques « _espace » sont des espaceurs vides créés à l'import.
 
 ## A v3 — hero B + trames de code + parcours façon Fourmula (9.11)
 
