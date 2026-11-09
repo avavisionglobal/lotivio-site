@@ -629,6 +629,56 @@ h1 .o,.h2 .o,.final .o{font-style:normal;color:var(--orange)}
 .fields3 div+div{border-top:1px solid var(--line)}
 .fields3 span{color:var(--muted)}.fields3 b{font-weight:500}.fields3 .g{color:var(--green)}
 @media (max-width:1000px){.fx3{grid-template-columns:1fr}.oc.fx .ui{min-height:0}}
+
+/* ---------- S01 · Hero variante 1 (centrée produit) ---------- */
+.hv1{position:relative;background:var(--warm-2);overflow:hidden;padding:128px 0 0;text-align:center}
+.hv1 .tex{left:0;right:0;top:40px;color:#DDD9D0;opacity:.5;mask-image:radial-gradient(60% 55% at 50% 40%,transparent 35%,#000 75%);-webkit-mask-image:radial-gradient(60% 55% at 50% 40%,transparent 35%,#000 75%)}
+.chip{position:relative;display:inline-flex;align-items:center;gap:9px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:7px 16px 7px 8px;font-size:13.5px;box-shadow:0 6px 16px -10px rgba(0,0,0,.2)}
+.chip b{background:#FDEEE2;border-radius:999px;padding:2px 8px;font-weight:400}
+.hv1 h1{position:relative;font-family:var(--disp);font-variation-settings:"wdth" 112;font-weight:600;font-size:clamp(40px,4.9vw,82px);line-height:1.03;letter-spacing:-.055em;margin:26px auto 0;padding:0 24px}
+.hv1 h1 .ln{display:block;white-space:nowrap}
+.hv1 h1 .o{font-style:normal;color:var(--orange)}
+.inl{display:inline-flex;vertical-align:middle;margin:0 .12em;transform:translateY(-.06em)}
+.inl span{width:.74em;height:.74em;border-radius:.2em;border:3px solid var(--warm-2);margin-left:-.22em;background:#fff center/cover no-repeat;box-shadow:0 6px 12px -6px rgba(0,0,0,.4)}
+.inl span:first-child{margin-left:0}
+.hv1 .sub{position:relative;font-size:18px;line-height:1.5;color:var(--muted);max-width:42em;margin:22px auto 0;padding:0 24px}
+.hv1 .row-b{position:relative;display:flex;gap:10px;justify-content:center;margin-top:30px}
+.b-or{background:var(--orange);color:#fff}.b-or:hover{background:var(--ink)}
+.b-gh{border:1px solid #DCDAD4;background:#fff}
+.stage1{position:relative;width:min(1180px,92%);margin:52px auto 0;perspective:1600px;text-align:left}
+.stage1 .frame{display:grid;grid-template-columns:1.55fr 1fr;transform:rotateX(12deg);transform-origin:50% 0;border-radius:14px;box-shadow:0 60px 100px -50px rgba(0,0,0,.5)}
+.stage1 .win{border-radius:14px 0 0 0;box-shadow:none}
+.stage1 .feed{height:300px}
+.side{background:#191919;color:#eee;border-left:1px solid #262626;padding:18px;border-radius:0 14px 0 0}
+.side .mono{color:#8b8b8b}
+.side h3{font-weight:500;font-size:22px;margin-top:10px}
+.side .tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}
+.side .tags span{font-size:12px;background:#262626;border-radius:6px;padding:5px 8px}
+.side .kv1{margin-top:16px;border-top:1px solid #262626}
+.side .kv1 div{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid #262626;font-size:13.5px}
+.side .kv1 span:first-child{color:#8b8b8b}.side .hot{color:#5FD49A}
+.hv1 .sources{margin:-40px 0 0;padding:26px 66px;position:relative;z-index:2;border-top:1px solid var(--warm-line);background:var(--warm-2);text-align:left;box-shadow:0 -30px 40px -10px var(--warm-2)}
+@media (max-width:1000px){
+  .hv1{padding-top:104px}
+  .hv1 h1 .ln{white-space:normal}
+  .stage1{width:calc(100% - 32px)}.stage1 .frame{grid-template-columns:1fr;transform:none}.side{display:none}.stage1 .win{border-radius:14px 14px 0 0}
+  .hv1 .tex{display:none}
+  .hv1 .sources{margin:0;padding:22px 16px}
+}
+@media (max-width:520px){
+  .hv1 h1{font-size:38px;padding:0 16px}.hv1 .sub{font-size:16px;padding:0 16px}
+  .hv1 .row-b{flex-wrap:wrap;padding:0 16px}.hv1 .btn{padding:12px 16px;font-size:14px}
+  .chip{font-size:12.5px}
+}
+
+/* ---------- Trame de code dans les cartes S03 et S08 ---------- */
+.oc.fx,.bento2 .bc{position:relative;overflow:hidden;isolation:isolate}
+.ctex{z-index:-1;left:-6px;top:-4px;width:auto;color:#B4AEA2;opacity:.8;
+  mask-image:linear-gradient(180deg,#000 0%,#000 42%,transparent 72%);-webkit-mask-image:linear-gradient(180deg,#000 0%,#000 42%,transparent 72%)}
+.oc.fx:hover .ctex{color:#9F9889}
+.ctex b{color:var(--orange)}
+.bento2 .ctex{left:auto;right:-6px;top:auto;bottom:-4px;color:#ADA79B;opacity:.85;mask-image:radial-gradient(90% 80% at 100% 100%,#000 20%,transparent 65%);-webkit-mask-image:radial-gradient(90% 80% at 100% 100%,#000 20%,transparent 65%)}
+.bento2 .stock .ctex{bottom:auto;top:-4px;mask-image:radial-gradient(75% 70% at 100% 30%,#000 25%,transparent 70%);-webkit-mask-image:radial-gradient(75% 70% at 100% 30%,#000 25%,transparent 70%)}
 </style>
 </head>
 <body>
@@ -649,24 +699,23 @@ h1 .o,.h2 .o,.final .o{font-style:normal;color:var(--orange)}
 <div class="page" id="page">
 
 <!-- S01 · Hero (premier écran) -->
-<header class="bh">
-  <pre class="tex" data-src="assets/photo-lac.jpg" data-w=".62" aria-hidden="true"></pre>
-  <h1 class="rv"><span>Vos acheteurs écrivent partout.</span><span>Lotivio les suit tous<i class="o">.</i></span></h1>
-  <div class="bh-grid">
-    <div class="rv">
-      <p class="lede">Le CRM immobilier des promoteurs et des agences romandes. <strong>Les demandes des portails arrivent seules</strong>, l'IA qualifie l'acheteur sur WhatsApp, et chaque matin vous savez qui relancer. Mis en place avec vous, selon votre façon de vendre.</p>
-      <div class="cta"><a class="btn btn-dark" href="#demo">Réserver une démo <span aria-hidden="true">→</span></a><a class="btn btn-line" href="#">Voir le film</a></div>
-      <div class="status mono"><span class="dot"></span> 7 sources branchées</div>
-    </div>
-    <div class="win rv" aria-label="Aperçu de la file Demandes reçues, données de démonstration">
+<header class="hv1">
+  <pre class="tex" data-src="assets/photo-lac.jpg" data-w="1" data-r=".36" aria-hidden="true"></pre>
+  <span class="chip rv"><b>🇨🇭</b>Développé pour la Suisse</span>
+  <h1 class="rv"><span class="ln">Vos prospects écrivent <span class="inl" aria-hidden="true"><span style="background-image:url(assets/logos/smg.png)"></span><span style="background-image:url(assets/logos/immobilier-ch.png)"></span><span style="background-image:url(assets/logos/properstar.png)"></span><span style="background-image:url(assets/logos/whatsapp.svg);background-size:70%;background-color:#fff"></span></span> partout.</span><span class="ln">Gardez le fil de chaque acheteur<i class="o">.</i></span></h1>
+  <p class="sub rv">Le CRM immobilier développé pour la Suisse. Portails, Meta Ads, site : vos demandes arrivent dans Lotivio. Envoyez vos e-mails et WhatsApp, retrouvez le suivi de chaque acheteur et voyez quels projets attirent des prospects.</p>
+  <div class="row-b rv"><a class="btn b-or" href="#demo">Réserver une démo</a><a class="btn b-gh" href="#">Voir le film · 1 min</a></div>
+  <div class="stage1 rv"><div class="frame">
+    <div class="win" aria-label="Aperçu de la file Demandes reçues, données de démonstration">
       <div class="win-bar"><span class="t"><span class="dot" style="border-radius:50%"></span>demandes_recues — Démo Immobilier NE</span><span id="clock">21:47</span></div>
       <div class="feed" id="feed"></div>
       <div class="ticks"><span class="mono" id="count">12 demandes aujourd'hui</span><div class="scale"><i id="mark"></i></div><span class="mono">arrivées seules</span></div>
-      <span class="mono demo">Données de démonstration</span>
     </div>
-  </div>
-  <div class="sources rv">
-    <span class="mono">Sources branchées</span>
+    <aside class="side"><span class="mono">Fiche acheteur</span><h3>Nathalie Girard</h3><div class="tags"><span style="background:rgba(173,70,255,.25);color:#D9B4FF">Qualifié</span><span>Meta Ads</span><span>Les Terrasses du Vignoble</span></div>
+      <div class="kv1"><div><span>Recherche</span><span>3.5 pièces · Milvignes</span></div><div><span>Budget max</span><span>CHF 1'100'000</span></div><div><span>Brochure</span><span class="hot">Consultée 3×</span></div><div><span>Dernier échange</span><span>WhatsApp · hier 21:50</span></div><div><span>Prochaine étape</span><span>Visite samedi 10:00</span></div></div></aside>
+  </div></div>
+  <div class="sources">
+    <span class="mono">Vos canaux, connectés</span>
     <img class="lg" src="assets/logos/homegate.svg" alt="Homegate" style="height:30px"><img class="lg" src="assets/logos/immoscout24.svg" alt="ImmoScout24" style="height:38px"><img class="lg" src="assets/logos/immobilier-ch.svg" alt="immobilier.ch" style="height:20px"><img class="lg" src="assets/logos/properstar-logo.png" alt="Properstar" style="height:24px"><img class="lg" src="assets/logos/meta.svg" alt="Meta" style="height:22px"><span class="lgw"><img src="assets/logos/whatsapp.svg" alt="" style="height:28px">WhatsApp</span><span class="s">Votre site</span>
   </div>
 </header>
@@ -694,7 +743,7 @@ h1 .o,.h2 .o,.final .o{font-style:normal;color:var(--orange)}
     <div class="body"><h2 class="h2">Toutes vos demandes.<span class="g">Un seul endroit<i class="o">.</i></span></h2></div>
   </div>
   <div class="fx3">
-    <article class="oc fx rv">
+    <article class="oc fx rv"><pre class="tex ctex" data-src="assets/lake-residence.webp" data-w=".42" data-r=".9" aria-hidden="true"></pre>
       <span class="nb">1</span>
       <div class="ui">
         <div class="ui-h"><b>Demandes reçues</b><span>Aujourd'hui · 13</span></div>
@@ -710,7 +759,7 @@ h1 .o,.h2 .o,.final .o{font-style:normal;color:var(--orange)}
       <p>Portails, Meta et votre site : chaque demande arrive avec sa source, le bien et les critères de l'acheteur.</p>
     </article>
 
-    <article class="oc fx rv">
+    <article class="oc fx rv"><pre class="tex ctex" data-src="assets/photo-lac.jpg" data-w=".42" data-r=".9" aria-hidden="true"></pre>
       <span class="nb">2</span>
       <div class="ui">
         <div class="ui-h"><b>Assistant WhatsApp</b><span class="live"><i></i>en ligne</span></div>
@@ -726,7 +775,7 @@ h1 .o,.h2 .o,.final .o{font-style:normal;color:var(--orange)}
       <p>Brochure, type de bien, pièces, budget : la fiche se remplit pendant la conversation, même à 21 h 47.</p>
     </article>
 
-    <article class="oc fx rv">
+    <article class="oc fx rv"><pre class="tex ctex" data-src="assets/lake-residence-portrait.webp" data-w=".42" data-r=".9" aria-hidden="true"></pre>
       <span class="nb">3</span>
       <div class="ui">
         <div class="ui-h"><b>Dictée vocale</b><span>Après la visite</span></div>
@@ -956,13 +1005,13 @@ h1 .o,.h2 .o,.final .o{font-style:normal;color:var(--orange)}
     <div class="body"><h2 class="h2">Publiez une fois.<span class="g">Pilotez tout.</span></h2></div>
   </div>
   <div class="bento2">
-    <article class="bc stock rv">
+    <article class="bc stock rv"><pre class="tex ctex" data-src="assets/lake-residence.webp" data-w=".42" data-r=".9" aria-hidden="true"></pre>
       <span class="mono lab">Disponibilités</span>
       <h3>Le stock à jour, lot par lot.</h3>
       <p>Disponible, réservé, vendu : chaque changement du pipeline se voit dans le stock du projet.</p>
       <div class="im"><img src="assets/ui-stock.png" alt="Tableau des disponibilités d'un projet, données de démonstration" loading="lazy"></div>
     </article>
-    <article class="bc rv">
+    <article class="bc rv"><pre class="tex ctex" data-src="assets/photo-lac.jpg" data-w=".42" data-r=".9" aria-hidden="true"></pre>
       <span class="mono lab">Diffusion</span>
       <h3>Publiez une fois, diffusez partout.</h3>
       <div class="diff">
@@ -973,7 +1022,7 @@ h1 .o,.h2 .o,.final .o{font-style:normal;color:var(--orange)}
       </div>
       <p>Les lots réservés sortent des annonces.</p>
     </article>
-    <article class="bc rv">
+    <article class="bc rv"><pre class="tex ctex" data-src="assets/lake-residence-portrait.webp" data-w=".42" data-r=".9" aria-hidden="true"></pre>
       <div class="pdf">
         <div><span class="mono lab">PDF de vente</span><h3>Brochure et disponibilités, en un clic.</h3><span class="chip-hot">Brochure consultée 3×</span></div>
         <img src="assets/ui-brochure.png" alt="Couverture d'une brochure générée, données de démonstration" loading="lazy">

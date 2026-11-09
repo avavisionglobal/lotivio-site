@@ -15,6 +15,13 @@ Format d'une entrée :
 
 ---
 
+## 2026-11-09 — Hero : variante 1 retenue ; Figma fait foi pour les textes
+- Décision : la variante 1 (centrée produit, logos des sources dans le titre, fenêtre de l'app + fiche acheteur) devient le hero, avec les textes réécrits par Diego dans Figma, et la bande « Vos canaux, connectés » conservée dessous. Les textes modifiés dans Figma (v6) font foi sur ceux du code.
+- Raison : choix de Diego (« Variante 1 ! », « garde ceci : Container - Vos canaux, connectés »).
+- Statut : décidée.
+- Reste à faire : reporter dans le code les textes réécrits dans Figma (S02, S04, S06, S07, S07B, S08, S09, S11).
+- Source : conversation Diego / Claude Code, 9 novembre 2026. Figma : 64:2 (v6), 65:2 (mobile).
+
 ## 2026-11-09 — Hero : variante 2 retenue, déclinaisons 2B et 2C ; page mobile
 - Décision : la variante 2 du hero (photo + cartes de l'app) est retenue comme base. Deux déclinaisons proposées dans le même style (2B bandeau photo, 2C photo qui devient code). Une version mobile 390 px de la page est livrée dans Figma, avec une échelle typographique mobile dédiée.
 - Raison : choix de Diego (« Je préfère celle-ci… garde ceci… fais 2 autres variantes dans le même style ») ; demandes « il me faut aussi la page en version mobile » et « adapter la taille de la typographie […] pour que le responsive soit le mieux fait possible ».

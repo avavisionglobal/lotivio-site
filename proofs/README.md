@@ -1,5 +1,10 @@
 # Pistes de design — 9.11.2026
 
+## Hero V1 intégré ; textes modifiés dans Figma (9.11)
+
+- Diego choisit la variante 1 (centrée produit). Elle remplace le hero dans `a-orbite.html`, dans la v6 (`64:2`) et dans la page mobile (`65:2`), avec ses textes Figma : pastille « 🇨🇭 Développé pour la Suisse », titre « Vos prospects écrivent [logos] partout. / Gardez le fil de chaque acheteur. », paragraphe « Le CRM immobilier développé pour la Suisse… ». La bande « Vos canaux, connectés » de la v6 (`22:222`, modifiée par Diego) est conservée telle quelle sous le nouveau hero.
+- **Important** : beaucoup de textes ont été réécrits directement dans la v6 Figma (S02, S04, S06.1–S06.4, S07, S07B, S08, S09, S11). Le code de `a-orbite.html` n'a pas encore ces textes. Figma fait foi ; ne pas réimporter une section entière depuis le code sans reprendre d'abord ses textes Figma.
+
 ## S03 en cartes façon S07 ; planche du hero complète (9.11)
 
 - S03 « Ce que Lotivio fait » : le bento est remplacé par trois grandes cartes grises numérotées sur le modèle des cartes de S07 (choix de Diego) : 1 Demandes reçues (file avec logos des sources, nouvelles demandes qui arrivent), 2 Assistant WhatsApp (conversation avec brochure PDF, critères Pièces / Zone / Statut Qualifié), 3 Dictée vocale (micro orange, onde, transcription, champs remplis). Titres alignés, survol qui soulève la carte et passe le numéro en orange. Figma : remplacée sur place dans la v6 (`51:2`) et dans la page mobile (`52:2`).
