@@ -1,0 +1,51 @@
+---
+import '@fontsource-variable/geist';
+import '@fontsource-variable/geist-mono';
+import '@fontsource-variable/archivo/standard.css';
+import '../styles/global.css';
+import { SITE } from '../config';
+
+const canonical = new URL(Astro.url.pathname, SITE.url).href;
+const og = new URL('/og-image.jpg', SITE.url).href;
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: 'Lotivio',
+  applicationCategory: 'BusinessApplication',
+  operatingSystem: 'Web',
+  description: SITE.description,
+  url: SITE.url,
+  inLanguage: 'fr-CH',
+  areaServed: 'CH',
+  publisher: { '@type': 'Organization', name: 'Ava Vision' },
+};
+---
+<!doctype html>
+<html lang="fr-CH">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{SITE.title}</title>
+    <meta name="description" content={SITE.description} />
+    <link rel="canonical" href={canonical} />
+    <meta name="theme-color" content="#F7F6F3" />
+    <link rel="icon" href="/brand/lotivio-mark.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/brand/icon-512.png" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="fr_CH" />
+    <meta property="og:site_name" content="Lotivio" />
+    <meta property="og:title" content={SITE.title} />
+    <meta property="og:description" content={SITE.description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={og} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+    <script is:inline>document.documentElement.classList.add('js');</script>
+  </head>
+  <body>
+    <a class="skip" href="#contenu">Aller au contenu</a>
+    <slot />
+  </body>
+</html>

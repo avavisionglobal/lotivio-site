@@ -1,0 +1,33 @@
+---
+import { SITE } from '../config';
+const links = [
+  ['Produit', '#s03'],
+  ['IA', '#ia'],
+  ['Parcours', '#parcours'],
+  ['Mise en place', '#mise-en-place'],
+  ['Questions', '#faq'],
+];
+---
+<!-- S00 · Navigation -->
+<nav class="nav" aria-label="Navigation principale" data-bloc="S00">
+  <a class="logo" href="#top" aria-label="Lotivio, retour en haut"><img src="/brand/lotivio-mark.svg" alt="" width="26" height="26" /><span>lotivio<i>.</i></span></a>
+  <div class="pill-wrap">
+    <button class="pill" id="menu-btn" aria-expanded="false" aria-controls="menu">
+      <span class="burger" aria-hidden="true"><i></i><i></i></span><span class="pl-lab">Menu</span>
+      <span class="sep pl-opt" aria-hidden="true"></span><span class="pl-opt pl-sub">Produit · IA · Mise en place</span>
+      <span class="chip" id="prog" aria-hidden="true">0%</span>
+    </button>
+    <div class="menu" id="menu" hidden>
+      <ul>
+        {links.map(([label, href], i) => (
+          <li><a href={href} data-menu-link><span class="mono">0{i + 1}</span>{label}</a></li>
+        ))}
+      </ul>
+      <a class="menu-cta" href="#demo" data-menu-link>Réserver une démo <span aria-hidden="true">→</span></a>
+    </div>
+  </div>
+  <div class="nav-r">
+    <a class="icon-btn" href={SITE.appUrl} aria-label="Se connecter à Lotivio"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#141414" stroke-width="2" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg></a>
+    <a class="btn btn-dark magnet" href="#demo">Réserver une démo</a>
+  </div>
+</nav>

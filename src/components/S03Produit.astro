@@ -1,0 +1,73 @@
+---
+const R = '/media/residence-800.webp', P = '/media/residence-portrait-600.webp', L = '/media/lac-800.webp';
+const tiles = [
+  [R, '30% 50%', 'Homegate', 'David Grosjean', 'Clos des Vergers · A2', 'Nouveau', 'n'],
+  [P, '50% 35%', 'Meta Ads', 'Nathalie Girard', 'Les Terrasses · 3.5 p.', 'Qualifié', 'q'],
+  [L, '60% 50%', 'immobilier.ch', 'Claire Monnier', 'Les Terrasses · Attique', 'Nouveau', 'n'],
+  [R, '80% 40%', 'Properstar', 'Léa Perrin', 'Lac & Lumière · F3', 'Brochure', 'b'],
+  [L, '20% 60%', 'Votre site', 'Yann Renaud', 'Lac & Lumière · 4.5 p.', 'Qualifié', 'q'],
+  [P, '50% 75%', 'ImmoScout24', 'Sophie Jeanneret', 'Clos des Vergers · A4', 'Nouveau', 'n'],
+  [R, '55% 70%', 'WhatsApp', 'Marc Vuilleumier', 'Clos des Vergers · C1', 'Relance', 'r'],
+  [L, '85% 45%', 'Meta Ads', 'Famille Aubry', 'Les Terrasses · B2', 'Vendu', 'v'],
+];
+---
+<!-- S03 · Ce que Lotivio fait -->
+<section class="sec" id="s03">
+  <div class="split">
+    <div class="lab" data-scramble>Ce que Lotivio fait</div>
+    <div class="body"><h2 class="h2" data-split>Toutes vos demandes.<span class="g">Un seul endroit<i class="o">.</i></span></h2></div>
+  </div>
+  <div class="f3">
+    <article class="fp big" data-bloc="S03.1" data-reveal>
+      <pre class="tex ctex" data-src={R} data-w=".9" data-r=".38" aria-hidden="true"></pre>
+      <span class="fl">Demandes reçues</span>
+      <div class="f-stage">
+        <div class="in-card" role="img" aria-label="Demande reçue d'un portail, données de démonstration">
+          <div class="in-h"><img src="/media/logos/homegate.svg" alt="Homegate" loading="lazy" /><time>21:46</time></div>
+          <small>Nouvelle demande de contact</small>
+          <b>Clos des Vergers · Lot A2</b>
+          <p>« Bonjour, je souhaite recevoir la brochure et visiter le 3.5 pièces. »</p>
+          <div class="in-f"><span>David Grosjean</span><span>079 · · · · · ·</span></div>
+        </div>
+        <span class="arw" aria-hidden="true">→</span>
+        <div class="app" role="img" aria-label="File Demandes reçues de Lotivio, données de démonstration">
+          <div class="app-h"><span class="apc"><img src="/brand/lotivio-mark.svg" alt="" />Demandes reçues <i>/</i> <b>Aujourd'hui</b></span><span class="act"><span class="n">13</span><span class="add">+ Ajouter un lead</span><span class="exp">Exporter</span></span></div>
+          <div class="grid" data-tiles>
+            {tiles.map(([img, pos, src, name, proj, st, cls]) => (
+              <div class="lt"><div class="ph" style={`background-image:url(${img});background-position:${pos}`}></div><span class="ico"><i></i><i class="o"></i></span><div class="lt-b"><b>{name}</b><small>{proj}</small></div><span class="lt-c">{src}</span><em class={cls}>{st}</em></div>
+            ))}
+          </div>
+        </div>
+      </div>
+      <div class="f-txt"><h3 data-split>Une file pour toutes<br />les sources.</h3><p>Portails, Meta Ads, votre site : chaque demande arrive avec sa source, le bien et les critères de l'acheteur. Sans copier-coller.</p></div>
+    </article>
+
+    <article class="fp half" data-bloc="S03.2" data-reveal>
+      <pre class="tex ctex" data-src={L} data-w=".45" data-r=".7" aria-hidden="true"></pre>
+      <span class="fl">Assistant WhatsApp</span>
+      <div class="col" data-collage>
+        <div class="ck c-ph" data-speed="-40"><img src="/media/ui-whatsapp-500.webp" alt="Conversation WhatsApp de l'assistant, données de démonstration" loading="lazy" /></div>
+        <div class="ck c-bro" data-speed="30"><div class="ph" style={`background-image:url(${P})`}></div><div class="cb"><small>PDF · envoyé</small><b>Les Terrasses du Vignoble</b></div></div>
+        <div class="ck c-q" data-speed="60"><small>Statut</small><b>Qualifié</b></div>
+        <div class="ck c-cr" data-speed="-20"><span><small>Pièces</small>3.5</span><span><small>Zone</small>Milvignes</span><span><small>Budget</small>≤ 1,1 mio</span></div>
+        <div class="ck c-t" data-speed="10"><i></i>21:47</div>
+      </div>
+      <div class="f-txt"><h3 data-split>L'IA qualifie,<br />jour et nuit.</h3><p>La brochure part sur WhatsApp, l'assistant pose les questions et la fiche se remplit.</p></div>
+      <span class="rb" aria-hidden="true"><img src="/brand/lotivio-mark.svg" alt="" /></span>
+    </article>
+
+    <article class="fp half" data-bloc="S03.3" data-reveal>
+      <pre class="tex ctex" data-src={P} data-w=".45" data-r=".7" aria-hidden="true"></pre>
+      <span class="fl">Dictée vocale</span>
+      <div class="col" data-collage>
+        <div class="ck d-vis" data-speed="-30"><div class="ph" style={`background-image:url(${R});background-position:35% 50%`}></div><span class="tagv">Visite · Lot F3</span></div>
+        <div class="ck d-mic" data-speed="20"><span class="mic3"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></span><div class="wave" id="wave3" aria-hidden="true"></div><span class="tm3">0:14</span></div>
+        <div class="ck d-tr" data-speed="40">« Très intéressé, budget 1,2 million, je le rappelle jeudi. »</div>
+        <div class="ck d-f" data-speed="-10"><div><span>Intérêt</span><b class="g">Fort</b></div><div><span>Budget</span><b>CHF 1'200'000</b></div></div>
+        <div class="ck d-cal" data-speed="50"><small>Relance</small><b>Jeu. 09:00</b></div>
+      </div>
+      <div class="f-txt"><h3 data-split>Dictez, la fiche<br />se remplit.</h3><p>En sortant d'une visite, l'agent dicte. Intérêt, budget, relance : il relit et valide.</p></div>
+      <span class="rb" aria-hidden="true"><img src="/brand/lotivio-mark.svg" alt="" /></span>
+    </article>
+  </div>
+</section>

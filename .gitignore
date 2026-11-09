@@ -3,3 +3,6 @@ node_modules/
 .playwright-mcp/
 .next/
 .vercel/
+
+dist/
+.astro/

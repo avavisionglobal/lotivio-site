@@ -1,0 +1,29 @@
+---
+const lines = [
+  ['S04.1', 'var(--violet)', 'qualifie vos leads Meta sur WhatsApp', 'Leads Meta Ads'],
+  ['S04.2', 'var(--orange)', 'répond avec les informations de vos projets', 'Vos fiches projet'],
+  ['S04.3', 'var(--green)', 'prépare vos comptes rendus dictés', ''],
+  ['S04.4', 'var(--blue)', 'rédige vos descriptions de lots', ''],
+];
+---
+<!-- S04 · L'IA qui -->
+<section class="sec" id="ia">
+  <div class="ai">
+    <div class="l">
+      <div>
+        <div class="lab" data-scramble>L’IA, dans votre quotidien</div>
+        <h2 style="margin-top:22px" data-split>L’IA qui</h2>
+        <p>Vos projets et vos consignes guident l’assistant. Vous choisissez les automatismes à la mise en place et gardez la main sur le suivi.</p>
+      </div>
+      <a class="btn btn-dark magnet" href="#demo" style="align-self:flex-start">Réserver une démo</a>
+    </div>
+    <div class="r">
+      <ul id="ai-lines">
+        {lines.map(([b, c, t, tag]) => (
+          <li style={`--c:${c}`} data-bloc={b}><span class="t">{t}</span>{tag && <span class="tag">{tag}</span>}</li>
+        ))}
+      </ul>
+      <div class="guard mono"><span>Consentement demandé</span><span>STOP respecté</span><span>IA en pause contact par contact</span><span>Brouillons à valider</span></div>
+    </div>
+  </div>
+</section>

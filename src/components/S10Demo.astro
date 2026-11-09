@@ -1,0 +1,52 @@
+---
+import { SITE, DEMO } from '../config';
+const writeHref = DEMO.email ? `mailto:${DEMO.email}?subject=${encodeURIComponent('Lotivio — question')}` : '#demo';
+---
+<!-- S10 · Appel final -->
+<section class="cta10" id="demo">
+  <div class="cta10-card" data-reveal>
+    <pre class="tex cta10-tex" data-src="/media/residence-1600.webp" data-w=".95" data-r=".42" aria-hidden="true"></pre>
+    <div class="cta10-l" data-bloc="S10.1">
+      <span class="eyb">Démo</span>
+      <h2 data-split>Voyons comment<span class="g">votre agence travaille<i class="o">.</i></span></h2>
+      <ul class="chk">
+        <li>Une démonstration à partir de vos projets en cours</li>
+        <li>Vos portails, vos relances, vos réglages</li>
+        <li>Avec l'équipe qui met Lotivio en place, sans engagement</li>
+      </ul>
+      <div class="cta10-mark"><img src="/brand/lotivio-mark.svg" alt="" /><span>lotivio<i>.</i></span></div>
+      <div class="cta10-links"><a href={writeHref} data-write>Écrire à l'équipe <span aria-hidden="true">→</span></a><button type="button" data-film>Voir le film <span aria-hidden="true">→</span></button></div>
+    </div>
+
+    <form class="book" id="book" data-bloc="S10.2" aria-label="Réserver une démo" data-endpoint={DEMO.endpoint} data-email={DEMO.email} novalidate>
+      <div class="bk-h"><span class="av"><img src="/brand/lotivio-mark.svg" alt="" /></span><div><b>Démo Lotivio</b><small>Visio · lien envoyé par e-mail</small></div><span class="bk-step" id="bk-step">1/2</span></div>
+
+      <div class="bk-p" data-step="1">
+        <div class="bk-l" id="lbl-day">Choisissez un jour</div>
+        <div class="days" id="days" role="group" aria-labelledby="lbl-day"></div>
+        <div class="bk-l" id="lbl-slot">Choisissez une heure</div>
+        <div class="slots" id="slots" role="group" aria-labelledby="lbl-slot">
+          {['09:00', '10:00', '11:00', '14:00', '15:00', '16:00'].map((h) => <button type="button" aria-pressed="false">{h}</button>)}
+        </div>
+        <div class="tz">Heure suisse</div>
+        <button type="button" class="go" id="bk-next" disabled>Continuer</button>
+      </div>
+
+      <div class="bk-p" data-step="2" hidden>
+        <button type="button" class="bk-back" id="bk-back">← <span id="bk-when"></span></button>
+        <label class="fld"><span>Nom et prénom</span><input name="name" autocomplete="name" required /></label>
+        <label class="fld"><span>E-mail professionnel</span><input name="email" type="email" autocomplete="email" required /></label>
+        <label class="fld"><span>Agence</span><input name="agency" autocomplete="organization" required /></label>
+        <label class="fld"><span>Téléphone <em>(facultatif)</em></span><input name="phone" type="tel" autocomplete="tel" /></label>
+        <p class="bk-legal">Vos coordonnées servent uniquement à organiser la démo. <a href={SITE.privacyUrl} target="_blank" rel="noopener">Confidentialité</a></p>
+        <button type="submit" class="go" id="bk-send">Demander la démo</button>
+      </div>
+
+      <div class="bk-p bk-done" data-step="3" hidden role="status" aria-live="polite">
+        <span class="bk-ok" aria-hidden="true">✓</span>
+        <b id="bk-msg-t">Demande envoyée.</b>
+        <p id="bk-msg">Nous vous confirmons le créneau par e-mail.</p>
+      </div>
+    </form>
+  </div>
+</section>
