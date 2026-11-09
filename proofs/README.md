@@ -1,5 +1,10 @@
 # Pistes de design — 9.11.2026
 
+## S03 en cartes façon S07 ; planche du hero complète (9.11)
+
+- S03 « Ce que Lotivio fait » : le bento est remplacé par trois grandes cartes grises numérotées sur le modèle des cartes de S07 (choix de Diego) : 1 Demandes reçues (file avec logos des sources, nouvelles demandes qui arrivent), 2 Assistant WhatsApp (conversation avec brochure PDF, critères Pièces / Zone / Statut Qualifié), 3 Dictée vocale (micro orange, onde, transcription, champs remplis). Titres alignés, survol qui soulève la carte et passe le numéro en orange. Figma : remplacée sur place dans la v6 (`51:2`) et dans la page mobile (`52:2`).
+- Planche du hero : V1 et V3 remises (malentendu), ordre V1, V2, V3, 2B, 2C.
+
 ## Hero : V2 retenue + variantes 2B / 2C ; page mobile 390 (9.11)
 
 - Diego retient la variante 2 (photo + cartes). Deux déclinaisons dans le même style : 2B · Bandeau photo (titre et texte sur une ligne, résidence en bandeau pleine largeur, cartes, barre des 7 sources, compteur « demandes aujourd'hui ») ; 2C · La photo devient code (moitié gauche de la résidence en trame de code, téléphone WhatsApp, fiche avec critères). V1 et V3 retirées de `hero-variantes.html` (archive : `archive/hero-variantes-v1.html`). Figma : planche `36:2` mise à jour sur place (V2, 2B, 2C).

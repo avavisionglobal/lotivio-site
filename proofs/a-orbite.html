@@ -114,7 +114,7 @@ a{color:inherit;text-decoration:none}
 .mic{display:flex;align-items:center;gap:14px;margin-top:30px}
 .mic span.b{width:52px;height:52px;border-radius:50%;background:var(--ink);display:grid;place-items:center;flex:none}
 .wave{display:flex;align-items:center;gap:3px;height:40px}
-.wave i{width:3px;border-radius:2px;background:var(--ink);animation:w 1.1s var(--ease) infinite alternate}
+.wave i{width:3px;height:var(--h,20px);border-radius:2px;background:var(--ink);animation:w 1.1s var(--ease) infinite alternate}
 @keyframes w{from{height:6px}to{height:var(--h,30px)}}
 .quote{font-size:14px;line-height:1.45;margin-top:16px;color:var(--ink-2);font-style:italic}
 .fields{margin-top:14px;background:#fff;border-radius:16px;border:1px solid var(--line)}
@@ -590,6 +590,45 @@ h1 .o,.h2 .o,.final .o{font-style:normal;color:var(--orange)}
   .f-brand p{font-size:16px}.f-cols a{font-size:15px}
   .f-legal{flex-direction:column;gap:6px}
 }
+
+/* ---------- S03 · cartes façon S07 ---------- */
+.fx3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:64px}
+.oc.fx{width:auto;min-height:0;transition:transform .35s var(--ease),box-shadow .35s var(--ease)}
+.oc.fx:hover{transform:translateY(-6px);box-shadow:0 30px 60px -36px rgba(20,20,20,.35)}
+.oc.fx .ui{height:372px;display:flex;flex-direction:column}
+.oc.fx .ui .ui-in{flex:1}
+.oc.fx h3{margin-top:34px}
+.oc.fx .nb{transition:background .3s,color .3s}.oc.fx:hover .nb{background:var(--orange);color:#fff}
+.rows3{padding:6px 10px}
+.r3{display:grid;grid-template-columns:62px 1fr auto;gap:10px;align-items:center;padding:10px 2px;font-size:13px}
+.r3+.r3{border-top:1px solid #EAEAE8}
+.r3 img{height:18px;width:auto;max-width:62px;object-fit:contain;object-position:left}
+.r3 b{display:block;font-weight:500;font-size:14px}.r3 small{color:var(--muted);font-size:12px}
+.r3 em{font-style:normal;font-family:var(--mono);font-size:10px;padding:4px 7px;border-radius:5px}
+.r3 em.n{background:#FDEEE2;color:#C9551B}.r3 em.q{background:#F3E8FF;color:#7B2CBF}.r3 em.b{background:#EFEFEC;color:#555}
+.r3.in{animation:r3in .6s var(--ease)}
+@keyframes r3in{from{opacity:0;transform:translateY(-8px);background:#FFF5EE}to{opacity:1;transform:none}}
+.live{display:flex;align-items:center;gap:6px;font-size:12.5px;color:var(--green)}.live i{width:7px;height:7px;border-radius:50%;background:var(--green);animation:pl 1.6s infinite}
+@keyframes pl{50%{opacity:.3}}
+.chat3{background:#EFEAE0;display:flex;flex-direction:column;gap:7px}
+.chat3 .bq{background:#fff;border-radius:12px;padding:8px 10px;font-size:13px;line-height:1.35;max-width:88%}
+.chat3 .ba{align-self:flex-end;background:#DCF5D6;border-radius:12px;padding:8px 10px;font-size:13px}
+.chat3 .pdf{display:flex;align-items:center;gap:8px;background:#fff;border-radius:12px;padding:8px 10px;font-size:12.5px;max-width:88%}
+.chat3 .pdf span{background:#E5484D;color:#fff;font-family:var(--mono);font-size:9px;border-radius:4px;padding:3px 5px}
+.crit3{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:12px}
+.crit3 span{background:#F6F6F5;border-radius:10px;padding:8px 9px;font-weight:500;font-size:14px}
+.crit3 small{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:400;margin-bottom:2px}
+.crit3 .ok{background:#F3E8FF;color:#7B2CBF}
+.rec{display:flex;align-items:center;gap:10px}
+.mic3{width:38px;height:38px;border-radius:50%;background:var(--orange);display:grid;place-items:center;flex:none;box-shadow:0 0 0 6px rgba(235,110,44,.15)}
+.rec .wave{flex:1;height:30px}.rec .wave i{background:var(--ink)}
+.tm3{font-family:var(--mono);font-size:11px;color:var(--muted)}
+.tr{font-size:13.5px;line-height:1.45;font-style:italic;margin-top:12px;color:#333}
+.fields3{margin-top:12px;border:1px solid var(--line);border-radius:14px}
+.fields3 div{display:flex;justify-content:space-between;padding:9px 12px;font-size:13px}
+.fields3 div+div{border-top:1px solid var(--line)}
+.fields3 span{color:var(--muted)}.fields3 b{font-weight:500}.fields3 .g{color:var(--green)}
+@media (max-width:1000px){.fx3{grid-template-columns:1fr}.oc.fx .ui{min-height:0}}
 </style>
 </head>
 <body>
@@ -649,41 +688,56 @@ h1 .o,.h2 .o,.final .o{font-style:normal;color:var(--orange)}
 </section>
 
 <!-- S03 · Ce que Lotivio fait -->
-<section class="sec">
+<section class="sec" id="s03">
   <div class="split rv">
     <div class="lab">Ce que Lotivio fait</div>
     <div class="body"><h2 class="h2">Toutes vos demandes.<span class="g">Un seul endroit<i class="o">.</i></span></h2></div>
   </div>
-  <div class="bento">
-    <article class="bc wide rv">
-      <div class="txt">
-        <span class="mono lab">Demandes reçues</span>
-        <h3>Une file pour toutes les sources.</h3>
-        <p>Chaque demande arrive avec sa source, le bien demandé et les critères de l'acheteur. Vous voyez tout de suite qui engager.</p>
+  <div class="fx3">
+    <article class="oc fx rv">
+      <span class="nb">1</span>
+      <div class="ui">
+        <div class="ui-h"><b>Demandes reçues</b><span>Aujourd'hui · 13</span></div>
+        <div class="ui-in rows3" id="rows3">
+          <div class="r3"><img src="assets/logos/homegate.svg" alt="Homegate"><div><b>David Grosjean</b><small>Clos des Vergers · Lot A2</small></div><em class="n">Nouveau</em></div>
+          <div class="r3"><img src="assets/logos/meta.png" alt="Meta"><div><b>Nathalie Girard</b><small>Les Terrasses · 3.5 p.</small></div><em class="q">Qualifié</em></div>
+          <div class="r3"><img src="assets/logos/immobilier-ch.svg" alt="immobilier.ch"><div><b>Claire Monnier</b><small>Les Terrasses · Attique</small></div><em class="n">Nouveau</em></div>
+          <div class="r3"><img src="assets/logos/properstar-logo.png" alt="Properstar"><div><b>Léa Perrin</b><small>Lac &amp; Lumière · Lot F3</small></div><em class="b">Brochure</em></div>
+        </div>
+        <div class="ui-f"><span class="b1">Toutes les sources</span><span class="b2">Ouvrir la file</span></div>
       </div>
-      <div class="shot"><img src="assets/ui-leads.png" alt="Écran Demandes reçues de Lotivio, données de démonstration" loading="lazy"></div>
+      <h3>Une file pour toutes les sources</h3>
+      <p>Portails, Meta et votre site : chaque demande arrive avec sa source, le bien et les critères de l'acheteur.</p>
     </article>
-    <article class="bc wa rv">
-      <div class="txt">
-        <span class="mono lab">Assistant WhatsApp</span>
-        <h3>L'IA qualifie vos acheteurs, jour et nuit.</h3>
-        <p>Brochure, type de bien, pièces, budget : la fiche se remplit pendant la conversation.</p>
+
+    <article class="oc fx rv">
+      <span class="nb">2</span>
+      <div class="ui">
+        <div class="ui-h"><b>Assistant WhatsApp</b><span class="live"><i></i>en ligne</span></div>
+        <div class="ui-in chat3">
+          <div class="bq">Bonjour Nathalie, voici la brochure des Terrasses du Vignoble.</div>
+          <div class="pdf"><span>PDF</span>Les Terrasses du Vignoble.pdf</div>
+          <div class="bq">Combien de pièces recherchez-vous ?</div>
+          <div class="ba">3.5, à Milvignes</div>
+        </div>
+        <div class="crit3"><span><small>Pièces</small>3.5</span><span><small>Zone</small>Milvignes</span><span class="ok"><small>Statut</small>Qualifié</span></div>
       </div>
-      <div class="phone"><img src="assets/ui-wa.png" alt="Conversation WhatsApp de l'assistant Max, données de démonstration" loading="lazy"></div>
+      <h3>L'IA qualifie, jour et nuit</h3>
+      <p>Brochure, type de bien, pièces, budget : la fiche se remplit pendant la conversation, même à 21 h 47.</p>
     </article>
-    <article class="bc rv">
-      <span class="mono lab">Dictée vocale</span>
-      <h3>Dictez. La fiche se remplit.</h3>
-      <div class="mic">
-        <span class="b" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></span>
-        <div class="wave" id="wave" aria-hidden="true"></div>
+
+    <article class="oc fx rv">
+      <span class="nb">3</span>
+      <div class="ui">
+        <div class="ui-h"><b>Dictée vocale</b><span>Après la visite</span></div>
+        <div class="ui-in">
+          <div class="rec"><span class="mic3"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></span><div class="wave" id="wave3" aria-hidden="true"></div><span class="tm3">0:14</span></div>
+          <p class="tr">« Visite faite avec M. Renaud, très intéressé, budget 1,2 million, je le rappelle jeudi. »</p>
+        </div>
+        <div class="fields3"><div><span>Intérêt</span><b class="g">Fort</b></div><div><span>Budget max</span><b>CHF 1'200'000</b></div><div><span>Relance</span><b>Jeudi · 09:00</b></div></div>
       </div>
-      <p class="quote">« Visite faite avec M. Renaud, très intéressé, budget 1,2 million, je le rappelle jeudi. »</p>
-      <div class="fields">
-        <div><span>Intérêt</span><span class="hot">Fort</span></div>
-        <div><span>Budget max</span><span>CHF 1'200'000</span></div>
-        <div><span>Relance</span><span>Jeudi · 09:00</span></div>
-      </div>
+      <h3>Dictez, la fiche se remplit</h3>
+      <p>En sortant d'une visite, l'agent dicte son compte rendu. Intérêt, budget, relance : il relit et valide.</p>
     </article>
   </div>
 </section>
@@ -1033,7 +1087,7 @@ setInterval(()=>{const d=data[n++%data.length];minute=(minute+1)%60;const t='21:
 
 /* Onde de la dictée */
 const wv=document.getElementById('wave');
-for(let i=0;i<34;i++){const b=el('i');b.style.setProperty('--h',(8+Math.abs(Math.sin(i*1.7))*30)+'px');b.style.animationDelay=(i*.05)+'s';wv.append(b)}
+if(wv)for(let i=0;i<34;i++){const b=el('i');b.style.setProperty('--h',(8+Math.abs(Math.sin(i*1.7))*30)+'px');b.style.animationDelay=(i*.05)+'s';wv.append(b)}
 
 /* Liste « L'IA qui » */
 const aiIo=new IntersectionObserver(es=>es.forEach(e=>e.target.classList.toggle('on',e.isIntersecting)),{rootMargin:'-40% 0px -40% 0px'});
@@ -1137,6 +1191,11 @@ drawChain();
   pick(days);pick(document.getElementById('slots'));
   document.querySelectorAll('#slots button').forEach(b=>b.setAttribute('aria-pressed','false'));
 })();
+/* S03 · onde de la dictée et nouvelles demandes */
+(function(){const w=document.getElementById('wave3');if(w)for(let i=0;i<30;i++){const b=el('i');b.style.setProperty('--h',(6+Math.abs(Math.sin(i*1.3))*22)+'px');b.style.animationDelay=(i*.05)+'s';w.append(b)}
+  const box=document.getElementById('rows3');if(!box)return;
+  const pool=[['assets/logos/immoscout24.svg','ImmoScout24','Sophie Jeanneret','Clos des Vergers · Lot A4','n','Nouveau'],['assets/logos/homegate.svg','Homegate','Marc Vuilleumier','Clos des Vergers · Lot C1','n','Nouveau'],['assets/logos/meta.png','Meta','Yann Renaud','Lac & Lumière · 4.5 p.','q','Qualifié']];let k=0;
+  setInterval(()=>{const d=pool[k++%pool.length];const r=el('div','r3 in');const im=el('img');im.src=d[0];im.alt=d[1];const t=el('div');t.append(el('b',null,d[2]),el('small',null,d[3]));r.append(im,t,el('em',d[4],d[5]));box.prepend(r);if(box.children.length>4)box.lastElementChild.remove()},3200)})();
 /* Progression + apparitions */
 const pr=document.getElementById('prog');
 addEventListener('scroll',()=>{const p=scrollY/Math.max(1,document.body.scrollHeight-innerHeight);pr.textContent=Math.min(100,Math.round(p*100))+'%'},{passive:true});
