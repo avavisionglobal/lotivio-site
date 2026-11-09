@@ -15,6 +15,13 @@ Format d'une entrée :
 
 ---
 
+## 2026-11-09 — Trois pistes des premières sections, importées dans Figma
+- Décision : trois variantes A Orbite, B Atelier, C Paysage (`proofs/`, détail dans `proofs/README.md`), importées dans le fichier Figma Lotivio, page « WebDesign » (nodes 4:2, 5:2, 6:2). Aucune image générée : résidence de la démo, photo du film et captures de l'app réutilisées.
+- Raison : demande de Diego (« 2-3 variantes de LP avec les 2-3 premières sections », puis « crée-moi ceci dans le lien Figma »).
+- Remplace / modifie : rien.
+- Statut : proposition à valider (choix d'une piste attendu).
+- Source : conversation Diego / Claude Code, 9 novembre 2026.
+
 ## 2026-11-09 — DA : 1600.agency + Fourmula ; structure v1 proposée
 - Décision : la direction artistique s'appuie sur deux références, https://www.1600.agency/ et https://fourmula.ai. Structure de la landing page proposée dans `docs/structure-lp-v1.md` : squelette de Fourmula, détails de 1600, contenus du script v0. Fichier Figma du projet : https://www.figma.com/design/9QMY3loAtT7Sw4WEBdY6HU/Lotivio (page « WebDesign », vide au 9.11).
 - Raison : choix de Diego après les listes One Page Love. Les autres candidates de `refs/opl-shortlist.md` ne sont pas retenues.

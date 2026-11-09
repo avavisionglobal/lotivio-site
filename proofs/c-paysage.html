@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lotivio — Piste C · Paysage</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F7F6F3; --ink:#141414; --muted:#6F6E6A; --grey:#B4B2AC; --line:#E6E4DF;
+  --orange:#E8762D; --orange-l:#F4A06A; --violet:#AD46FF; --green:#0E8345;
+  --sans:'Geist',sans-serif; --mono:'Geist Mono',monospace; --serif:'Instrument Serif',serif;
+  --ease:cubic-bezier(.2,.7,.1,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+html{overflow-x:clip}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+.mono{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase}
+.btn{display:inline-flex;align-items:center;gap:8px;border-radius:999px;padding:13px 22px;font-size:14.5px;font-weight:500;transition:transform .15s var(--ease),background .15s}
+.btn:active{transform:scale(.96)}
+
+.frame{padding:12px}
+.hero{position:relative;height:calc(100svh - 24px);min-height:720px;border-radius:30px;overflow:hidden;color:#fff;isolation:isolate}
+.hero picture,.hero .ph{position:absolute;inset:0;z-index:-2}
+.hero .ph img{width:100%;height:100%;object-fit:cover;object-position:30% 50%;transform:scale(1.06);animation:drift 26s var(--ease) forwards}
+@keyframes drift{to{transform:scale(1)}}
+.hero::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(12,12,12,.62) 0%,rgba(12,12,12,.28) 48%,rgba(12,12,12,0) 70%),linear-gradient(180deg,rgba(10,10,10,.35) 0%,rgba(10,10,10,0) 26%,rgba(10,10,10,0) 44%,rgba(10,10,10,.7) 100%)}
+
+.nav{position:absolute;top:18px;left:18px;right:18px;display:flex;justify-content:space-between;align-items:center}
+.brand{display:flex;align-items:center;gap:10px;font-weight:600;font-size:17px;letter-spacing:-.02em}
+.brand img{width:32px;height:32px;filter:invert(1)}
+.glass{display:flex;gap:4px;padding:5px;border-radius:999px;background:rgba(255,255,255,.14);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.18)}
+.glass a{padding:9px 16px;border-radius:999px;font-size:14px}
+.glass a:hover{background:rgba(255,255,255,.14)}
+.btn-white{background:#fff;color:var(--ink)}
+.btn-white:hover{background:#F1F0EC}
+
+.copy{position:absolute;left:44px;bottom:44px;max-width:min(780px,62%)}
+.copy .mono{opacity:.8}
+h1{font-weight:500;font-size:clamp(44px,6.2vw,100px);line-height:.95;letter-spacing:-.05em;margin-top:18px}
+h1 .s{display:block;color:rgba(255,255,255,.6)}
+h1 em{font-family:var(--serif);font-style:italic;font-weight:400;letter-spacing:-.02em;color:var(--orange-l);font-size:1.08em}
+.copy p{font-size:17px;line-height:1.5;color:rgba(255,255,255,.82);max-width:34em;margin-top:22px}
+.copy .row{display:flex;gap:10px;margin-top:26px;flex-wrap:wrap}
+.btn-o{border:1px solid rgba(255,255,255,.4);color:#fff}
+
+.notifs{position:absolute;right:28px;bottom:44px;width:340px;display:flex;flex-direction:column;gap:8px}
+.nt{background:rgba(250,250,248,.9);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);color:var(--ink);border-radius:18px;padding:12px 14px;display:grid;grid-template-columns:34px 1fr auto;gap:10px;align-items:center;
+  box-shadow:0 20px 40px -24px rgba(0,0,0,.6);opacity:0;transform:translateY(14px) scale(.98);transition:opacity .6s var(--ease),transform .6s var(--ease)}
+.nt.on{opacity:1;transform:none}
+.nt .ic{width:34px;height:34px;border-radius:9px;display:grid;place-items:center;background:var(--ink)}
+.nt .ic img{width:34px;height:34px}
+.nt .l{font-family:var(--mono);font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.nt b{display:block;font-size:14px;font-weight:600;letter-spacing:-.01em;margin-top:2px}
+.nt span.t{font-size:13px;color:#3d3d3d}
+.nt time{font-size:11px;color:var(--muted);align-self:start}
+.demo{position:absolute;right:30px;top:76px;opacity:.6;font-size:10px}
+
+.band{display:grid;grid-template-columns:auto 1fr auto;align-items:end;gap:48px;padding:90px 56px 70px;border-bottom:1px solid var(--line)}
+.band .n{font-weight:500;font-size:clamp(96px,13vw,210px);line-height:.78;letter-spacing:-.07em}
+.band .n sup{font-size:.28em;letter-spacing:-.02em;vertical-align:top;margin-left:6px;color:var(--orange)}
+.band .n small{display:block;font-size:15px;letter-spacing:0;font-weight:400;color:var(--muted);margin-bottom:12px}
+.band h2{font-weight:500;font-size:clamp(26px,2.6vw,40px);line-height:1.08;letter-spacing:-.035em;max-width:16em}
+.band h2 em{font-family:var(--serif);font-style:italic;font-weight:400;font-size:1.1em}
+.band ul{list-style:none;display:flex;flex-direction:column;gap:10px;min-width:250px}
+.band li{display:flex;justify-content:space-between;gap:24px;font-size:14px;padding-bottom:10px;border-bottom:1px solid var(--line)}
+.band li span:last-child{color:var(--muted)}
+
+.ai{display:grid;grid-template-columns:minmax(220px,24%) 1fr;padding:0 56px}
+.ai .left{border-right:1px solid var(--line);padding:40px 30px 40px 0;display:flex;flex-direction:column;justify-content:space-between;position:sticky;top:0;height:min(100svh,760px)}
+.ai .left h2{font-weight:500;font-size:clamp(46px,5.2vw,84px);letter-spacing:-.05em;line-height:.95}
+.ai .left p{font-size:14px;line-height:1.5;color:var(--muted);margin-top:18px;max-width:20em}
+.btn-dark{background:var(--ink);color:#fff}
+.btn-dark:hover{background:#276EF1}
+.lines{list-style:none}
+.lines li{display:grid;grid-template-columns:1fr auto;align-items:center;gap:20px;border-bottom:1px solid var(--line);padding:30px 0 30px 36px;cursor:default;color:#C9C7C1;transition:color .5s var(--ease)}
+.lines li.on,.lines li:hover{color:var(--ink)}
+.lines li .t{font-weight:500;font-size:clamp(30px,4.3vw,70px);letter-spacing:-.045em;line-height:1}
+.lines li .tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);opacity:0;transform:translateX(-8px);transition:.4s var(--ease)}
+.lines li.on .tag,.lines li:hover .tag{opacity:1;transform:none}
+.lines li .tag::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--c);margin-right:8px;vertical-align:1px}
+.guard{display:flex;flex-wrap:wrap;gap:8px 26px;padding:26px 0 0 36px;color:var(--muted)}
+.guard span::before{content:"✓ ";color:var(--green)}
+.end{padding:120px 56px 50px;color:var(--grey)}
+
+@media (max-width:1000px){
+  .glass{display:none}
+  .copy{left:24px;right:24px;bottom:auto;top:110px;max-width:none}
+  .notifs{left:16px;right:16px;width:auto;bottom:18px}
+  .band{grid-template-columns:1fr;padding:64px 24px;gap:28px}
+  .ai{grid-template-columns:1fr;padding:0 24px}
+  .ai .left{position:static;height:auto;border-right:0;padding:56px 0 24px;gap:24px}
+  .lines li{padding-left:0}
+  .guard{padding-left:0}
+  .end{padding-left:24px}
+}
+@media (max-width:520px){
+  .frame{padding:8px}
+  .hero{min-height:780px;border-radius:24px}
+  .copy{top:90px}
+  .copy p{font-size:15.5px}
+  .nav .btn{padding:10px 14px;font-size:13px}
+  .nt:nth-child(3){display:none}
+  .demo{top:66px;right:20px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.nt{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+<div class="frame">
+<header class="hero">
+  <div class="ph"><img src="assets/lake-residence.webp" alt="Résidence au bord du lac, image de la promotion de démonstration" fetchpriority="high"></div>
+  <nav class="nav">
+    <a class="brand" href="#"><img src="assets/lotivio-mark.svg" alt="">Lotivio</a>
+    <div class="glass"><a href="#">Produit</a><a href="#">IA</a><a href="#">Mise en place</a><a href="#">Questions</a></div>
+    <a class="btn btn-white" href="#demo">Réserver une démo</a>
+  </nav>
+  <span class="mono demo">Données de démonstration</span>
+
+  <div class="copy">
+    <span class="mono">CRM immobilier · Suisse romande</span>
+    <h1>Vos acheteurs écrivent partout.<span class="s">Lotivio les suit <em>tous.</em></span></h1>
+    <p>Homegate, immobilier.ch, Properstar, Meta, votre site : chaque demande arrive dans Lotivio. L'IA qualifie l'acheteur sur WhatsApp, et vous savez qui relancer. Mis en place avec vous.</p>
+    <div class="row"><a class="btn btn-white" href="#demo">Réserver une démo</a><a class="btn btn-o" href="#">Voir le film · 1 min</a></div>
+  </div>
+
+  <div class="notifs" id="notifs" aria-label="Exemples de notifications, données de démonstration"></div>
+</header>
+</div>
+
+<section class="band">
+  <div class="n"><small>Jusqu'à</small>4 h<sup>/ sem.</sup></div>
+  <h2>gagnées chaque semaine, par agent. Le temps de la saisie devient du temps de <em>vente.</em></h2>
+  <ul>
+    <li><span>Saisie des demandes</span><span>automatique</span></li>
+    <li><span>Envoi de la brochure</span><span>WhatsApp</span></li>
+    <li><span>Compte rendu de visite</span><span>dicté</span></li>
+    <li><span>Qui relancer</span><span>chaque matin</span></li>
+  </ul>
+</section>
+
+<section class="ai">
+  <div class="left">
+    <div>
+      <span class="mono" style="color:var(--muted)">L'IA dans Lotivio</span>
+      <h2 style="margin-top:18px">L'IA qui</h2>
+      <p>Réglée avec vous à la mise en place : vos consignes, vos projets, votre ton.</p>
+    </div>
+    <a class="btn btn-dark" href="#demo" style="align-self:flex-start">Réserver une démo</a>
+  </div>
+  <div>
+    <ul class="lines" id="lines">
+      <li style="--c:var(--violet)"><span class="t">qualifie vos acheteurs sur WhatsApp</span><span class="tag">Assistant Max</span></li>
+      <li style="--c:var(--orange)"><span class="t">répond à leurs questions sur vos projets</span><span class="tag">Vos fiches projet</span></li>
+      <li style="--c:var(--green)"><span class="t">remplit vos fiches à la voix</span><span class="tag">Dictée vocale</span></li>
+      <li style="--c:#276EF1"><span class="t">rédige vos descriptions de lots</span><span class="tag">Catalogue</span></li>
+    </ul>
+    <div class="guard mono"><span>Consentement demandé</span><span>STOP respecté</span><span>IA en pause contact par contact</span><span>Brouillons à valider</span></div>
+  </div>
+</section>
+
+<footer class="end mono">Piste C · Paysage — Fourmula (liste « L'IA qui »), photo de la promotion de démo · proposition non validée</footer>
+
+<script>
+function el(tag,cls,text){const e=document.createElement(tag);if(cls)e.className=cls;if(text!=null)e.textContent=text;return e}
+const notes=[
+  ['Homegate','Nouvelle demande','David Grosjean · Clos des Vergers, lot A2','21:46'],
+  ['WhatsApp · Max','Nathalie Girard est qualifiée','3.5 pièces · Milvignes · ≤ CHF 1,1 mio','21:50'],
+  ['Lotivio · Aujourd\'hui','7 relances à traiter','Brochure consultée 3× : Claire Monnier','08:00']
+];
+const box=document.getElementById('notifs');
+notes.forEach((n,i)=>{const c=el('div','nt');const ic=el('span','ic');const im=el('img');im.src='assets/lotivio-mark.svg';im.alt='';ic.append(im);
+  const tx=el('div');tx.append(el('div','l',n[0]),el('b',null,n[1]),el('span','t',n[2]));
+  c.append(ic,tx,el('time',null,n[3]));box.append(c);setTimeout(()=>c.classList.add('on'),700+i*900)});
+/* les lignes s'assombrissent quand elles passent au centre de l'écran */
+const lis=[...document.querySelectorAll('#lines li')];
+const io=new IntersectionObserver(es=>es.forEach(e=>e.target.classList.toggle('on',e.isIntersecting)),{rootMargin:'-42% 0px -42% 0px'});
+lis.forEach(l=>io.observe(l));
+</script>
+</body>
+</html>
