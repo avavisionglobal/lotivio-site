@@ -71,12 +71,21 @@ Sans aucune des deux, le formulaire indique honnêtement que la réservation en 
 
 ## Mesures (9 novembre 2026, build local)
 
-Lighthouse 12 :
+Lighthouse 12, première visite (intro jouée) :
 
-- **Bureau** : performance 99, accessibilité 94, bonnes pratiques 100, SEO 100.
-- **Mobile, bridage réel** (devtools, 4G et CPU ×4) : performance 87 à 91, LCP 1,9 à 2,1 s, CLS 0,01.
+- **Bureau** : performance 100, accessibilité 95, bonnes pratiques 96, SEO 100. FCP 0,3 s, LCP 0,6 s, TBT 0 ms, CLS 0.
+- **Mobile, bridage réel** (devtools, 4G et CPU ×4) : performance 95 à 97, accessibilité 96, bonnes pratiques 100, SEO 100. FCP et LCP 1,2 à 1,3 s, TBT 150 à 240 ms, CLS 0,04.
+- **Poids de la page** : 411 Ko (809 Ko avant optimisation, hors film chargé à la demande).
+- **Défilement** (14 s à la molette, 120 Hz) : 99 % des images sous 10 ms, pire image 26 ms.
+- **Largeurs vérifiées** : 320, 360, 414, 768, 834, 1024, 1280, 1440 et 1920 px, sans défilement horizontal.
 
-Le mode simulé de Lighthouse annonce un LCP de 4,8 s sur mobile. Le LCP mesuré dans le navigateur est de 0,2 s sans bridage et de 2 s avec bridage réel.
+Ce qui fait la vitesse (à préserver) :
+- le CSS est intégré dans la page (`inlineStylesheets: 'always'`) ;
+- les trames de code sont dessinées dans des canvas (`src/scripts/ascii.ts`), jamais pendant le défilement ;
+- les images servent en 480 px là où l'affichage est petit (intro, tuiles, trames) et les logos à leur taille ×2 (`npm run images`) ;
+- les apparitions sont des transitions CSS ; GSAP ne gère que les effets liés au défilement ;
+- `motion.js` et tout ce qui est sous la ligne de flottaison s'initialisent en temps libre ;
+- l'intro ne se joue qu'une fois par visite (sessionStorage).
 
 Écart d'accessibilité connu : le texte blanc sur l'orange de marque #EB6E2C (bouton du hero) a un contraste de 3:1, sous le seuil AA de 4,5:1.
 

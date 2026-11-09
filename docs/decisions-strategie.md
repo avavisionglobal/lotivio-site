@@ -15,6 +15,23 @@ Format d'une entrée :
 
 ---
 
+## 2026-11-09 — Barre de navigation dépolie, vitesse et adaptation aux écrans
+- Décision :
+  - Quand on quitte le haut de page, le menu repose sur une bande en verre dépoli, lisible sur tous les fonds.
+  - Le site est optimisé pour la vitesse :
+    - CSS intégré dans la page ;
+    - trames de code dessinées dans des canvas ;
+    - images de 480 px et logos à leur taille d'affichage ;
+    - dimensions déclarées pour toutes les images ;
+    - initialisations sous la ligne de flottaison et découpage des titres faits en temps libre ;
+    - intro jouée une fois par visite.
+  - Ajustements pour les écrans de 1001 à 1280 px : cartes sources S06 et carte de démo S10.
+- Raison : demandes de Diego (« un petit filtre pour que ce soit beau […] ça ne fait pas pro » ; « un site rapide, très responsif et ultra bien optimisé »).
+- Mesure : Lighthouse mobile en bridage réel, première visite. Performance de 64 à 95-97, LCP de 4,6 à 1,3 s, TBT de 710 à 150-240 ms. Poids de 809 à 411 Ko. Bureau à 100.
+- Corrigé au passage : titre S07 invisible depuis la réécriture des apparitions.
+- Statut : décidée.
+- Source : conversation Diego / Claude Code, 9 novembre 2026.
+
 ## 2026-11-09 — Animation d'entrée et fluidité calquée sur meotis.ch
 - Décision :
   - Une animation d'entrée d'environ 2 s ouvre le site (mécanisme de fourmula.ai) :
