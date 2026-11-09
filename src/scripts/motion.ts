@@ -25,7 +25,8 @@ if (reduced) {
 
 async function init() {
   /* ---------- Lenis : défilement doux synchronisé avec ScrollTrigger ---------- */
-  const lenis = new Lenis({ duration: 1.15, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), anchors: false });
+  // Interpolation continue (lerp) : défilement plus souple qu'une durée fixe, sans à-coups entre deux crans de molette.
+  const lenis = new Lenis({ lerp: 0.085, smoothWheel: true, wheelMultiplier: 0.95, touchMultiplier: 1.4, anchors: false });
   lenis.on('scroll', ScrollTrigger.update);
   gsap.ticker.add((t) => lenis.raf(t * 1000));
   gsap.ticker.lagSmoothing(0);
@@ -63,6 +64,11 @@ async function init() {
         scrollTrigger: { trigger: h, start: 'top 86%', once: true },
       }),
     });
+  });
+  // Titres aux lignes posées à la main (.lm > .li) : même effet, sans SplitText
+  // (S02 : SplitText duplique le compteur « 4 »).
+  $$('[data-lines]').forEach((h) => {
+    gsap.from($$('.li', h), { yPercent: 105, duration: 1.15, ease: EASE, stagger: 0.09, scrollTrigger: { trigger: h, start: 'top 86%', once: true } });
   });
 
   /* ---------- Labels : texte « décodé » (ScrambleText) ---------- */
@@ -123,7 +129,7 @@ async function init() {
     pns.forEach((pn, i) => {
       const nextPn = pns[i + 1]; if (!nextPn) return;
       gsap.to(pn.querySelector('.pn-in'), { scale: 0.9, yPercent: -4, ease: 'none', scrollTrigger: { trigger: nextPn, start: 'top bottom', end: 'top top', scrub: true } });
-      gsap.to(pn, { '--dk': 0.55, ease: 'none', scrollTrigger: { trigger: nextPn, start: 'top bottom', end: 'top top', scrub: true } });
+      gsap.to(pn.querySelector('.pn-dim'), { opacity: 0.55, ease: 'none', scrollTrigger: { trigger: nextPn, start: 'top bottom', end: 'top top', scrub: true } });
     });
     pns.forEach((pn) => {
       const h = pn.querySelector('h3'); const st = pn.querySelector('.stage');
@@ -196,7 +202,7 @@ async function init() {
 
   /* ---------- S10 · la carte de démo se redresse ---------- */
   const card = $('.cta10-card');
-  if (card) gsap.fromTo(card, { scale: 0.92, borderRadius: 64 }, { scale: 1, borderRadius: 36, ease: 'none', scrollTrigger: { trigger: card, start: 'top bottom', end: 'top 35%', scrub: true } });
+  if (card) gsap.fromTo(card, { scale: 0.92 }, { scale: 1, ease: 'none', scrollTrigger: { trigger: card, start: 'top bottom', end: 'top 35%', scrub: true } });
 
   await tick(); // rend la main au navigateur entre deux groupes (TBT)
   /* ---------- S11 · le mot « lotivio. » monte lettre par lettre ---------- */

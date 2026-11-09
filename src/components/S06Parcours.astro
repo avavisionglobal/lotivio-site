@@ -21,6 +21,7 @@ const lots = Array.from({ length: 24 }, (_, i) => String.fromCharCode(65 + Math.
 <section class="flow4" aria-label="Parcours d'une demande en quatre étapes">
   {panels.map((p, i) => (
     <article class={`pn ${p.g}`} data-bloc={p.b}>
+      <span class="pn-dim" aria-hidden="true"></span>
       <div class="pn-in">
         <div class="code">{p.code}</div>
         <div class="top"><h3>{p.h[0]}<br />{p.h[1]}</h3><span class="num">0{i + 1}</span></div>

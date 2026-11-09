@@ -1,0 +1,63 @@
+---
+// S00 · Animation d'entrée (réf. fourmula.ai) : mot qui défile en haut à gauche, photos qui
+// défilent au centre puis deviennent du code, compteur 0 → 100 %, puis le rideau se lève.
+// La trame de code est calculée ici, à la construction du site : rien à calculer au chargement.
+import sharp from 'sharp';
+import path from 'node:path';
+
+const COLS = 48, ROWS = 44, RAMP = ' .:-=+*#%@';
+const src = path.resolve(process.cwd(), 'public/media/residence-portrait-600.webp');
+const { data } = await sharp(src).resize(COLS, ROWS, { fit: 'cover' }).greyscale().raw().toBuffer({ resolveWithObject: true });
+// Trame en texte : les caractères de la rampe ne contiennent aucun caractère HTML spécial.
+// Quelques caractères orange, répartis de façon déterministe.
+let code = '';
+for (let y = 0; y < ROWS; y++) {
+  for (let x = 0; x < COLS; x++) {
+    const ch = RAMP[Math.min(RAMP.length - 1, Math.floor((1 - data[y * COLS + x] / 255) * RAMP.length))];
+    code += ch !== ' ' && (x * 31 + y * 17) % 97 === 0 ? '<b>' + ch + '</b>' : ch;
+  }
+  code += '\n';
+}
+const photos = ['/media/lac-800.webp', '/media/residence-800.webp', '/media/residence-portrait-600.webp'];
+---
+<div class="intro" id="intro" aria-hidden="true" data-bloc="S00.0">
+  <div class="intro-in">
+    <span class="intro-word" id="intro-word">Homegate</span>
+    <div class="intro-card">
+      {photos.map((p, i) => <span class={`ip ip${i + 1}`} style={`background-image:url(${p})`}></span>)}
+      <pre class="ip-code" set:html={code}></pre>
+    </div>
+    <span class="intro-mark"><img src="/brand/lotivio-mark.svg" alt="" width="26" height="26" /><span>lotivio<i>.</i></span></span>
+    <span class="intro-count"><span id="intro-n">0</span>%</span>
+  </div>
+</div>
+<script is:inline>
+(function () {
+  var el = document.getElementById('intro'), root = document.documentElement;
+  if (!el) return;
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) { el.remove(); return; }
+  root.classList.add('has-intro');
+  var words = ['Homegate', 'ImmoScout24', 'immobilier.ch', 'Properstar', 'Meta Ads', 'WhatsApp', 'Votre site'];
+  var w = document.getElementById('intro-word'), n = document.getElementById('intro-n'), i = 0;
+  var tick = setInterval(function () {
+    i++;
+    if (i < words.length) { w.textContent = words[i]; return; }
+    clearInterval(tick);
+    w.textContent = 'Un seul suivi';
+    var dot = document.createElement('i'); dot.textContent = '.'; w.appendChild(dot);
+    w.classList.add('is-final');
+  }, 150);
+  var t0 = performance.now(), D = 1500;
+  (function count(t) {
+    var p = Math.min(1, (t - t0) / D), e = 1 - Math.pow(1 - p, 3);
+    n.textContent = String(Math.round(e * 100));
+    if (p < 1) requestAnimationFrame(count);
+  })(t0);
+  setTimeout(function () {
+    el.classList.add('is-out');
+    // Le hero commence son entrée pendant que le rideau se lève.
+    setTimeout(function () { root.classList.remove('has-intro'); }, 180);
+    setTimeout(function () { el.remove(); }, 1100);
+  }, 2050);
+})();
+</script>

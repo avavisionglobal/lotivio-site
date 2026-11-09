@@ -12,9 +12,9 @@ const ld = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: q
 <!-- S09 · Questions (FAQ) -->
 <section class="sec" id="faq">
   <div class="faq">
-    <div class="lab" style="padding:18px 0" data-scramble>Vos questions, avant de changer</div>
+    <div class="lab" data-scramble>Vos questions, avant de changer</div>
     <div class="r">
-      <h2 class="h2" style="padding:18px 0 40px" data-split>Votre agence.<span class="g">Vos questions.</span></h2>
+      <h2 class="h2 faq-h" data-split>Votre agence.<span class="g">Vos questions.</span></h2>
       {qa.map(([q, a], i) => (
         <details open={i === 0} data-bloc={`S09.${i + 1}`} data-reveal><summary>{q}</summary><p>{a}</p></details>
       ))}

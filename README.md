@@ -29,6 +29,7 @@ npm run images     # régénère les WebP de public/media depuis assets/
 | `src/pages/index.astro` | Assemble les sections |
 | `src/components/Sxx*.astro` | Une section par fichier, nommée comme dans Figma (`S00` … `S11`) |
 | `src/scripts/app.ts` | Comportements : trames de code, démos animées, réglages, réservation, film, menu |
+| `src/scripts/texhover.ts` | Lentille de code au survol des trames |
 | `src/scripts/motion.ts` | Animations GSAP + Lenis (chargé quand le navigateur est libre) |
 | `src/styles/global.css` | Styles (issus de la maquette `proofs/a-orbite.html`, purgés) + ajouts de production en fin de fichier |
 | `proofs/` | Maquettes HTML de conception (hors site) |
@@ -51,8 +52,13 @@ Niveau visé : fourmula.ai et meotis.ch.
 - S10 : la carte se redresse.
 - S11 : le footer se révèle sous la page ; « lotivio. » monte lettre par lettre.
 - Navigation masquée en descendant, boutons magnétiques, menu animé.
+- Trames de code : au survol de la souris, une lentille fait réapparaître le code sous le pointeur, sur toute la surface du bloc (`src/scripts/texhover.ts`). Les lentilles sont préparées en temps libre à l'approche du bloc ; rien n'est construit pendant le défilement. Pas d'effet au toucher.
 
 Avec `prefers-reduced-motion`, rien n'est animé : Lenis est coupé, S07 devient une piste à faire défiler et S07B une grille statique.
+
+## Espacements
+
+Une seule échelle, définie en fin de `global.css` (« Rythme vertical ») : `--sp-sec` entre deux sections (150 à 210 px sur grand écran, 120 px sur tablette, 96 px sur mobile) et `--sp-head` entre un titre et son contenu (60 à 90 px, 48 px, 40 px). Pour modifier le rythme, changer ces deux variables plutôt que des marges isolées.
 
 ## Réservation de démo (S10) — à brancher
 

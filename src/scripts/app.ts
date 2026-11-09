@@ -286,3 +286,9 @@ $$('[data-diff] > div').forEach((row) => {
     f.classList.toggle('is-near', e.isIntersecting || e.boundingClientRect.top < 0);
   }, { rootMargin: '0px 0px 400px 0px' }).observe(demo);
 })();
+
+/* ---------- Animations en boucle suspendues hors écran (onde, chargement, porte-clés) ---------- */
+(() => {
+  const io = new IntersectionObserver((es) => es.forEach((e) => e.target.classList.toggle('is-off', !e.isIntersecting)), { rootMargin: '200px 0px' });
+  $$('#page > header, main > section, .flow4 > .pn').forEach((s) => io.observe(s));
+})();

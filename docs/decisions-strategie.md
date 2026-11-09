@@ -15,6 +15,13 @@ Format d'une entrée :
 
 ---
 
+## 2026-11-09 — Code au survol, défilement plus fluide, rythme vertical unifié
+- Décision : au survol de la souris, une lentille fait réapparaître le code des trames sous le pointeur, sur toute la surface du bloc. Le défilement passe en interpolation continue (Lenis, lerp 0,085). Les sources d'à-coups sont supprimées : onde vocale animée en hauteur, flous d'arrière-plan sur des éléments mis à l'échelle, variable CSS animée sur les panneaux S06, lentilles construites pendant le survol. Les espacements suivent une seule échelle (--sp-sec entre sections, --sp-head entre titre et contenu).
+- Raison : retours de Diego (« le code réapparaît un peu […] on voit qu'il y a une interaction », « un peu plus fluide lorsque je scroll », « un peu plus d'espace […] entre les sections ou entre les textes »).
+- Corrigé au passage : compteur S02 qui affichait « 44 h », étiquettes S04 sorties de leurs lignes (conflit avec les porte-clés S07B), jambages coupés dans les titres révélés ligne par ligne.
+- Statut : décidée.
+- Source : conversation Diego / Claude Code, 9 novembre 2026.
+
 ## 2026-11-09 — Production : Astro + GSAP + Lenis, site complet en local
 - Décision : le site est construit en Astro (statique) avec GSAP (ScrollTrigger, SplitText, ScrambleText) et Lenis, à partir de la maquette a-orbite.html et des textes de Figma v6. Toutes les sections S00 à S11 sont en place, avec les animations du niveau de fourmula.ai et meotis.ch. La réservation de démo se fait en deux étapes (créneau, puis coordonnées) ; sa destination reste à brancher (variables PUBLIC_DEMO_ENDPOINT ou PUBLIC_DEMO_EMAIL).
 - Raison : demande de Diego (« on peut y aller pour la production […] animations du même niveau que fourmula.ai et meotis.ch ») ; stack laissée au choix (« là où toi tu as le plus de skill, juste pas Webflow »), démo « à brancher plus tard », mise en ligne « local d'abord ».
