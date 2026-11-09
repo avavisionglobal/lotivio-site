@@ -15,6 +15,14 @@ Format d'une entrée :
 
 ---
 
+## 2026-11-09 — Production : Astro + GSAP + Lenis, site complet en local
+- Décision : le site est construit en Astro (statique) avec GSAP (ScrollTrigger, SplitText, ScrambleText) et Lenis, à partir de la maquette a-orbite.html et des textes de Figma v6. Toutes les sections S00 à S11 sont en place, avec les animations du niveau de fourmula.ai et meotis.ch. La réservation de démo se fait en deux étapes (créneau, puis coordonnées) ; sa destination reste à brancher (variables PUBLIC_DEMO_ENDPOINT ou PUBLIC_DEMO_EMAIL).
+- Raison : demande de Diego (« on peut y aller pour la production […] animations du même niveau que fourmula.ai et meotis.ch ») ; stack laissée au choix (« là où toi tu as le plus de skill, juste pas Webflow »), démo « à brancher plus tard », mise en ligne « local d'abord ».
+- Remplace / modifie : la maquette proofs/a-orbite.html devient une source de conception ; le code de production vit dans src/.
+- Statut : décidée. Pas de mise en ligne ni de déploiement sans demande.
+- À trancher : destination des demandes de démo et adresse « Écrire à l'équipe » ; domaine lotivio.ch ; URL de la page confidentialité ; contraste du texte blanc sur l'orange #EB6E2C (3:1) ; source du chiffre « 4 h » ; droits d'usage des logos tiers.
+- Source : conversation Diego / Claude Code, 9 novembre 2026.
+
 ## 2026-11-09 — Hero : variante 1 retenue ; Figma fait foi pour les textes
 - Décision : la variante 1 (centrée produit, logos des sources dans le titre, fenêtre de l'app + fiche acheteur) devient le hero, avec les textes réécrits par Diego dans Figma, et la bande « Vos canaux, connectés » conservée dessous. Les textes modifiés dans Figma (v6) font foi sur ceux du code.
 - Raison : choix de Diego (« Variante 1 ! », « garde ceci : Container - Vos canaux, connectés »).

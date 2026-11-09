@@ -4,6 +4,8 @@ import '@fontsource-variable/geist-mono';
 import '@fontsource-variable/archivo/standard.css';
 import '../styles/global.css';
 import { SITE } from '../config';
+import archivoWoff from '@fontsource-variable/archivo/files/archivo-latin-standard-normal.woff2?url';
+import geistWoff from '@fontsource-variable/geist/files/geist-latin-wght-normal.woff2?url';
 
 const canonical = new URL(Astro.url.pathname, SITE.url).href;
 const og = new URL('/og-image.jpg', SITE.url).href;
@@ -31,6 +33,8 @@ const jsonLd = {
     <meta name="theme-color" content="#F7F6F3" />
     <link rel="icon" href="/brand/lotivio-mark.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/brand/icon-512.png" />
+    <link rel="preload" as="font" type="font/woff2" href={archivoWoff} crossorigin />
+    <link rel="preload" as="font" type="font/woff2" href={geistWoff} crossorigin />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="fr_CH" />
     <meta property="og:site_name" content="Lotivio" />

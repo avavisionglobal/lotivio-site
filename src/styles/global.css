@@ -436,6 +436,9 @@ h1 .o,.h2 .o,.final .o{font-style:normal;color:var(--orange)}
   transform:translateY(16%);margin-left:-.04em;
   background:linear-gradient(180deg,rgba(255,255,255,.45) 0%,#fff 38%);-webkit-background-clip:text;background-clip:text;color:transparent}
 .f-word i{font-style:normal;-webkit-text-fill-color:#141414;color:#141414}
+/* Mot découpé en lettres par l'animation : le dégradé passe sur chaque lettre */
+.f-word.is-split{background:none}
+.f-word .fw-c{background:linear-gradient(180deg,rgba(255,255,255,.45) 0%,#fff 38%);-webkit-background-clip:text;background-clip:text;color:transparent;will-change:transform}
 @media (max-width:1000px){
   .f-top{grid-template-columns:1fr}
   .f-cols{grid-template-columns:1fr 1fr}
@@ -780,10 +783,26 @@ html.lenis{scroll-behavior:auto}
 .film-x{position:absolute;right:-6px;top:-52px;width:42px;height:42px;border-radius:50%;border:0;background:#fff;color:var(--ink);font-size:24px;line-height:1;cursor:pointer}
 .film-x:hover{background:var(--orange);color:#fff}
 
-/* États initiaux des animations d'entrée (uniquement si JS + mouvement autorisé) */
+/* S01 · intro du premier écran en CSS : elle démarre sans attendre le JavaScript (LCP) */
+@keyframes in-up{from{opacity:0;transform:translateY(22px)}}
+@keyframes in-line{from{transform:translateY(38%);filter:blur(6px)}}
+@keyframes in-stage{from{opacity:0;transform:perspective(1400px) rotateX(22deg) translateY(120px) scale(.94)}}
 @media (prefers-reduced-motion:no-preference){
-  .js:not(.ready) [data-intro],.js:not(.ready) [data-intro-title] .ln,.js:not(.ready) [data-intro-stage]{opacity:0}
+  .hv1 [data-intro]{animation:in-up .9s var(--ease) backwards}
+  .hv1 .sub[data-intro]{animation-delay:.45s}
+  .hv1 .row-b[data-intro]{animation-delay:.55s}
+  .hv1 [data-intro-title] .ln{animation:in-line 1.2s var(--ease) backwards .1s}
+  .hv1 [data-intro-title] .ln+.ln{animation-delay:.22s}
+  .hv1 [data-intro-stage]{transform-origin:50% 0;animation:in-stage 1.6s cubic-bezier(.16,1,.3,1) backwards .6s}
 }
+
+/* Le footer fixe reste masqué tant qu'on n'approche pas du bas (évite les décalages comptés au chargement) */
+.js .foot2{visibility:hidden}
+.js .foot2.is-near{visibility:visible}
+
+/* Contraste et titres du pied de page */
+.row .tm{color:#9a9894}
+.f-cols h2{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;font-weight:400;color:rgba(255,255,255,.85);margin-bottom:14px}
 
 /* Mouvement réduit sur grand écran : S07 et S07B passent en mise en page statique */
 @media (prefers-reduced-motion:reduce) and (min-width:1001px){
@@ -799,3 +818,6 @@ html.lenis{scroll-behavior:auto}
   .why .fob{height:auto}.why .ins{min-height:220px}
   .why .why-cta{position:relative;left:auto;bottom:auto;display:inline-flex;margin-top:48px;opacity:1;transform:none}
 }
+
+/* Les trames (milliers de caractères) sont isolées : leur insertion ne relance pas la mise en page de la section */
+.tex{contain:layout paint style}

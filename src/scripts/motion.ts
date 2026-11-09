@@ -12,6 +12,7 @@ const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const $ = <T extends Element = HTMLElement>(s: string, r: ParentNode = document) => r.querySelector<T>(s);
 const $$ = <T extends Element = HTMLElement>(s: string, r: ParentNode = document) => [...r.querySelectorAll<T>(s)];
 const EASE = 'expo.out';
+const tick = () => new Promise<void>((r) => setTimeout(r, 0));
 
 gsap.registerPlugin(ScrollTrigger, SplitText, ScrambleTextPlugin);
 
@@ -19,10 +20,10 @@ if (reduced) {
   root.classList.add('ready');
   // Ancres sans animation, compteurs à leur valeur finale.
 } else {
-  init();
+  void init();
 }
 
-function init() {
+async function init() {
   /* ---------- Lenis : défilement doux synchronisé avec ScrollTrigger ---------- */
   const lenis = new Lenis({ duration: 1.15, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), anchors: false });
   lenis.on('scroll', ScrollTrigger.update);
@@ -43,24 +44,15 @@ function init() {
     if (id !== '#top') { (target as HTMLElement).setAttribute('tabindex', '-1'); (target as HTMLElement).focus({ preventScroll: true }); }
   });
 
-  /* ---------- S01 · intro du premier écran ---------- */
-  const intro = gsap.timeline({ defaults: { ease: EASE }, delay: 0.15, onComplete: () => root.classList.add('ready') });
-  const introBits = $$('[data-intro]');
-  const lines = $$('[data-intro-title] .ln');
+  /* ---------- S01 · l'intro est en CSS (global.css, « intro du premier écran ») ----------
+     Ici seulement : le cadre bascule légèrement en défilant (effet « fenêtre qui s'ouvre »). */
   const stage = $('[data-intro-stage]');
-  gsap.set([...introBits, ...lines, stage], { opacity: 1 });
-  intro
-    .from(introBits[0], { y: 20, autoAlpha: 0, duration: 0.9 })
-    .from(lines, { yPercent: 70, autoAlpha: 0, filter: 'blur(10px)', duration: 1.2, stagger: 0.12 }, '<0.1')
-    .from(introBits.slice(1), { y: 24, autoAlpha: 0, duration: 1, stagger: 0.1 }, '<0.35');
   if (stage) {
     gsap.set(stage, { transformPerspective: 1400, transformOrigin: '50% 0%' });
-    intro.from(stage, { rotateX: 22, y: 120, scale: 0.94, autoAlpha: 0, duration: 1.6, ease: 'expo.out' }, '<0.15');
-    // Le cadre se redresse encore un peu en défilant (effet « fenêtre qui s'ouvre »).
-    gsap.fromTo(stage, { rotateX: 0 }, { rotateX: -4, scale: 1.02, ease: 'none', scrollTrigger: { trigger: stage, start: 'top 60%', end: 'bottom top', scrub: true } });
+    gsap.fromTo(stage, { rotateX: 0, scale: 1 }, { rotateX: -4, scale: 1.02, ease: 'none', scrollTrigger: { trigger: stage, start: 'top 60%', end: 'bottom top', scrub: true } });
   }
-  setTimeout(() => root.classList.add('ready'), 3000); // filet de sécurité
 
+  await tick(); // rend la main au navigateur entre deux groupes (TBT)
   /* ---------- Titres : lignes révélées sous masque (SplitText) ---------- */
   $$('[data-split]').forEach((h) => {
     if (h.closest('#hs-track')) return; // titre de la piste horizontale : traité plus bas
@@ -84,6 +76,7 @@ function init() {
     });
   });
 
+  await tick(); // rend la main au navigateur entre deux groupes (TBT)
   /* ---------- Blocs : apparition par lots ---------- */
   gsap.set('[data-reveal]', { autoAlpha: 0, y: 60 });
   ScrollTrigger.batch('[data-reveal]', {
@@ -100,6 +93,7 @@ function init() {
     gsap.to(o, { v: to, duration: 1.6, ease: 'power3.out', snap: { v: 1 }, onUpdate: () => (c.textContent = String(o.v)), scrollTrigger: { trigger: c, start: 'top 85%', once: true } });
   });
 
+  await tick(); // rend la main au navigateur entre deux groupes (TBT)
   /* ---------- S03 · tuiles de la file + collages en parallaxe ---------- */
   $$('[data-tiles]').forEach((g) => {
     gsap.from(g.children, { autoAlpha: 0, scale: 0.86, y: 30, duration: 0.9, ease: 'back.out(1.6)', stagger: { each: 0.06, from: 'start' }, scrollTrigger: { trigger: g, start: 'top 80%', once: true } });
@@ -122,6 +116,7 @@ function init() {
 
   const mm = gsap.matchMedia();
 
+  await tick(); // rend la main au navigateur entre deux groupes (TBT)
   /* ---------- S06 · panneaux empilés : le précédent recule et s'assombrit ---------- */
   mm.add('(min-width: 1001px)', () => {
     const pns = $$('.flow4 .pn');
@@ -161,6 +156,7 @@ function init() {
     return () => { ScrollTrigger.removeEventListener('refreshInit', setH); sec.style.height = ''; };
   });
 
+  await tick(); // rend la main au navigateur entre deux groupes (TBT)
   /* ---------- S07B · les porte-clés viennent se suspendre au tableau ---------- */
   mm.add('(min-width: 1001px)', () => {
     const sec = $('#pourquoi'); if (!sec) return;
@@ -202,10 +198,13 @@ function init() {
   const card = $('.cta10-card');
   if (card) gsap.fromTo(card, { scale: 0.92, borderRadius: 64 }, { scale: 1, borderRadius: 36, ease: 'none', scrollTrigger: { trigger: card, start: 'top bottom', end: 'top 35%', scrub: true } });
 
+  await tick(); // rend la main au navigateur entre deux groupes (TBT)
   /* ---------- S11 · le mot « lotivio. » monte lettre par lettre ---------- */
   const word = $('[data-fword]'), foot = $('#foot2'), page = $('#page');
   if (word && foot && page) {
-    const s = SplitText.create(word, { type: 'chars', mask: 'chars' });
+    // Pas de masque : la hauteur de ligne (0.74) couperait les lettres ; le footer rogne déjà le bas.
+    const s = SplitText.create(word, { type: 'chars', charsClass: 'fw-c' });
+    word.classList.add('is-split');
     gsap.fromTo(s.chars, { yPercent: 110 }, {
       yPercent: 0, ease: 'none', stagger: 0.06,
       scrollTrigger: { trigger: page, start: 'bottom bottom', end: () => `bottom ${innerHeight - foot.offsetHeight * 0.85}px`, scrub: 0.6, invalidateOnRefresh: true },
@@ -250,6 +249,8 @@ function init() {
   }
 
   // Les trames et images chargées après coup changent les hauteurs : on recalcule.
-  addEventListener('load', () => ScrollTrigger.refresh());
+  // (motion.ts est chargé à l'inactivité : l'événement load peut déjà être passé)
+  if (document.readyState === 'complete') ScrollTrigger.refresh();
+  else addEventListener('load', () => ScrollTrigger.refresh());
   document.fonts?.ready.then(() => ScrollTrigger.refresh());
 }

@@ -53,10 +53,21 @@ $$('pre.tex[data-src]').forEach((p) => {
   const host = p.closest('section, header, footer') ?? p.parentElement!;
   texBySection.set(host, [...(texBySection.get(host) ?? []), p]);
 });
+// File d'attente : une trame par créneau libre, pour ne pas bloquer le fil principal.
+const texQueue: HTMLElement[] = [];
+let texBusy = false;
+const idle = (cb: () => void) => (window.requestIdleCallback ? requestIdleCallback(cb, { timeout: 1500 }) : setTimeout(cb, 120));
+const pumpTextures = () => {
+  const pre = texQueue.shift();
+  if (!pre) { texBusy = false; return; }
+  if (getComputedStyle(pre).display !== 'none') drawTexture(pre); // trame masquée (ex. mobile) : ignorée
+  idle(pumpTextures);
+};
 const texIo = new IntersectionObserver((es) => es.forEach((e) => {
   if (!e.isIntersecting) return;
-  texBySection.get(e.target)?.forEach(drawTexture);
+  texQueue.push(...(texBySection.get(e.target) ?? []));
   texIo.unobserve(e.target);
+  if (!texBusy) { texBusy = true; idle(pumpTextures); }
 }), { rootMargin: '800px 0px' });
 texBySection.forEach((_, host) => texIo.observe(host));
 
@@ -235,7 +246,7 @@ $$('[data-diff] > div').forEach((row) => {
     opener = b; dlg.showModal(); document.dispatchEvent(new CustomEvent('lotivio:lock', { detail: true }));
     video.play().catch(() => {});
   }));
-  const close = () => dlg.open && dlg.close();
+  const close = () => { video.pause(); if (dlg.open) dlg.close(); };
   $('[data-film-close]', dlg)!.addEventListener('click', close);
   dlg.addEventListener('click', (e) => { if (e.target === dlg) close(); });
   dlg.addEventListener('close', () => { video.pause(); document.dispatchEvent(new CustomEvent('lotivio:lock', { detail: false })); opener?.focus(); });
@@ -269,4 +280,9 @@ $$('[data-diff] > div').forEach((row) => {
   const f = $('#foot2'), p = $('#page'); if (!f || !p) return;
   const fit = () => { p.style.marginBottom = f.offsetHeight + 'px'; };
   fit(); new ResizeObserver(fit).observe(f);
+  // Visible seulement à l'approche du bas de page (sinon masqué derrière la page).
+  const demo = $('#demo') ?? p;
+  new IntersectionObserver(([e]) => {
+    f.classList.toggle('is-near', e.isIntersecting || e.boundingClientRect.top < 0);
+  }, { rootMargin: '0px 0px 400px 0px' }).observe(demo);
 })();
