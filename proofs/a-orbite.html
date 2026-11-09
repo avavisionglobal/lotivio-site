@@ -154,6 +154,123 @@ footer.end{padding:120px 28px 60px;color:var(--grey)}
   .footer.end{padding-left:16px}
 }
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* ===== Sections 4 à 10 ===== */
+.ai{display:grid;grid-template-columns:minmax(180px,26%) 1fr;border-top:1px solid var(--line);margin-top:0}
+.ai .l{padding:18px 28px 28px 0;display:flex;flex-direction:column;justify-content:space-between;gap:30px}
+.ai .l h2{font-weight:500;font-size:clamp(44px,5.6vw,88px);letter-spacing:-.05em;line-height:.95}
+.ai .l p{font-size:14px;color:var(--muted);line-height:1.5;margin-top:14px;max-width:22em}
+.ai .r{border-left:1px solid var(--line)}
+.ai ul{list-style:none}
+.ai li{display:grid;grid-template-columns:1fr auto;align-items:center;gap:20px;border-bottom:1px solid var(--line);padding:26px 0 26px 28px;color:#CFCDC8;transition:color .5s var(--ease)}
+.ai li.on{color:var(--ink)}
+.ai li .t{font-weight:500;font-size:clamp(28px,3.9vw,62px);letter-spacing:-.045em;line-height:1.02}
+.ai li .tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);opacity:0;transition:opacity .4s}
+.ai li.on .tag{opacity:1}
+.ai li .tag::before{content:"";display:inline-block;width:6px;height:6px;border-radius:2px;background:var(--c);margin-right:8px;vertical-align:1px}
+.guard{display:flex;flex-wrap:wrap;gap:8px 24px;padding:22px 0 0 28px;color:var(--muted)}
+.guard span::before{content:"✓ ";color:var(--green)}
+
+.steps-head{display:grid;grid-template-columns:1fr auto;align-items:end;gap:30px;padding:0 28px;margin-top:120px}
+.steps-head p{font-size:14px;color:var(--muted);max-width:22em;text-align:right;line-height:1.5}
+.panels{margin-top:56px}
+.panel{position:relative;padding:22px 28px 0;overflow:hidden;color:var(--fg)}
+.panel .code{text-align:center;font-family:var(--mono);font-size:11px;letter-spacing:.08em;opacity:.65}
+.panel .top{display:grid;grid-template-columns:1fr auto;align-items:start;margin-top:26px}
+.panel h3{font-weight:500;font-size:clamp(34px,3.6vw,56px);letter-spacing:-.04em;line-height:1}
+.panel .num{font-weight:400;font-size:clamp(70px,8vw,128px);letter-spacing:-.06em;line-height:.8}
+.panel .pts{display:grid;grid-template-columns:1fr 1fr;margin-top:30px;border-top:1px solid var(--rule)}
+.panel .pts div{padding:14px 0 30px;font-size:14px;line-height:1.45}
+.panel .pts div+div{border-left:1px solid var(--rule);padding-left:18px}
+.panel .pts b{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;font-weight:400;opacity:.7;margin-bottom:8px}
+.panel .go{display:flex;justify-content:center;margin-top:6px}
+.panel .go a{background:#fff;color:var(--ink);border-radius:999px;padding:11px 18px;font-size:14px;font-weight:500}
+.panel .glass{position:relative;width:min(980px,100%);margin:34px auto 0;background:rgba(255,255,255,.22);border:1px solid rgba(255,255,255,.35);border-bottom:0;border-radius:24px 24px 0 0;padding:14px 14px 0;max-height:430px;overflow:hidden}
+.panel .glass img{border-radius:14px 14px 0 0;width:100%}
+.panel .glass.phone{width:340px;padding:12px 12px 0}
+.panel .glass.phone img{border-radius:22px 22px 0 0}
+.p1{background:#E8762D;--fg:#141414;--rule:rgba(20,20,20,.22)}
+.p2{background:#AD46FF;--fg:#141414;--rule:rgba(20,20,20,.22)}
+.p3{background:#276EF1;--fg:#fff;--rule:rgba(255,255,255,.3)}
+.p4{background:#0E8345;--fg:#fff;--rule:rgba(255,255,255,.3)}
+
+.mep{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:64px}
+.mep ol{list-style:none;border-top:1px solid var(--line)}
+.mep li{display:grid;grid-template-columns:56px 1fr;padding:22px 0;border-bottom:1px solid var(--line)}
+.mep li .n{font-family:var(--mono);font-size:12px;color:var(--orange)}
+.mep li h4{font-size:20px;font-weight:500;letter-spacing:-.02em}
+.mep li p{font-size:14px;color:var(--muted);line-height:1.5;margin-top:6px;max-width:30em}
+.cfg{background:var(--soft);border-radius:28px;padding:28px}
+.cfg .hd{display:flex;justify-content:space-between;align-items:center}
+.cfg .hd b{font-size:18px;font-weight:500;letter-spacing:-.02em}
+.opt{margin-top:20px}
+.opt .lb{font-size:13px;color:var(--muted);margin-bottom:8px}
+.seg{display:inline-flex;background:#fff;border:1px solid var(--line);border-radius:12px;padding:3px;gap:3px}
+.seg button{border:0;background:none;font:inherit;font-size:13.5px;padding:8px 13px;border-radius:9px;cursor:pointer;color:var(--muted)}
+.seg button[aria-pressed="true"]{background:var(--ink);color:#fff}
+.note{margin-top:20px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px;font-size:13.5px;line-height:1.5}
+.note .mono{color:var(--muted);display:block;margin-bottom:6px}
+.chain{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin-top:20px}
+.chain span{background:#fff;border:1px solid var(--line);border-radius:999px;padding:6px 11px;font-size:12.5px}
+.chain i{font-style:normal;color:var(--grey)}
+.cfg .cap{margin-top:18px;color:var(--muted)}
+
+.bento2{display:grid;grid-template-columns:1.3fr 1fr;grid-template-rows:auto auto;gap:10px;margin-top:64px}
+.bento2 .bc{min-height:0}
+.bento2 .stock{grid-row:1/3;display:flex;flex-direction:column}
+.bento2 .stock .im{margin-top:auto;padding-top:28px}
+.bento2 .stock img{border-radius:14px;border:1px solid var(--line);box-shadow:0 30px 60px -36px rgba(0,0,0,.3)}
+.diff{margin-top:20px;background:#fff;border:1px solid var(--line);border-radius:16px}
+.diff div{display:flex;justify-content:space-between;align-items:center;padding:12px 14px;font-size:13.5px}
+.diff div+div{border-top:1px solid var(--line)}
+.sw{width:34px;height:20px;border-radius:999px;background:#DDD;position:relative}
+.sw::after{content:"";position:absolute;top:2px;left:2px;width:16px;height:16px;border-radius:50%;background:#fff}
+.sw.on{background:var(--green)}.sw.on::after{left:16px}
+.pdf{display:grid;grid-template-columns:1fr 150px;gap:20px;align-items:end}
+.pdf img{border-radius:8px;transform:rotate(4deg);box-shadow:0 24px 40px -20px rgba(0,0,0,.45)}
+.chip-hot{display:inline-flex;margin-top:16px;background:#E7F9F1;color:#047857;border-radius:8px;padding:6px 10px;font-size:12.5px;font-weight:500}
+
+.faq{display:grid;grid-template-columns:minmax(180px,26%) 1fr;border-top:1px solid var(--line);margin-top:0}
+.faq .r{border-left:1px solid var(--line);padding-left:28px}
+.faq details{border-bottom:1px solid var(--line)}
+.faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;gap:20px;padding:22px 0;font-size:20px;font-weight:500;letter-spacing:-.02em}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-weight:300;font-size:24px;line-height:1;color:var(--muted)}
+.faq details[open] summary::after{content:"–"}
+.faq details p{font-size:15px;color:var(--muted);line-height:1.55;padding:0 60px 24px 0;max-width:46em}
+
+.final{margin:140px 28px 0;border-top:1px solid var(--line);padding-top:28px;display:grid;grid-template-columns:1fr auto;align-items:end;gap:30px}
+.final h2{font-weight:500;font-size:clamp(46px,7vw,112px);letter-spacing:-.05em;line-height:.93}
+.final h2 .g{color:var(--grey);display:block}
+.foot{margin-top:120px;padding:40px 28px 30px;border-top:1px solid var(--line);display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:30px;font-size:14px}
+.foot h5{font-family:var(--mono);font-size:11px;letter-spacing:.07em;text-transform:uppercase;font-weight:400;color:var(--muted);margin-bottom:12px}
+.foot a{display:block;margin-top:6px}
+.dots{height:180px;margin:0 28px 0;background-image:radial-gradient(circle,#D9D7D2 1.3px,transparent 1.6px);background-size:14px 14px;
+  mask-image:linear-gradient(transparent,#000);-webkit-mask-image:linear-gradient(transparent,#000)}
+.legal{display:flex;justify-content:space-between;padding:16px 28px 30px;color:var(--grey)}
+
+@media (max-width:900px){
+  .ai,.faq{grid-template-columns:1fr}
+  .ai .r,.faq .r{border-left:0;padding-left:0}
+  .ai li,.guard{padding-left:0}
+  .steps-head{grid-template-columns:1fr}
+  .steps-head p{text-align:left}
+  .panel .pts{grid-template-columns:1fr}
+  .panel .pts div+div{border-left:0;padding-left:0;border-top:1px solid var(--rule)}
+  .mep,.bento2{grid-template-columns:1fr}
+  .bento2 .stock{grid-row:auto}
+  .final{grid-template-columns:1fr}
+  .foot{grid-template-columns:1fr 1fr}
+  .faq details p{padding-right:0}
+}
+@media (max-width:520px){
+  .steps-head,.panel,.final,.foot,.legal{padding-left:16px;padding-right:16px}
+  .final{margin-left:16px;margin-right:16px;padding-left:0;padding-right:0}
+  .dots{margin:0 16px}
+  .panel .glass.phone{width:260px}
+  .seg{flex-wrap:wrap}
+}
+
 </style>
 </head>
 <body>
@@ -258,7 +375,149 @@ footer.end{padding:120px 28px 60px;color:var(--grey)}
   </div>
 </section>
 
-<footer class="end mono">Piste A · Orbite — structure Fourmula, couleurs et polices de l'app · proposition non validée</footer>
+
+<section class="sec" id="ia">
+  <div class="ai rv">
+    <div class="l">
+      <div>
+        <div class="lab" style="font-size:13px">L'IA dans Lotivio</div>
+        <h2 style="margin-top:22px">L'IA qui</h2>
+        <p>Réglée avec vous à la mise en place : vos projets, vos consignes, votre façon de répondre.</p>
+      </div>
+      <a class="btn btn-dark" href="#demo" style="align-self:flex-start">Réserver une démo</a>
+    </div>
+    <div class="r">
+      <ul id="ai-lines">
+        <li style="--c:var(--violet)"><span class="t">qualifie vos acheteurs sur WhatsApp</span><span class="tag">Assistant Max</span></li>
+        <li style="--c:var(--orange)"><span class="t">répond à leurs questions sur vos projets</span><span class="tag">Vos fiches projet</span></li>
+        <li style="--c:var(--green)"><span class="t">remplit vos fiches à la voix</span><span class="tag">Dictée vocale</span></li>
+        <li style="--c:#276EF1"><span class="t">rédige vos descriptions de lots</span><span class="tag">Catalogue</span></li>
+      </ul>
+      <div class="guard mono"><span>Consentement demandé</span><span>STOP respecté</span><span>IA en pause contact par contact</span><span>Brouillons à valider</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="steps-head rv">
+  <h2 class="h2">Du portail à la vente,<span class="g">en quatre étapes.</span></h2>
+  <p>Une seule demande, suivie de bout en bout. Captures de l'app, données de démonstration.</p>
+</div>
+<section class="panels">
+  <article class="panel p1">
+    <div class="code">(NOUVELLE DEMANDE)</div>
+    <div class="top"><h3>Elle arrive<br>seule.</h3><span class="num">01</span></div>
+    <div class="pts"><div><b>Portails</b>Homegate, ImmoScout24, immobilier.ch, Properstar.</div><div><b>Publicité et site</b>Meta Lead Ads et le formulaire de votre site.</div></div>
+    <div class="go"><a href="#demo">Réserver une démo</a></div>
+    <div class="glass"><img src="assets/ui-leads.png" alt="Écran Demandes reçues, données de démonstration" loading="lazy"></div>
+  </article>
+  <article class="panel p2">
+    <div class="code">(QUALIFIÉ)</div>
+    <div class="top"><h3>L'IA la<br>qualifie.</h3><span class="num">02</span></div>
+    <div class="pts"><div><b>WhatsApp</b>La brochure part, l'assistant demande type de bien, pièces, zone et budget.</div><div><b>Fiche</b>Les réponses remplissent la fiche, l'acheteur passe en Qualifié.</div></div>
+    <div class="go"><a href="#demo">Réserver une démo</a></div>
+    <div class="glass phone"><img src="assets/ui-wa.png" alt="Conversation WhatsApp de l'assistant, données de démonstration" loading="lazy"></div>
+  </article>
+  <article class="panel p3">
+    <div class="code">(RELANCE)</div>
+    <div class="top"><h3>Vous relancez<br>au bon moment.</h3><span class="num">03</span></div>
+    <div class="pts"><div><b>Signaux</b>Brochure consultée trois fois, pas de réponse : l'acheteur remonte en tête.</div><div><b>Un geste</b>Relancer, Retour reçu ou Traité, directement depuis la liste.</div></div>
+    <div class="go"><a href="#demo">Réserver une démo</a></div>
+    <div class="glass"><img src="assets/ui-relance.png" alt="Liste des relances à traiter, données de démonstration" loading="lazy"></div>
+  </article>
+  <article class="panel p4">
+    <div class="code">(VENDU)</div>
+    <div class="top"><h3>Le lot<br>est vendu.</h3><span class="num">04</span></div>
+    <div class="pts"><div><b>Pipeline</b>Qualifié, Réservation, Notaire, Vendu, par glisser-déposer.</div><div><b>Stock</b>Le lot passe de Disponible à Réservé puis Vendu.</div></div>
+    <div class="go"><a href="#demo">Réserver une démo</a></div>
+    <div class="glass"><img src="assets/ui-pipeline.png" alt="Pipeline des ventes, données de démonstration" loading="lazy"></div>
+  </article>
+</section>
+
+<section class="sec">
+  <div class="split rv">
+    <div class="lab">Mise en place</div>
+    <div class="body"><h2 class="h2">Construit autour<span class="g">de votre agence.</span></h2></div>
+  </div>
+  <div class="mep">
+    <ol class="rv">
+      <li><span class="n">01</span><div><h4>Atelier</h4><p>Vos projets, vos canaux, qui fait quoi dans l'équipe. On part de votre façon de vendre.</p></div></li>
+      <li><span class="n">02</span><div><h4>Branchements</h4><p>Portails, formulaire du site, Meta, le WhatsApp professionnel de l'agence, Outlook pour l'envoi.</p></div></li>
+      <li><span class="n">03</span><div><h4>Réglages</h4><p>Premier message automatique ou validé, brochure par WhatsApp ou e-mail, relances, consignes de l'assistant.</p></div></li>
+      <li><span class="n">04</span><div><h4>Mise en route</h4><p>Import de vos contacts et prise en main avec l'équipe.</p></div></li>
+    </ol>
+    <div class="cfg rv">
+      <div class="hd"><b>Réglages · Démo Immobilier NE</b><span class="mono" style="color:var(--muted)">Exemple</span></div>
+      <div class="opt"><div class="lb">Premier contact</div><div class="seg" data-k="first"><button aria-pressed="true">Automatique</button><button aria-pressed="false">L'agent valide</button></div></div>
+      <div class="opt"><div class="lb">Brochure</div><div class="seg" data-k="bro"><button aria-pressed="true">WhatsApp</button><button aria-pressed="false">E-mail</button></div></div>
+      <div class="opt"><div class="lb">Relance</div><div class="seg" data-k="rel"><button aria-pressed="false">WhatsApp</button><button aria-pressed="true">E-mail</button><button aria-pressed="false">Aucune</button></div></div>
+      <div class="note"><span class="mono">Consignes de l'assistant</span>Vouvoyer. Donner le prix seulement s'il est demandé. Proposer une visite le samedi matin.</div>
+      <div class="chain" id="chain"></div>
+      <div class="mono cap">Réglés avec vous à la mise en place</div>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="split rv">
+    <div class="lab">Pour la direction</div>
+    <div class="body"><h2 class="h2">Publiez une fois.<span class="g">Pilotez tout.</span></h2></div>
+  </div>
+  <div class="bento2">
+    <article class="bc stock rv">
+      <span class="mono lab">Disponibilités</span>
+      <h3>Le stock à jour, lot par lot.</h3>
+      <p>Disponible, réservé, vendu : chaque changement du pipeline se voit dans le stock du projet.</p>
+      <div class="im"><img src="assets/ui-stock.png" alt="Tableau des disponibilités d'un projet, données de démonstration" loading="lazy"></div>
+    </article>
+    <article class="bc rv">
+      <span class="mono lab">Diffusion</span>
+      <h3>Publiez une fois, diffusez partout.</h3>
+      <div class="diff">
+        <div><span>Votre site internet</span><span class="sw on"></span></div>
+        <div><span>Homegate</span><span class="sw on"></span></div>
+        <div><span>immobilier.ch</span><span class="sw on"></span></div>
+        <div><span>Properstar</span><span class="sw"></span></div>
+      </div>
+      <p>Les lots réservés sortent des annonces.</p>
+    </article>
+    <article class="bc rv">
+      <div class="pdf">
+        <div><span class="mono lab">PDF de vente</span><h3>Brochure et disponibilités, en un clic.</h3><span class="chip-hot">Brochure consultée 3×</span></div>
+        <img src="assets/ui-brochure.png" alt="Couverture d'une brochure générée, données de démonstration" loading="lazy">
+      </div>
+    </article>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="faq rv">
+    <div class="lab" style="padding:18px 0;font-size:13px">Questions</div>
+    <div class="r">
+      <h2 class="h2" style="padding:18px 0 40px">Avant une démo,<span class="g">on nous demande…</span></h2>
+      <details open><summary>Où sont stockées les données ?</summary><p>Dans l'Union européenne, à Francfort. Chaque agence est isolée des autres : un agent ne voit que les données de son organisation.</p></details>
+      <details><summary>Quels portails sont couverts ?</summary><p>Homegate et ImmoScout24, immobilier.ch et Properstar, plus Meta Lead Ads et le formulaire de votre site. La diffusion de vos annonces se règle agence par agence.</p></details>
+      <details><summary>Lotivio lit-il mon WhatsApp personnel ?</summary><p>Non. Lotivio passe par un numéro WhatsApp professionnel de l'agence. Les conversations de ce numéro arrivent dans la fiche du contact.</p></details>
+      <details><summary>L'IA répond-elle sans contrôle ?</summary><p>Elle demande le consentement de l'acheteur, s'arrête à « STOP » et peut être mise en pause contact par contact. La dictée vocale produit un brouillon que l'agent valide.</p></details>
+      <details><summary>Puis-je garder Outlook ?</summary><p>Oui. Lotivio envoie vos e-mails par Outlook ; les e-mails reçus restent dans votre boîte.</p></details>
+      <details><summary>Combien ça coûte ?</summary><p>Une mise en place, puis un abonnement mensuel. Le montant dépend des sources à brancher et des réglages : on le fixe ensemble après la démo.</p></details>
+    </div>
+  </div>
+</section>
+
+<section class="final rv" id="demo">
+  <h2>Voyons comment<span class="g">votre agence travaille.</span></h2>
+  <div class="hero-side"><p>Une démo sur vos vrais projets : vos sources, vos relances, vos réglages.</p><div class="row"><a class="btn btn-dark" href="#">Réserver une démo</a></div></div>
+</section>
+
+<footer class="foot">
+  <div><a class="brand" href="#"><img src="assets/lotivio-mark.svg" alt="">Lotivio</a><p style="color:var(--muted);margin-top:14px;max-width:22em;line-height:1.5">Le CRM immobilier des promoteurs et des agences romandes.</p></div>
+  <div><h5>Produit</h5><a href="#">Demandes reçues</a><a href="#">Assistant WhatsApp</a><a href="#">Dictée vocale</a><a href="#">Diffusion</a></div>
+  <div><h5>Agence</h5><a href="#">Mise en place</a><a href="#">Questions</a><a href="#demo">Réserver une démo</a></div>
+  <div><h5>Compte</h5><a href="#">Se connecter</a><a href="#">Confidentialité</a></div>
+</footer>
+<div class="dots" aria-hidden="true"></div>
+<div class="legal mono"><span>© 2026 Lotivio · Ava Vision</span><span>Données de démonstration</span></div>
+
 
 <script>
 function el(tag, cls, text){const e=document.createElement(tag);if(cls)e.className=cls;if(text!=null)e.textContent=text;return e}
@@ -303,6 +562,25 @@ for(let i=0;i<34;i++){const b=el('i');b.style.setProperty('--h',(8+Math.abs(Math
 
 const pr=document.getElementById('prog');
 addEventListener('scroll',()=>{const p=scrollY/Math.max(1,document.body.scrollHeight-innerHeight);pr.textContent=Math.round(p*100)+'%'},{passive:true});
+
+/* liste « L'IA qui » : la ligne au centre de l'écran s'assombrit */
+const aiIo=new IntersectionObserver(es=>es.forEach(e=>e.target.classList.toggle('on',e.isIntersecting)),{rootMargin:'-40% 0px -40% 0px'});
+document.querySelectorAll('#ai-lines li').forEach(l=>aiIo.observe(l));
+
+/* réglages : segments cliquables et parcours recomposé */
+const chain=document.getElementById('chain');
+function drawChain(){
+  const v=k=>document.querySelector('.seg[data-k="'+k+'"] [aria-pressed="true"]').textContent;
+  const steps=['Demande',v('first')==='Automatique'?'Message automatique':"Message validé par l'agent",'Brochure · '+v('bro'),v('rel')==='Aucune'?'Pas de relance':'Relance · '+v('rel')];
+  const parts=[];steps.forEach((s,i)=>{if(i)parts.push(el('i',null,'→'));parts.push(el('span',null,s))});
+  chain.replaceChildren(...parts);
+}
+document.querySelectorAll('.seg').forEach(seg=>seg.addEventListener('click',e=>{
+  const b=e.target.closest('button');if(!b)return;
+  seg.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',x===b?'true':'false'));drawChain();
+}));
+drawChain();
+
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}}),{threshold:.12});
 document.querySelectorAll('.rv').forEach(x=>io.observe(x));
 </script>
