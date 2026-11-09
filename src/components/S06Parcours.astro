@@ -53,7 +53,7 @@ const lots = Array.from({ length: 24 }, (_, i) => String.fromCharCode(65 + Math.
           <div class="stage">
             <div class="rel">
               {rel.map(([img, sig, name, proj, pos]) => (
-                <div class="rc"><img src={img} alt="" loading="lazy" style={`object-position:${pos}`} /><span class="sig">{sig}</span>
+                <div class="rc"><img src={img} alt="" width="800" height="533" loading="lazy" decoding="async" style={`object-position:${pos}`} /><span class="sig">{sig}</span>
                   <span class="acts"><span title="Traité"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg></span><span class="go" title="Relancer"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" aria-hidden="true"><path d="M4 12h14M13 6l6 6-6 6"/></svg></span></span>
                   <span class="who"><b>{name}</b><span>{proj}</span></span></div>
               ))}
@@ -64,7 +64,7 @@ const lots = Array.from({ length: 24 }, (_, i) => String.fromCharCode(65 + Math.
           <div class="stage" style="padding:12px">
             <div class="sale">
               <div class="bgl">{lots.map((l) => <span>{l}</span>)}</div>
-              <div class="tool"><div class="in" id="tool"><img src="/brand/lotivio-mark.svg" alt="" /><span class="lot">Lot B4</span><span class="stg">Qualifié</span><span class="stg">Réservation</span><span class="stg">Notaire</span><span class="stg">Vendu</span><span class="av">SK</span></div></div>
+              <div class="tool"><div class="in" id="tool"><img src="/brand/lotivio-mark.svg" alt="" width="24" height="24" /><span class="lot">Lot B4</span><span class="stg">Qualifié</span><span class="stg">Réservation</span><span class="stg">Notaire</span><span class="stg">Vendu</span><span class="av">SK</span></div></div>
               <div class="crumb">Pipeline &nbsp;/&nbsp; <b>Les Terrasses du Vignoble</b></div>
             </div>
           </div>

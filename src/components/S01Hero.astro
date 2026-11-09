@@ -1,18 +1,25 @@
 ---
-const strip = [
+import sharp from 'sharp';
+import path from 'node:path';
+const raw: [string, string, number][] = [
   ['/media/logos/homegate.svg', 'Homegate', 30],
   ['/media/logos/immoscout24.svg', 'ImmoScout24', 38],
   ['/media/logos/immobilier-ch.svg', 'immobilier.ch', 20],
-  ['/media/logos/properstar-logo.png', 'Properstar', 24],
-  ['/media/logos/meta.png', 'Meta', 22],
+  ['/media/logos/properstar-logo-84.webp', 'Properstar', 24],
+  ['/media/logos/meta-64.webp', 'Meta', 22],
 ];
+// Largeur déclarée d'après les proportions réelles du fichier : pas de saut de mise en page.
+const strip = await Promise.all(raw.map(async ([src, alt, h]) => {
+  const m = await sharp(path.resolve(process.cwd(), 'public' + src)).metadata();
+  return { src, alt, h, w: Math.round((h * (m.width ?? h)) / (m.height ?? h)) };
+}));
 ---
 <!-- S01 · Hero -->
 <header class="hv1" id="top">
-  <pre class="tex" data-src="/media/lac-800.webp" data-w="1" data-r=".36" aria-hidden="true"></pre>
+  <pre class="tex" data-src="/media/lac-480.webp" data-w="1" data-r=".36" aria-hidden="true"></pre>
   <span class="chip" data-bloc="S01.1" data-intro><b>🇨🇭</b>Développé pour la Suisse</span>
   <h1 data-bloc="S01.2" data-intro-title>
-    <span class="ln">Vos prospects écrivent <span class="inl" aria-hidden="true"><span style="background-image:url(/media/logos/smg.png)"></span><span style="background-image:url(/media/logos/immobilier-ch.png)"></span><span style="background-image:url(/media/logos/properstar.png)"></span><span style="background-image:url(/media/logos/whatsapp.svg);background-size:70%;background-color:#fff"></span></span> partout.</span>
+    <span class="ln">Vos prospects écrivent <span class="inl" aria-hidden="true"><span style="background-image:url(/media/logos/smg-96.webp)"></span><span style="background-image:url(/media/logos/immobilier-ch-96.webp)"></span><span style="background-image:url(/media/logos/properstar-96.webp)"></span><span style="background-image:url(/media/logos/whatsapp.svg);background-size:70%;background-color:#fff"></span></span> partout.</span>
     <span class="ln">Gardez le fil de chaque acheteur<i class="o">.</i></span>
   </h1>
   <p class="sub" data-bloc="S01.3" data-intro>Le CRM immobilier développé pour la Suisse. Portails, Meta Ads, site : vos demandes arrivent dans Lotivio. Envoyez vos e-mails et WhatsApp, retrouvez le suivi de chaque acheteur et voyez quels projets attirent des prospects.</p>
@@ -35,7 +42,7 @@ const strip = [
   </div>
   <div class="sources" data-bloc="S01.7">
     <span class="mono">Vos canaux, connectés</span>
-    {strip.map(([src, alt, h]) => <img class="lg" src={src} alt={alt} style={`height:${h}px`} loading="lazy" />)}
-    <span class="lgw"><img src="/media/logos/whatsapp.svg" alt="" style="height:28px" loading="lazy" />WhatsApp</span><span class="s">Votre site</span>
+    {strip.map(({ src, alt, h, w }) => <img class="lg" src={src} alt={alt} width={w} height={h} style={`height:${h}px`} decoding="async" />)}
+    <span class="lgw"><img src="/media/logos/whatsapp.svg" alt="" width="28" height="28" style="height:28px" decoding="async" />WhatsApp</span><span class="s">Votre site</span>
   </div>
 </header>

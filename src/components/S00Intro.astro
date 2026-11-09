@@ -18,13 +18,13 @@ for (let y = 0; y < ROWS; y++) {
   }
   code += '\n';
 }
-const photos = ['/media/lac-800.webp', '/media/residence-800.webp', '/media/residence-portrait-600.webp'];
+const photos = ['/media/lac-480.webp', '/media/residence-480.webp', '/media/residence-portrait-480.webp'];
 ---
 <div class="intro" id="intro" aria-hidden="true" data-bloc="S00.0">
   <div class="intro-in">
     <span class="intro-word" id="intro-word">Homegate</span>
     <div class="intro-card">
-      {photos.map((p, i) => <span class={`ip ip${i + 1}`} style={`background-image:url(${p})`}></span>)}
+      {photos.map((p, i) => <img class={`ip ip${i + 1}`} src={p} alt="" width="480" height="640" decoding="async" fetchpriority={i === 0 ? "high" : "low"} />)}
       <pre class="ip-code" set:html={code}></pre>
     </div>
     <span class="intro-mark"><img src="/brand/lotivio-mark.svg" alt="" width="26" height="26" /><span>lotivio<i>.</i></span></span>
@@ -35,7 +35,10 @@ const photos = ['/media/lac-800.webp', '/media/residence-800.webp', '/media/resi
 (function () {
   var el = document.getElementById('intro'), root = document.documentElement;
   if (!el) return;
-  if (matchMedia('(prefers-reduced-motion: reduce)').matches) { el.remove(); return; }
+  // Une fois par visite : en rechargeant pendant la même session, le site s'affiche directement.
+  var seen = false;
+  try { seen = sessionStorage.getItem('lotivio-intro') === '1'; sessionStorage.setItem('lotivio-intro', '1'); } catch (e) {}
+  if (seen || matchMedia('(prefers-reduced-motion: reduce)').matches) { el.remove(); return; }
   root.classList.add('has-intro');
   var words = ['Homegate', 'ImmoScout24', 'immobilier.ch', 'Properstar', 'Meta Ads', 'WhatsApp', 'Votre site'];
   var w = document.getElementById('intro-word'), n = document.getElementById('intro-n'), i = 0;

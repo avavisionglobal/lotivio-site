@@ -5,6 +5,7 @@ import sitemap from '@astrojs/sitemap';
 export default defineConfig({
   site: 'https://lotivio.ch',
   integrations: [sitemap()],
-  build: { inlineStylesheets: 'auto' },
+  // CSS intégré dans la page : pas de fichier bloquant à télécharger avant le premier affichage.
+  build: { inlineStylesheets: 'always' },
   compressHTML: true,
 });

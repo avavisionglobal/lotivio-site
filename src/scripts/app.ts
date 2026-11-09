@@ -1,6 +1,8 @@
 // Lotivio — comportements fonctionnels (sans dépendance d'animation).
 // Toutes les données affichées sont des données de démonstration.
+import { asciiCanvas, monoReady } from './ascii';
 
+const ORANGE = '#EB6E2C';
 type Cls = string | null;
 const el = <K extends keyof HTMLElementTagNameMap>(tag: K, cls?: Cls, text?: string | null) => {
   const e = document.createElement(tag);
@@ -23,28 +25,17 @@ function loopWhenVisible(target: Element | null, tick: () => void, ms: number) {
 }
 
 /* ---------- Trames de code tirées des photos (générées à l'approche) ---------- */
+// Dessinées dans un canvas (src/scripts/ascii.ts) : une image au lieu de milliers de caractères.
 function drawTexture(pre: HTMLElement) {
   const img = new Image();
   img.decoding = 'async';
   img.src = pre.dataset.src!;
-  img.onload = () => {
+  img.onload = async () => {
+    await monoReady();
     const w = parseFloat(pre.dataset.w || '.6'), ratio = parseFloat(pre.dataset.r || '.42');
     const cols = Math.max(40, Math.round((Math.min(innerWidth, 1600) * w) / 6.1)), rows = Math.round(cols * ratio);
-    const c = document.createElement('canvas'); c.width = cols; c.height = rows;
-    const x = c.getContext('2d', { willReadFrequently: true })!; x.drawImage(img, 0, 0, cols, rows);
-    const d = x.getImageData(0, 0, cols, rows).data, ramp = ' .:-=+*#%@';
-    const frag = document.createDocumentFragment(); let line = '';
-    for (let y = 0; y < rows; y++) {
-      for (let i = 0; i < cols; i++) {
-        const p = (y * cols + i) * 4, l = (d[p] * 0.3 + d[p + 1] * 0.59 + d[p + 2] * 0.11) / 255;
-        const ch = ramp[Math.min(ramp.length - 1, Math.floor((1 - l) * ramp.length))];
-        if (ch !== ' ' && Math.random() < 0.004) { frag.append(document.createTextNode(line)); line = ''; frag.append(el('b', null, ch)); }
-        else line += ch;
-      }
-      line += '\n';
-    }
-    frag.append(document.createTextNode(line));
-    pre.replaceChildren(frag);
+    const color = getComputedStyle(pre).color;
+    pre.replaceChildren(asciiCanvas(img, { cols, rows, color, accent: ORANGE, accentRate: 0.004 }));
     requestAnimationFrame(() => pre.classList.add('drawn')); // fondu d'apparition (CSS)
   };
 }
@@ -119,6 +110,8 @@ if (document.readyState === 'complete') all(); else addEventListener('load', all
   }, 2400);
 })();
 
+const belowFold = () => {
+
 /* ---------- S03 · onde de la dictée ---------- */
 (() => {
   const w = $('#wave3'); if (!w) return;
@@ -128,15 +121,16 @@ if (document.readyState === 'complete') all(); else addEventListener('load', all
 /* ---------- S06.1 · sources : la sélection passe d'une source à l'autre ---------- */
 (() => {
   const srcs = $('#srcs'); if (!srcs) return;
-  const srcData: [string, number, string, boolean?][] = [
-    ['Homegate', 12, '/media/logos/homegate.svg'], ['ImmoScout24', 6, '/media/logos/immoscout24.svg', true],
-    ['immobilier.ch', 7, '/media/logos/immobilier-ch.svg'], ['Properstar', 4, '/media/logos/properstar-logo.png'], ['Meta Ads', 18, '/media/logos/meta.png'],
+  // [nom, demandes, logo, logo haut ?, largeur, hauteur intrinsèques — proportions déclarées]
+  const srcData: [string, number, string, boolean, number, number][] = [
+    ['Homegate', 12, '/media/logos/homegate.svg', false, 737, 125], ['ImmoScout24', 6, '/media/logos/immoscout24.svg', true, 567, 341],
+    ['immobilier.ch', 7, '/media/logos/immobilier-ch.svg', false, 433, 61], ['Properstar', 4, '/media/logos/properstar-logo-84.webp', false, 545, 84], ['Meta Ads', 18, '/media/logos/meta-64.webp', false, 318, 64],
   ];
   srcData.forEach((s, i) => {
     const c = el('div', 'sc' + (i === 3 ? ' on' : '')), ln = el('span', 'ln');
     [52, 38, 46].forEach((w) => { const b = el('i'); b.style.width = w + 'px'; ln.append(b); });
     const ct = el('span', 'ct', String(s[1])); ct.append(el('small', null, 'demandes'));
-    const nm = el('img', 'lgo' + (s[3] ? ' tall' : '')); nm.src = s[2]; nm.alt = s[0]; nm.loading = 'lazy';
+    const nm = el('img', 'lgo' + (s[3] ? ' tall' : '')); nm.src = s[2]; nm.alt = s[0]; nm.width = s[4]; nm.height = s[5]; nm.loading = 'lazy'; nm.decoding = 'async';
     c.append(el('span', 'rd'), ln, nm, ct); srcs.append(c);
   });
   let si = 3;
@@ -199,7 +193,7 @@ $$('[data-diff] > div').forEach((row) => {
   list.forEach((x) => {
     const b = el('button'); b.type = 'button'; b.setAttribute('aria-pressed', 'false');
     b.dataset.date = x.toISOString().slice(0, 10);
-    b.setAttribute('aria-label', x.toLocaleDateString('fr-CH', { weekday: 'long', day: 'numeric', month: 'long' }));
+    b.dataset.label = x.toLocaleDateString('fr-CH', { weekday: 'long', day: 'numeric', month: 'long' });
     b.append(el('small', null, jours[x.getDay()]), el('b', null, String(x.getDate())), el('small', null, mois[x.getMonth()]));
     days.append(b);
   });
@@ -217,7 +211,7 @@ $$('[data-diff] > div').forEach((row) => {
     const first = $<HTMLElement>(n === 2 ? 'input' : n === 3 ? '[role=status]' : 'button', steps[n - 1]);
     first?.focus({ preventScroll: true });
   };
-  const when = () => `${picked(days)!.getAttribute('aria-label')} · ${picked(slotsBox)!.textContent}`;
+  const when = () => `${picked(days)!.dataset.label} · ${picked(slotsBox)!.textContent}`;
   next.addEventListener('click', () => { $('#bk-when')!.textContent = when(); show(2); });
   $('#bk-back')!.addEventListener('click', () => show(1));
 
@@ -253,6 +247,11 @@ $$('[data-diff] > div').forEach((row) => {
   });
 })();
 
+};
+// Tout ce bloc concerne des sections sous la ligne de flottaison : initialisé en temps libre,
+// le premier écran devient interactif sans l’attendre.
+idle(belowFold);
+
 /* ---------- Modale du film ---------- */
 (() => {
   const dlg = $<HTMLDialogElement>('#film'), video = $<HTMLVideoElement>('#film-v'); if (!dlg || !video) return;
@@ -281,13 +280,22 @@ $$('[data-diff] > div').forEach((row) => {
 })();
 
 /* ---------- Progression de lecture ---------- */
+// + barre de navigation en verre dépoli dès qu'on quitte le haut de page.
 (() => {
-  const pr = $('#prog'); if (!pr) return;
-  let raf = 0;
-  addEventListener('scroll', () => {
-    if (raf) return;
-    raf = requestAnimationFrame(() => { raf = 0; const p = scrollY / Math.max(1, document.documentElement.scrollHeight - innerHeight); pr.textContent = Math.min(100, Math.round(p * 100)) + '%'; });
-  }, { passive: true });
+  const pr = $('#prog'), nav = $('.nav');
+  let raf = 0, max = 1, lastP = -1, scrolled = false;
+  // Hauteur de page mise en cache (relue seulement quand elle change), pas à chaque image.
+  const measure = () => { max = Math.max(1, document.documentElement.scrollHeight - innerHeight); };
+  measure(); new ResizeObserver(measure).observe(document.body); addEventListener('resize', measure);
+  const update = () => {
+    raf = 0;
+    const p = Math.min(100, Math.round((scrollY / max) * 100));
+    if (pr && p !== lastP) { lastP = p; pr.textContent = p + '%'; }
+    const s = scrollY > 40;
+    if (nav && s !== scrolled) { scrolled = s; nav.classList.toggle('is-scrolled', s); }
+  };
+  addEventListener('scroll', () => { if (!raf) raf = requestAnimationFrame(update); }, { passive: true });
+  update();
 })();
 
 /* ---------- S11 · le footer se révèle sous la page ---------- */

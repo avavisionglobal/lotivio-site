@@ -58,11 +58,18 @@ async function init() {
     if (id !== '#top') { (target as HTMLElement).setAttribute('tabindex', '-1'); (target as HTMLElement).focus({ preventScroll: true }); }
   });
 
+  await tick(); // étape courte : le navigateur reprend la main entre deux groupes
   /* ---------- Préparation des apparitions (avant d'activer les états cachés) ---------- */
   // Titres découpés en lignes (SplitText) ; les lignes reçoivent leur rang pour le décalage CSS.
+  // Découpage paresseux : un titre n'est découpé qu'un écran avant d'arriver (pas tous au chargement).
+  const split = (h: Element) => SplitText.create(h, { type: 'lines', mask: 'lines', autoSplit: true, linesClass: 'sl', onSplit: (self) => index(self.lines) });
+  const splitIo = new IntersectionObserver((es) => es.forEach((e) => {
+    if (!e.isIntersecting) return;
+    splitIo.unobserve(e.target); split(e.target);
+  }), { rootMargin: '0px 0px 100% 0px' });
   $$('[data-split]').forEach((h) => {
     if (h.closest('#hs-track')) return; // titre de la piste horizontale S07 : traité avec la piste
-    SplitText.create(h, { type: 'lines', mask: 'lines', autoSplit: true, linesClass: 'sl', onSplit: (self) => index(self.lines) });
+    if (h.getBoundingClientRect().top < innerHeight * 1.2) split(h); else splitIo.observe(h);
   });
   $$('[data-lines]').forEach((h) => index($$('.li', h)));
   $$('[data-stagger], [data-tiles]').forEach((g) => index([...g.children]));
@@ -84,6 +91,7 @@ async function init() {
   const pnIo = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); pnIo.unobserve(e.target); } }), { rootMargin: '0px 0px -35% 0px' });
   $$('.flow4 .pn').forEach((pn) => { if (!pn.classList.contains('in')) pnIo.observe(pn); });
 
+  await tick(); // étape courte : le navigateur reprend la main entre deux groupes
   /* ---------- Labels : texte « décodé » (ScrambleText) à l'apparition ---------- */
   $$('[data-scramble]').forEach((lab) => {
     const text = lab.textContent?.trim() ?? '';
@@ -112,6 +120,7 @@ async function init() {
     gsap.fromTo(stage, { rotateX: 0, scale: 1 }, { rotateX: -4, scale: 1.02, ease: 'none', scrollTrigger: { trigger: stage, start: 'top 60%', end: 'bottom top', scrub: true } });
   }
 
+  await tick(); // étape courte : le navigateur reprend la main entre deux groupes
   // S03 · collages en parallaxe.
   $$('[data-collage]').forEach((col) => {
     const card = col.closest('article') ?? col;
@@ -134,6 +143,7 @@ async function init() {
     });
   });
 
+  await tick(); // étape courte : le navigateur reprend la main entre deux groupes
   // S07 · piste horizontale pilotée par le défilement.
   mm.add('(min-width: 1001px)', () => {
     const sec = $('#mise-en-place'), track = $('#hs-track');
@@ -150,6 +160,9 @@ async function init() {
     const intro = $('.hs-intro', track);
     if (intro) {
       const h = $('h2', intro)!;
+      // Le déclencheur de ce titre est le bloc d'intro (.hs-intro), pas le titre lui-même :
+      // on le marque « in » pour que seule la règle .hs-intro:not(.in) s'applique.
+      h.classList.add('in');
       SplitText.create(h, { type: 'lines', mask: 'lines', linesClass: 'sl', onSplit: (self) => index(self.lines) });
       watch(intro);
     }
@@ -201,6 +214,7 @@ async function init() {
     });
   }
 
+  await tick(); // étape courte : le navigateur reprend la main entre deux groupes
   /* ---------- S00 · navigation masquée en descendant ---------- */
   const nav = $('.nav');
   if (nav) {
@@ -233,11 +247,11 @@ async function init() {
     });
   }
 
-  // Les trames et images chargées après coup changent les hauteurs : on recalcule.
-  // (motion.ts est chargé à l'inactivité : l'événement load peut déjà être passé)
-  if (document.readyState === 'complete') ScrollTrigger.refresh();
-  else addEventListener('load', () => ScrollTrigger.refresh());
-  document.fonts?.ready.then(() => ScrollTrigger.refresh());
+  // Recalcul des positions seulement si quelque chose peut encore changer les hauteurs.
+  // ScrollTrigger calcule déjà ses positions à la création : un recalcul de plus après coup
+  // relance une mise en page complète (coûteux sur mobile).
+  if (document.readyState !== 'complete') addEventListener('load', () => ScrollTrigger.refresh(), { once: true });
+  if (document.fonts && document.fonts.status !== 'loaded') document.fonts.ready.then(() => ScrollTrigger.refresh());
 }
 
 if (!reduced) void init();

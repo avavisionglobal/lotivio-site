@@ -10,11 +10,11 @@ const facts = [
   <div class="split">
     <div class="lab" data-scramble>Du temps pour vos acheteurs</div>
     <div class="body">
-      <pre class="tex soft" data-src="/media/residence-800.webp" data-w=".5" aria-hidden="true"></pre>
+      <pre class="tex soft" data-src="/media/residence-480.webp" data-w=".5" aria-hidden="true"></pre>
       <h2 class="h2" data-lines><span class="lm"><span class="li">Jusqu’à <span class="count" data-to="4">4</span> h gagnées.</span></span><span class="lm"><span class="li g">Par semaine et par agent.</span></span></h2>
       <div class="facts" data-stagger>
         {facts.map(([b, k, t, p]) => (
-          <div data-bloc={b}><span class="mono">{k}</span><h4>{t}</h4><p>{p}</p></div>
+          <div data-bloc={b}><span class="mono">{k}</span><h3>{t}</h3><p>{p}</p></div>
         ))}
       </div>
     </div>

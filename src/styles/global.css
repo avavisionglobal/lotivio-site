@@ -75,7 +75,7 @@ a{color:inherit;text-decoration:none}
 .facts{position:relative;display:grid;grid-template-columns:repeat(3,1fr);margin-top:64px;border-top:1px solid var(--line);background:#fff}
 .facts div{padding:18px 22px 0 0}
 .facts div+div{border-left:1px solid var(--line);padding-left:22px}
-.facts h4{font-size:16px;font-weight:600;letter-spacing:-.01em;margin-top:10px}
+.facts h3{font-size:16px;font-weight:600;letter-spacing:-.01em;margin-top:10px}
 .facts p{font-size:14px;color:var(--muted);line-height:1.45;margin-top:6px}
 .facts .mono::before{content:"■ ";color:var(--orange)}
 .sec-4h{overflow:hidden}
@@ -488,7 +488,7 @@ h1 .o,.h2 .o,.final .o{font-style:normal;color:var(--orange)}
 /* ---------- Échelle typographique mobile (≤ 520 px) ---------- */
 @media (max-width:520px){
   .h2{font-size:38px;line-height:1;letter-spacing:-.04em}
-  .facts{margin-top:36px}.facts h4{font-size:17px}
+  .facts{margin-top:36px}.facts h3{font-size:17px}
   .bc{padding:22px;border-radius:22px}.bc h3{font-size:22px}
   .bento2{margin-top:36px}
   .ai .l h2{font-size:46px}
@@ -842,7 +842,7 @@ html.lenis{scroll-behavior:auto}
 /* Respirations dans les textes */
 .split>.lab,.split>.body{padding-top:22px}
 .facts div{padding-top:24px}
-.facts h4{margin-top:14px;line-height:1.25}
+.facts h3{margin-top:14px;line-height:1.25}
 .facts p{margin-top:10px;line-height:1.55}
 .ai .l{padding-top:22px}
 .ai-h{margin-top:26px}
@@ -915,7 +915,7 @@ html.has-intro{overflow:hidden}
 .intro-card{position:absolute;left:50%;top:50%;width:224px;height:304px;margin:-152px 0 0 -112px;border-radius:14px;overflow:hidden;background:#EDEBE6;
   box-shadow:0 40px 70px -40px rgba(0,0,0,.45);animation:ic-in .7s cubic-bezier(.16,1,.3,1) both .05s}
 @keyframes ic-in{from{opacity:0;transform:translateY(40px) scale(.9)}}
-.ip{position:absolute;inset:0;background:center/cover no-repeat;clip-path:inset(100% 0 0 0);animation:ip-in .55s cubic-bezier(.76,0,.24,1) forwards}
+.ip{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;clip-path:inset(100% 0 0 0);animation:ip-in .55s cubic-bezier(.76,0,.24,1) forwards}
 .ip1{animation-delay:.1s}.ip2{animation-delay:.48s}.ip3{animation-delay:.86s}
 @keyframes ip-in{to{clip-path:inset(0 0 0 0)}}
 .ip-code{position:absolute;inset:0;margin:0;padding:2px 0 0 1px;background:var(--warm-2);color:#5E594F;font-family:var(--mono);font-size:7px;line-height:7px;letter-spacing:.4px;
@@ -981,3 +981,43 @@ html.has-intro{overflow:hidden}
 .f-word,.f-word.is-split{background:none;-webkit-background-clip:border-box;background-clip:border-box;color:#fff;
   -webkit-mask-image:linear-gradient(180deg,rgba(0,0,0,.45) 0%,#000 38%);mask-image:linear-gradient(180deg,rgba(0,0,0,.45) 0%,#000 38%)}
 .f-word .fw-c{background:none;-webkit-background-clip:border-box;background-clip:border-box;color:inherit;will-change:auto}
+
+/* =================================================================
+   S00 · Barre de navigation en verre dépoli quand on a quitté le haut de page
+   (lisible sur tous les fonds : noir S10, orange S07B, panneaux S06…)
+   ================================================================= */
+.nav::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;opacity:0;
+  background:rgba(247,246,243,.74);-webkit-backdrop-filter:blur(18px) saturate(1.6);backdrop-filter:blur(18px) saturate(1.6);
+  border-bottom:1px solid rgba(20,20,20,.07);box-shadow:0 12px 32px -26px rgba(0,0,0,.45);transition:opacity .45s var(--ease)}
+.nav.is-scrolled::before{opacity:1}
+.nav{transition:transform .5s var(--ease),padding .45s var(--ease)}
+.nav.is-scrolled{padding-top:12px;padding-bottom:12px}
+@media (max-width:520px){
+  .nav{background:none;-webkit-backdrop-filter:none;backdrop-filter:none}
+  .nav.is-scrolled{padding-top:10px;padding-bottom:10px}
+}
+
+/* Trames en canvas : la trame prend la taille de son image, sans interligne parasite */
+.tex canvas,.tex-hi canvas{display:block}
+/* Lentille : calque graphique seulement pendant le survol (sinon 14 grands calques en mémoire) */
+.tex-hi{will-change:auto}
+.tex-lens{visibility:hidden;will-change:auto;transition:opacity .45s var(--ease),scale .6s var(--ease),visibility 0s linear .6s}
+.is-lit>.tex-lens{visibility:visible;will-change:transform,opacity;transition-delay:0s}
+.is-lit>.tex-lens .tex-hi{will-change:transform}
+
+/* =================================================================
+   Grands écrans étroits (1001–1280 px : portables 13", iPad paysage)
+   ================================================================= */
+/* S06 · sources : cinq colonnes qui rétrécissent au lieu de déborder */
+.srcs{grid-template-columns:repeat(5,minmax(0,1fr))}
+.sc{min-width:0}
+.sc .lgo{max-width:100%}
+@media (min-width:1001px) and (max-width:1280px){
+  .sc{height:230px;padding:14px 14px 16px}
+  .sc .ct{font-size:46px}
+  .sc .ln{display:none}
+  .pn .stage{width:min(1180px,88%)}
+  /* S10 · titre plus compact, colonne de réservation un peu plus étroite */
+  .cta10-card{grid-template-columns:1fr minmax(340px,420px);gap:40px;padding:56px 44px}
+  .cta10 h2{font-size:clamp(40px,4.4vw,56px)}
+}
