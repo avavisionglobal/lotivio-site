@@ -254,7 +254,7 @@ a{color:inherit;text-decoration:none}
 .sw{width:34px;height:20px;border-radius:999px;background:#DDD;position:relative}
 .sw::after{content:"";position:absolute;top:2px;left:2px;width:16px;height:16px;border-radius:50%;background:#fff}
 .sw.on{background:var(--green)}.sw.on::after{left:16px}
-.pdf{display:grid;grid-template-columns:1fr 150px;gap:20px;align-items:end}
+.pdf{display:grid;grid-template-columns:1fr 290px;gap:34px;align-items:end}
 .pdf img{border-radius:8px;transform:rotate(4deg);box-shadow:0 24px 40px -20px rgba(0,0,0,.45)}
 .chip-hot{display:inline-flex;margin-top:16px;background:#E7F9F1;color:#047857;border-radius:8px;padding:6px 10px;font-size:12.5px;font-weight:500}
 
@@ -672,13 +672,142 @@ h1 .o,.h2 .o,.final .o{font-style:normal;color:var(--orange)}
 }
 
 /* ---------- Trame de code dans les cartes S03 et S08 ---------- */
-.oc.fx,.bento2 .bc{position:relative;overflow:hidden;isolation:isolate}
+.oc.fx,.bento2 .bc,.hs-track>.oc{position:relative;overflow:hidden;isolation:isolate}
 .ctex{z-index:-1;left:-6px;top:-4px;width:auto;color:#B4AEA2;opacity:.8;
   mask-image:linear-gradient(180deg,#000 0%,#000 42%,transparent 72%);-webkit-mask-image:linear-gradient(180deg,#000 0%,#000 42%,transparent 72%)}
-.oc.fx:hover .ctex{color:#9F9889}
+.oc.fx:hover .ctex,.hs-track>.oc:hover .ctex{color:#9F9889}
 .ctex b{color:var(--orange)}
 .bento2 .ctex{left:auto;right:-6px;top:auto;bottom:-4px;color:#ADA79B;opacity:.85;mask-image:radial-gradient(90% 80% at 100% 100%,#000 20%,transparent 65%);-webkit-mask-image:radial-gradient(90% 80% at 100% 100%,#000 20%,transparent 65%)}
 .bento2 .stock .ctex{bottom:auto;top:-4px;mask-image:radial-gradient(75% 70% at 100% 30%,#000 25%,transparent 70%);-webkit-mask-image:radial-gradient(75% 70% at 100% 30%,#000 25%,transparent 70%)}
+
+/* ---------- Mobile : défilement latéral (S01.7, S03, S07) ---------- */
+.hs-intro-m,.swipe{display:none}
+.swipe{align-items:center;gap:8px;padding:0 var(--pad);font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.swipe i{display:flex;gap:4px}.swipe i b{width:16px;height:3px;border-radius:2px;background:#DDDAD4}.swipe i b:first-child{background:var(--orange)}
+@media (max-width:1000px){
+  .fx3,.hs-track{display:flex!important;flex-direction:row!important;overflow-x:auto;scroll-snap-type:x mandatory;gap:12px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  .fx3{margin-left:calc(var(--pad)*-1);margin-right:calc(var(--pad)*-1);padding:4px var(--pad) 18px}
+  .hs-track{padding:4px var(--pad) 18px}
+  .fx3::-webkit-scrollbar,.hs-track::-webkit-scrollbar,.hv1 .sources::-webkit-scrollbar{display:none}
+  .fx3>.oc,.hs-track>.oc{flex:0 0 84%;scroll-snap-align:start}
+  .hs-track>.hs-intro{display:none}
+  .hs-intro-m{display:block}
+  .hv1 .sources{flex-wrap:nowrap!important;overflow-x:auto;scroll-snap-type:x proximity;scroll-padding-left:16px;gap:28px!important;scrollbar-width:none;padding-left:16px!important;padding-right:16px!important}
+  .hv1 .sources>*{flex:none;scroll-snap-align:start}
+  .swipe{display:flex}
+  .fx3{scroll-padding-left:var(--pad)}.hs-track{scroll-padding-left:var(--pad)}
+  .fx3>.oc,.hs-track>.oc{flex-basis:86%}
+  .oc.fx .ui{height:auto}.oc.fx h3{margin-top:22px}
+  .r3{grid-template-columns:44px 1fr auto;gap:8px}.r3 img{max-width:44px;height:14px}.r3 b{font-size:13px}.r3 small{font-size:11px}
+  .ui-h{flex-wrap:wrap}.ui-h b{font-size:15px}
+}
+
+/* ---------- S08.3 · éventail de brochures ---------- */
+.bfan{position:relative;height:250px;margin:-20px -40px -40px 0}
+.bp{position:absolute;bottom:0;width:150px;height:212px;background:#fff;border-radius:8px;box-shadow:0 26px 40px -22px rgba(0,0,0,.45),0 0 0 1px rgba(0,0,0,.05);overflow:hidden;transform-origin:50% 100%;transition:transform .5s var(--ease)}
+.p1{left:128px;transform:rotate(4deg);z-index:3}
+.p2{left:72px;transform:rotate(-6deg) translateY(-6px);z-index:2;padding:12px}
+.p3{left:26px;transform:rotate(-14deg) translateY(-10px);z-index:1;padding:12px}
+.bento2 .bc:hover .p1{transform:rotate(7deg) translate(14px,-6px)}
+.bento2 .bc:hover .p2{transform:rotate(-4deg) translateY(-18px)}
+.bento2 .bc:hover .p3{transform:rotate(-18deg) translate(-12px,-12px)}
+.p1 .ph{height:122px;background:center/cover no-repeat}
+.bp-c{padding:10px 11px}
+.bp-c small{display:block;font-family:var(--mono);font-size:7.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--orange)}
+.bp-c b{display:block;font-family:var(--disp);font-variation-settings:"wdth" 108;font-weight:700;font-size:16px;line-height:1;letter-spacing:-.03em;margin-top:5px}
+.bp-c span{display:block;font-size:9px;color:var(--muted);margin-top:5px}
+.bp-h{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid var(--line);padding-bottom:6px}
+.bp-h b{font-size:11px;font-weight:600}.bp-h span{font-family:var(--mono);font-size:8px;color:var(--muted)}
+.rows{display:flex;flex-direction:column;gap:6px;margin-top:9px}
+.rows i{display:flex;justify-content:space-between;align-items:center;font-style:normal;font-size:9.5px;padding:5px 6px;border-radius:5px;background:#F6F5F2}
+.rows em{width:7px;height:7px;border-radius:50%}
+.rows .d em{background:#0E8345}.rows .r em{background:var(--orange)}.rows .v em{background:#A3A29E}
+.plan{width:100%;margin-top:10px}
+.bp-kv{display:flex;flex-wrap:wrap;gap:4px;margin-top:8px}
+.bp-kv span{font-size:8.5px;background:#F6F5F2;border-radius:4px;padding:3px 5px}
+.bp-kv b{width:100%;font-size:12px;font-weight:600;margin-top:4px}
+.sent{position:absolute;z-index:4;right:28px;top:6px;display:flex;align-items:center;gap:6px;background:#E9F7E4;color:#0E6B37;border-radius:999px;padding:6px 10px;font-size:11.5px;font-weight:500;box-shadow:0 10px 20px -12px rgba(0,0,0,.4)}
+.sent i{width:7px;height:7px;border-radius:50%;background:#25D366}
+@media (max-width:1000px){.pdf{grid-template-columns:1fr}.bfan{margin:10px auto -30px;width:290px}}
+
+/* ---------- S03 · mise en page façon Fourmula ---------- */
+.f3{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:56px}
+.fp{position:relative;overflow:hidden;isolation:isolate;background:#F4F4F3;border-radius:40px}
+.fp .ctex{mask-image:linear-gradient(180deg,#000 0%,transparent 45%);-webkit-mask-image:linear-gradient(180deg,#000 0%,transparent 45%);opacity:.6}
+.fp.big{grid-column:1/-1;padding:56px 0 64px 64px}
+.fp.half{padding:56px 64px 64px}
+.fl{display:inline-flex;align-items:center;gap:10px;font-size:15px;font-weight:500}
+.fl::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--orange)}
+.f-txt h3{font-weight:500;font-size:clamp(34px,3.6vw,60px);line-height:1;letter-spacing:-.045em}
+.f-txt p{font-size:17px;line-height:1.45;color:#6F6E6A;margin-top:18px;max-width:30em}
+.fp.big .f-txt{margin-top:64px}
+.f-stage{display:grid;grid-template-columns:320px 64px 1fr;align-items:center;margin-top:48px}
+.in-card{position:relative;background:#121212;color:#EDEDED;border-radius:28px;padding:22px;height:400px;display:flex;flex-direction:column;
+  background-image:linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);background-size:18px 18px}
+.in-h{display:flex;justify-content:space-between;align-items:center;background:#fff;border-radius:12px;padding:10px 12px}
+.in-h img{height:20px;width:auto}.in-h time{font-family:var(--mono);font-size:11px;color:var(--muted)}
+.in-card small{font-family:var(--mono);font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:#9a9a9a;margin-top:auto}
+.in-card b{font-weight:500;font-size:22px;letter-spacing:-.02em;margin-top:8px}
+.in-card p{font-size:14.5px;line-height:1.45;color:#cfcfcf;margin-top:10px}
+.in-f{display:flex;justify-content:space-between;margin-top:18px;padding-top:12px;border-top:1px solid #2a2a2a;font-size:13px;color:#a9a9a9}
+.arw{text-align:center;font-size:30px;color:#B9B6AF}
+.app{background:#0E0E0E;border-radius:32px 0 0 32px;padding:14px 0 14px 14px;overflow:hidden}
+.app-h{display:flex;justify-content:space-between;align-items:center;padding:4px 18px 14px 6px;color:#8b8b8b;font-size:12.5px}
+.apc{display:flex;align-items:center;gap:9px}.apc img{width:22px;height:22px;filter:invert(1)}.apc i{font-style:normal;color:#555}.apc b{color:#fff;font-weight:500}
+.act{display:flex;gap:8px;align-items:center}
+.act .n{border:1px solid #EB6E2C;color:#FF9C61;border-radius:999px;padding:3px 9px;font-family:var(--mono);font-size:11px}
+.act .add{background:var(--orange);color:#fff;border-radius:999px;padding:6px 12px;font-size:12px;font-weight:500}
+.act .exp{background:#2a1a10;color:#F59A62;border-radius:999px;padding:6px 12px;font-size:12px}
+.grid{display:grid;grid-template-columns:repeat(4,240px);gap:8px}
+.lt{position:relative;height:240px;border-radius:16px;overflow:hidden;color:#fff}
+.lt .ph{position:absolute;inset:0;background-size:cover}
+.lt::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 35%,rgba(0,0,0,.72))}
+.lt .ico{position:absolute;z-index:2;right:10px;top:10px;display:flex;gap:5px}
+.lt .ico i{width:26px;height:26px;border-radius:50%;background:rgba(40,40,40,.55);backdrop-filter:blur(6px)}
+.lt .ico i.o{background:var(--orange)}
+.lt-b{position:absolute;z-index:2;left:12px;bottom:40px}.lt-b b{display:block;font-weight:500;font-size:15px}.lt-b small{font-size:11.5px;opacity:.8}
+.lt-c{position:absolute;z-index:2;left:10px;bottom:10px;background:rgba(30,30,30,.7);border-radius:999px;padding:4px 9px;font-size:10.5px}
+.lt em{position:absolute;z-index:2;right:10px;bottom:10px;font-style:normal;font-family:var(--mono);font-size:10px;border-radius:5px;padding:4px 7px}
+.lt em.n{background:#FDEEE2;color:#C9551B}.lt em.q{background:#F3E8FF;color:#7B2CBF}.lt em.b{background:#EFEFEC;color:#444}.lt em.r{background:#E7EEFE;color:#1D4FB8}.lt em.v{background:#E7F9F1;color:#047857}
+.col{position:relative;height:420px;margin:40px -64px 0}
+.ck{position:absolute;border-radius:22px;overflow:hidden;background:#fff;box-shadow:0 24px 40px -28px rgba(0,0,0,.35)}
+.ck .ph{position:absolute;inset:0;background-size:cover;background-position:center}
+.c-ph{left:-30px;top:30px;width:230px;height:330px;border:6px solid #141414;border-radius:30px}.c-ph img{width:100%}
+.c-bro{left:228px;top:0;width:200px;height:250px}.c-bro .ph{bottom:72px}.c-bro .cb{position:absolute;left:0;right:0;bottom:0;padding:12px 14px;background:#fff}
+.c-bro small{font-family:var(--mono);font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--orange)}.c-bro b{display:block;font-family:var(--disp);font-variation-settings:"wdth" 108;font-weight:700;font-size:16px;letter-spacing:-.02em;margin-top:4px;line-height:1.05}
+.c-q{left:228px;top:266px;width:200px;height:120px;background:#AD46FF;color:#fff;padding:16px;display:flex;flex-direction:column;justify-content:space-between}
+.c-q small{font-family:var(--mono);font-size:10px;letter-spacing:.07em;text-transform:uppercase;opacity:.8}.c-q b{font-weight:500;font-size:30px;letter-spacing:-.04em}
+.c-cr{left:444px;top:60px;width:290px;padding:14px;display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.c-cr span{background:#F4F3F1;border-radius:10px;padding:8px;font-weight:500;font-size:14px}.c-cr small{display:block;font-family:var(--mono);font-size:9px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:400}
+.c-t{left:444px;top:162px;padding:10px 14px;border-radius:999px;font-family:var(--mono);font-size:12px;display:flex;align-items:center;gap:8px}.c-t i{width:8px;height:8px;border-radius:50%;background:#25D366}
+.d-vis{left:-30px;top:0;width:250px;height:300px}.tagv{position:absolute;left:44px;bottom:12px;background:rgba(255,255,255,.92);border-radius:999px;padding:5px 10px;font-size:12px;font-weight:500}
+.d-mic{left:236px;top:40px;width:300px;padding:14px;display:flex;align-items:center;gap:10px}
+.d-mic .wave{flex:1;height:30px}.d-mic .wave i{background:var(--ink)}
+.d-tr{left:236px;top:126px;width:300px;padding:14px 16px;font-size:14.5px;line-height:1.45;font-style:italic}
+.d-f{left:236px;top:232px;width:230px;border:1px solid var(--line)}.d-f div{display:flex;justify-content:space-between;padding:10px 14px;font-size:13px}.d-f div+div{border-top:1px solid var(--line)}.d-f span{color:var(--muted)}.d-f b{font-weight:500}.d-f .g{color:var(--green)}
+.d-cal{left:482px;top:232px;width:150px;height:110px;background:#141414;color:#fff;padding:14px;display:flex;flex-direction:column;justify-content:space-between}
+.d-cal small{font-family:var(--mono);font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:#FF9C61}.d-cal b{font-weight:500;font-size:24px;letter-spacing:-.03em}
+.rb{position:absolute;right:28px;bottom:28px;width:64px;height:64px;border-radius:50%;background:#fff;display:grid;place-items:center;box-shadow:0 10px 20px -14px rgba(0,0,0,.3);transition:transform .3s var(--ease)}
+.rb img{width:26px;height:26px}.fp:hover .rb{transform:rotate(90deg)}
+.fp.half .ck{transition:transform .5s var(--ease)}
+.fp.half:hover .ck:nth-child(odd){transform:translateY(-6px)}.fp.half:hover .ck:nth-child(even){transform:translateY(6px)}
+@media (max-width:1000px){
+  .f3{grid-template-columns:1fr}
+  .fp{border-radius:28px}
+  .fp.big{padding:32px 0 36px 20px}.fp.half{padding:32px 20px 36px}
+  .f-stage{grid-template-columns:1fr;gap:18px;margin-top:28px}
+  .in-card{height:auto;min-height:260px;margin-right:20px}
+  .arw{transform:rotate(90deg);font-size:24px}
+  .grid{grid-template-columns:repeat(4,180px)}.lt{height:190px}
+  .app-h .act .exp{display:none}
+  .fp.big .f-txt{margin-top:32px;padding-right:20px}
+  .f-txt h3{font-size:36px}.f-txt p{font-size:15.5px}
+  .col{height:380px;margin:28px -20px 0;transform:scale(.82);transform-origin:0 0;width:122%;margin-bottom:-60px}
+  .rb{width:52px;height:52px;right:18px;bottom:18px}
+  .fp.half{padding-bottom:92px}
+  .apc i,.apc b{display:none}.act .add{white-space:nowrap}
+  .c-q{top:236px;height:110px}
+}
 </style>
 </head>
 <body>
@@ -742,51 +871,53 @@ h1 .o,.h2 .o,.final .o{font-style:normal;color:var(--orange)}
     <div class="lab">Ce que Lotivio fait</div>
     <div class="body"><h2 class="h2">Toutes vos demandes.<span class="g">Un seul endroit<i class="o">.</i></span></h2></div>
   </div>
-  <div class="fx3">
-    <article class="oc fx rv" data-bloc="S03.1"><pre class="tex ctex" data-src="assets/lake-residence.webp" data-w=".42" data-r=".9" aria-hidden="true"></pre>
-      <span class="nb">1</span>
-      <div class="ui">
-        <div class="ui-h"><b>Demandes reçues</b><span>Aujourd'hui · 13</span></div>
-        <div class="ui-in rows3" id="rows3">
-          <div class="r3"><img src="assets/logos/homegate.svg" alt="Homegate"><div><b>David Grosjean</b><small>Clos des Vergers · Lot A2</small></div><em class="n">Nouveau</em></div>
-          <div class="r3"><img src="assets/logos/meta.png" alt="Meta"><div><b>Nathalie Girard</b><small>Les Terrasses · 3.5 p.</small></div><em class="q">Qualifié</em></div>
-          <div class="r3"><img src="assets/logos/immobilier-ch.svg" alt="immobilier.ch"><div><b>Claire Monnier</b><small>Les Terrasses · Attique</small></div><em class="n">Nouveau</em></div>
-          <div class="r3"><img src="assets/logos/properstar-logo.png" alt="Properstar"><div><b>Léa Perrin</b><small>Lac &amp; Lumière · Lot F3</small></div><em class="b">Brochure</em></div>
+  <div class="f3">
+    <article class="fp big rv" data-bloc="S03.1">
+      <pre class="tex ctex" data-src="assets/lake-residence.webp" data-w=".9" data-r=".38" aria-hidden="true"></pre>
+      <span class="fl">Demandes reçues</span>
+      <div class="f-stage">
+        <div class="in-card" aria-label="Demande reçue d'un portail, données de démonstration">
+          <div class="in-h"><img src="assets/logos/homegate.svg" alt="Homegate"><time>21:46</time></div>
+          <small>Nouvelle demande de contact</small>
+          <b>Clos des Vergers · Lot A2</b>
+          <p>« Bonjour, je souhaite recevoir la brochure et visiter le 3.5 pièces. »</p>
+          <div class="in-f"><span>David Grosjean</span><span>079 · · · · · ·</span></div>
         </div>
-        <div class="ui-f"><span class="b1">Toutes les sources</span><span class="b2">Ouvrir la file</span></div>
+        <span class="arw" aria-hidden="true">→</span>
+        <div class="app" aria-label="File Demandes reçues de Lotivio, données de démonstration">
+          <div class="app-h"><span class="apc"><img src="assets/lotivio-mark.svg" alt="">Demandes reçues <i>/</i> <b>Aujourd'hui</b></span><span class="act"><span class="n">13</span><span class="add">+ Ajouter un lead</span><span class="exp">Exporter</span></span></div>
+          <div class="grid"><div class="lt"><div class="ph" style="background-image:url(assets/lake-residence.webp);background-position:30% 50%"></div><span class="ico"><i></i><i class="o"></i></span><div class="lt-b"><b>David Grosjean</b><small>Clos des Vergers · A2</small></div><span class="lt-c">Homegate</span><em class="n">Nouveau</em></div><div class="lt"><div class="ph" style="background-image:url(assets/lake-residence-portrait.webp);background-position:50% 35%"></div><span class="ico"><i></i><i class="o"></i></span><div class="lt-b"><b>Nathalie Girard</b><small>Les Terrasses · 3.5 p.</small></div><span class="lt-c">Meta Ads</span><em class="q">Qualifié</em></div><div class="lt"><div class="ph" style="background-image:url(assets/photo-lac.jpg);background-position:60% 50%"></div><span class="ico"><i></i><i class="o"></i></span><div class="lt-b"><b>Claire Monnier</b><small>Les Terrasses · Attique</small></div><span class="lt-c">immobilier.ch</span><em class="n">Nouveau</em></div><div class="lt"><div class="ph" style="background-image:url(assets/lake-residence.webp);background-position:80% 40%"></div><span class="ico"><i></i><i class="o"></i></span><div class="lt-b"><b>Léa Perrin</b><small>Lac & Lumière · F3</small></div><span class="lt-c">Properstar</span><em class="b">Brochure</em></div><div class="lt"><div class="ph" style="background-image:url(assets/photo-lac.jpg);background-position:20% 60%"></div><span class="ico"><i></i><i class="o"></i></span><div class="lt-b"><b>Yann Renaud</b><small>Lac & Lumière · 4.5 p.</small></div><span class="lt-c">Votre site</span><em class="q">Qualifié</em></div><div class="lt"><div class="ph" style="background-image:url(assets/lake-residence-portrait.webp);background-position:50% 75%"></div><span class="ico"><i></i><i class="o"></i></span><div class="lt-b"><b>Sophie Jeanneret</b><small>Clos des Vergers · A4</small></div><span class="lt-c">ImmoScout24</span><em class="n">Nouveau</em></div><div class="lt"><div class="ph" style="background-image:url(assets/lake-residence.webp);background-position:55% 70%"></div><span class="ico"><i></i><i class="o"></i></span><div class="lt-b"><b>Marc Vuilleumier</b><small>Clos des Vergers · C1</small></div><span class="lt-c">WhatsApp</span><em class="r">Relance</em></div><div class="lt"><div class="ph" style="background-image:url(assets/photo-lac.jpg);background-position:85% 45%"></div><span class="ico"><i></i><i class="o"></i></span><div class="lt-b"><b>Famille Aubry</b><small>Les Terrasses · B2</small></div><span class="lt-c">Meta Ads</span><em class="v">Vendu</em></div></div>
+        </div>
       </div>
-      <h3>Une file pour toutes les sources</h3>
-      <p>Portails, Meta et votre site : chaque demande arrive avec sa source, le bien et les critères de l'acheteur.</p>
+      <div class="f-txt"><h3>Une file pour toutes<br>les sources.</h3><p>Portails, Meta Ads, votre site : chaque demande arrive avec sa source, le bien et les critères de l'acheteur. Sans copier-coller.</p></div>
     </article>
 
-    <article class="oc fx rv" data-bloc="S03.2"><pre class="tex ctex" data-src="assets/photo-lac.jpg" data-w=".42" data-r=".9" aria-hidden="true"></pre>
-      <span class="nb">2</span>
-      <div class="ui">
-        <div class="ui-h"><b>Assistant WhatsApp</b><span class="live"><i></i>en ligne</span></div>
-        <div class="ui-in chat3">
-          <div class="bq">Bonjour Nathalie, voici la brochure des Terrasses du Vignoble.</div>
-          <div class="pdf"><span>PDF</span>Les Terrasses du Vignoble.pdf</div>
-          <div class="bq">Combien de pièces recherchez-vous ?</div>
-          <div class="ba">3.5, à Milvignes</div>
-        </div>
-        <div class="crit3"><span><small>Pièces</small>3.5</span><span><small>Zone</small>Milvignes</span><span class="ok"><small>Statut</small>Qualifié</span></div>
+    <article class="fp half rv" data-bloc="S03.2">
+      <pre class="tex ctex" data-src="assets/photo-lac.jpg" data-w=".45" data-r=".7" aria-hidden="true"></pre>
+      <span class="fl">Assistant WhatsApp</span>
+      <div class="col">
+        <div class="ck c-ph"><img src="assets/ui-wa.png" alt="Conversation WhatsApp de l'assistant, données de démonstration"></div>
+        <div class="ck c-bro"><div class="ph" style="background-image:url(assets/lake-residence-portrait.webp)"></div><div class="cb"><small>PDF · envoyé</small><b>Les Terrasses du Vignoble</b></div></div>
+        <div class="ck c-q"><small>Statut</small><b>Qualifié</b></div>
+        <div class="ck c-cr"><span><small>Pièces</small>3.5</span><span><small>Zone</small>Milvignes</span><span><small>Budget</small>≤ 1,1 mio</span></div>
+        <div class="ck c-t"><i></i>21:47</div>
       </div>
-      <h3>L'IA qualifie, jour et nuit</h3>
-      <p>Brochure, type de bien, pièces, budget : la fiche se remplit pendant la conversation, même à 21 h 47.</p>
+      <div class="f-txt"><h3>L'IA qualifie,<br>jour et nuit.</h3><p>La brochure part sur WhatsApp, l'assistant pose les questions et la fiche se remplit.</p></div>
+      <span class="rb" aria-hidden="true"><img src="assets/lotivio-mark.svg" alt=""></span>
     </article>
 
-    <article class="oc fx rv" data-bloc="S03.3"><pre class="tex ctex" data-src="assets/lake-residence-portrait.webp" data-w=".42" data-r=".9" aria-hidden="true"></pre>
-      <span class="nb">3</span>
-      <div class="ui">
-        <div class="ui-h"><b>Dictée vocale</b><span>Après la visite</span></div>
-        <div class="ui-in">
-          <div class="rec"><span class="mic3"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></span><div class="wave" id="wave3" aria-hidden="true"></div><span class="tm3">0:14</span></div>
-          <p class="tr">« Visite faite avec M. Renaud, très intéressé, budget 1,2 million, je le rappelle jeudi. »</p>
-        </div>
-        <div class="fields3"><div><span>Intérêt</span><b class="g">Fort</b></div><div><span>Budget max</span><b>CHF 1'200'000</b></div><div><span>Relance</span><b>Jeudi · 09:00</b></div></div>
+    <article class="fp half rv" data-bloc="S03.3">
+      <pre class="tex ctex" data-src="assets/lake-residence-portrait.webp" data-w=".45" data-r=".7" aria-hidden="true"></pre>
+      <span class="fl">Dictée vocale</span>
+      <div class="col">
+        <div class="ck d-vis"><div class="ph" style="background-image:url(assets/lake-residence.webp);background-position:35% 50%"></div><span class="tagv">Visite · Lot F3</span></div>
+        <div class="ck d-mic"><span class="mic3"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></span><div class="wave" id="wave3" aria-hidden="true"></div><span class="tm3">0:14</span></div>
+        <div class="ck d-tr">« Très intéressé, budget 1,2 million, je le rappelle jeudi. »</div>
+        <div class="ck d-f"><div><span>Intérêt</span><b class="g">Fort</b></div><div><span>Budget</span><b>CHF 1'200'000</b></div></div>
+        <div class="ck d-cal"><small>Relance</small><b>Jeu. 09:00</b></div>
       </div>
-      <h3>Dictez, la fiche se remplit</h3>
-      <p>En sortant d'une visite, l'agent dicte son compte rendu. Intérêt, budget, relance : il relit et valide.</p>
+      <div class="f-txt"><h3>Dictez, la fiche<br>se remplit.</h3><p>En sortant d'une visite, l'agent dicte. Intérêt, budget, relance : il relit et valide.</p></div>
+      <span class="rb" aria-hidden="true"><img src="assets/lotivio-mark.svg" alt=""></span>
     </article>
   </div>
 </section>
@@ -877,6 +1008,11 @@ h1 .o,.h2 .o,.final .o{font-style:normal;color:var(--orange)}
 
 <!-- S07 · Mise en place -->
 <section class="hs" id="mise-en-place">
+  <div class="hs-intro hs-intro-m" style="padding:0 var(--pad) 22px">
+        <span class="eyb">Mise en place</span>
+        <h2>Construit autour de votre agence.</h2>
+        <p>On part de votre façon de vendre et des outils que vous utilisez déjà, puis on règle Lotivio pour qu'il s'y adapte.</p>
+      </div>
   <div class="hs-pin">
     <div class="hs-track" id="hs-track">
       <div class="hs-intro">
@@ -885,7 +1021,7 @@ h1 .o,.h2 .o,.final .o{font-style:normal;color:var(--orange)}
         <p>On part de votre façon de vendre et des outils que vous utilisez déjà, puis on règle Lotivio pour qu'il s'y adapte.</p>
       </div>
 
-      <article class="oc" data-bloc="S07.1">
+      <article class="oc" data-bloc="S07.1"><pre class="tex ctex" data-src="assets/lake-residence.webp" data-w=".38" data-r=".95" aria-hidden="true"></pre>
         <span class="nb">1</span>
         <div class="ui">
           <div class="ui-h"><b>Atelier de mise en place</b><span>Démo Immobilier NE</span></div>
@@ -899,7 +1035,7 @@ h1 .o,.h2 .o,.final .o{font-style:normal;color:var(--orange)}
         <p>Vos projets, vos canaux, qui fait quoi. On part de votre façon de vendre, pas d'un modèle tout fait.</p>
       </article>
 
-      <article class="oc" data-bloc="S07.2">
+      <article class="oc" data-bloc="S07.2"><pre class="tex ctex" data-src="assets/photo-lac.jpg" data-w=".38" data-r=".95" aria-hidden="true"></pre>
         <span class="nb">2</span>
         <div class="ui">
           <div class="ui-h"><b>Branchements</b><img src="assets/lotivio-mark.svg" alt=""></div>
@@ -917,7 +1053,7 @@ h1 .o,.h2 .o,.final .o{font-style:normal;color:var(--orange)}
         <p>Portails, formulaire du site, Meta, le WhatsApp professionnel de l'agence et Outlook pour l'envoi des e-mails.</p>
       </article>
 
-      <article class="oc" data-bloc="S07.3">
+      <article class="oc" data-bloc="S07.3"><pre class="tex ctex" data-src="assets/lake-residence-portrait.webp" data-w=".38" data-r=".95" aria-hidden="true"></pre>
         <span class="nb">3</span>
         <div class="ui">
           <div class="ui-h"><b>Réglages des parcours</b><span>Exemple</span></div>
@@ -932,7 +1068,7 @@ h1 .o,.h2 .o,.final .o{font-style:normal;color:var(--orange)}
         <p>Premier message automatique ou validé, brochure par WhatsApp ou par e-mail, relances : tout est réglé avec vous.</p>
       </article>
 
-      <article class="oc" data-bloc="S07.4">
+      <article class="oc" data-bloc="S07.4"><pre class="tex ctex" data-src="assets/lake-residence.webp" data-w=".38" data-r=".95" aria-hidden="true"></pre>
         <span class="nb">4</span>
         <div class="ui">
           <div class="ui-h"><b>Assistant · consignes</b><span>Démo Immobilier NE</span></div>
@@ -946,7 +1082,7 @@ h1 .o,.h2 .o,.final .o{font-style:normal;color:var(--orange)}
         <p>Vos consignes, votre ton, vos projets : l'assistant répond aux questions de vos prospects comme votre équipe le ferait.</p>
       </article>
 
-      <article class="oc" data-bloc="S07.5">
+      <article class="oc" data-bloc="S07.5"><pre class="tex ctex" data-src="assets/photo-lac.jpg" data-w=".38" data-r=".95" aria-hidden="true"></pre>
         <span class="nb">5</span>
         <div class="ui">
           <div class="ui-h"><b>Mise en route</b><span>Démo Immobilier NE</span></div>
@@ -962,6 +1098,7 @@ h1 .o,.h2 .o,.final .o{font-style:normal;color:var(--orange)}
       </article>
     </div>
   </div>
+  <div class="swipe" aria-hidden="true"><i><b></b><b></b><b></b></i>Faire glisser</div>
 </section>
 
 <!-- S07B · Pourquoi maintenant (CTA) -->
@@ -1025,7 +1162,16 @@ h1 .o,.h2 .o,.final .o{font-style:normal;color:var(--orange)}
     <article class="bc rv" data-bloc="S08.3"><pre class="tex ctex" data-src="assets/lake-residence-portrait.webp" data-w=".42" data-r=".9" aria-hidden="true"></pre>
       <div class="pdf">
         <div><span class="mono lab">PDF de vente</span><h3>Brochure et disponibilités, en un clic.</h3><span class="chip-hot">Brochure consultée 3×</span></div>
-        <img src="assets/ui-brochure.png" alt="Couverture d'une brochure générée, données de démonstration" loading="lazy">
+        <div class="bfan" aria-label="Trois pages de brochure générées par Lotivio, données de démonstration">
+          <div class="bp p3"><div class="bp-h"><b>Lot B4</b><span>3.5 pièces</span></div>
+            <svg viewBox="0 0 120 84" class="plan" aria-hidden="true"><g fill="none" stroke="#141414" stroke-width="1.6"><rect x="4" y="4" width="112" height="76"/><path d="M60 4v40M4 44h56M86 44v36M60 44h56M60 62h26"/><path d="M30 44v-8M100 44v8" stroke="#fff" stroke-width="3"/></g><g font-family="Geist Mono" font-size="6" fill="#6F6E6A"><text x="14" y="26">Séjour 34 m²</text><text x="68" y="26">Cuisine</text><text x="10" y="64">Chambre</text><text x="90" y="60">Ch. 2</text></g></svg>
+            <div class="bp-kv"><span>98 m²</span><span>Balcon 14 m²</span><b>CHF 1'100'000</b></div></div>
+          <div class="bp p2"><div class="bp-h"><b>Disponibilités</b><span>24 lots</span></div>
+            <div class="rows"><i class="d">A2 · 3.5 p.<em></em></i><i class="r">A4 · 4.5 p.<em></em></i><i class="d">B4 · 3.5 p.<em></em></i><i class="v">B2 · 2.5 p.<em></em></i><i class="d">C1 · 5.5 p.<em></em></i><i class="r">C3 · 4.5 p.<em></em></i></div></div>
+          <div class="bp p1"><div class="ph" style="background-image:url(assets/lake-residence-portrait.webp)"></div>
+            <div class="bp-c"><small>Démo Immobilier NE</small><b>Les Terrasses<br>du Vignoble</b><span>Milvignes · 24 appartements</span></div></div>
+          <span class="sent"><i></i>Envoyée sur WhatsApp · 21:47</span>
+        </div>
       </div>
     </article>
   </div>

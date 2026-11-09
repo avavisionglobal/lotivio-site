@@ -1,5 +1,15 @@
 # Pistes de design — 9.11.2026
 
+## S03 façon Fourmula ; S08.3 éventail de brochures ; trame S07 (9.11)
+
+- S03 refait sur le modèle des captures fourmula.ai : un grand panneau gris arrondi (S03.1) avec puce « Demandes reçues », une demande Homegate « telle qu'elle arrive » dans une carte noire quadrillée, une flèche, puis la fenêtre sombre de Lotivio avec une grille de 8 demandes (photo, source, nom, statut) qui sort du bord droit ; grand titre et texte en bas. Puis deux demi-panneaux (S03.2 Assistant WhatsApp, S03.3 Dictée vocale) avec un collage de cartes décalées qui débordent, grand titre, texte et bouton rond. Mobile : panneaux empilés, flèche verticale, grille de demandes qui déborde, collages réduits. Figma : `78:2` (v6) et `79:2` (mobile). Le défilement latéral mobile de S03 est remplacé par cette mise en page.
+- S08.3 : la couverture noire est remplacée par un éventail de trois pages de brochure (couverture avec la résidence, disponibilités avec pastilles de statut, plan du lot B4 avec prix) et l'étiquette « Envoyée sur WhatsApp · 21:47 ». Au survol, l'éventail s'ouvre. Figma : `74:2` (v6), `75:2` (mobile), textes de Diego conservés.
+- S07 : trame de code ajoutée aux 5 cartes (v6, mobile, rangée `16:2`).
+
+## Mobile : défilement latéral S01.7, S03, S07 (9.11)
+
+Sur mobile (≤ 1000 px), les cartes S03, les cartes S07 et la bande « Vos canaux, connectés » défilent à l'horizontale au doigt (scroll-snap, carte suivante visible à droite, indicateur « Faire glisser » sous S03 et S07). L'introduction de S07 passe au-dessus de la rangée. Figma mobile (`39:2`) : rangées horizontales de cartes de 310 px coupées au bord de l'écran (S03 `52:14`, S07 `72:2`), bande des canaux sur une ligne.
+
 ## Index des blocs (Figma v6 `22:2`, mobile `39:2`, code `data-bloc`)
 
 Pour désigner une modification : « S03.2 : … ». Les noms Figma suivent ce format : `Sxx.n · rôle`.
@@ -16,7 +26,9 @@ Pour désigner une modification : « S03.2 : … ». Les noms Figma suivent ce f
 - S10 Appel final : S10.1 texte et engagements · S10.2 module de réservation.
 - S11 Footer : S11.1 présentation + bouton · S11.2 liens · S11.3 mentions · S11.4 grand logo.
 
-## Trame de code dans les cartes S03 et S08 (9.11)
+## Trame de code dans les cartes S03, S07 et S08 (9.11)
+
+S07 ajoutée ensuite (même réglage que S03 : haut de la carte, s'efface vers le texte), sur la v6, la page mobile et la rangée complète `16:2`.
 
 Fond « code » ajouté sur demande de Diego : en haut des cartes S03 (autour du numéro et de la maquette, s'efface vers le texte), dans l'angle bas droit des cartes S08 (en haut à droite pour la carte stock) pour ne pas gêner la lecture. Dans Figma : calque texte « Trame de code » verrouillé, en fond de chaque carte, Geist Mono 9 px, quelques caractères orange. Les cartes S08 de Diego n'ont pas été réimportées (ses textes sont conservés).
 
