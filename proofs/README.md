@@ -1,8 +1,21 @@
 # Pistes de design — 9.11.2026
 
+## A v6 — S07B : tableau à clés au lieu des gélules (9.11)
+
+Retour de Diego : les gélules « ne sont pas top pour de l'immobilier ». Même mécanisme (objets en vrac qui se mettent en place au défilement), objet métier : trois porte-clés d'agence (noir, violet, vert, avec insert papier ligné et une clé) qui tombent en vrac puis se suspendent à un tableau à clés en bois, légende « Le tableau des clés de votre agence », puis bouton « Réserver une démo ». Mêmes chiffres : jusqu'à 4 h, 24/7, 7 sources. Mobile : étiquettes empilées, sans clé ni tableau.
+Figma : v6 = node `22:2` (v5 `19:2` marquée « ancienne »). Corrigé dans Figma après import : ombres des clés (aplats sombres) et police du bouton.
+
+## A v4 / v5 — S07 façon Script Runner, vrais logos, CTA S07B (9.11)
+
+- S07 Mise en place : introduction à gauche (étiquette orange, grand titre, sous-titre gris) et cinq grandes cartes numérotées (Atelier, Branchements, Réglages, Assistant, Mise en route), chacune avec une maquette d'interface. La rangée défile à l'horizontale pendant le défilement vertical (section épinglée). Mobile : cartes empilées.
+- Vrais logos (Homegate, ImmoScout24, immobilier.ch, Properstar, Meta, WhatsApp) dans la bande « Sources branchées » de S01 et dans les cartes du panneau S06.1. Provenance : `assets/logos/README.md`.
+- S07B Pourquoi maintenant : fond orange, titre centré, trois gélules (jusqu'à 4 h gagnées par semaine et par agent ; 24/7 l'assistant WhatsApp répond ; 7 sources dans une seule file) qui arrivent en désordre et s'alignent au défilement, puis bouton « Réserver une démo ».
+- Corrigé : `overflow-x:hidden` sur `body` empêchait tout effet « sticky » (S06 ne s'empilait pas) ; trame de S02 qui débordait à droite ; navigation mobile sans fond.
+- Figma : v5 = node `19:2` (rangée complète de S07 à côté : `16:2`). v3 `12:2` et v4 `14:2` marquées « ancienne ». Dans Figma, S07B est montrée dans son état final (gélules alignées) et S07 dans son état de départ ; le logo Meta est une image PNG (la conversion SVG échouait).
+
 ## Noms des sections (Figma node 12:2 et commentaires du code)
 
-S00 Navigation · S01 Hero · S02 Temps gagné — 4 h · S03 Ce que Lotivio fait · S04 L'IA qui · S05 Parcours — titre · S06 Parcours — 4 panneaux (S06.1 Demande, S06.2 Qualification, S06.3 Relance, S06.4 Vente) · S07 Mise en place · S08 Pour la direction · S09 Questions · S10 Appel final · S11 Footer · S12 Trame de points · S13 Mentions légales. Les calques « _espace » sont des espaceurs vides créés à l'import.
+S00 Navigation · S01 Hero · S02 Temps gagné — 4 h · S03 Ce que Lotivio fait · S04 L'IA qui · S05 Parcours — titre · S06 Parcours — 4 panneaux (S06.1 Demande, S06.2 Qualification, S06.3 Relance, S06.4 Vente) · S07 Mise en place · S07B Pourquoi maintenant (tableau à clés) · S08 Pour la direction · S09 Questions · S10 Appel final · S11 Footer · S12 Trame de points · S13 Mentions légales. Les calques « _espace » sont des espaceurs vides créés à l'import.
 
 ## A v3 — hero B + trames de code + parcours façon Fourmula (9.11)
 
