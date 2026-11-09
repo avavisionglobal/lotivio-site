@@ -1,5 +1,25 @@
 # Pistes de design — 9.11.2026
 
+## Index des blocs (Figma v6 `22:2`, mobile `39:2`, code `data-bloc`)
+
+Pour désigner une modification : « S03.2 : … ». Les noms Figma suivent ce format : `Sxx.n · rôle`.
+
+- S01 Hero : S01.1 pastille Suisse · S01.2 titre · S01.3 texte · S01.4 boutons · S01.5 fenêtre des demandes · S01.6 fiche acheteur (desktop) · S01.7 bande « Vos canaux, connectés ».
+- S02 Temps gagné : S02.1 Demandes · S02.2 Échanges · S02.3 Suivi (titres Figma de Diego ; dans le code : Saisie, Brochure, Relances).
+- S03 Ce que Lotivio fait : S03.1 Demandes reçues · S03.2 Assistant WhatsApp · S03.3 Dictée vocale (chaque carte a sa « Maquette » et sa « Trame de code »).
+- S04 L'IA qui : S04.1 à S04.4 (les quatre lignes).
+- S05 titre du parcours ; S06 Parcours : S06.1 Demande · S06.2 Qualification · S06.3 Relance · S06.4 Vente.
+- S07 Mise en place : S07.0 introduction · S07.1 à S07.5 cartes (chacune avec sa « Maquette »).
+- S07B Pourquoi maintenant : S07B.0 titre et texte · S07B.1 à S07B.3 porte-clés · S07B.4 bouton · S07B.5 légende du tableau.
+- S08 Pour la direction : S08.1 vue par projet / stock · S08.2 diffusion · S08.3 PDF de vente (avec « Trame de code »).
+- S09 Questions : S09.1 à S09.6.
+- S10 Appel final : S10.1 texte et engagements · S10.2 module de réservation.
+- S11 Footer : S11.1 présentation + bouton · S11.2 liens · S11.3 mentions · S11.4 grand logo.
+
+## Trame de code dans les cartes S03 et S08 (9.11)
+
+Fond « code » ajouté sur demande de Diego : en haut des cartes S03 (autour du numéro et de la maquette, s'efface vers le texte), dans l'angle bas droit des cartes S08 (en haut à droite pour la carte stock) pour ne pas gêner la lecture. Dans Figma : calque texte « Trame de code » verrouillé, en fond de chaque carte, Geist Mono 9 px, quelques caractères orange. Les cartes S08 de Diego n'ont pas été réimportées (ses textes sont conservés).
+
 ## Hero V1 intégré ; textes modifiés dans Figma (9.11)
 
 - Diego choisit la variante 1 (centrée produit). Elle remplace le hero dans `a-orbite.html`, dans la v6 (`64:2`) et dans la page mobile (`65:2`), avec ses textes Figma : pastille « 🇨🇭 Développé pour la Suisse », titre « Vos prospects écrivent [logos] partout. / Gardez le fil de chaque acheteur. », paragraphe « Le CRM immobilier développé pour la Suisse… ». La bande « Vos canaux, connectés » de la v6 (`22:222`, modifiée par Diego) est conservée telle quelle sous le nouveau hero.
