@@ -3,29 +3,33 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Lotivio — Piste A · Orbite</title>
+<title>Lotivio — Piste A · v3</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,400..800&family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root{
   --ink:#141414; --ink-2:#2a2a2a; --grey:#A3A29E; --muted:#6F6E6A;
   --line:#ECEBE8; --soft:#F5F4F1; --soft-2:#EEECE7; --white:#fff;
-  --orange:#E8762D; --violet:#AD46FF; --green:#0E8345;
-  --sans:'Geist',ui-sans-serif,sans-serif; --mono:'Geist Mono',ui-monospace,monospace;
-  --ease:cubic-bezier(.2,.7,.1,1);
+  --warm:#F1F0EC; --warm-2:#F7F6F3; --warm-line:#DCDAD4;
+  --orange:#E8762D; --violet:#AD46FF; --green:#0E8345; --blue:#276EF1;
+  --sans:'Geist',ui-sans-serif,sans-serif; --mono:'Geist Mono',ui-monospace,monospace; --disp:'Archivo',sans-serif;
+  --ease:cubic-bezier(.2,.7,.1,1); --pad:28px;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;overflow-x:clip}
-body{font-family:var(--sans);color:var(--ink);background:var(--white);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{font-family:var(--sans);color:var(--ink);background:var(--white);-webkit-font-smoothing:antialiased}
 img{display:block;max-width:100%}
 a{color:inherit;text-decoration:none}
 .mono{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase}
+.dot{display:inline-block;width:7px;height:7px;background:var(--orange);border-radius:1px;vertical-align:middle}
 
-.nav{position:fixed;inset:0 0 auto 0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:22px 28px;pointer-events:none}
+/* ---------- Navigation (Fourmula) ---------- */
+.nav{position:fixed;inset:0 0 auto 0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:22px var(--pad);pointer-events:none}
 .nav>*{pointer-events:auto}
-.brand{display:flex;align-items:center;gap:10px;font-weight:600;font-size:17px;letter-spacing:-.02em}
-.brand img{width:34px;height:34px}
+.logo{font-family:var(--disp);font-variation-settings:"wdth" 118;font-weight:700;font-size:24px;letter-spacing:-.04em;display:flex;align-items:center;gap:9px}
+.logo img{width:26px;height:26px}
+.logo i{color:var(--orange);font-style:normal}
 .pill{display:flex;align-items:center;gap:6px;background:var(--ink);color:#fff;border-radius:999px;padding:5px 5px 5px 16px;font-size:14px}
 .pill .burger{display:inline-flex;flex-direction:column;gap:4px;margin-right:10px}
 .pill .burger i{display:block;width:16px;height:1.5px;background:#fff}
@@ -33,69 +37,69 @@ a{color:inherit;text-decoration:none}
 .pill .chip{background:#2c2c2c;border-radius:999px;padding:6px 12px;font-family:var(--mono);font-size:12px;margin-left:8px}
 .nav-r{display:flex;align-items:center;gap:10px}
 .icon-btn{width:34px;height:34px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;background:#fff}
-.btn{display:inline-flex;align-items:center;gap:8px;border-radius:999px;padding:12px 20px;font-size:14px;font-weight:500;transition:transform .15s var(--ease),background .15s}
+.btn{display:inline-flex;align-items:center;gap:8px;border-radius:999px;padding:12px 20px;font-size:14px;font-weight:500;transition:transform .15s var(--ease),background .15s;white-space:nowrap}
 .btn:active{transform:scale(.96)}
 .btn-dark{background:var(--ink);color:#fff}
-.btn-dark:hover{background:#276EF1}
+.btn-dark:hover{background:var(--blue)}
 .btn-ghost{border:1px solid var(--line);background:#fff}
 
-.hero{position:relative;overflow:hidden;min-height:max(100svh,780px);padding:0 28px 40px;display:grid;grid-template-rows:1fr auto}
-.stage{position:relative;display:grid;place-items:center;padding-top:84px}
-.orbit{position:relative;width:min(560px,86vw,56svh);aspect-ratio:1}
-.ring{position:absolute;inset:0;animation:spin 140s linear infinite}
-.ring svg{position:absolute;inset:0;width:100%;height:100%}
-.tile{position:absolute;width:132px;margin:-56px 0 0 -66px}
-.tile .in{animation:spin 140s linear infinite reverse}
-.tile .card{background:#fff;border:1px solid var(--line);border-radius:22px;padding:13px 14px 12px;box-shadow:0 14px 30px -18px rgba(20,20,20,.28);transform:rotate(var(--r,0deg))}
-.tile .src{display:flex;align-items:center;gap:6px;color:var(--muted)}
-.tile .src b{width:7px;height:7px;border-radius:2px;background:var(--c,var(--ink))}
-.tile p{font-size:12.5px;line-height:1.3;margin-top:8px;color:var(--ink-2)}
-.tile time{display:block;margin-top:8px;font-family:var(--mono);font-size:10px;color:var(--grey)}
-@keyframes spin{to{transform:rotate(360deg)}}
+/* ---------- Trames de code (Code Block) ---------- */
+.tex{position:absolute;font-family:var(--mono);font-size:9px;line-height:9px;letter-spacing:.5px;color:#C4C1B9;white-space:pre;pointer-events:none;user-select:none;
+  mask-image:linear-gradient(90deg,transparent,#000 32%);-webkit-mask-image:linear-gradient(90deg,transparent,#000 32%)}
+.tex b{color:var(--orange);font-weight:400}
+.tex.soft{color:#DDDAD3}
 
-.core{position:absolute;left:50%;top:calc(50% + 42px);width:250px;transform:translate(-50%,-50%);z-index:3}
-.lead{background:#fff;border:1px solid var(--line);border-radius:24px;padding:16px 16px 14px;box-shadow:0 30px 60px -30px rgba(20,20,20,.35)}
-.lead-top{display:flex;justify-content:space-between;align-items:center}
-.tag{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:10.5px;letter-spacing:.05em;text-transform:uppercase}
-.tag::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--orange)}
-.lead h3{font-size:19px;font-weight:600;letter-spacing:-.02em;margin-top:12px}
-.lead .proj{font-size:13px;color:var(--muted);margin-top:2px}
-.chips{display:flex;flex-wrap:wrap;gap:5px;margin-top:12px}
-.chips span{background:var(--soft);border-radius:8px;padding:5px 8px;font-size:11.5px}
-.lead-foot{display:flex;justify-content:space-between;align-items:center;margin-top:14px;padding-top:11px;border-top:1px solid var(--line)}
-.badge{font-family:var(--mono);font-size:10.5px;padding:4px 8px;border-radius:6px;background:var(--soft-2)}
-.swap{transition:opacity .35s var(--ease),transform .35s var(--ease)}
-.lead.out .swap{opacity:0;transform:translateY(6px)}
-.core-cap{text-align:center;margin-top:12px;font-size:12.5px;color:var(--muted)}
+/* ---------- Premier écran (piste B) ---------- */
+.bh{position:relative;background:var(--warm);padding:120px 66px 0;overflow:hidden}
+.bh .tex{right:-20px;top:96px;width:62%}
+.bh h1{position:relative;font-family:var(--disp);font-variation-settings:"wdth" 112;font-weight:600;font-size:clamp(44px,5.25vw,96px);line-height:.95;letter-spacing:-.055em}
+.bh h1 span{display:block}
+.bh-grid{position:relative;display:grid;grid-template-columns:minmax(300px,40%) 1fr;gap:56px;margin-top:52px;align-items:start}
+.lede{font-size:19px;line-height:1.48;color:var(--muted);max-width:30em}
+.lede strong{color:var(--ink);font-weight:500}
+.bh .cta{display:flex;gap:10px;margin-top:30px;flex-wrap:wrap}
+.bh .btn{border-radius:3px;padding:13px 20px;font-size:15px}
+.btn-line{border:1px solid var(--warm-line);background:var(--warm-2)}
+.status{margin-top:34px;display:flex;align-items:center;gap:10px;color:var(--muted)}
+.win{position:relative;background:#121212;color:#EDEDED;border-radius:4px;box-shadow:0 40px 80px -40px rgba(0,0,0,.5);overflow:hidden}
+.win-bar{display:flex;justify-content:space-between;align-items:center;padding:13px 18px;font-family:var(--mono);font-size:11px;color:#8b8b8b;border-bottom:1px solid #222}
+.win-bar .t{display:flex;align-items:center;gap:9px;color:#d8d8d8}
+.feed{position:relative;height:330px;overflow:hidden;margin:18px;border:1px solid #232323;border-radius:3px}
+.row{display:grid;grid-template-columns:58px 112px 1fr auto;gap:14px;align-items:center;padding:14px 16px;border-bottom:1px solid #1f1f1f;font-size:14px;transition:background 1.2s}
+.row.new{background:#1d1a17}
+.row .tm{font-family:var(--mono);font-size:11px;color:#777}
+.row .src{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:#a9a9a9}
+.row .who b{font-weight:500;color:#fff;display:block}
+.row .who span{font-size:12.5px;color:#8a8a8a}
+.st{font-family:var(--mono);font-size:10.5px;padding:5px 9px;border-radius:3px;letter-spacing:.04em;white-space:nowrap}
+.st.n{background:rgba(232,118,45,.16);color:#F29A5E}
+.st.q{background:rgba(173,70,255,.18);color:#C995FF}
+.st.b{background:rgba(255,255,255,.08);color:#cfcfcf}
+.st.v{background:rgba(14,131,69,.22);color:#5FD49A}
+.ticks{display:flex;align-items:center;gap:14px;padding:0 18px 18px}
+.ticks .scale{flex:1;height:18px;background:repeating-linear-gradient(90deg,#3a3a3a 0 1px,transparent 1px 7px);position:relative}
+.ticks .scale i{position:absolute;top:-3px;width:9px;height:9px;background:var(--orange);left:0;transition:left 2.4s linear}
+.ticks .mono{color:#8b8b8b;font-size:10.5px}
+.win .demo{position:absolute;right:18px;bottom:-26px;color:var(--grey);font-size:10px}
+.sources{position:relative;display:flex;align-items:center;gap:44px;margin:70px -66px 0;padding:26px 66px;border-top:1px solid var(--warm-line);background:var(--warm);flex-wrap:wrap}
+.sources .mono{color:var(--muted);min-width:180px}
+.sources span.s{font-family:var(--disp);font-variation-settings:"wdth" 108;font-weight:600;font-size:21px;letter-spacing:-.03em;color:#9C9A94}
 
-.side{position:absolute;right:0;top:50%;transform:translateY(-40%);height:260px;overflow:hidden;
-  mask-image:linear-gradient(transparent,#000 30%,#000 70%,transparent);-webkit-mask-image:linear-gradient(transparent,#000 30%,#000 70%,transparent)}
-.side ul{list-style:none;display:flex;flex-direction:column;align-items:flex-end;gap:8px;animation:up 18s linear infinite}
-.side li{border:1px solid var(--line);border-radius:10px;padding:8px 12px;font-size:13px;background:#fff;white-space:nowrap}
-@keyframes up{to{transform:translateY(-50%)}}
-
-.hero-foot{display:grid;grid-template-columns:1fr 340px;align-items:end;gap:32px}
-h1{font-weight:500;font-size:clamp(42px,5.2vw,96px);line-height:.95;letter-spacing:-.05em}
-h1 .g{color:var(--grey);display:block}
-.eyebrow{margin-bottom:22px;color:var(--muted)}
-.hero-side{max-width:340px;padding-bottom:6px}
-.hero-side .btn{padding:11px 16px;white-space:nowrap}
-.hero-side p{font-size:15px;line-height:1.5;color:var(--muted)}
-.hero-side .row{display:flex;gap:8px;margin-top:18px}
-.demo-note{position:absolute;left:50%;bottom:14px;transform:translateX(-50%);color:var(--grey)}
-
-.sec{padding:120px 28px 0}
-.split{display:grid;grid-template-columns:minmax(180px,26%) 1fr;border-top:1px solid var(--line)}
+/* ---------- Sections (Fourmula) ---------- */
+.sec{position:relative;padding:120px var(--pad) 0}
+.split{position:relative;display:grid;grid-template-columns:minmax(180px,26%) 1fr;border-top:1px solid var(--line)}
 .split>.lab{padding:18px 0;font-size:13px}
-.split>.body{border-left:1px solid var(--line);padding:18px 0 0 28px}
-.h2{font-weight:500;font-size:clamp(38px,6vw,96px);line-height:.95;letter-spacing:-.045em}
+.split>.body{border-left:1px solid var(--line);padding:18px 0 0 28px;position:relative}
+.h2{font-weight:500;font-size:clamp(38px,6vw,96px);line-height:.95;letter-spacing:-.045em;position:relative}
 .h2 .g{color:var(--grey);display:block}
-.facts{display:grid;grid-template-columns:repeat(3,1fr);margin-top:64px;border-top:1px solid var(--line)}
+.facts{position:relative;display:grid;grid-template-columns:repeat(3,1fr);margin-top:64px;border-top:1px solid var(--line);background:#fff}
 .facts div{padding:18px 22px 0 0}
 .facts div+div{border-left:1px solid var(--line);padding-left:22px}
 .facts h4{font-size:16px;font-weight:600;letter-spacing:-.01em;margin-top:10px}
 .facts p{font-size:14px;color:var(--muted);line-height:1.45;margin-top:6px}
 .facts .mono::before{content:"■ ";color:var(--orange)}
+.sec-4h{overflow:hidden}
+.sec-4h .tex{right:-28px;top:-10px;width:56%;opacity:.9}
 
 .bento{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:64px}
 .bc{position:relative;background:var(--soft);border-radius:28px;overflow:hidden;min-height:440px;padding:30px}
@@ -118,45 +122,8 @@ h1 .g{color:var(--grey);display:block}
 .fields div+div{border-top:1px solid var(--line)}
 .fields span:first-child{color:var(--muted)}
 .fields .hot{color:var(--green);font-weight:600}
-footer.end{padding:120px 28px 60px;color:var(--grey)}
 
-.rv{opacity:0;transform:translateY(18px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
-.rv.on{opacity:1;transform:none}
-
-@media (max-width:900px){
-  .pill .opt{display:none}
-  .nav-r .icon-btn{display:none}
-  .side{display:none}
-  .orbit{width:min(560px,124vw)}
-  .tile{scale:.78}
-  .hero-foot{grid-template-columns:1fr;gap:18px}
-  .split{grid-template-columns:1fr}
-  .split>.body{border-left:0;padding-left:0}
-  .facts{grid-template-columns:1fr}
-  .facts div+div{border-left:0;padding-left:0;border-top:1px solid var(--line);margin-top:18px}
-  .bento{grid-template-columns:1fr}
-  .bc.wide{grid-template-columns:1fr;padding-right:30px}
-  .shot{margin-right:-30px}
-  .wa .txt{max-width:100%}
-  .wa{min-height:600px}
-}
-@media (max-width:520px){
-  .nav{padding:16px}
-  .pill{display:none}
-  .hero,.sec{padding-left:16px;padding-right:16px}
-  .hero{min-height:auto;padding-bottom:48px}
-  .stage{padding-top:70px}
-  .btn{padding:11px 16px}
-  .orbit{width:150vw}
-  .tile{scale:.6}
-  .core{scale:.86}
-  .bc{padding:24px}
-  .footer.end{padding-left:16px}
-}
-@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
-
-/* ===== Sections 4 à 10 ===== */
-.ai{display:grid;grid-template-columns:minmax(180px,26%) 1fr;border-top:1px solid var(--line);margin-top:0}
+.ai{display:grid;grid-template-columns:minmax(180px,26%) 1fr;border-top:1px solid var(--line)}
 .ai .l{padding:18px 28px 28px 0;display:flex;flex-direction:column;justify-content:space-between;gap:30px}
 .ai .l h2{font-weight:500;font-size:clamp(44px,5.6vw,88px);letter-spacing:-.05em;line-height:.95}
 .ai .l p{font-size:14px;color:var(--muted);line-height:1.5;margin-top:14px;max-width:22em}
@@ -171,29 +138,89 @@ footer.end{padding:120px 28px 60px;color:var(--grey)}
 .guard{display:flex;flex-wrap:wrap;gap:8px 24px;padding:22px 0 0 28px;color:var(--muted)}
 .guard span::before{content:"✓ ";color:var(--green)}
 
-.steps-head{display:grid;grid-template-columns:1fr auto;align-items:end;gap:30px;padding:0 28px;margin-top:120px}
+/* ---------- Parcours : 4 panneaux plein écran (réf. Fourmula) ---------- */
+.steps-head{display:grid;grid-template-columns:1fr auto;align-items:end;gap:30px;margin:140px var(--pad) 0;border-top:1px solid var(--line);padding-top:28px}
 .steps-head p{font-size:14px;color:var(--muted);max-width:22em;text-align:right;line-height:1.5}
-.panels{margin-top:56px}
-.panel{position:relative;padding:22px 28px 0;overflow:hidden;color:var(--fg)}
-.panel .code{text-align:center;font-family:var(--mono);font-size:11px;letter-spacing:.08em;opacity:.65}
-.panel .top{display:grid;grid-template-columns:1fr auto;align-items:start;margin-top:26px}
-.panel h3{font-weight:500;font-size:clamp(34px,3.6vw,56px);letter-spacing:-.04em;line-height:1}
-.panel .num{font-weight:400;font-size:clamp(70px,8vw,128px);letter-spacing:-.06em;line-height:.8}
-.panel .pts{display:grid;grid-template-columns:1fr 1fr;margin-top:30px;border-top:1px solid var(--rule)}
-.panel .pts div{padding:14px 0 30px;font-size:14px;line-height:1.45}
-.panel .pts div+div{border-left:1px solid var(--rule);padding-left:18px}
-.panel .pts b{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;font-weight:400;opacity:.7;margin-bottom:8px}
-.panel .go{display:flex;justify-content:center;margin-top:6px}
-.panel .go a{background:#fff;color:var(--ink);border-radius:999px;padding:11px 18px;font-size:14px;font-weight:500}
-.panel .glass{position:relative;width:min(980px,100%);margin:34px auto 0;background:rgba(255,255,255,.22);border:1px solid rgba(255,255,255,.35);border-bottom:0;border-radius:24px 24px 0 0;padding:14px 14px 0;max-height:430px;overflow:hidden}
-.panel .glass img{border-radius:14px 14px 0 0;width:100%}
-.panel .glass.phone{width:340px;padding:12px 12px 0}
-.panel .glass.phone img{border-radius:22px 22px 0 0}
-.p1{background:#E8762D;--fg:#141414;--rule:rgba(20,20,20,.22)}
-.p2{background:#AD46FF;--fg:#141414;--rule:rgba(20,20,20,.22)}
-.p3{background:#276EF1;--fg:#fff;--rule:rgba(255,255,255,.3)}
-.p4{background:#0E8345;--fg:#fff;--rule:rgba(255,255,255,.3)}
+.flow4{position:relative;margin-top:64px}
+.pn{position:sticky;top:0;height:100svh;min-height:820px;overflow:hidden;color:#fff;padding:96px 40px 0}
+.pn .code{text-align:center;font-size:15px;opacity:.55;letter-spacing:.02em}
+.pn .top{display:grid;grid-template-columns:1fr auto;align-items:start;margin-top:14px}
+.pn h3{font-weight:500;font-size:clamp(46px,5.2vw,84px);letter-spacing:-.05em;line-height:.95}
+.pn .num{font-weight:300;font-size:clamp(96px,11vw,168px);letter-spacing:-.06em;line-height:.78}
+.pn .box{display:grid;grid-template-columns:1fr 1fr;margin-top:26px;border-top:1px solid rgba(255,255,255,.3)}
+.pn .box div{height:92px;padding:26px 28px 0;font-size:15px;font-weight:500;border-left:1px solid rgba(255,255,255,.3)}
+.pn .box div:last-child{border-right:1px solid rgba(255,255,255,.3)}
+.pn .box div::before{content:"";display:inline-block;width:7px;height:7px;background:#fff;margin-right:14px;vertical-align:2px}
+.pn .say{display:grid;grid-template-columns:1fr auto 1fr;align-items:end;margin-top:10px}
+.pn .say p{font-size:clamp(22px,1.9vw,30px);font-weight:500;letter-spacing:-.03em;line-height:1.08}
+.pn .say p span{display:block;color:rgba(255,255,255,.58)}
+.pn .say a{background:#fff;color:var(--ink);border-radius:999px;padding:15px 26px;font-size:16px;font-weight:500}
+.pn .stage{position:relative;width:min(1180px,76%);margin:36px auto 0;background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.28);border-radius:34px;padding:22px;min-height:440px;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.pn .stage h4{font-size:26px;font-weight:500;letter-spacing:-.03em;padding:8px 10px 0}
+.pn .stage .sub{font-size:15px;color:rgba(255,255,255,.55);padding:8px 10px 18px}
+.g1{background:linear-gradient(180deg,#E25F22 0%,#EC7A35 55%,#F08F4C 100%)}
+.g2{background:linear-gradient(180deg,#8C3BE6 0%,#A766D9 38%,#D98A63 78%,#EE8540 100%)}
+.g3{background:linear-gradient(180deg,#2856D8 0%,#5E6AD6 35%,#B08A9A 72%,#EE8540 100%)}
+.g4{background:linear-gradient(180deg,#0B4A2E 0%,#3D5A2C 40%,#B9652B 78%,#EE8540 100%)}
 
+.srcs{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+.sc{position:relative;background:#fff;color:var(--ink);border-radius:22px;padding:18px 18px 20px;height:260px;display:flex;flex-direction:column;border:3px solid transparent;transition:border-color .4s,transform .4s var(--ease)}
+.sc.on{border-color:var(--orange);transform:translateY(-4px)}
+.sc .rd{width:24px;height:24px;border-radius:50%;border:1.5px solid #D6D4CF;display:grid;place-items:center}
+.sc.on .rd{border-color:var(--orange)}
+.sc.on .rd::after{content:"";width:12px;height:12px;border-radius:50%;background:var(--orange)}
+.sc .nm{font-family:var(--disp);font-variation-settings:"wdth" 108;font-weight:600;font-size:20px;letter-spacing:-.03em;margin-top:auto}
+.sc .ct{font-weight:300;font-size:58px;letter-spacing:-.06em;line-height:.9;margin-top:6px}
+.sc .ct small{font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);display:block;margin-top:8px;font-weight:400}
+.sc .ln{position:absolute;right:16px;top:18px;display:flex;flex-direction:column;gap:5px;align-items:flex-end}
+.sc .ln i{display:block;height:6px;border-radius:3px;background:#EFEDE8}
+
+.qual{display:grid;grid-template-columns:1.5fr repeat(4,1fr);gap:10px}
+.qcard{position:relative;border-radius:22px;overflow:hidden;height:300px}
+.qchat{background:#EFEAE0;color:var(--ink);padding:52px 16px 16px;display:flex;flex-direction:column;gap:8px}
+.qchat .lbl{position:absolute;left:12px;top:12px;display:flex;align-items:center;gap:8px;background:rgba(20,20,20,.75);color:#fff;border-radius:10px;padding:7px 11px;font-size:13px}
+.spin{width:14px;height:14px;border-radius:50%;border:2px solid rgba(255,255,255,.35);border-top-color:#fff;animation:sp 1s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+.bub{max-width:86%;background:#fff;border-radius:12px;padding:9px 11px;font-size:13px;line-height:1.35}
+.bub.me{align-self:flex-end;background:#DCF5D6}
+.qslot{background:rgba(255,255,255,.22);display:flex;flex-direction:column;justify-content:center;align-items:center;gap:12px;text-align:center;padding:16px;transition:background .5s}
+.qslot .spin{width:34px;height:34px;border-width:3px}
+.qslot .k{font-family:var(--mono);font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;opacity:.8}
+.qslot .v{font-weight:500;font-size:24px;letter-spacing:-.03em;display:none}
+.qslot.done{background:#fff;color:var(--ink)}
+.qslot.done .spin{display:none}
+.qslot.done .v{display:block}
+.qslot.done .k{color:var(--muted)}
+.qslot .badge{position:absolute;bottom:14px;font-family:var(--mono);font-size:10px;letter-spacing:.06em;color:#7B2CBF;background:#F3E8FF;border-radius:5px;padding:4px 7px;opacity:0}
+.qslot.done .badge{opacity:1}
+
+.rel{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.rc{position:relative;border-radius:20px;overflow:hidden;height:330px}
+.rc img{width:100%;height:100%;object-fit:cover}
+.rc::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 40%,rgba(0,0,0,.6))}
+.rc .acts{position:absolute;right:12px;top:12px;display:flex;gap:7px;z-index:2}
+.rc .acts span{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:rgba(40,40,40,.55);backdrop-filter:blur(6px)}
+.rc .acts span.go{background:var(--orange)}
+.rc .sig{position:absolute;left:12px;top:12px;z-index:2;background:rgba(255,255,255,.9);color:var(--ink);border-radius:9px;padding:7px 10px;font-size:12.5px;font-weight:500}
+.rc .who{position:absolute;left:16px;bottom:14px;z-index:2}
+.rc .who b{display:block;font-size:18px;font-weight:500;letter-spacing:-.02em}
+.rc .who span{font-size:13px;opacity:.8}
+
+.sale{position:relative;height:440px;border-radius:24px;overflow:hidden}
+.sale .bgl{position:absolute;inset:0;display:grid;grid-template-columns:repeat(8,1fr);gap:8px;opacity:.28}
+.sale .bgl span{border-radius:14px;background:rgba(255,255,255,.35);display:grid;place-items:center;font-family:var(--mono);font-size:12px}
+.tool{position:absolute;left:50%;top:44%;transform:translate(-50%,-50%);background:rgba(255,255,255,.35);border-radius:40px;padding:12px;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.tool .in{display:flex;align-items:center;gap:10px;background:#fff;border-radius:30px;padding:12px 14px 12px 18px;color:var(--ink)}
+.tool .in img{width:34px;height:34px}
+.stg{white-space:nowrap;border:1.5px solid #E6E3DD;border-radius:999px;padding:10px 16px;font-size:15px;color:var(--muted);transition:background .35s,color .35s,border-color .35s}
+.stg.on{background:var(--orange);border-color:var(--orange);color:#fff}
+.stg.done{color:var(--ink);border-color:#cfe9db;background:#E7F9F1}
+.tool .av{flex:none;width:40px;height:40px;border-radius:50%;background:var(--blue);color:#fff;display:grid;place-items:center;font-size:13px;font-weight:600}
+.tool .lot{font-family:var(--mono);font-size:12px;background:#F3F2EF;border-radius:999px;padding:9px 12px;white-space:nowrap}
+.crumb{position:absolute;left:50%;top:calc(44% + 64px);transform:translateX(-50%);font-size:18px;color:rgba(255,255,255,.6);white-space:nowrap}
+.crumb b{color:#fff;font-weight:500}
+
+/* ---------- Mise en place, direction, FAQ, fin ---------- */
 .mep{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:64px}
 .mep ol{list-style:none;border-top:1px solid var(--line)}
 .mep li{display:grid;grid-template-columns:56px 1fr;padding:22px 0;border-bottom:1px solid var(--line)}
@@ -214,6 +241,7 @@ footer.end{padding:120px 28px 60px;color:var(--grey)}
 .chain span{background:#fff;border:1px solid var(--line);border-radius:999px;padding:6px 11px;font-size:12.5px}
 .chain i{font-style:normal;color:var(--grey)}
 .cfg .cap{margin-top:18px;color:var(--muted)}
+.sec-mep .tex{right:-28px;top:-6px;width:48%}
 
 .bento2{display:grid;grid-template-columns:1.3fr 1fr;grid-template-rows:auto auto;gap:10px;margin-top:64px}
 .bento2 .bc{min-height:0}
@@ -230,7 +258,7 @@ footer.end{padding:120px 28px 60px;color:var(--grey)}
 .pdf img{border-radius:8px;transform:rotate(4deg);box-shadow:0 24px 40px -20px rgba(0,0,0,.45)}
 .chip-hot{display:inline-flex;margin-top:16px;background:#E7F9F1;color:#047857;border-radius:8px;padding:6px 10px;font-size:12.5px;font-weight:500}
 
-.faq{display:grid;grid-template-columns:minmax(180px,26%) 1fr;border-top:1px solid var(--line);margin-top:0}
+.faq{display:grid;grid-template-columns:minmax(180px,26%) 1fr;border-top:1px solid var(--line)}
 .faq .r{border-left:1px solid var(--line);padding-left:28px}
 .faq details{border-bottom:1px solid var(--line)}
 .faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;gap:20px;padding:22px 0;font-size:20px;font-weight:500;letter-spacing:-.02em}
@@ -239,47 +267,143 @@ footer.end{padding:120px 28px 60px;color:var(--grey)}
 .faq details[open] summary::after{content:"–"}
 .faq details p{font-size:15px;color:var(--muted);line-height:1.55;padding:0 60px 24px 0;max-width:46em}
 
-.final{margin:140px 28px 0;border-top:1px solid var(--line);padding-top:28px;display:grid;grid-template-columns:1fr auto;align-items:end;gap:30px}
-.final h2{font-weight:500;font-size:clamp(46px,7vw,112px);letter-spacing:-.05em;line-height:.93}
+.final{position:relative;margin:140px var(--pad) 0;border-top:1px solid var(--line);padding:28px 0 40px;display:grid;grid-template-columns:1fr auto;align-items:end;gap:30px;overflow:hidden}
+.final .tex{right:-10px;top:0;width:58%}
+.final h2{position:relative;font-weight:500;font-size:clamp(46px,7vw,112px);letter-spacing:-.05em;line-height:.93}
 .final h2 .g{color:var(--grey);display:block}
-.foot{margin-top:120px;padding:40px 28px 30px;border-top:1px solid var(--line);display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:30px;font-size:14px}
+.final .side{position:relative;max-width:340px}
+.final .side p{font-size:15px;line-height:1.5;color:var(--muted)}
+.final .side .btn{margin-top:18px}
+.foot{margin-top:80px;padding:40px var(--pad) 30px;border-top:1px solid var(--line);display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:30px;font-size:14px}
 .foot h5{font-family:var(--mono);font-size:11px;letter-spacing:.07em;text-transform:uppercase;font-weight:400;color:var(--muted);margin-bottom:12px}
 .foot a{display:block;margin-top:6px}
-.dots{height:180px;margin:0 28px 0;background-image:radial-gradient(circle,#D9D7D2 1.3px,transparent 1.6px);background-size:14px 14px;
-  mask-image:linear-gradient(transparent,#000);-webkit-mask-image:linear-gradient(transparent,#000)}
-.legal{display:flex;justify-content:space-between;padding:16px 28px 30px;color:var(--grey)}
+.foot a.logo{display:flex;margin-top:0}
+.dots{height:180px;margin:0 var(--pad);background-image:radial-gradient(circle,#D9D7D2 1.3px,transparent 1.6px);background-size:14px 14px;mask-image:linear-gradient(transparent,#000);-webkit-mask-image:linear-gradient(transparent,#000)}
+.legal{display:flex;justify-content:space-between;padding:16px var(--pad) 30px;color:var(--grey)}
 
-@media (max-width:900px){
-  .ai,.faq{grid-template-columns:1fr}
-  .ai .r,.faq .r{border-left:0;padding-left:0}
+.rv{opacity:0;transform:translateY(18px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.rv.on{opacity:1;transform:none}
+
+@media (max-width:1000px){
+  .pill .pl-opt,.nav-r .icon-btn{display:none}
+  .bh{padding:110px 24px 0}
+  .bh-grid{grid-template-columns:1fr}
+  .bh .tex{width:120%;top:200px;opacity:.55}
+  .row{grid-template-columns:48px 1fr auto}.row .src{display:none}
+  .sources{margin:56px -24px 0;padding:22px 24px;gap:16px 26px}
+  .sources span.s{font-size:17px}
+  .split,.ai,.faq{grid-template-columns:1fr}
+  .split>.body,.ai .r,.faq .r{border-left:0;padding-left:0}
   .ai li,.guard{padding-left:0}
-  .steps-head{grid-template-columns:1fr}
-  .steps-head p{text-align:left}
-  .panel .pts{grid-template-columns:1fr}
-  .panel .pts div+div{border-left:0;padding-left:0;border-top:1px solid var(--rule)}
-  .mep,.bento2{grid-template-columns:1fr}
+  .facts{grid-template-columns:1fr}
+  .facts div+div{border-left:0;padding-left:0;border-top:1px solid var(--line);margin-top:18px}
+  .bento,.mep,.bento2{grid-template-columns:1fr}
+  .bc.wide{grid-template-columns:1fr;padding-right:30px}
+  .shot{margin-right:-30px}
+  .wa .txt{max-width:100%}.wa{min-height:600px}
   .bento2 .stock{grid-row:auto}
+  .steps-head{grid-template-columns:1fr}.steps-head p{text-align:left}
+  .pn{position:relative;height:auto;min-height:0;padding:80px 20px 40px}
+  .pn .box{grid-template-columns:1fr}.pn .box div{height:auto;padding:16px 18px;border-right:1px solid rgba(255,255,255,.3)}
+  .pn .say{grid-template-columns:1fr;gap:20px;margin-top:20px}.pn .say a{justify-self:start}
+  .pn .stage{width:100%;min-height:0}
+  .srcs{grid-template-columns:repeat(2,1fr)}.sc{height:190px}
+  .qual{grid-template-columns:1fr 1fr}.qchat{grid-column:1/-1}
+  .rel{grid-template-columns:1fr}
+  .tool .in{flex-wrap:wrap;justify-content:center}
+  .sale{height:520px}
   .final{grid-template-columns:1fr}
   .foot{grid-template-columns:1fr 1fr}
   .faq details p{padding-right:0}
 }
 @media (max-width:520px){
-  .steps-head,.panel,.final,.foot,.legal{padding-left:16px;padding-right:16px}
-  .final{margin-left:16px;margin-right:16px;padding-left:0;padding-right:0}
-  .dots{margin:0 16px}
-  .panel .glass.phone{width:260px}
+  :root{--pad:16px}
+  .nav{padding:12px 16px;background:rgba(255,255,255,.82);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}.pill{display:none}
+  .bh{padding:96px 16px 0}
+  .lede{font-size:17px}
+  .feed{height:300px;margin:12px}
+  .sources{margin:48px -16px 0;padding:22px 16px}
   .seg{flex-wrap:wrap}
+  .crumb{font-size:14px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* ---------- S07 · Mise en place : défilement horizontal (réf. Script Runner) ---------- */
+.hs{position:relative;margin-top:120px}
+.hs-pin{position:sticky;top:0;height:100svh;min-height:760px;overflow:hidden;display:flex;align-items:center}
+.hs-track{display:flex;align-items:stretch;gap:32px;padding:0 64px;will-change:transform}
+.hs-intro{flex:none;width:min(640px,46vw);display:flex;flex-direction:column;justify-content:center;padding-right:120px}
+.hs-intro .eyb{font-size:17px;letter-spacing:.04em;text-transform:uppercase;color:var(--orange)}
+.hs-intro h2{font-weight:500;font-size:clamp(44px,4.4vw,70px);line-height:1.04;letter-spacing:-.04em;margin-top:22px}
+.hs-intro p{font-size:clamp(18px,1.6vw,24px);line-height:1.4;color:#7A7975;margin-top:30px;max-width:22em}
+.oc{flex:none;width:430px;min-height:640px;background:#F4F4F3;border-radius:36px;padding:28px 28px 34px;display:flex;flex-direction:column}
+.oc .nb{width:48px;height:48px;border-radius:50%;background:#fff;display:grid;place-items:center;font-size:17px}
+.oc .ui{margin-top:44px;background:#fff;border-radius:24px;padding:20px 18px 16px;box-shadow:0 1px 0 rgba(0,0,0,.02)}
+.ui-h{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.ui-h b{font-weight:500;font-size:17px;letter-spacing:-.01em}
+.ui-h span{font-size:12.5px;color:var(--muted)}
+.ui-h img{width:26px;height:26px}
+.ui-in{margin-top:16px;background:#F6F6F5;border-radius:16px;padding:14px}
+.ui-in .who{display:grid;grid-template-columns:36px 1fr auto;gap:10px;align-items:center}
+.ui-in .av{width:36px;height:36px;border-radius:50%;background:var(--ink);color:#fff;display:grid;place-items:center;font-size:12px;font-weight:600}
+.ui-in .who small{display:block;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.ui-in .who b{font-weight:500;font-size:15px}
+.ui-in .lk{font-size:14px}
+.kv{display:grid;grid-template-columns:auto 1fr auto 1fr;gap:12px 14px;margin-top:18px;font-size:14px}
+.kv span{color:var(--muted)}
+.kv b{font-weight:500}
+.kv b.o{color:var(--orange)}
+.ui-f{display:flex;gap:8px;margin-top:14px}
+.ui-f span{border-radius:999px;padding:8px 13px;font-size:14px}
+.ui-f .b1{border:1px solid var(--line)}
+.ui-f .b2{background:#FDEEE2;color:#D2601C}
+.list div{display:flex;justify-content:space-between;align-items:center;padding:9px 2px;font-size:14px}
+.list div+div{border-top:1px solid #EAEAE8}
+.list em{font-style:normal;font-size:12.5px;color:var(--green)}
+.list em::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--green);margin-right:6px;vertical-align:1px}
+.oc .opt{margin-top:0}
+.oc .opt+.opt{margin-top:12px}
+.oc .lb{font-size:12.5px;color:var(--muted);margin-bottom:6px}
+.oc .seg{display:inline-flex;background:#fff;border:1px solid var(--line);border-radius:11px;padding:3px;gap:3px}
+.oc .seg button{border:0;background:none;font:inherit;font-size:13px;padding:7px 11px;border-radius:8px;cursor:pointer;color:var(--muted)}
+.oc .seg button[aria-pressed="true"]{background:var(--ink);color:#fff}
+.oc .chain{display:flex;flex-wrap:wrap;align-items:center;gap:5px;margin-top:14px}
+.oc .chain span{background:#F6F6F5;border-radius:999px;padding:5px 10px;font-size:12px}
+.oc .chain i{font-style:normal;color:var(--grey);font-size:12px}
+.oc .note{font-size:13.5px;line-height:1.5;background:#fff;border-radius:12px;padding:11px 12px;border:1px solid #ECEBE8}
+.chat{display:flex;flex-direction:column;gap:7px;margin-top:12px}
+.chat .q{align-self:flex-end;background:#DCF5D6;border-radius:12px;padding:8px 10px;font-size:13px;max-width:85%}
+.chat .a{background:#fff;border-radius:12px;padding:8px 10px;font-size:13px;line-height:1.4;max-width:90%}
+.pl{display:flex;justify-content:space-between;font-size:14px}
+.pl span{color:var(--muted)}
+.pl b{font-weight:500}
+.pl b.g{color:var(--green)}
+.bar{height:8px;border-radius:4px;background:#E7E6E3;margin-top:10px;overflow:hidden}
+.bar i{display:block;height:100%;width:100%;background:var(--green);border-radius:4px}
+.team{display:flex;margin-top:12px}
+.team span{width:38px;height:38px;border-radius:50%;border:2px solid #F6F6F5;margin-left:-6px;display:grid;place-items:center;font-size:12px;font-weight:600;color:#fff;background:var(--ink)}
+.team span:first-child{margin-left:0}
+.team span:nth-child(2){background:#276EF1}.team span:nth-child(3){background:#E8762D}.team span:nth-child(4){background:#0E8345}
+.oc h3{font-weight:500;font-size:27px;letter-spacing:-.025em;line-height:1.15;margin-top:auto;padding-top:40px}
+.oc p{font-size:17px;line-height:1.5;color:#7A7975;margin-top:16px}
+@media (max-width:1000px){
+  .hs{margin-top:90px}
+  .hs-pin{position:relative;height:auto;min-height:0;display:block;overflow:visible}
+  .hs-track{flex-direction:column;gap:16px;padding:0 var(--pad);transform:none!important}
+  .hs-intro{width:auto;padding:0 0 20px}
+  .oc{width:auto;min-height:0}
 }
 
 </style>
 </head>
 <body>
 
+<!-- S00 · Navigation -->
 <nav class="nav">
-  <a class="brand" href="#"><img src="assets/lotivio-mark.svg" alt="">Lotivio</a>
+  <a class="logo" href="#"><img src="assets/lotivio-mark.svg" alt=""><span>lotivio<i>.</i></span></a>
   <div class="pill">
     <span class="burger" aria-hidden="true"><i></i><i></i></span>Menu
-    <span class="sep opt"></span><span class="opt" style="opacity:.7">Produit · IA · Mise en place</span>
+    <span class="sep pl-opt"></span><span class="pl-opt" style="opacity:.7">Produit · IA · Mise en place</span>
     <span class="chip" id="prog">0%</span>
   </div>
   <div class="nav-r">
@@ -288,44 +412,35 @@ footer.end{padding:120px 28px 60px;color:var(--grey)}
   </div>
 </nav>
 
-<header class="hero">
-  <div class="stage">
-    <div class="orbit" aria-hidden="true">
-      <div class="ring" id="ring">
-        <svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="46" fill="none" stroke="#E4E3DF" stroke-width=".18" stroke-dasharray=".6 .9"/><circle cx="50" cy="50" r="30" fill="none" stroke="#F0EFEC" stroke-width=".18"/></svg>
-      </div>
+<!-- S01 · Hero (premier écran) -->
+<header class="bh">
+  <pre class="tex" data-src="assets/photo-lac.jpg" data-w=".62" aria-hidden="true"></pre>
+  <h1 class="rv"><span>Vos acheteurs écrivent partout.</span><span>Lotivio les suit tous.</span></h1>
+  <div class="bh-grid">
+    <div class="rv">
+      <p class="lede">Le CRM immobilier des promoteurs et des agences romandes. <strong>Les demandes des portails arrivent seules</strong>, l'IA qualifie l'acheteur sur WhatsApp, et chaque matin vous savez qui relancer. Mis en place avec vous, selon votre façon de vendre.</p>
+      <div class="cta"><a class="btn btn-dark" href="#demo">Réserver une démo <span aria-hidden="true">→</span></a><a class="btn btn-line" href="#">Voir le film</a></div>
+      <div class="status mono"><span class="dot"></span> 7 sources branchées</div>
     </div>
-    <div class="core">
-      <div class="lead" id="lead">
-        <div class="lead-top"><span class="tag">Nouvelle demande</span><span class="mono" style="color:var(--grey)">maintenant</span></div>
-        <div class="swap">
-          <h3 id="l-name">Nathalie Girard</h3>
-          <div class="proj" id="l-proj">Les Terrasses du Vignoble · Lot B4</div>
-          <div class="chips" id="l-chips"><span>3.5 pièces</span><span>Milvignes</span><span>≤ CHF 1'100'000</span></div>
-        </div>
-        <div class="lead-foot"><span class="mono" style="color:var(--muted)">Source</span><span class="badge swap" id="l-src">Meta Ads</span></div>
-      </div>
-    </div>
-    <div class="side" aria-hidden="true"><ul id="side"></ul></div>
-  </div>
-
-  <div class="hero-foot">
-    <div>
-      <div class="mono eyebrow">CRM immobilier · Suisse romande</div>
-      <h1>Vos acheteurs écrivent partout.<span class="g">Lotivio les suit tous.</span></h1>
-    </div>
-    <div class="hero-side">
-      <p>Homegate, immobilier.ch, Properstar, Meta, votre site : chaque demande arrive dans Lotivio. L'IA qualifie l'acheteur sur WhatsApp et vous dit qui relancer. Mis en place avec vous.</p>
-      <div class="row"><a class="btn btn-dark" href="#demo">Réserver une démo</a><a class="btn btn-ghost" href="#">Voir le film · 1 min</a></div>
+    <div class="win rv" aria-label="Aperçu de la file Demandes reçues, données de démonstration">
+      <div class="win-bar"><span class="t"><span class="dot" style="border-radius:50%"></span>demandes_recues — Démo Immobilier NE</span><span id="clock">21:47</span></div>
+      <div class="feed" id="feed"></div>
+      <div class="ticks"><span class="mono" id="count">12 demandes aujourd'hui</span><div class="scale"><i id="mark"></i></div><span class="mono">arrivées seules</span></div>
+      <span class="mono demo">Données de démonstration</span>
     </div>
   </div>
-  <span class="mono demo-note">Données de démonstration</span>
+  <div class="sources rv">
+    <span class="mono">Sources branchées</span>
+    <span class="s">Homegate</span><span class="s">ImmoScout24</span><span class="s">immobilier.ch</span><span class="s">Properstar</span><span class="s">Meta</span><span class="s">Votre site</span><span class="s">WhatsApp</span>
+  </div>
 </header>
 
-<section class="sec">
+<!-- S02 · Temps gagné — 4 h -->
+<section class="sec sec-4h">
   <div class="split rv">
     <div class="lab">Temps gagné</div>
     <div class="body">
+      <pre class="tex soft" data-src="assets/lake-residence.webp" data-w=".5" aria-hidden="true"></pre>
       <h2 class="h2">Jusqu'à 4 h par semaine.<span class="g">Pour chaque agent.</span></h2>
       <div class="facts">
         <div><span class="mono">Saisie</span><h4>Les demandes arrivent seules.</h4><p>Portails, publicité et formulaire du site remplissent Lotivio, sans copier-coller.</p></div>
@@ -336,6 +451,7 @@ footer.end{padding:120px 28px 60px;color:var(--grey)}
   </div>
 </section>
 
+<!-- S03 · Ce que Lotivio fait -->
 <section class="sec">
   <div class="split rv">
     <div class="lab">Ce que Lotivio fait</div>
@@ -375,12 +491,12 @@ footer.end{padding:120px 28px 60px;color:var(--grey)}
   </div>
 </section>
 
-
+<!-- S04 · L'IA qui -->
 <section class="sec" id="ia">
   <div class="ai rv">
     <div class="l">
       <div>
-        <div class="lab" style="font-size:13px">L'IA dans Lotivio</div>
+        <div style="font-size:13px">L'IA dans Lotivio</div>
         <h2 style="margin-top:22px">L'IA qui</h2>
         <p>Réglée avec vous à la mise en place : vos projets, vos consignes, votre façon de répondre.</p>
       </div>
@@ -391,72 +507,164 @@ footer.end{padding:120px 28px 60px;color:var(--grey)}
         <li style="--c:var(--violet)"><span class="t">qualifie vos acheteurs sur WhatsApp</span><span class="tag">Assistant Max</span></li>
         <li style="--c:var(--orange)"><span class="t">répond à leurs questions sur vos projets</span><span class="tag">Vos fiches projet</span></li>
         <li style="--c:var(--green)"><span class="t">remplit vos fiches à la voix</span><span class="tag">Dictée vocale</span></li>
-        <li style="--c:#276EF1"><span class="t">rédige vos descriptions de lots</span><span class="tag">Catalogue</span></li>
+        <li style="--c:var(--blue)"><span class="t">rédige vos descriptions de lots</span><span class="tag">Catalogue</span></li>
       </ul>
       <div class="guard mono"><span>Consentement demandé</span><span>STOP respecté</span><span>IA en pause contact par contact</span><span>Brouillons à valider</span></div>
     </div>
   </div>
 </section>
 
+<!-- S05 · Parcours — titre -->
 <div class="steps-head rv">
   <h2 class="h2">Du portail à la vente,<span class="g">en quatre étapes.</span></h2>
-  <p>Une seule demande, suivie de bout en bout. Captures de l'app, données de démonstration.</p>
+  <p>Une demande suivie de bout en bout. Données de démonstration.</p>
 </div>
-<section class="panels">
-  <article class="panel p1">
-    <div class="code">(NOUVELLE DEMANDE)</div>
+<!-- S06 · Parcours — 4 panneaux (S06.1 à S06.4) -->
+<section class="flow4" aria-label="Parcours d'une demande en quatre étapes">
+  <article class="pn g1">
+    <div class="code">(Demande)</div>
     <div class="top"><h3>Elle arrive<br>seule.</h3><span class="num">01</span></div>
-    <div class="pts"><div><b>Portails</b>Homegate, ImmoScout24, immobilier.ch, Properstar.</div><div><b>Publicité et site</b>Meta Lead Ads et le formulaire de votre site.</div></div>
-    <div class="go"><a href="#demo">Réserver une démo</a></div>
-    <div class="glass"><img src="assets/ui-leads.png" alt="Écran Demandes reçues, données de démonstration" loading="lazy"></div>
+    <div class="box"><div>Homegate, ImmoScout24, immobilier.ch, Properstar</div><div>Meta Lead Ads et formulaire de votre site</div></div>
+    <div class="say"><p>Chaque demande arrive<span>avec sa source, le bien</span><span>et les critères.</span></p><a href="#demo">Réserver une démo</a><span></span></div>
+    <div class="stage">
+      <h4>Sources branchées</h4><div class="sub">Cette semaine</div>
+      <div class="srcs" id="srcs"></div>
+    </div>
   </article>
-  <article class="panel p2">
-    <div class="code">(QUALIFIÉ)</div>
+  <article class="pn g2">
+    <div class="code">(Qualification)</div>
     <div class="top"><h3>L'IA la<br>qualifie.</h3><span class="num">02</span></div>
-    <div class="pts"><div><b>WhatsApp</b>La brochure part, l'assistant demande type de bien, pièces, zone et budget.</div><div><b>Fiche</b>Les réponses remplissent la fiche, l'acheteur passe en Qualifié.</div></div>
-    <div class="go"><a href="#demo">Réserver une démo</a></div>
-    <div class="glass phone"><img src="assets/ui-wa.png" alt="Conversation WhatsApp de l'assistant, données de démonstration" loading="lazy"></div>
+    <div class="box"><div>Brochure envoyée sur WhatsApp</div><div>Pièces, zone et budget dans la fiche</div></div>
+    <div class="say"><p>L'assistant pose<span>les questions, la fiche</span><span>se remplit seule.</span></p><a href="#demo">Réserver une démo</a><span></span></div>
+    <div class="stage">
+      <div class="qual" id="qual">
+        <div class="qcard qchat"><span class="lbl"><span class="spin"></span>Qualification…</span>
+          <div class="bub">Bonjour ! Voici la brochure des Terrasses du Vignoble. Que recherchez-vous ?</div>
+          <div class="bub me">Un appartement</div>
+          <div class="bub">Combien de pièces ?</div>
+          <div class="bub me">4.5, plutôt au littoral</div>
+        </div>
+        <div class="qcard qslot"><span class="spin"></span><span class="k">Type</span><span class="v">Appartement</span></div>
+        <div class="qcard qslot"><span class="spin"></span><span class="k">Pièces</span><span class="v">4.5</span></div>
+        <div class="qcard qslot"><span class="spin"></span><span class="k">Zone</span><span class="v">Littoral</span></div>
+        <div class="qcard qslot"><span class="spin"></span><span class="k">Budget</span><span class="v">≤ 1,3 mio</span><span class="badge">Qualifié</span></div>
+      </div>
+    </div>
   </article>
-  <article class="panel p3">
-    <div class="code">(RELANCE)</div>
+  <article class="pn g3">
+    <div class="code">(Relance)</div>
     <div class="top"><h3>Vous relancez<br>au bon moment.</h3><span class="num">03</span></div>
-    <div class="pts"><div><b>Signaux</b>Brochure consultée trois fois, pas de réponse : l'acheteur remonte en tête.</div><div><b>Un geste</b>Relancer, Retour reçu ou Traité, directement depuis la liste.</div></div>
-    <div class="go"><a href="#demo">Réserver une démo</a></div>
-    <div class="glass"><img src="assets/ui-relance.png" alt="Liste des relances à traiter, données de démonstration" loading="lazy"></div>
+    <div class="box"><div>Brochure consultée, pas de réponse</div><div>Relancer, Retour reçu ou Traité</div></div>
+    <div class="say"><p>Lotivio met en tête<span>les acheteurs à rappeler</span><span>aujourd'hui.</span></p><a href="#demo">Réserver une démo</a><span></span></div>
+    <div class="stage">
+      <div class="rel" id="rel"></div>
+    </div>
   </article>
-  <article class="panel p4">
-    <div class="code">(VENDU)</div>
+  <article class="pn g4">
+    <div class="code">(Vente)</div>
     <div class="top"><h3>Le lot<br>est vendu.</h3><span class="num">04</span></div>
-    <div class="pts"><div><b>Pipeline</b>Qualifié, Réservation, Notaire, Vendu, par glisser-déposer.</div><div><b>Stock</b>Le lot passe de Disponible à Réservé puis Vendu.</div></div>
-    <div class="go"><a href="#demo">Réserver une démo</a></div>
-    <div class="glass"><img src="assets/ui-pipeline.png" alt="Pipeline des ventes, données de démonstration" loading="lazy"></div>
+    <div class="box"><div>Qualifié, Réservation, Notaire, Vendu</div><div>Le stock du projet suit chaque étape</div></div>
+    <div class="say"><p>Du premier message<span>à l'acte, tout</span><span>au même endroit.</span></p><a href="#demo">Réserver une démo</a><span></span></div>
+    <div class="stage" style="padding:12px">
+      <div class="sale">
+        <div class="bgl" id="bgl"></div>
+        <div class="tool"><div class="in" id="tool"><img src="assets/lotivio-mark.svg" alt=""><span class="lot">Lot B4</span><span class="stg">Qualifié</span><span class="stg">Réservation</span><span class="stg">Notaire</span><span class="stg">Vendu</span><span class="av">SK</span></div></div>
+        <div class="crumb">Pipeline &nbsp;/&nbsp; <b>Les Terrasses du Vignoble</b></div>
+      </div>
+    </div>
   </article>
 </section>
 
-<section class="sec">
-  <div class="split rv">
-    <div class="lab">Mise en place</div>
-    <div class="body"><h2 class="h2">Construit autour<span class="g">de votre agence.</span></h2></div>
-  </div>
-  <div class="mep">
-    <ol class="rv">
-      <li><span class="n">01</span><div><h4>Atelier</h4><p>Vos projets, vos canaux, qui fait quoi dans l'équipe. On part de votre façon de vendre.</p></div></li>
-      <li><span class="n">02</span><div><h4>Branchements</h4><p>Portails, formulaire du site, Meta, le WhatsApp professionnel de l'agence, Outlook pour l'envoi.</p></div></li>
-      <li><span class="n">03</span><div><h4>Réglages</h4><p>Premier message automatique ou validé, brochure par WhatsApp ou e-mail, relances, consignes de l'assistant.</p></div></li>
-      <li><span class="n">04</span><div><h4>Mise en route</h4><p>Import de vos contacts et prise en main avec l'équipe.</p></div></li>
-    </ol>
-    <div class="cfg rv">
-      <div class="hd"><b>Réglages · Démo Immobilier NE</b><span class="mono" style="color:var(--muted)">Exemple</span></div>
-      <div class="opt"><div class="lb">Premier contact</div><div class="seg" data-k="first"><button aria-pressed="true">Automatique</button><button aria-pressed="false">L'agent valide</button></div></div>
-      <div class="opt"><div class="lb">Brochure</div><div class="seg" data-k="bro"><button aria-pressed="true">WhatsApp</button><button aria-pressed="false">E-mail</button></div></div>
-      <div class="opt"><div class="lb">Relance</div><div class="seg" data-k="rel"><button aria-pressed="false">WhatsApp</button><button aria-pressed="true">E-mail</button><button aria-pressed="false">Aucune</button></div></div>
-      <div class="note"><span class="mono">Consignes de l'assistant</span>Vouvoyer. Donner le prix seulement s'il est demandé. Proposer une visite le samedi matin.</div>
-      <div class="chain" id="chain"></div>
-      <div class="mono cap">Réglés avec vous à la mise en place</div>
+<!-- S07 · Mise en place -->
+<section class="hs" id="mise-en-place">
+  <div class="hs-pin">
+    <div class="hs-track" id="hs-track">
+      <div class="hs-intro">
+        <span class="eyb">Mise en place</span>
+        <h2>Construit autour de votre agence.</h2>
+        <p>On part de votre façon de vendre et des outils que vous utilisez déjà, puis on règle Lotivio pour qu'il s'y adapte.</p>
+      </div>
+
+      <article class="oc">
+        <span class="nb">1</span>
+        <div class="ui">
+          <div class="ui-h"><b>Atelier de mise en place</b><span>Démo Immobilier NE</span></div>
+          <div class="ui-in">
+            <div class="who"><span class="av">SK</span><div><small>Direction</small><b>Sarah Keller</b></div><span class="lk">Ordre du jour</span></div>
+            <div class="kv"><span>Projets</span><b>3</b><span>Agents</span><b>4</b><span>Canaux</span><b>6</b><span>Priorité</span><b class="o">Lancement</b></div>
+          </div>
+          <div class="ui-f"><span class="b1">Voir le plan</span><span class="b2">Planifier</span></div>
+        </div>
+        <h3>Un atelier avec votre équipe</h3>
+        <p>Vos projets, vos canaux, qui fait quoi. On part de votre façon de vendre, pas d'un modèle tout fait.</p>
+      </article>
+
+      <article class="oc">
+        <span class="nb">2</span>
+        <div class="ui">
+          <div class="ui-h"><b>Branchements</b><img src="assets/lotivio-mark.svg" alt=""></div>
+          <div class="ui-in list">
+            <div><span>Homegate · ImmoScout24</span><em>Connecté</em></div>
+            <div><span>immobilier.ch</span><em>Connecté</em></div>
+            <div><span>Properstar</span><em>Connecté</em></div>
+            <div><span>Meta Lead Ads</span><em>Connecté</em></div>
+            <div><span>WhatsApp de l'agence</span><em>Connecté</em></div>
+            <div><span>Outlook · envoi</span><em>Connecté</em></div>
+          </div>
+          <div class="ui-f"><span class="b1">Ajouter une source</span><span class="b2">Tester</span></div>
+        </div>
+        <h3>On branche vos sources</h3>
+        <p>Portails, formulaire du site, Meta, le WhatsApp professionnel de l'agence et Outlook pour l'envoi des e-mails.</p>
+      </article>
+
+      <article class="oc">
+        <span class="nb">3</span>
+        <div class="ui">
+          <div class="ui-h"><b>Réglages des parcours</b><span>Exemple</span></div>
+          <div class="ui-in">
+            <div class="opt"><div class="lb">Premier contact</div><div class="seg" data-k="first"><button aria-pressed="true">Automatique</button><button aria-pressed="false">L'agent valide</button></div></div>
+            <div class="opt"><div class="lb">Brochure</div><div class="seg" data-k="bro"><button aria-pressed="true">WhatsApp</button><button aria-pressed="false">E-mail</button></div></div>
+            <div class="opt"><div class="lb">Relance</div><div class="seg" data-k="rel"><button aria-pressed="false">WhatsApp</button><button aria-pressed="true">E-mail</button><button aria-pressed="false">Aucune</button></div></div>
+          </div>
+          <div class="chain" id="chain"></div>
+        </div>
+        <h3>On règle vos parcours</h3>
+        <p>Premier message automatique ou validé, brochure par WhatsApp ou par e-mail, relances : tout est réglé avec vous.</p>
+      </article>
+
+      <article class="oc">
+        <span class="nb">4</span>
+        <div class="ui">
+          <div class="ui-h"><b>Assistant · consignes</b><span>Démo Immobilier NE</span></div>
+          <div class="ui-in">
+            <div class="note">Vouvoyer. Donner le prix seulement s'il est demandé. Proposer une visite le samedi matin.</div>
+            <div class="chat"><div class="q">Le lot B4 est-il encore disponible ?</div><div class="a">Oui, le lot B4 (3.5 pièces) est disponible. Souhaitez-vous le visiter samedi matin ?</div></div>
+          </div>
+          <div class="ui-f"><span class="b1">Modifier</span><span class="b2">Tester l'assistant</span></div>
+        </div>
+        <h3>Un assistant à votre image</h3>
+        <p>Vos consignes, votre ton, vos projets : l'assistant répond aux questions de vos prospects comme votre équipe le ferait.</p>
+      </article>
+
+      <article class="oc">
+        <span class="nb">5</span>
+        <div class="ui">
+          <div class="ui-h"><b>Mise en route</b><span>Démo Immobilier NE</span></div>
+          <div class="ui-in">
+            <div class="prog"><div class="pl"><span>Import des contacts</span><b class="g">Terminé</b></div><div class="bar"><i></i></div></div>
+            <div class="pl" style="margin-top:18px"><span>Équipe</span><b class="g">4 agents</b></div>
+            <div class="team"><span>SK</span><span>DL</span><span>MR</span><span>AN</span></div>
+          </div>
+          <div class="ui-f"><span class="b1">Voir l'équipe</span><span class="b2">Ouvrir Lotivio</span></div>
+        </div>
+        <h3>Votre équipe démarre</h3>
+        <p>Import de vos contacts et prise en main avec les agents, sur vos vrais projets.</p>
+      </article>
     </div>
   </div>
 </section>
 
+<!-- S08 · Pour la direction -->
 <section class="sec">
   <div class="split rv">
     <div class="lab">Pour la direction</div>
@@ -489,9 +697,10 @@ footer.end{padding:120px 28px 60px;color:var(--grey)}
   </div>
 </section>
 
+<!-- S09 · Questions (FAQ) -->
 <section class="sec">
   <div class="faq rv">
-    <div class="lab" style="padding:18px 0;font-size:13px">Questions</div>
+    <div style="padding:18px 0;font-size:13px">Questions</div>
     <div class="r">
       <h2 class="h2" style="padding:18px 0 40px">Avant une démo,<span class="g">on nous demande…</span></h2>
       <details open><summary>Où sont stockées les données ?</summary><p>Dans l'Union européenne, à Francfort. Chaque agence est isolée des autres : un agent ne voit que les données de son organisation.</p></details>
@@ -504,83 +713,137 @@ footer.end{padding:120px 28px 60px;color:var(--grey)}
   </div>
 </section>
 
+<!-- S10 · Appel final -->
 <section class="final rv" id="demo">
+  <pre class="tex" data-src="assets/photo-lac.jpg" data-w=".58" aria-hidden="true"></pre>
   <h2>Voyons comment<span class="g">votre agence travaille.</span></h2>
-  <div class="hero-side"><p>Une démo sur vos vrais projets : vos sources, vos relances, vos réglages.</p><div class="row"><a class="btn btn-dark" href="#">Réserver une démo</a></div></div>
+  <div class="side"><p>Une démo sur vos vrais projets : vos sources, vos relances, vos réglages.</p><a class="btn btn-dark" href="#">Réserver une démo</a></div>
 </section>
 
+<!-- S11 · Footer -->
 <footer class="foot">
-  <div><a class="brand" href="#"><img src="assets/lotivio-mark.svg" alt="">Lotivio</a><p style="color:var(--muted);margin-top:14px;max-width:22em;line-height:1.5">Le CRM immobilier des promoteurs et des agences romandes.</p></div>
+  <div><a class="logo" href="#"><img src="assets/lotivio-mark.svg" alt=""><span>lotivio<i>.</i></span></a><p style="color:var(--muted);margin-top:14px;max-width:22em;line-height:1.5">Le CRM immobilier des promoteurs et des agences romandes.</p></div>
   <div><h5>Produit</h5><a href="#">Demandes reçues</a><a href="#">Assistant WhatsApp</a><a href="#">Dictée vocale</a><a href="#">Diffusion</a></div>
   <div><h5>Agence</h5><a href="#">Mise en place</a><a href="#">Questions</a><a href="#demo">Réserver une démo</a></div>
   <div><h5>Compte</h5><a href="#">Se connecter</a><a href="#">Confidentialité</a></div>
 </footer>
+<!-- S12 · Trame de points -->
 <div class="dots" aria-hidden="true"></div>
+<!-- S13 · Mentions légales -->
 <div class="legal mono"><span>© 2026 Lotivio · Ava Vision</span><span>Données de démonstration</span></div>
 
-
 <script>
-function el(tag, cls, text){const e=document.createElement(tag);if(cls)e.className=cls;if(text!=null)e.textContent=text;return e}
+function el(tag,cls,text){const e=document.createElement(tag);if(cls)e.className=cls;if(text!=null)e.textContent=text;return e}
+function svgIcon(d){const ns='http://www.w3.org/2000/svg',s=document.createElementNS(ns,'svg');s.setAttribute('width','16');s.setAttribute('height','16');s.setAttribute('viewBox','0 0 24 24');s.setAttribute('fill','none');s.setAttribute('stroke','#fff');s.setAttribute('stroke-width','2.4');const p=document.createElementNS(ns,'path');p.setAttribute('d',d);s.append(p);return s}
 
-const sources=[
-  ['Homegate','Demande de visite · 4.5 pièces','il y a 2 min','#E8762D',-8],
-  ['WhatsApp','Bonjour, le lot B4 est encore libre ?','21:47','#0E8345',6],
-  ['E-mail','Re : brochure Clos des Vergers','08:12','#141414',-4],
-  ['Properstar','Contact · Résidence Lac & Lumière','hier','#276EF1',9],
-  ['Meta Ads','Formulaire · Les Terrasses','il y a 5 min','#AD46FF',-10],
-  ['Site internet','Formulaire de contact · Lot A2','10:03','#141414',4],
-  ['immobilier.ch',"Demande d'information · attique",'il y a 1 h','#E8762D',-6],
-  ['ImmoScout24','Visite souhaitée samedi','09:30','#276EF1',8]
-];
-const ring=document.getElementById('ring');
-sources.forEach((s,i)=>{
-  const a=(i/sources.length)*Math.PI*2-Math.PI/2, R=46;
-  const t=el('div','tile');t.style.left=(50+R*Math.cos(a))+'%';t.style.top=(50+R*Math.sin(a))+'%';
-  const inn=el('div','in'), card=el('div','card');card.style.setProperty('--r',s[4]+'deg');card.style.setProperty('--c',s[3]);
-  const src=el('div','src mono');src.append(el('b'),document.createTextNode(s[0]));
-  card.append(src,el('p',null,s[1]),el('time',null,s[2]));inn.append(card);t.append(inn);ring.append(t);
+/* Trames de code tirées des photos de la résidence */
+document.querySelectorAll('pre.tex').forEach(pre=>{
+  const img=new Image();img.src=pre.dataset.src;
+  img.onload=()=>{
+    const w=parseFloat(pre.dataset.w||.6), ratio=parseFloat(pre.dataset.r||.42);
+    const cols=Math.max(40,Math.round(Math.min(innerWidth,1600)*w/6.1)), rows=Math.round(cols*ratio);
+    const c=document.createElement('canvas');c.width=cols;c.height=rows;
+    const x=c.getContext('2d');x.drawImage(img,0,0,cols,rows);
+    const d=x.getImageData(0,0,cols,rows).data, ramp=" .:-=+*#%@";
+    const frag=document.createDocumentFragment();let line='';
+    for(let y=0;y<rows;y++){for(let i=0;i<cols;i++){const p=(y*cols+i)*4,l=(d[p]*.3+d[p+1]*.59+d[p+2]*.11)/255;
+      const ch=ramp[Math.min(ramp.length-1,Math.floor((1-l)*ramp.length))];
+      if(ch!==' '&&Math.random()<.004){frag.append(document.createTextNode(line));line='';frag.append(el('b',null,ch))}else line+=ch}line+='\n'}
+    frag.append(document.createTextNode(line));pre.append(frag);
+  };
 });
 
-const side=document.getElementById('side');
-const steps=['Nouvelle demande','Brochure envoyée','Qualifié','Visite samedi 10:00','Relance','Réservation','Notaire','Vendu'];
-[...steps,...steps].forEach(s=>side.append(el('li',null,s)));
-
-const leads=[
-  ['Nathalie Girard','Les Terrasses du Vignoble · Lot B4',['3.5 pièces','Milvignes',"≤ CHF 1'100'000"],'Meta Ads'],
-  ['David Grosjean','Clos des Vergers · Lot A2',['3.5 pièces','Cortaillod','CHF 840K–1.1M'],'Homegate'],
-  ['Yann Renaud','Résidence Lac & Lumière · Lot F3',['4.5 pièces','Littoral','CHF 1.0–1.3M'],'Site internet'],
-  ['Claire Monnier','Les Terrasses du Vignoble · Attique',['5.5 pièces','Milvignes',"≤ CHF 1'650'000"],'immobilier.ch']
+/* File de demandes en direct (premier écran) */
+const data=[
+  ['Homegate','David Grosjean','Clos des Vergers · Lot A2','Nouveau','n'],
+  ['WhatsApp','Nathalie Girard','Les Terrasses du Vignoble','Qualifié','q'],
+  ['Site internet','Yann Renaud','Résidence Lac & Lumière','Brochure envoyée','b'],
+  ['immobilier.ch','Claire Monnier','Les Terrasses · Attique','Nouveau','n'],
+  ['Meta Ads','Marc Vuilleumier','Clos des Vergers · Lot C1','Qualifié','q'],
+  ['Properstar','Léa Perrin','Résidence Lac & Lumière','Nouveau','n'],
+  ['Pipeline','Famille Aubry','Les Terrasses · Lot B2','Vendu','v'],
+  ['ImmoScout24','Sophie Jeanneret','Clos des Vergers · Lot A4','Nouveau','n']
 ];
-let k=0;const L=document.getElementById('lead'),chips=document.getElementById('l-chips');
-setInterval(()=>{L.classList.add('out');setTimeout(()=>{k=(k+1)%leads.length;const d=leads[k];
-  document.getElementById('l-name').textContent=d[0];document.getElementById('l-proj').textContent=d[1];
-  chips.replaceChildren(...d[2].map(c=>el('span',null,c)));
-  document.getElementById('l-src').textContent=d[3];L.classList.remove('out')},350)},3600);
+const feed=document.getElementById('feed');let n=0,count=12,minute=47;
+function row(d,t){const r=el('div','row new');const who=el('div','who');who.append(el('b',null,d[1]),el('span',null,d[2]));
+  r.append(el('span','tm',t),el('span','src',d[0]),who,el('span','st '+d[4],d[3]));setTimeout(()=>r.classList.remove('new'),1400);return r}
+for(let i=0;i<5;i++){feed.append(row(data[(i+3)%data.length],'21:'+(40-i*3)))}
+setInterval(()=>{const d=data[n++%data.length];minute=(minute+1)%60;const t='21:'+String(minute).padStart(2,'0');
+  feed.prepend(row(d,t));if(feed.children.length>7)feed.lastElementChild.remove();
+  if(d[4]==='n'){count++;document.getElementById('count').textContent=count+" demandes aujourd'hui"}
+  document.getElementById('clock').textContent=t;document.getElementById('mark').style.left=(Math.min(98,(n%12)*8.5))+'%'},2400);
 
+/* Onde de la dictée */
 const wv=document.getElementById('wave');
 for(let i=0;i<34;i++){const b=el('i');b.style.setProperty('--h',(8+Math.abs(Math.sin(i*1.7))*30)+'px');b.style.animationDelay=(i*.05)+'s';wv.append(b)}
 
-const pr=document.getElementById('prog');
-addEventListener('scroll',()=>{const p=scrollY/Math.max(1,document.body.scrollHeight-innerHeight);pr.textContent=Math.round(p*100)+'%'},{passive:true});
-
-/* liste « L'IA qui » : la ligne au centre de l'écran s'assombrit */
+/* Liste « L'IA qui » */
 const aiIo=new IntersectionObserver(es=>es.forEach(e=>e.target.classList.toggle('on',e.isIntersecting)),{rootMargin:'-40% 0px -40% 0px'});
 document.querySelectorAll('#ai-lines li').forEach(l=>aiIo.observe(l));
 
-/* réglages : segments cliquables et parcours recomposé */
+/* 01 · sources : la sélection passe d'une source à l'autre */
+const srcData=[['Homegate',12],['immobilier.ch',7],['Properstar',4],['Meta Ads',18],['Votre site',9]];
+const srcs=document.getElementById('srcs');
+srcData.forEach((s,i)=>{const c=el('div','sc'+(i===3?' on':''));const ln=el('span','ln');[52,38,46].forEach(w=>{const b=el('i');b.style.width=w+'px';ln.append(b)});
+  const ct=el('span','ct',String(s[1]));ct.append(el('small',null,'demandes'));c.append(el('span','rd'),ln,el('span','nm',s[0]),ct);srcs.append(c)});
+let si=3;setInterval(()=>{const cs=srcs.children;cs[si].classList.remove('on');si=(si+1)%cs.length;cs[si].classList.add('on')},1700);
+
+/* 02 · qualification : les critères se remplissent un à un */
+const slots=[...document.querySelectorAll('#qual .qslot')];let qi=0;
+setInterval(()=>{if(qi<slots.length){slots[qi++].classList.add('done')}else{slots.forEach(s=>s.classList.remove('done'));qi=0}},1300);
+
+/* 03 · relances : trois acheteurs à rappeler */
+const relData=[
+  ['assets/lake-residence.webp','Brochure consultée 3×','Céline Favre','Les Terrasses du Vignoble · Lot B3','50% 50%'],
+  ['assets/photo-lac.jpg','Sans réponse depuis 5 jours','Justine Perret','Résidence Lac & Lumière · Lot D1','50% 50%'],
+  ['assets/lake-residence-portrait.webp','Match envoyé · 1re relance','Aurélie Matthey','Clos des Vergers · Lot A2','50% 30%']
+];
+const rel=document.getElementById('rel');
+relData.forEach(r=>{const c=el('div','rc');const im=el('img');im.src=r[0];im.alt='';im.loading='lazy';im.style.objectPosition=r[4];
+  const acts=el('span','acts');const a1=el('span');a1.title='Traité';a1.append(svgIcon('M5 12l5 5 9-10'));const a2=el('span','go');a2.title='Relancer';a2.append(svgIcon('M4 12h14M13 6l6 6-6 6'));acts.append(a1,a2);
+  const who=el('span','who');who.append(el('b',null,r[2]),el('span',null,r[3]));c.append(im,el('span','sig',r[1]),acts,who);rel.append(c)});
+
+/* 04 · vente : le lot avance dans le pipeline */
+const bgl=document.getElementById('bgl');
+for(let i=0;i<24;i++){bgl.append(el('span',null,String.fromCharCode(65+Math.floor(i/8))+(i%8+1)))}
+const stg=[...document.querySelectorAll('#tool .stg')];let gi=0;
+function stage(){stg.forEach((s,i)=>{s.classList.toggle('on',i===gi);s.classList.toggle('done',i<gi)});gi=(gi+1)%stg.length}
+stage();setInterval(stage,1500);
+
+/* Réglages cliquables */
 const chain=document.getElementById('chain');
-function drawChain(){
-  const v=k=>document.querySelector('.seg[data-k="'+k+'"] [aria-pressed="true"]').textContent;
+function drawChain(){const v=k=>document.querySelector('.seg[data-k="'+k+'"] [aria-pressed="true"]').textContent;
   const steps=['Demande',v('first')==='Automatique'?'Message automatique':"Message validé par l'agent",'Brochure · '+v('bro'),v('rel')==='Aucune'?'Pas de relance':'Relance · '+v('rel')];
-  const parts=[];steps.forEach((s,i)=>{if(i)parts.push(el('i',null,'→'));parts.push(el('span',null,s))});
-  chain.replaceChildren(...parts);
-}
-document.querySelectorAll('.seg').forEach(seg=>seg.addEventListener('click',e=>{
-  const b=e.target.closest('button');if(!b)return;
-  seg.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',x===b?'true':'false'));drawChain();
-}));
+  const parts=[];steps.forEach((s,i)=>{if(i)parts.push(el('i',null,'→'));parts.push(el('span',null,s))});chain.replaceChildren(...parts)}
+document.querySelectorAll('.seg').forEach(seg=>seg.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;
+  seg.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',x===b?'true':'false'));drawChain()}));
 drawChain();
 
+
+/* S07 · défilement horizontal lié au défilement vertical */
+(function(){
+  const sec=document.getElementById('mise-en-place'), track=document.getElementById('hs-track');
+  if(!sec||!track)return;
+  let dist=0;
+  function layout(){
+    if(innerWidth<1000){sec.style.height='';track.style.transform='';dist=0;return}
+    dist=Math.max(0,track.scrollWidth-innerWidth);
+    sec.style.height=(innerHeight+dist)+'px';
+    move();
+  }
+  function move(){
+    if(!dist)return;
+    const top=sec.getBoundingClientRect().top, span=sec.offsetHeight-innerHeight;
+    const p=Math.min(1,Math.max(0,-top/span));
+    track.style.transform='translateX('+(-p*dist)+'px)';
+  }
+  addEventListener('resize',layout);addEventListener('scroll',move,{passive:true});
+  addEventListener('load',layout);layout();
+})();
+
+/* Progression + apparitions */
+const pr=document.getElementById('prog');
+addEventListener('scroll',()=>{const p=scrollY/Math.max(1,document.body.scrollHeight-innerHeight);pr.textContent=Math.round(p*100)+'%'},{passive:true});
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}}),{threshold:.12});
 document.querySelectorAll('.rv').forEach(x=>io.observe(x));
 </script>

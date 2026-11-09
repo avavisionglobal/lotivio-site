@@ -1,5 +1,18 @@
 # Pistes de design — 9.11.2026
 
+## Noms des sections (Figma node 12:2 et commentaires du code)
+
+S00 Navigation · S01 Hero · S02 Temps gagné — 4 h · S03 Ce que Lotivio fait · S04 L'IA qui · S05 Parcours — titre · S06 Parcours — 4 panneaux (S06.1 Demande, S06.2 Qualification, S06.3 Relance, S06.4 Vente) · S07 Mise en place · S08 Pour la direction · S09 Questions · S10 Appel final · S11 Footer · S12 Trame de points · S13 Mentions légales. Les calques « _espace » sont des espaceurs vides créés à l'import.
+
+## A v3 — hero B + trames de code + parcours façon Fourmula (9.11)
+
+Demandes de Diego : mettre le premier écran de B dans A ; ajouter des « Code Block » (trames ASCII) à plusieurs endroits ; refaire « Du portail à la vente » comme les panneaux de Fourmula (captures fournies).
+- Premier écran : celui de B (titre Archivo, fenêtre des demandes en direct, trame ASCII), sous la navigation en pilule de A.
+- Trames de code : premier écran, section « 4 h », titre « Construit autour de votre agence », appel final. Générées dans le navigateur depuis les photos de la résidence de démo.
+- Parcours : quatre panneaux plein écran qui s'empilent au défilement (position sticky), dégradés orange / violet / bleu / vert vers orange, code entre parenthèses, titre + grand numéro, deux puces en cadre filet, phrase bicolore, bouton blanc, et une maquette animée dans un panneau en verre : 01 sources branchées (sélection qui tourne), 02 critères qui se remplissent pendant la conversation WhatsApp, 03 trois acheteurs à relancer avec actions, 04 barre d'outils du pipeline sur une grille de lots.
+- Figma : node `12:2`. Version précédente archivée dans `archive/a-orbite-v2.html` (et `archive/b-atelier-v2.html`).
+- Mobile : panneaux empilés normalement (sans effet sticky), aucun débordement à 390 px.
+
 ## v2 — pages complètes A et B (9.11, après retour de Diego)
 
 Retour de Diego : préfère le premier écran de B et sa trame de code ASCII, et la section « Ce que Lotivio fait » de A. Les deux pistes sont prolongées jusqu'au footer, selon `docs/structure-lp-v1.md` :
