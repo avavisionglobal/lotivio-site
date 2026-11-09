@@ -1,0 +1,25 @@
+# One Page Love — références candidates (9.11.2026)
+
+Recherche via le MCP onepagelove (requêtes : CRM + saas, sales pipeline, real estate software, saas + grey, dashboard). One Page Love ne classe pas de « CRM » à proprement parler ; ces cinq sites sont les plus proches par sujet (vente B2B, immobilier, données clients) ou par DA (proche de 1600.agency). Statut : proposition, à retenir par Diego.
+
+| # | Site | Pourquoi | Rôle possible |
+|---|---|---|---|
+| 1 | Vestris — https://vestris.ai · https://onepagelove.com/vestris/ | IA qui fait avancer un dossier immobilier du contrat à la signature ; l'interface réelle sert de héros | Montrer l'app dans un premier écran sans dashboard générique ; ton « le dossier avance seul » |
+| 2 | Billow — https://www.billow.so · https://onepagelove.com/billow/ | Outil qui relie clients, factures et chiffres : « Run On Facts, Not Guesswork. » | Titre de promesse factuelle, capture produit sous le titre, CTA secondaire « Pour qui » |
+| 3 | Congrue — https://www.congrue.ai · https://onepagelove.com/congrue/ | IA pour équipes de vente B2B, CTA « Book a demo », texte qui décrit le travail fait à la place des commerciaux | Formulation « ce que le système fait pour vous », CTA démo unique |
+| 4 | F13 — https://www.f13.com · https://onepagelove.com/f13/ | Grille fine visible, étiquettes mono, fond clair, accent unique, liste « 01 — Fast / 02 — Accurate » | La plus proche de 1600 : rythme technique, liste numérotée des capacités |
+| 5 | Shelf — https://www.savetoshelf.com · https://onepagelove.com/shelf/ | Fond clair, un mot-clé surligné dans le titre, vraie interface de recherche sous le titre | Mot-clé coloré (orange) dans le titre, comme le film ; interface lisible au premier écran |
+
+## Deuxième série (9.11, demande « plus de SaaS modernes »)
+
+| # | Site | Pourquoi | Rôle possible |
+|---|---|---|---|
+| 6 | Simeon — https://simeon.sh · https://onepagelove.com/simeon-sh/ | « All your revenue. One dashboard. » : plusieurs sources réunies dans un seul tableau, sombre | Même promesse que « toutes vos demandes au même endroit » ; tableau de bord en héros |
+| 7 | Monologue — https://www.monologue.to · https://onepagelove.com/monologue/ | Dictée vocale, objet physique stylisé, grande sérif | Section dictée vocale : montrer la voix devenir une fiche |
+| 8 | 101 GenAI — https://www.101gen.ai · https://onepagelove.com/101-genai/ | IA métier, « Schedule Demo », onde vocale reliée à un dossier | Expliquer l'assistant vocal et les assistants IA sans jargon |
+| 9 | Canopy — https://canopyseo.com · https://onepagelove.com/canopy/ | « Blog on autopilot. » : l'interface montre le travail déjà fait par l'outil | Montrer une fiche déjà remplie par Lotivio ; ton « en pilote automatique » |
+| 10 | Sort — https://sort.to · https://onepagelove.com/sort/ | Très calme, fond clair, liste produit sur photo de paysage | Écran Demandes reçues posé sur une photo de promotion |
+| 11 | Tiny Computer Co. — https://tinycomputer.co · https://onepagelove.com/tiny-computer-co/ | Éditorial, sérif + mono, studio logiciel indépendant | Ton « fait pour vous, sur mesure » ; section mise en place |
+| 12 | WinWinKit — https://winwinkit.com · https://onepagelove.com/winwinkit/ | Mot-clé surligné, vraie interface de configuration en grand | Section réglages sur mesure : montrer les options |
+
+Écartés : Kizupi, Pairio, Tapdaa, Flashform, Woblo (sujet ou DA trop éloignés).
