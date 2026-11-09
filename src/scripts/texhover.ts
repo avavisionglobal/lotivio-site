@@ -2,6 +2,8 @@
 // sur toute la surface du bloc, y compris là où la trame de fond est effacée.
 // Uniquement sur les appareils avec une souris (pas d'effet au toucher).
 
+import { whenCalm } from './app';
+
 const fine = matchMedia('(hover: hover) and (pointer: fine)').matches;
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const RAMP = ' .:-=+*#%@';
@@ -59,27 +61,32 @@ function lens(pre: HTMLElement) {
     inner = document.createElement('pre'); inner.className = 'tex-hi';
     wrap.append(inner); pre.after(wrap);
     img = new Image(); img.decoding = 'async'; img.src = pre.dataset.src!;
-    img.onload = () => idle(fill);
+    img.onload = () => whenCalm(fill);
   };
   const place = () => {
     wrap!.style.transform = `translate3d(${x - R}px,${y - R}px,0)`;
     inner!.style.transform = `translate3d(${R - x}px,${R - y}px,0)`;
   };
-  // Position du pointeur dans le bloc, recalculée à chaque image : la lentille reste
-  // sous la souris même quand la page défile sans que la souris bouge.
-  const target = () => {
+  // Position du bloc à l'écran, relue seulement quand la page a défilé (pas à chaque image).
+  let left = 0, top = 0, sx = 1, sy = 1, dirty = true, last = 0;
+  const measure = () => {
     const rect = host.getBoundingClientRect();
-    const sx = rect.width / host.offsetWidth || 1, sy = rect.height / host.offsetHeight || 1; // bloc éventuellement mis à l'échelle
-    tx = (cx - rect.left) / sx; ty = (cy - rect.top) / sy;
+    sx = rect.width / host.offsetWidth || 1; sy = rect.height / host.offsetHeight || 1; // bloc éventuellement mis à l'échelle
+    left = rect.left; top = rect.top; dirty = false;
   };
-  const loop = () => {
+  const onScroll = () => { dirty = true; };
+  const target = () => { if (dirty) measure(); tx = (cx - left) / sx; ty = (cy - top) / sy; };
+  // Suivi amorti, indépendant de la fréquence de l'écran (60, 120 Hz…) : constante de temps 110 ms.
+  const loop = (t: number) => {
+    const dt = last ? Math.min(64, t - last) : 16; last = t;
     if (active) target();
-    const k = reduced ? 1 : 0.2;
+    const k = reduced ? 1 : 1 - Math.exp(-dt / 110);
     x += (tx - x) * k; y += (ty - y) * k; place();
-    raf = active || Math.abs(tx - x) + Math.abs(ty - y) > 0.5 ? requestAnimationFrame(loop) : 0;
+    if (active || Math.abs(tx - x) + Math.abs(ty - y) > 0.3) raf = requestAnimationFrame(loop);
+    else { raf = 0; last = 0; }
   };
   const show = () => {
-    target(); x = tx; y = ty; place();
+    dirty = true; target(); x = tx; y = ty; place();
     host.classList.add('is-lit');
     if (!raf) raf = requestAnimationFrame(loop);
   };
@@ -87,16 +94,16 @@ function lens(pre: HTMLElement) {
   host.addEventListener('pointerenter', (e) => {
     if (e.pointerType !== 'mouse') return;
     cx = e.clientX; cy = e.clientY; active = true;
-    if (ready) show(); else { build(); if (img?.complete) idle(fill); } // jamais de construction pendant le survol
+    addEventListener('scroll', onScroll, { passive: true });
+    if (ready) show(); else { build(); if (img?.complete) whenCalm(fill); } // jamais de construction pendant le survol
   });
   host.addEventListener('pointermove', (e) => { cx = e.clientX; cy = e.clientY; }, { passive: true });
-  host.addEventListener('pointerleave', () => { active = false; host.classList.remove('is-lit'); });
+  host.addEventListener('pointerleave', () => { active = false; host.classList.remove('is-lit'); removeEventListener('scroll', onScroll); });
 
   return build;
 }
 
-// Préparation à l'avance, en temps libre, quand le bloc approche de l'écran.
-const idle = (cb: () => void) => (window.requestIdleCallback ? requestIdleCallback(cb, { timeout: 1200 }) : setTimeout(cb, 120));
+// Préparation à l'avance, page au repos, quand le bloc approche de l'écran.
 if (fine) {
   const builders = new Map<Element, () => void>();
   document.querySelectorAll<HTMLElement>('pre.tex[data-src]').forEach((pre) => {
@@ -105,7 +112,7 @@ if (fine) {
   const io = new IntersectionObserver((es) => es.forEach((e) => {
     if (!e.isIntersecting) return;
     io.unobserve(e.target);
-    idle(() => builders.get(e.target)?.());
-  }), { rootMargin: '700px 0px' });
+    whenCalm(() => builders.get(e.target)?.());
+  }), { rootMargin: '1000px 0px' });
   builders.forEach((_, host) => io.observe(host));
 }

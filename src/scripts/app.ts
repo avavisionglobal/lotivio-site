@@ -45,6 +45,7 @@ function drawTexture(pre: HTMLElement) {
     }
     frag.append(document.createTextNode(line));
     pre.replaceChildren(frag);
+    requestAnimationFrame(() => pre.classList.add('drawn')); // fondu d'apparition (CSS)
   };
 }
 // Une trame vide fait 0 px de haut : on observe donc la section qui la contient.
@@ -57,19 +58,33 @@ $$('pre.tex[data-src]').forEach((p) => {
 const texQueue: HTMLElement[] = [];
 let texBusy = false;
 const idle = (cb: () => void) => (window.requestIdleCallback ? requestIdleCallback(cb, { timeout: 1500 }) : setTimeout(cb, 120));
+// Jamais de calcul de trame pendant que la page défile : on attend une pause.
+let lastScroll = 0;
+addEventListener('scroll', () => { lastScroll = performance.now(); }, { passive: true });
+export const whenCalm = (cb: () => void) => {
+  const run = () => (performance.now() - lastScroll < 220 ? setTimeout(run, 160) : idle(cb));
+  run();
+};
 const pumpTextures = () => {
   const pre = texQueue.shift();
   if (!pre) { texBusy = false; return; }
-  if (getComputedStyle(pre).display !== 'none') drawTexture(pre); // trame masquée (ex. mobile) : ignorée
-  idle(pumpTextures);
+  if (!pre.classList.contains('drawn') && !pre.dataset.queued && getComputedStyle(pre).display !== 'none') { pre.dataset.queued = '1'; drawTexture(pre); } // trame masquée (ex. mobile) : ignorée
+  whenCalm(pumpTextures);
 };
+const enqueue = (pres: HTMLElement[]) => {
+  texQueue.push(...pres);
+  if (!texBusy) { texBusy = true; whenCalm(pumpTextures); }
+};
+// Priorité aux trames proches de l'écran…
 const texIo = new IntersectionObserver((es) => es.forEach((e) => {
   if (!e.isIntersecting) return;
-  texQueue.push(...(texBySection.get(e.target) ?? []));
+  enqueue(texBySection.get(e.target) ?? []);
   texIo.unobserve(e.target);
-  if (!texBusy) { texBusy = true; idle(pumpTextures); }
-}), { rootMargin: '800px 0px' });
+}), { rootMargin: '1200px 0px' });
 texBySection.forEach((_, host) => texIo.observe(host));
+// … puis toutes les autres, une fois la page chargée : elles sont prêtes avant qu'on y arrive.
+const all = () => setTimeout(() => enqueue([...texBySection.values()].flat()), 1500);
+if (document.readyState === 'complete') all(); else addEventListener('load', all);
 
 /* ---------- S01 · file de demandes en direct ---------- */
 (() => {

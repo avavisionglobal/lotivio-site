@@ -15,6 +15,23 @@ Format d'une entrée :
 
 ---
 
+## 2026-11-09 — Animation d'entrée et fluidité calquée sur meotis.ch
+- Décision :
+  - Une animation d'entrée d'environ 2 s ouvre le site (mécanisme de fourmula.ai) :
+    - les sources défilent en haut à gauche, puis le mot se pose sur « Un seul suivi. » ;
+    - les photos des résidences défilent au centre et la dernière devient du code ;
+    - un compteur monte de 0 à 100 %, puis le rideau se lève et le hero joue son entrée.
+  - La fluidité reprend les réglages relevés sur meotis.ch :
+    - Lenis avec lerp 0,11 et molette ×1 ;
+    - apparitions en transitions CSS déclenchées une fois (déplacement de 18 à 30 px, courbe cubic-bezier(.16,1,.3,1)) ;
+    - effets liés au défilement branchés directement sur Lenis, sans second lissage.
+  - Les trames de code apparaissent en fondu et ne se calculent jamais pendant le défilement.
+  - La lentille au survol suit le pointeur avec un amortissement indépendant de la fréquence de l'écran.
+- Raison : demandes de Diego (« Animation d'entrée ! » ; « beaucoup plus smooth […] un peu comme meotis »).
+- Mesure : 14 s de défilement à la molette, du haut au bas de la page, à 120 Hz. Pire image à 17 et 25 ms sur deux passages (contre 58 à 775 ms auparavant), et aucune image longue.
+- Statut : décidée.
+- Source : conversation Diego / Claude Code, 9 novembre 2026. Réglages lus dans le code de meotis.ch le même jour.
+
 ## 2026-11-09 — Code au survol, défilement plus fluide, rythme vertical unifié
 - Décision : au survol de la souris, une lentille fait réapparaître le code des trames sous le pointeur, sur toute la surface du bloc. Le défilement passe en interpolation continue (Lenis, lerp 0,085). Les sources d'à-coups sont supprimées : onde vocale animée en hauteur, flous d'arrière-plan sur des éléments mis à l'échelle, variable CSS animée sur les panneaux S06, lentilles construites pendant le survol. Les espacements suivent une seule échelle (--sp-sec entre sections, --sp-head entre titre et contenu).
 - Raison : retours de Diego (« le code réapparaît un peu […] on voit qu'il y a une interaction », « un peu plus fluide lorsque je scroll », « un peu plus d'espace […] entre les sections ou entre les textes »).
