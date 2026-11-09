@@ -52,8 +52,9 @@ Interdits de promesse : aucune hausse de taux de vente, aucune durée de répons
 
 ## Références
 
-- **Dominante : 1600.agency** (fournie par Diego). Fiche et captures : `refs/REF-1600-agency/`.
-- Secondaires : liste One Page Love dans `refs/opl-shortlist.md` (12 candidates), à retenir par Diego (une ou deux, chacune avec un rôle).
+- **DA retenue le 9.11.2026 : 1600.agency + Fourmula.** Fourmula donne le squelette (`refs/REF-fourmula/`), 1600 les détails (`refs/REF-1600-agency/`). Les autres candidates One Page Love (`refs/opl-shortlist.md`) ne sont pas retenues.
+- Figma : https://www.figma.com/design/9QMY3loAtT7Sw4WEBdY6HU/Lotivio (page « WebDesign », vide au 9.11).
+- Structure proposée : `docs/structure-lp-v1.md`.
 
 ## Script
 

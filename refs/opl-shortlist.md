@@ -22,4 +22,15 @@ Recherche via le MCP onepagelove (requêtes : CRM + saas, sales pipeline, real e
 | 11 | Tiny Computer Co. — https://tinycomputer.co · https://onepagelove.com/tiny-computer-co/ | Éditorial, sérif + mono, studio logiciel indépendant | Ton « fait pour vous, sur mesure » ; section mise en place |
 | 12 | WinWinKit — https://winwinkit.com · https://onepagelove.com/winwinkit/ | Mot-clé surligné, vraie interface de configuration en grand | Section réglages sur mesure : montrer les options |
 
+## Troisième série (9.11, « encore d'autres exemples »)
+
+| # | Site | Pourquoi | Rôle possible |
+|---|---|---|---|
+| 13 | Muse — https://www.musesoftware.ai · https://onepagelove.com/muse/ | CRM vertical (musées) : « All-in-One Software — CRM, Ticketing… », bande de fonctions sous le titre, « Schedule a Demo » | Le plus proche du cas Lotivio : un CRM pensé pour un seul métier |
+| 14 | Script Runner — https://scriptrunner.ai · https://onepagelove.com/script-runner/ | IA métier, photo atmosphérique en carte arrondie, l'app posée dessous, « Book a demo » | Premier écran photo d'une promotion + écran Lotivio |
+| 15 | Vault AI — https://www.usevault.ai · https://onepagelove.com/vault-ai/ | « Control your Business Finances in One Place », tableau dense en héros, sombre | Version sombre de « tout au même endroit » |
+| 16 | invoicemon — https://invoicemon.com · https://onepagelove.com/invoicemon/ | Petites cartes de fonctions autour du titre, fenêtres de l'app sur un paysage | Montrer les fonctions (WhatsApp, dictée, PDF, diffusion) en cartes autour du titre |
+| 17 | Mainframe — https://mainframe.app · https://onepagelove.com/mainframe/ | « Watch your agents work. » : carrousel de vidéos du produit, trois colonnes d'arguments | Section IA : montrer les assistants en action en courtes vidéos |
+| 18 | Fourmula — https://fourmula.ai · https://onepagelove.com/fourmula/ | Très épuré, grandes lignes de texte, seconde moitié grise du titre, grille éditoriale | Typographie du titre (« Vos acheteurs écrivent partout. / Lotivio les suit tous. ») |
+
 Écartés : Kizupi, Pairio, Tapdaa, Flashform, Woblo (sujet ou DA trop éloignés).
