@@ -151,7 +151,7 @@
   /* Vitesse (LCP) : pendant l'intro, le titre est posé à sa place, caché par le rideau, au lieu d'être
      masqué. Le navigateur le compte ainsi comme affiché dès le premier rendu ; la montée des mots
      démarre quand le rideau se lève (même effet à l'œil). Avant ce réglage : LCP mobile 4,8 s. */
-  .has-intro .hc .hwi,.has-intro .hc h1 .o{animation:none}
+  .has-intro .hc .hwi,.has-intro .hc h1 .o,.has-intro .hc [data-intro]{animation:none}
 }
 
 /* ---------- Tablette ---------- */

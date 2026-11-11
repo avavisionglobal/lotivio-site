@@ -1,0 +1,22 @@
+---
+const facts = [
+  ['S02.1', 'Demandes', 'Le prospect arrive. Sa fiche aussi.', 'Les demandes de vos portails connectés, de Meta Ads et du site arrivent avec leur source et le bien recherché.'],
+  ['S02.2', 'Échanges', 'Le dernier échange, sous les yeux.', 'E-mails envoyés, conversations WhatsApp pro, notes : retrouvez le suivi dans la fiche du contact.'],
+  ['S02.3', 'Suivi', 'Une relance avec le bon contexte.', 'Consultez l’historique et les signaux d’intérêt avant de rappeler. Reprenez la conversation là où elle en était.'],
+];
+---
+<!-- S02 · Temps gagné -->
+<section class="sec sec-4h" id="contenu">
+  <div class="split">
+    <div class="lab" data-scramble>Du temps pour vos acheteurs</div>
+    <div class="body">
+      <pre class="tex soft" data-src="/media/residence-480.webp" data-w=".5" aria-hidden="true"></pre>
+      <h2 class="h2" data-flash>Jusqu’à <span class="count" data-to="4">4</span> h gagnées.<span class="g">Par semaine et par agent.</span></h2>
+      <div class="facts" data-stagger>
+        {facts.map(([b, k, t, p]) => (
+          <div data-bloc={b}><span class="mono">{k}</span><h3>{t}</h3><p>{p}</p></div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

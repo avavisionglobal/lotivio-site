@@ -857,41 +857,6 @@ html.lenis{scroll-behavior:auto}
 .tex-lens{contain:strict}
 
 /* =================================================================
-   S00 · Animation d'entrée (réf. fourmula.ai)
-   ================================================================= */
-.intro{display:none}
-.js .intro{display:block;position:fixed;inset:0;z-index:95;background:var(--warm-2);color:var(--ink);will-change:transform;
-  transition:transform .95s cubic-bezier(.76,0,.24,1)}
-.intro-in{position:absolute;inset:0;transition:transform .95s cubic-bezier(.76,0,.24,1)}
-.intro.is-out{transform:translateY(-100%)}
-.intro.is-out .intro-in{transform:translateY(30%)}
-html.has-intro{overflow:hidden}
-.intro-word{position:absolute;left:var(--pad);top:22px;font-family:var(--disp);font-variation-settings:"wdth" 112;font-weight:600;
-  font-size:clamp(40px,4.6vw,72px);line-height:1;letter-spacing:-.05em}
-.intro-word i{font-style:normal;color:var(--orange)}
-.intro-word.is-final{animation:iw-in .5s var(--ease)}
-@keyframes iw-in{from{opacity:0;transform:translateY(30%)}}
-.intro-card{position:absolute;left:50%;top:50%;width:224px;height:304px;margin:-152px 0 0 -112px;border-radius:14px;overflow:hidden;background:#EDEBE6;
-  box-shadow:0 40px 70px -40px rgba(0,0,0,.45);animation:ic-in .7s cubic-bezier(.16,1,.3,1) both .05s}
-@keyframes ic-in{from{opacity:0;transform:translateY(40px) scale(.9)}}
-.ip{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;clip-path:inset(100% 0 0 0);animation:ip-in .55s cubic-bezier(.76,0,.24,1) forwards}
-.ip1{animation-delay:.1s}.ip2{animation-delay:.48s}.ip3{animation-delay:.86s}
-@keyframes ip-in{to{clip-path:inset(0 0 0 0)}}
-.ip-code{position:absolute;inset:0;margin:0;padding:2px 0 0 1px;background:var(--warm-2);color:#5E594F;font-family:var(--mono);font-size:7px;line-height:7px;letter-spacing:.4px;
-  white-space:pre;overflow:hidden;clip-path:inset(100% 0 0 0);animation:ip-in .6s cubic-bezier(.76,0,.24,1) forwards 1.2s}
-.ip-code b{color:var(--orange);font-weight:400}
-.intro-mark{position:absolute;left:var(--pad);bottom:24px;display:flex;align-items:center;gap:9px;font-family:var(--disp);font-variation-settings:"wdth" 118;
-  font-weight:700;font-size:24px;letter-spacing:-.04em}
-.intro-mark i{font-style:normal;color:var(--orange)}
-.intro-count{position:absolute;right:var(--pad);bottom:26px;font-family:var(--mono);font-size:13px;letter-spacing:.06em;color:var(--muted);font-variant-numeric:tabular-nums}
-@media (max-width:520px){
-  .intro-word{top:18px;font-size:38px}
-  .intro-card{width:190px;height:258px;margin:-129px 0 0 -95px}
-  .ip-code{font-size:6px;line-height:5.9px;letter-spacing:.3px}
-}
-@media (prefers-reduced-motion:reduce){.js .intro{display:none}}
-
-/* =================================================================
    Apparitions façon meotis.ch : transitions CSS déclenchées une fois
    (classe .in posée par motion.ts). Le navigateur les joue hors du fil
    JavaScript : elles restent fluides même pendant le défilement.

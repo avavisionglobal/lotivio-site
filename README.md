@@ -87,7 +87,10 @@ Ce qui fait la vitesse (à préserver) :
 - les images servent en 480 px là où l'affichage est petit (intro, tuiles, trames) et les logos à leur taille ×2 (`npm run images`) ;
 - les apparitions sont des transitions CSS ; GSAP ne gère que les effets liés au défilement ;
 - `motion.js` et tout ce qui est sous la ligne de flottaison s'initialisent en temps libre ;
-- l'intro ne se joue qu'une fois par visite (sessionStorage).
+- l'intro ne se joue qu'une fois par visite (sessionStorage) ;
+- pendant l'intro, le titre et le sous-titre du hero sont posés à leur place sous le rideau (pas masqués) : ils comptent comme affichés dès le premier rendu (`hero-circuit.css`, fin du bloc d'animations). Masqués, le LCP mobile passait à 4,8 s.
+
+Mesure du 11 novembre 2026 (hero « circuit », titres en éclair, S07 animée), machine chargée : mobile 90 à 91, FCP et LCP 1,4 à 1,7 s, TBT 370 ms, CLS 0,01, 419 Ko ; bureau 100. À refaire machine au repos.
 
 Écart d'accessibilité connu : le texte blanc sur l'orange de marque #EB6E2C (bouton du hero) a un contraste de 3:1, sous le seuil AA de 4,5:1.
 
