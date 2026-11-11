@@ -1,0 +1,47 @@
+/* =================================================================
+   S03 · Ce que Lotivio fait (réf. capture « AI solutions… », 11.11.2026)
+   Suite de la section sombre S02 : fils qui se divisent, trois cartes claires.
+   ================================================================= */
+.lf{background:#17130F;color:#F3EEE6;padding:0 var(--pad) clamp(110px,11vw,160px)}
+.lf-in{max-width:1200px;margin:0 auto}
+.lf-fork{display:block;width:100%;height:auto;overflow:visible}
+.lf-w{stroke-width:1.6;stroke-dasharray:1 0}
+.lf-p{stroke:var(--orange);stroke-width:2;stroke-linecap:round;stroke-dasharray:7 200;stroke-dashoffset:7;opacity:0}
+.lf-dot{fill:#F3EEE6}
+.lf-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:2px}
+.lf-card{display:flex;flex-direction:column;background:#F4F3F1;color:var(--ink);padding:28px 24px 24px}
+.lf-card p{flex:1}
+.lf-art{position:relative;aspect-ratio:3/2;margin:-28px -24px 24px;overflow:hidden;background:#F1F0EE}
+.lf-art img{display:block;width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--ease)}
+.lf-art .v-b{display:none}
+.lf[data-illu="b"] .lf-art{background:none}
+.lf[data-illu="b"] .lf-art .v-a{display:none}
+.lf[data-illu="b"] .lf-art .v-b{display:block}
+.lf-card h3{font-family:var(--disp);font-variation-settings:"wdth" 100;font-weight:500;font-size:21px;letter-spacing:-.025em}
+.lf-card p{margin-top:10px;font-size:14px;line-height:1.5;color:#6F6B65;max-width:30em}
+.lf-btn{align-self:flex-start;display:inline-flex;align-items:center;gap:10px;margin-top:22px;background:var(--ink);color:#fff;padding:4px 4px 4px 12px;font-size:12px;font-weight:500;transition:background .2s}
+.lf-btn span{display:grid;place-items:center;width:22px;height:22px;background:#fff;color:var(--ink);font-size:12px;transition:transform .25s var(--ease)}
+.lf-btn:hover{background:var(--orange)}
+.lf-btn:hover span{transform:rotate(45deg)}
+.lf-btn:focus-visible{outline:2px solid var(--orange);outline-offset:3px}
+
+/* Les fils se tracent quand ils entrent à l'écran, puis une impulsion descend de temps en temps. */
+@keyframes lf-draw{from{stroke-dashoffset:1;stroke-dasharray:1 1}to{stroke-dashoffset:0;stroke-dasharray:1 1}}
+@keyframes lf-pulse{0%{opacity:1;stroke-dashoffset:7}26%{opacity:1;stroke-dashoffset:-93}27%,100%{opacity:0;stroke-dashoffset:-93}}
+@keyframes lf-pop{from{transform:scale(0)}}
+@media (prefers-reduced-motion:no-preference){
+  .rv-on .lf-fork:not(.in) .lf-w{stroke-dashoffset:1;stroke-dasharray:1 1}
+  .lf-fork.in .lf-w{animation:lf-draw 1.4s cubic-bezier(.6,0,.2,1) backwards calc(var(--i) * .08s)}
+  .rv-on .lf-fork:not(.in) .lf-dot{transform:scale(0)}
+  .lf-dot{transform-box:fill-box;transform-origin:center}
+  .lf-fork.in .lf-dot{animation:lf-pop .5s cubic-bezier(.34,1.56,.64,1) backwards calc(1.2s + var(--i) * .08s)}
+  .lf-fork.in .lf-p{animation:lf-pulse 6s linear infinite calc(2.2s + var(--i) * 1.5s)}
+  .lf-card:hover .lf-art img{transform:scale(1.035)}
+}
+
+@media (max-width:1000px){
+  .lf-cards{grid-template-columns:1fr;gap:10px;max-width:520px;margin:0 auto}
+  .lf-fork{display:none}
+  .lf{padding-top:8px}
+  .lf-card{min-height:0}
+}

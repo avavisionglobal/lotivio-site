@@ -1,0 +1,77 @@
+---
+// S03 · Ce que Lotivio fait (réf. « AI solutions built for every enterprise team », capture de Diego du 11.11.2026).
+// Sous le paragraphe de S02 : des fils partent d'un point, se divisent vers trois cartes claires.
+// Chaque carte : illustration isométrique en points, titre, texte, petit bouton.
+// Contenus repris de la version précédente (proofs/archive/S03Produit-v1-bento.astro).
+import '../styles/s03-fait.css';
+
+/* ---------- Illustrations isométriques en trame de points ---------- */
+type Box = [number, number, number, number, number, number]; // x, y, z, largeur, profondeur, hauteur
+const A = 34, C = Math.cos(Math.PI / 6);
+const iso = (x: number, y: number, z: number): [number, number] => [(x - y) * A * C, (x + y) * A * 0.5 - z * A];
+const poly = (pts: [number, number][]) => pts.map(([x, y]) => `${x.toFixed(1)},${y.toFixed(1)}`).join(' ');
+function scene(boxes: Box[], id: string) {
+  const faces: string[] = [];
+  let minX = 1e9, minY = 1e9, maxX = -1e9, maxY = -1e9;
+  // Ordre de dessin : de l'arrière vers l'avant.
+  [...boxes].sort((a, b) => a[0] + a[1] + a[2] - (b[0] + b[1] + b[2])).forEach(([x, y, z, w, d, h]) => {
+    const top = [iso(x, y, z + h), iso(x + w, y, z + h), iso(x + w, y + d, z + h), iso(x, y + d, z + h)];
+    const left = [iso(x, y + d, z + h), iso(x + w, y + d, z + h), iso(x + w, y + d, z), iso(x, y + d, z)];
+    const right = [iso(x + w, y, z + h), iso(x + w, y + d, z + h), iso(x + w, y + d, z), iso(x + w, y, z)];
+    [...top, ...left, ...right].forEach(([px, py]) => { minX = Math.min(minX, px); maxX = Math.max(maxX, px); minY = Math.min(minY, py); maxY = Math.max(maxY, py); });
+    faces.push(`<polygon points="${poly(left)}" fill="url(#${id}-l)"/><polygon points="${poly(right)}" fill="url(#${id}-r)"/><polygon points="${poly(top)}" fill="url(#${id}-t)"/>`);
+  });
+  const pad = 6, vb = `${(minX - pad).toFixed(0)} ${(minY - pad).toFixed(0)} ${(maxX - minX + pad * 2).toFixed(0)} ${(maxY - minY + pad * 2).toFixed(0)}`;
+  const pat = (k: string, s: number, r: number, c: string) =>
+    `<pattern id="${id}-${k}" width="${s}" height="${s}" patternUnits="userSpaceOnUse"><rect width="${s}" height="${s}" fill="#F4F3F1"/><circle cx="${s / 2}" cy="${s / 2}" r="${r}" fill="${c}"/></pattern>`;
+  return `<svg viewBox="${vb}" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs>${pat('t', 4.2, 0.95, '#CFCBC4')}${pat('l', 3.4, 1.05, '#BDB8B0')}${pat('r', 2.8, 1.1, '#A9A39A')}</defs>${faces.join('')}</svg>`;
+}
+
+const cards = [
+  {
+    bloc: 'S03.1', title: 'Demandes reçues', href: '#parcours', cta: 'Voir le parcours',
+    text: 'Portails, Meta Ads, votre site : chaque demande arrive avec sa source, le bien et les critères de l’acheteur. Sans copier-coller.',
+    art: scene([[0, 0, 0, 1, 1, 1], [1.1, 0, 0, 1, 1, 1], [0, 1.1, 0, 1, 1, 1], [0, 0, 1.1, 1, 1, 1]], 'a1'),
+  },
+  {
+    bloc: 'S03.2', title: 'Assistant WhatsApp', href: '#ia', cta: 'Voir l’IA',
+    text: 'Pour vos leads Meta Ads, la brochure part sur WhatsApp, l’assistant pose les questions et la fiche se remplit.',
+    art: scene([[0, 0, 0, 2, 2, 0.5], [0, 0, 1.05, 2, 2, 0.5], [0, 0, 2.1, 2, 2, 0.5]], 'a2'),
+  },
+  {
+    bloc: 'S03.3', title: 'Dictée vocale', href: '#demo', cta: 'Réserver une démo',
+    text: 'En sortant d’une visite, l’agent dicte. Intérêt, budget, relance : il relit et valide avant d’enregistrer.',
+    art: scene([[0, 0, 0, 1, 2, 3], [1, 0, 0, 1, 2, 2], [2, 0, 0, 1, 2, 1]], 'a3'),
+  },
+];
+
+// Fils : un point de départ au centre, quatre arrivées (carte 1, deux sur la carte 2, carte 3).
+const W = 1200, H = 190, ends = [0.162, 0.397, 0.603, 0.838].map((f) => f * W);
+const fork = [
+  `M600 0 C600 70 560 86 500 98 L${ends[0] + 56} 150 Q${ends[0]} 162 ${ends[0]} ${H - 6}`,
+  `M600 0 C600 84 ${ends[1]} 96 ${ends[1]} ${H - 6}`,
+  `M600 0 C600 84 ${ends[2]} 96 ${ends[2]} ${H - 6}`,
+  `M600 0 C600 70 640 86 700 98 L${ends[3] - 56} 150 Q${ends[3]} 162 ${ends[3]} ${H - 6}`,
+];
+---
+<!-- S03 · Ce que Lotivio fait -->
+<section class="lf" id="s03" aria-label="Ce que Lotivio fait">
+  <div class="lf-in">
+    <svg class="lf-fork" viewBox={`0 0 ${W} ${H}`} width={W} height={H} fill="none" aria-hidden="true" data-reveal>
+      <defs><linearGradient id="lf-g" x1="0" y1="0" x2="0" y2={H} gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#F3EEE6" stop-opacity="0" /><stop offset=".45" stop-color="#F3EEE6" stop-opacity=".45" /><stop offset="1" stop-color="#F3EEE6" stop-opacity=".95" /></linearGradient></defs>
+      {fork.map((d, i) => <path class="lf-w" d={d} stroke="url(#lf-g)" pathLength="1" style={`--i:${i}`} />)}
+      {fork.map((d, i) => <path class="lf-p" d={d} pathLength="100" style={`--i:${i}`} />)}
+      {ends.map((x, i) => <circle class="lf-dot" cx={x} cy={H - 6} r="4.5" style={`--i:${i}`} />)}
+    </svg>
+    <div class="lf-cards" data-stagger>
+      {cards.map((c) => (
+        <article class="lf-card" data-bloc={c.bloc}>
+          <div class="lf-art" set:html={c.art} />
+          <h3>{c.title}</h3>
+          <p>{c.text}</p>
+          <a class="lf-btn" href={c.href}>{c.cta}<span aria-hidden="true">↗</span></a>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

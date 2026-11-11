@@ -1,73 +1,71 @@
 ---
-const R = '/media/residence-480.webp', P = '/media/residence-portrait-480.webp', L = '/media/lac-480.webp';
-const tiles = [
-  [R, '30% 50%', 'Homegate', 'David Grosjean', 'Clos des Vergers · A2', 'Nouveau', 'n'],
-  [P, '50% 35%', 'Meta Ads', 'Nathalie Girard', 'Les Terrasses · 3.5 p.', 'Qualifié', 'q'],
-  [L, '60% 50%', 'immobilier.ch', 'Claire Monnier', 'Les Terrasses · Attique', 'Nouveau', 'n'],
-  [R, '80% 40%', 'Properstar', 'Léa Perrin', 'Lac & Lumière · F3', 'Brochure', 'b'],
-  [L, '20% 60%', 'Votre site', 'Yann Renaud', 'Lac & Lumière · 4.5 p.', 'Qualifié', 'q'],
-  [P, '50% 75%', 'ImmoScout24', 'Sophie Jeanneret', 'Clos des Vergers · A4', 'Nouveau', 'n'],
-  [R, '55% 70%', 'WhatsApp', 'Marc Vuilleumier', 'Clos des Vergers · C1', 'Relance', 'r'],
-  [L, '85% 45%', 'Meta Ads', 'Famille Aubry', 'Les Terrasses · B2', 'Vendu', 'v'],
+// S03 · Ce que Lotivio fait (réf. « AI solutions built for every enterprise team », capture de Diego du 11.11.2026).
+// Sous le paragraphe de S02 : des fils partent d'un point, se divisent vers trois cartes claires.
+// Chaque carte : illustration (deux variantes à choisir), titre, texte, petit bouton.
+// Contenus repris de la version précédente (proofs/archive/S03Produit-v1-bento.astro).
+import '../styles/s03-fait.css';
+
+/* ---------- Illustrations : deux variantes (lot assets/illustrations/2026-11-11-s03-cartes, GPT Image 2.5) ----------
+   A « BD » (ligne claire) par défaut ; B « Circuit au trait » avec ?illu=trait dans l'adresse.
+   La variante isométrique en points précédente : proofs/archive/S03Produit-v2-iso.astro */
+const art = (id: string) => ({
+  a: { src: `/media/s03/${id[0]}-bd-900.webp`, set: `/media/s03/${id[0]}-bd-600.webp 600w, /media/s03/${id[0]}-bd-900.webp 900w` },
+  b: { src: `/media/s03/${id[1]}-trait-900.webp`, set: `/media/s03/${id[1]}-trait-600.webp 600w, /media/s03/${id[1]}-trait-900.webp 900w` },
+});
+
+const cards = [
+  {
+    bloc: 'S03.1', title: 'Demandes reçues', href: '#parcours', cta: 'Voir le parcours',
+    text: 'Portails, Meta Ads, votre site : chaque demande arrive avec sa source, le bien et les critères de l’acheteur. Sans copier-coller.',
+    alt: 'Une agente à son bureau ; les demandes des portails et du site arrivent dans un seul bac', art: art(['A1-demandes', 'B1-demandes']),
+  },
+  {
+    bloc: 'S03.2', title: 'Assistant WhatsApp', href: '#ia', cta: 'Voir l’IA',
+    text: 'Pour vos leads Meta Ads, la brochure part sur WhatsApp, l’assistant pose les questions et la fiche se remplit.',
+    alt: 'Le soir, une prospecte reçoit la brochure et échange sur son téléphone', art: art(['A2-whatsapp', 'B2-whatsapp']),
+  },
+  {
+    bloc: 'S03.3', title: 'Dictée vocale', href: '#demo', cta: 'Réserver une démo',
+    text: 'En sortant d’une visite, l’agent dicte. Intérêt, budget, relance : il relit et valide avant d’enregistrer.',
+    alt: 'Un agent sort d’une visite et dicte son compte rendu ; une liste se coche', art: art(['A3-dictee', 'B3-dictee']),
+  },
+];
+
+// Fils : un point de départ au centre, quatre arrivées (carte 1, deux sur la carte 2, carte 3).
+const W = 1200, H = 190, ends = [0.162, 0.397, 0.603, 0.838].map((f) => f * W);
+const fork = [
+  `M600 0 C600 70 560 86 500 98 L${ends[0] + 56} 150 Q${ends[0]} 162 ${ends[0]} ${H - 6}`,
+  `M600 0 C600 84 ${ends[1]} 96 ${ends[1]} ${H - 6}`,
+  `M600 0 C600 84 ${ends[2]} 96 ${ends[2]} ${H - 6}`,
+  `M600 0 C600 70 640 86 700 98 L${ends[3] - 56} 150 Q${ends[3]} 162 ${ends[3]} ${H - 6}`,
 ];
 ---
 <!-- S03 · Ce que Lotivio fait -->
-<section class="sec" id="s03">
-  <div class="split">
-    <div class="lab" data-scramble>Ce que Lotivio fait</div>
-    <div class="body"><h2 class="h2" data-flash>Toutes vos demandes.<span class="g">Un seul endroit<i class="o">.</i></span></h2></div>
-  </div>
-  <div class="f3">
-    <article class="fp big" data-bloc="S03.1" data-reveal>
-      <pre class="tex ctex" data-src={R} data-w=".9" data-r=".38" aria-hidden="true"></pre>
-      <span class="fl">Demandes reçues</span>
-      <div class="f-stage">
-        <div class="in-card" role="img" aria-label="Demande reçue d'un portail, données de démonstration">
-          <div class="in-h"><img src="/media/logos/homegate.svg" alt="Homegate" width="118" height="20" loading="lazy" /><time>21:46</time></div>
-          <small>Nouvelle demande de contact</small>
-          <b>Clos des Vergers · Lot A2</b>
-          <p>« Bonjour, je souhaite recevoir la brochure et visiter le 3.5 pièces. »</p>
-          <div class="in-f"><span>David Grosjean</span><span>079 · · · · · ·</span></div>
-        </div>
-        <span class="arw" aria-hidden="true">→</span>
-        <div class="app" role="img" aria-label="File Demandes reçues de Lotivio, données de démonstration">
-          <div class="app-h"><span class="apc"><img src="/brand/lotivio-mark.svg" alt="" width="24" height="24" />Demandes reçues <i>/</i> <b>Aujourd'hui</b></span><span class="act"><span class="n">13</span><span class="add">+ Ajouter un lead</span><span class="exp">Exporter</span></span></div>
-          <div class="grid" data-tiles>
-            {tiles.map(([img, pos, src, name, proj, st, cls]) => (
-              <div class="lt"><div class="ph" style={`background-image:url(${img});background-position:${pos}`}></div><span class="ico"><i></i><i class="o"></i></span><div class="lt-b"><b>{name}</b><small>{proj}</small></div><span class="lt-c">{src}</span><em class={cls}>{st}</em></div>
-            ))}
+<section class="lf" id="s03" aria-label="Ce que Lotivio fait">
+  <div class="lf-in">
+    <svg class="lf-fork" viewBox={`0 0 ${W} ${H}`} width={W} height={H} fill="none" aria-hidden="true" data-reveal>
+      <defs><linearGradient id="lf-g" x1="0" y1="0" x2="0" y2={H} gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#F3EEE6" stop-opacity="0" /><stop offset=".45" stop-color="#F3EEE6" stop-opacity=".45" /><stop offset="1" stop-color="#F3EEE6" stop-opacity=".95" /></linearGradient></defs>
+      {fork.map((d, i) => <path class="lf-w" d={d} stroke="url(#lf-g)" pathLength="1" style={`--i:${i}`} />)}
+      {fork.map((d, i) => <path class="lf-p" d={d} pathLength="100" style={`--i:${i}`} />)}
+      {ends.map((x, i) => <circle class="lf-dot" cx={x} cy={H - 6} r="4.5" style={`--i:${i}`} />)}
+    </svg>
+    <div class="lf-cards" data-stagger>
+      {cards.map((c) => (
+        <article class="lf-card" data-bloc={c.bloc}>
+          <div class="lf-art">
+            <img class="v-a" src={c.art.a.src} srcset={c.art.a.set} sizes="(max-width: 1000px) 92vw, 400px" width="900" height="600" alt={c.alt} loading="lazy" decoding="async" />
+            <img class="v-b" src={c.art.b.src} srcset={c.art.b.set} sizes="(max-width: 1000px) 92vw, 400px" width="900" height="600" alt={c.alt} loading="lazy" decoding="async" />
           </div>
-        </div>
-      </div>
-      <div class="f-txt"><h3 data-flash>Une file pour toutes<br />les sources.</h3><p>Portails, Meta Ads, votre site : chaque demande arrive avec sa source, le bien et les critères de l'acheteur. Sans copier-coller.</p></div>
-    </article>
-
-    <article class="fp half" data-bloc="S03.2" data-reveal>
-      <pre class="tex ctex" data-src={L} data-w=".45" data-r=".7" aria-hidden="true"></pre>
-      <span class="fl">Assistant WhatsApp</span>
-      <div class="col" data-collage>
-        <div class="ck c-ph" data-speed="-40"><img src="/media/ui-whatsapp-500.webp" width="500" height="667" loading="lazy" decoding="async" alt="Conversation WhatsApp de l'assistant, données de démonstration" loading="lazy" /></div>
-        <div class="ck c-bro" data-speed="30"><div class="ph" style={`background-image:url(${P})`}></div><div class="cb"><small>PDF · envoyé</small><b>Les Terrasses du Vignoble</b></div></div>
-        <div class="ck c-q" data-speed="60"><small>Statut</small><b>Qualifié</b></div>
-        <div class="ck c-cr" data-speed="-20"><span><small>Pièces</small>3.5</span><span><small>Zone</small>Milvignes</span><span><small>Budget</small>≤ 1,1 mio</span></div>
-        <div class="ck c-t" data-speed="10"><i></i>21:47</div>
-      </div>
-      <div class="f-txt"><h3 data-flash>L'IA qualifie,<br />jour et nuit.</h3><p>La brochure part sur WhatsApp, l'assistant pose les questions et la fiche se remplit.</p></div>
-      <span class="rb" aria-hidden="true"><img src="/brand/lotivio-mark.svg" alt="" width="24" height="24" /></span>
-    </article>
-
-    <article class="fp half" data-bloc="S03.3" data-reveal>
-      <pre class="tex ctex" data-src={P} data-w=".45" data-r=".7" aria-hidden="true"></pre>
-      <span class="fl">Dictée vocale</span>
-      <div class="col" data-collage>
-        <div class="ck d-vis" data-speed="-30"><div class="ph" style={`background-image:url(${R});background-position:35% 50%`}></div><span class="tagv">Visite · Lot F3</span></div>
-        <div class="ck d-mic" data-speed="20"><span class="mic3"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></span><div class="wave" id="wave3" aria-hidden="true"></div><span class="tm3">0:14</span></div>
-        <div class="ck d-tr" data-speed="40">« Très intéressé, budget 1,2 million, je le rappelle jeudi. »</div>
-        <div class="ck d-f" data-speed="-10"><div><span>Intérêt</span><b class="g">Fort</b></div><div><span>Budget</span><b>CHF 1'200'000</b></div></div>
-        <div class="ck d-cal" data-speed="50"><small>Relance</small><b>Jeu. 09:00</b></div>
-      </div>
-      <div class="f-txt"><h3 data-flash>Dictez, la fiche<br />se remplit.</h3><p>En sortant d'une visite, l'agent dicte. Intérêt, budget, relance : il relit et valide.</p></div>
-      <span class="rb" aria-hidden="true"><img src="/brand/lotivio-mark.svg" alt="" width="24" height="24" /></span>
-    </article>
+          <h3>{c.title}</h3>
+          <p>{c.text}</p>
+          <a class="lf-btn" href={c.href}>{c.cta}<span aria-hidden="true">↗</span></a>
+        </article>
+      ))}
+    </div>
   </div>
 </section>
+<script>
+  // Choix de la variante d'illustration par l'adresse : ?illu=trait (B) ; par défaut, la BD (A).
+  const v = new URLSearchParams(location.search).get('illu');
+  if (v === 'trait' || v === 'b') document.getElementById('s03')?.setAttribute('data-illu', 'b');
+</script>

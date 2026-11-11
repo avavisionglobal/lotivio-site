@@ -79,12 +79,6 @@ if (document.readyState === 'complete') all(); else addEventListener('load', all
 
 const belowFold = () => {
 
-/* ---------- S03 · onde de la dictée ---------- */
-(() => {
-  const w = $('#wave3'); if (!w) return;
-  for (let i = 0; i < 30; i++) { const b = el('i'); b.style.setProperty('--h', 6 + Math.abs(Math.sin(i * 1.3)) * 22 + 'px'); b.style.animationDelay = i * 0.05 + 's'; w.append(b); }
-})();
-
 /* ---------- S06.1 · sources : la sélection passe d'une source à l'autre ---------- */
 (() => {
   const srcs = $('#srcs'); if (!srcs) return;

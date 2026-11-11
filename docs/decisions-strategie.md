@@ -15,6 +15,33 @@ Format d'une entrée :
 
 ---
 
+## 2026-11-11 — Hero épuré avec une main, S02 « Lotivio en bref », S03 en fils et cartes, intro retirée
+- Décision :
+  - Hero v3, plus lisible :
+    - titre court en deux tons, « Gardez le fil / de chaque acheteur. » ;
+    - sous-titre de deux lignes : « Vos prospects écrivent partout. Avec Lotivio, chaque demande arrive au même endroit, avec son suivi. » ;
+    - au centre, une photo de main qui tient l'objet Lotivio (réf. Synais) ;
+    - cinq canaux en icônes seules (Homegate, Meta Ads, votre site, WhatsApp, immobilier.ch), sur des fils fins ;
+    - une impulsion à la fois, toutes les 2,4 s ;
+    - deux petites cartes sombres, masquées sur mobile.
+  - Photo : générée avec Higgsfield Soul 2.0 (4 variantes, 0,48 crédit), puis détourée. La variante c31cb2a1 est retenue ; le logo Lotivio est gravé en composition. Fiche de lot : assets/hero/2026-11-11-main-soul2/README.md.
+  - S02 devient une section sombre « Lotivio en bref » (réf. Synais « About us ») : une étiquette, puis le paragraphe « Lotivio réunit les demandes de vos portails, de Meta Ads et de votre site, vos échanges et le suivi de chaque acheteur, dans un CRM réglé avec votre agence. » Les chiffres 4 h, 7 canaux et 24/7 restent en S07B. L'ancienne S02 (« 4 h gagnées » + 3 faits) est archivée.
+  - S03 « Ce que Lotivio fait », sur le modèle de la capture fournie par Diego :
+    - sous le paragraphe de S02, des fils partent d'un point et se divisent vers trois cartes claires ;
+    - chaque carte a une illustration isométrique en points, un titre, un texte et un bouton ;
+    - cartes : Demandes reçues, Assistant WhatsApp (leads Meta Ads), Dictée vocale.
+    - L'ancien bento est archivé.
+  - L'animation d'entrée S00 est retirée de la page (le fichier reste, inutilisé).
+- Raison : retours de Diego (« trop d'informations […] pas assez designé », « qu'on ait une main comme dans l'exemple », « la section d'en dessous […] avec une explication de base de Lotivio », « Ce que Lotivio fait : faire exactement comme la section ci-jointe, en dessous de ce texte », « supprimer l'animation du début »).
+- Remplace / modifie :
+  - le hero « circuit » du même jour (archivé : proofs/archive/S01Hero-v2-circuit.astro, hero-circuit-v2.css) ;
+  - S02 (proofs/archive/S02Temps-v1-4h.astro) ;
+  - S03 (proofs/archive/S03Produit-v1-bento.astro) ;
+  - l'intro du 9.11.
+- Vérifié : 1440×900 et 390 px (hero, S02, S03), build. Lighthouse non remesuré après ce changement.
+- Statut : proposition à valider.
+- Source : conversation Diego / Claude Code, 11 novembre 2026, captures Synais et « AI solutions built for every enterprise team ».
+
 ## 2026-11-11 — Titres en éclair orange et illustrations animées de S07
 - Décision :
   - Tous les titres de section (H2 et titres des cartes S03) s'animent comme sur fourmula.ai, mesuré sur leur site :

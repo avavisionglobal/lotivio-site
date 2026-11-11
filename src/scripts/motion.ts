@@ -62,10 +62,10 @@ async function init() {
   await tick(); // étape courte : le navigateur reprend la main entre deux groupes
   /* ---------- Préparation des apparitions (avant d'activer les états cachés) ---------- */
   // Les titres (data-flash) sont animés par flash.ts : éclair orange mot par mot, en CSS.
-  $$('[data-stagger], [data-tiles]').forEach((g) => index([...g.children]));
+  $$('[data-stagger]').forEach((g) => index([...g.children]));
   $$('.bfan').forEach((f) => index($$('.bp', f)));
   // Tout ce qui est déjà à l'écran est marqué visible avant d'activer les états cachés.
-  const targets = $$('[data-reveal], [data-stagger], [data-tiles], .f-stage, .bfan, .flow4 .pn')
+  const targets = $$('[data-reveal], [data-stagger], .bfan, .flow4 .pn')
     .filter((el) => !el.closest('#hs-track'));
   targets.forEach((el) => { if (el.getBoundingClientRect().top < innerHeight * 0.92) el.classList.add('in'); });
   root.classList.add('rv-on');
@@ -102,23 +102,6 @@ async function init() {
   await tick();
   /* ---------- Effets liés au défilement : directement sur le défilement Lenis (scrub: true),
      sans second lissage par-dessus — c'est ce double retard qui donnait l'effet « mou ». ---------- */
-
-  // S01 · le cadre de l'app bascule légèrement en défilant.
-  const stage = $('[data-intro-stage]');
-  if (stage) {
-    gsap.set(stage, { transformPerspective: 1400, transformOrigin: '50% 0%' });
-    gsap.fromTo(stage, { rotateX: 0, scale: 1 }, { rotateX: -4, scale: 1.02, ease: 'none', scrollTrigger: { trigger: stage, start: 'top 60%', end: 'bottom top', scrub: true } });
-  }
-
-  await tick(); // étape courte : le navigateur reprend la main entre deux groupes
-  // S03 · collages en parallaxe.
-  $$('[data-collage]').forEach((col) => {
-    const card = col.closest('article') ?? col;
-    $$('[data-speed]', col).forEach((ck) => {
-      const s = Number(ck.dataset.speed);
-      gsap.fromTo(ck, { y: s }, { y: -s, ease: 'none', scrollTrigger: { trigger: card, start: 'top bottom', end: 'bottom top', scrub: true } });
-    });
-  });
 
   const mm = gsap.matchMedia();
 

@@ -1,0 +1,203 @@
+/* =================================================================
+   S01 · Hero « circuit » (réf. Synais, 11.11.2026)
+   Les canaux sont posés sur des fils qui convergent vers l'objet Lotivio.
+   Repère de la scène : 1920 × 960 px, alignée en bas du hero, centrée.
+   Le cadre utile (1440 px) commence à x = 240.
+   ================================================================= */
+.hc{--hc-bg:var(--warm-2);--wire:#D6D1C7;--taupe:#A1998D;--h:clamp(800px,100svh,900px);
+  position:relative;height:var(--h);overflow:hidden;background:var(--hc-bg);text-align:center;isolation:isolate}
+
+/* ---------- Texte ---------- */
+.hc-head{position:relative;z-index:3;padding-top:calc(146px - (900px - var(--h)) / 2)}
+.hc-kick{display:inline-flex;align-items:center;gap:7px;font-size:13.5px;color:var(--ink)}
+.hc-kick .ch{display:inline-block;width:15px;height:15px}
+.hc-kick .ch svg{display:block;width:100%;height:100%}
+.hc h1{font-family:var(--disp);font-variation-settings:"wdth" 104;font-weight:500;font-size:clamp(42px,5vw,74px);line-height:1.02;letter-spacing:-.052em;margin:22px auto 0;padding:0 24px}
+.hc h1 .ln{display:block;white-space:nowrap}
+.hc h1 .tn{color:var(--taupe)}
+.hc h1 .o{font-style:normal;color:var(--orange)}
+.hc .sub{font-size:16.5px;line-height:1.5;color:var(--muted);max-width:36em;text-wrap:balance;margin:22px auto 0;padding:0 24px}
+.hc .row-b{display:flex;gap:10px;justify-content:center;margin-top:28px}
+@media (min-width:1001px){.hc .sub .br{display:block}}
+
+/* ---------- Scène ---------- */
+.hc-stage{position:absolute;inset:0;z-index:1;pointer-events:none}
+.hc-scene{position:absolute;left:50%;bottom:0;width:1920px;height:960px;margin-left:-960px}
+.hc-wires{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.hc .w{stroke:var(--wire);stroke-width:1.5;stroke-dasharray:1 0}
+.hc .w-end{fill:var(--hc-bg);stroke:#C7C1B6;stroke-width:1.5}
+
+/* Impulsions : un trait orange glisse le long du fil (stroke-dashoffset), avec un halo. */
+.hc .p-core,.hc .p-halo{stroke-linecap:round;stroke-dasharray:46 6000;stroke-dashoffset:var(--o0)}
+.hc .p-core{stroke:var(--orange);stroke-width:2}
+.hc .p-halo{stroke:rgba(235,110,44,.2);stroke-width:8}
+.hc .p-feed{stroke:var(--orange);stroke-width:2;stroke-linecap:round;stroke-dasharray:16 300;stroke-dashoffset:16;opacity:0}
+@keyframes hc-pulse{from{stroke-dashoffset:var(--o0)}to{stroke-dashoffset:var(--o1)}}
+@keyframes hc-feed{0%{opacity:1;stroke-dashoffset:16}85%{opacity:1}100%{opacity:0;stroke-dashoffset:-100}}
+
+/* Jetons des sources : discrets au repos, allumés au passage de l'impulsion. */
+.src-c{position:absolute;left:var(--x);top:var(--y);transform:translate(-50%,-50%);display:flex;align-items:center;gap:6px;height:30px;padding:0 11px;border-radius:9px;
+  background:#F4F2EE;box-shadow:inset 0 1px 0 #fff,0 0 0 1px #E2DED6,0 8px 16px -10px rgba(60,48,36,.28);white-space:nowrap}
+.src-c img{display:block;width:auto;filter:grayscale(1);opacity:.55}
+.src-c b{font-size:12px;font-weight:500;letter-spacing:-.01em;color:#8F8A81}
+.src-c svg{color:#8F8A81}
+.src-c::after{content:"";position:absolute;inset:0;border-radius:inherit;box-shadow:0 0 0 1px var(--orange),0 0 22px -4px rgba(235,110,44,.55);opacity:0}
+
+/* Petits outils gravés (finitions) */
+.tool-c{position:absolute;transform:translate(-50%,-50%);display:flex;align-items:center;justify-content:center;gap:3px;width:34px;height:16px;border-radius:6px;
+  background:#EFECE6;box-shadow:inset 0 1px 2px rgba(60,48,36,.10),0 1px 0 #fff,0 0 0 1px #E1DDD5}
+.tool-c.v{width:16px;height:34px;flex-direction:column}
+.tool-c i{display:block;width:3px;height:3px;border-radius:50%;background:#C3BDB2}
+.tool-c.g-bars i{width:1.5px;height:7px;border-radius:1px}
+.tool-c.v.g-bars i{width:7px;height:1.5px}
+.tool-c.g-x i{position:absolute;width:9px;height:1.5px;border-radius:1px}
+.tool-c.g-x i:nth-child(1){transform:rotate(45deg)}.tool-c.g-x i:nth-child(2){transform:rotate(-45deg)}.tool-c.g-x i:nth-child(3){display:none}
+.tool-c.g-grid i{width:4px;height:4px;border-radius:1px}
+
+.tile-c{position:absolute;transform:translate(-50%,-50%);display:grid;place-items:center;width:46px;height:46px;border-radius:12px;background:#fff;
+  box-shadow:0 0 0 1px #ECE9E3,0 12px 26px -12px rgba(60,48,36,.35)}
+.tile-c img{width:22px;height:22px}
+
+/* ---------- Objet Lotivio (le « hub ») ---------- */
+.hub{position:absolute;width:176px;height:176px;margin:-88px 0 0 -88px}
+.hub-in{position:absolute;inset:0;transform:translate3d(var(--mx,0px),var(--my,0px),0) rotate(-10deg);transition:transform 1.2s cubic-bezier(.16,1,.3,1)}
+.hub-floor{position:absolute;left:4%;right:-6%;bottom:-46px;height:56px;border-radius:50%;background:radial-gradient(closest-side,rgba(52,40,28,.32),rgba(52,40,28,0));transform:rotate(10deg)}
+.hub-base{position:absolute;inset:0;border-radius:31%;background:linear-gradient(180deg,#141416,#050506);transform:translateY(13px)}
+.hub-glow{position:absolute;left:10%;right:10%;bottom:-11px;height:20px;border-radius:50%;
+  background:radial-gradient(closest-side,#FFD3AE,rgba(244,140,80,.95) 35%,rgba(235,110,44,0));filter:blur(2px)}
+.hub-glow::after{content:"";position:absolute;left:-20%;right:-20%;top:-10px;bottom:-30px;border-radius:50%;background:radial-gradient(closest-side,rgba(235,110,44,.30),rgba(235,110,44,0))}
+.hub-body{position:absolute;inset:0;border-radius:31%;overflow:hidden;
+  background:radial-gradient(130% 110% at 24% 8%,#45454b 0%,#26262a 34%,#151517 66%,#0d0d0f 100%);
+  box-shadow:inset 0 1.5px 0 rgba(255,255,255,.24),inset 0 0 0 1px rgba(255,255,255,.05),inset 0 -20px 34px rgba(0,0,0,.6),inset 16px 12px 30px rgba(255,255,255,.035)}
+.hub-body::after{content:"";position:absolute;left:-30%;top:-60%;width:90%;height:120%;background:linear-gradient(115deg,rgba(255,255,255,.10),rgba(255,255,255,0) 60%);transform:rotate(-8deg)}
+.hub-mark{position:absolute;left:17%;top:17%;width:66%;height:66%;filter:drop-shadow(0 1.2px 0 rgba(255,255,255,.09)) drop-shadow(0 -1px 0 rgba(0,0,0,.75))}
+.hub-led{position:absolute;right:15%;top:15%;width:6px;height:6px;border-radius:50%;background:#5a3a26;box-shadow:0 0 0 1px rgba(0,0,0,.4)}
+.hub-led::after{content:"";position:absolute;inset:-1px;border-radius:50%;background:#FF9C61;box-shadow:0 0 10px 2px rgba(235,110,44,.8);opacity:0}
+@keyframes hub-hit{0%{opacity:1}100%{opacity:0}}
+@keyframes glow-hit{0%{opacity:1;transform:scaleX(1.12)}100%{opacity:.82;transform:none}}
+.hub-glow{opacity:.82}
+
+/* ---------- Bas du hero : texte en bref + cartes ---------- */
+.hc-foot{position:absolute;left:0;right:0;bottom:0;max-width:1440px;margin:0 auto;z-index:3;display:flex;justify-content:space-between;align-items:flex-end;gap:24px;padding:0 var(--pad) 22px;text-align:left;pointer-events:none}
+.hc-info{max-width:420px;padding-bottom:6px}
+.hc-info .mono{display:inline-flex;align-items:center;gap:7px;color:var(--muted);text-transform:none;letter-spacing:.02em}
+.hc-info p{margin-top:14px;font-family:var(--disp);font-variation-settings:"wdth" 100;font-weight:450;font-size:21px;line-height:1.2;letter-spacing:-.025em;color:var(--ink)}
+.hc-info p span{color:var(--taupe)}
+.hc-cards{display:flex;gap:8px;pointer-events:auto}
+.dcard{width:258px;background:#1A1918;color:#EDEDED;border-radius:9px;padding:14px 14px 12px;font-size:11px;box-shadow:inset 0 0 0 1px #2B2927,0 34px 60px -30px rgba(30,20,10,.55)}
+.dc-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.dc-top b{display:block;font-size:12px;font-weight:500}
+.dc-top span{display:block;margin-top:3px;font-size:10px;color:#86827C}
+.dc-ctl{display:flex;align-items:center;gap:4px;flex:none}
+.dc-ctl i{width:16px;height:16px;border-radius:4px;background:#262423;box-shadow:inset 0 0 0 1px #34312E}
+.dc-ctl span{margin:0;background:#262423;box-shadow:inset 0 0 0 1px #34312E;border-radius:4px;padding:3px 6px;font-size:9.5px;color:#B9B5AE}
+.dc-val{margin-top:12px;font-size:21px;font-weight:500;letter-spacing:-.02em;color:#fff}
+.dc-val span{display:inline-block;font-variant-numeric:tabular-nums}
+.dc-badge{display:flex;align-items:center;gap:7px;margin-top:6px;font-size:10.5px;color:#86827C}
+.dc-badge .up{font-family:var(--mono);font-size:10px;border-radius:4px;padding:2px 6px;background:rgba(235,110,44,.16);color:#F29A5E}
+.dc-badge .up.g{background:rgba(14,131,69,.24);color:#5FD49A}
+.dc-foot{display:flex;align-items:center;gap:14px;margin-top:12px;padding-top:11px;border-top:1px solid #2B2927}
+.donut{flex:none;width:44px;height:44px;transform:rotate(-90deg)}
+.donut circle{fill:none;stroke-width:5}
+.dc-foot ul{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:5px 10px;font-size:10px;color:#9A968F}
+.dc-foot li{white-space:nowrap}
+.dc-foot li i{display:inline-block;width:6px;height:6px;border-radius:50%;margin-right:5px;vertical-align:1px}
+.dc-foot li b{color:#E4E1DC;font-weight:500}
+@keyframes hc-bump{0%{transform:translateY(-35%);opacity:0}100%{transform:none;opacity:1}}
+.dc-val span.bump{animation:hc-bump .5s cubic-bezier(.16,1,.3,1)}
+.dc-badge .up.bump{animation:hc-bump .5s cubic-bezier(.16,1,.3,1)}
+
+/* ---------- Mouvement ---------- */
+@keyframes hc-up{from{opacity:0;transform:translateY(22px)}}
+@keyframes hc-rise{from{transform:translate3d(0,118%,0) rotate(7deg)}}
+@keyframes hc-tint{0%,45%{color:var(--orange)}}
+@keyframes hc-dot{0%{transform:scale(0)}55%{transform:scale(1.9)}78%{transform:scale(.85)}100%{transform:none}}
+@keyframes hc-draw{from{stroke-dashoffset:1;stroke-dasharray:1 1}to{stroke-dashoffset:0;stroke-dasharray:1 1}}
+@keyframes hc-fade{from{opacity:0}}
+@keyframes hc-pop{from{opacity:0;transform:translate(-50%,-50%) scale(.6)}}
+@keyframes hc-hub{from{opacity:0;transform:translateY(60px) rotate(8deg) scale(.86)}}
+@keyframes hc-float{0%,100%{translate:0 0}50%{translate:0 -8px}}
+@keyframes hc-ring{0%{opacity:1}28%,100%{opacity:0}}
+@keyframes hc-logo{0%{filter:none;opacity:1}30%,100%{filter:grayscale(1);opacity:.55}}
+@keyframes hc-label{0%{color:var(--ink)}30%,100%{color:#8F8A81}}
+@media (prefers-reduced-motion:no-preference){
+  .hc [data-intro]{animation:hc-up .9s var(--ease) backwards}
+  .hc .sub[data-intro]{animation-delay:.4s}
+  .hc .row-b[data-intro]{animation-delay:.5s}
+  .hc .hc-info[data-intro]{animation-delay:1.2s}
+  /* Titre : chaque mot monte sous un masque, arrive orange et reprend sa couleur */
+  .hc .hw{display:inline-block;clip-path:inset(-.4em -.3em -.16em -.3em)}
+  .hc .hwi{display:inline-block;transform-origin:0 100%;
+    animation:hc-rise 1.15s cubic-bezier(.16,1,.3,1) backwards,hc-tint .95s ease-out backwards;animation-delay:calc(.12s + var(--i) * .055s)}
+  .hc h1 .o{display:inline-block;animation:hc-dot .8s cubic-bezier(.34,1.56,.64,1) backwards .75s}
+  .hc .w{animation:hc-draw 1.9s cubic-bezier(.6,0,.2,1) backwards calc(.45s + var(--i) * .12s)}
+  .hc .w-end,.hc .tool-c,.hc .tile-c{animation:hc-fade .8s ease-out backwards 1.6s}
+  .hc .tile-c{animation:hc-pop .8s cubic-bezier(.34,1.56,.64,1) backwards 1.5s}
+  .hc .src-c{animation:hc-pop .8s cubic-bezier(.34,1.56,.64,1) backwards 1.3s}
+  .hc .hub{animation:hc-hub 1.4s cubic-bezier(.16,1,.3,1) backwards .55s}
+  .hc .hub-in{animation:hc-float 7s ease-in-out infinite 2s}
+  .hc .hc-cards{animation:hc-up 1s var(--ease) backwards 1s}
+  /* Les impulsions démarrent une fois les fils tracés. */
+  .hc .w-pulses{animation:hc-fade .6s ease-out backwards 2.3s}
+  .hc .p-core,.hc .p-halo{animation:hc-pulse var(--d) linear var(--s) infinite}
+  .hc .src-c::after{animation:hc-ring var(--d) linear var(--dl) infinite}
+  .hc .src-c img,.hc .src-c svg{animation:hc-logo var(--d) linear var(--dl) infinite}
+  .hc .src-c b{animation:hc-label var(--d) linear var(--dl) infinite}
+  .hc .p-feed.go{animation:hc-feed .8s linear}
+  .hc .hub.hit .hub-led::after{animation:hub-hit 1s ease-out}
+  .hc .hub.hit .hub-glow{animation:glow-hit 1s ease-out}
+  /* Hors écran ou pendant l'intro : tout est à l'arrêt. */
+  .hc.is-off *,.hc.is-off *::after,.has-intro .hc *,.has-intro .hc *::after{animation-play-state:paused}
+  /* Vitesse (LCP) : pendant l'intro, le titre est posé à sa place, caché par le rideau, au lieu d'être
+     masqué. Le navigateur le compte ainsi comme affiché dès le premier rendu ; la montée des mots
+     démarre quand le rideau se lève (même effet à l'œil). Avant ce réglage : LCP mobile 4,8 s. */
+  .has-intro .hc .hwi,.has-intro .hc h1 .o,.has-intro .hc [data-intro]{animation:none}
+}
+
+/* ---------- Tablette ---------- */
+@media (min-width:1001px) and (max-width:1280px){
+  .hc-scene{transform:scale(.92);transform-origin:50% 100%}
+  .hc-info p{font-size:18px}
+  .hc-info{max-width:330px}
+  .dcard{width:236px}
+}
+
+@media (min-width:1001px) and (max-width:1160px){.hc-scene{transform:scale(.84)}}
+
+/* ---------- Mobile et tablette portrait : la scène devient un bloc réduit sous les boutons ---------- */
+@media (max-width:1000px){
+  .hc{height:auto;padding-bottom:28px}
+  .hc-head{padding-top:112px}
+  .hc h1 .ln{white-space:normal}
+  .hc-stage{position:relative;inset:auto;height:330px;margin-top:6px;overflow:hidden;
+    -webkit-mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)}
+  .hc-scene{left:50%;top:50%;bottom:auto;margin:0;transform:translate(-50%,-50%) scale(var(--k,.66)) translateY(-190px)}
+  .src-c{left:var(--xm);top:var(--ym);transform:translate(-50%,-50%) scale(1.25)}
+  .src-c.d-only{display:none}
+  .hc .src-c::after,.hc .src-c img,.hc .src-c svg,.hc .src-c b{animation-delay:var(--dlm)}
+  .tool-c{display:none}
+  .tile-c{display:none}
+  .hc-foot{position:relative;flex-direction:column;align-items:stretch;padding:0 16px;gap:22px}
+  .hc-info{max-width:none;padding:0}
+  .hc-info p{font-size:20px}
+  .hc-cards{display:grid;grid-template-columns:1fr 1fr}
+  .dcard{width:auto;min-width:0}
+}
+@media (max-width:1000px) and (prefers-reduced-motion:no-preference){
+  .hc .src-c{animation-name:hc-pop-m}
+}
+@keyframes hc-pop-m{from{opacity:0;transform:translate(-50%,-50%) scale(.8)}}
+@media (min-width:640px) and (max-width:1000px){
+  .hc-stage{height:400px}
+  .hc-scene{--k:.8}
+}
+@media (max-width:520px){
+  .hc h1{font-size:38px;padding:0 16px}
+  .hc .sub{font-size:15.5px;padding:0 16px}
+  .hc .row-b{flex-wrap:wrap;padding:0 16px}
+  .hc .btn{padding:12px 16px;font-size:14px}
+  .dc-ctl,.dc-foot ul{display:none}
+  .dc-top span{display:none}
+  .dcard{padding:12px}
+  .dc-foot{gap:10px}
+}
