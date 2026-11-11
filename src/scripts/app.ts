@@ -201,6 +201,8 @@ idle(belowFold);
   const dlg = $<HTMLDialogElement>('#film'), video = $<HTMLVideoElement>('#film-v'); if (!dlg || !video) return;
   let opener: HTMLElement | null = null;
   $$('[data-film]').forEach((b) => b.addEventListener('click', () => {
+    // L'affiche n'est posée qu'à l'ouverture : elle n'est pas téléchargée avec la page.
+    if (!video.poster && video.dataset.poster) video.poster = video.dataset.poster;
     opener = b; dlg.showModal(); document.dispatchEvent(new CustomEvent('lotivio:lock', { detail: true }));
     video.play().catch(() => {});
   }));

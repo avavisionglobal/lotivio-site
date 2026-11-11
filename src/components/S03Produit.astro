@@ -9,8 +9,8 @@ import '../styles/s03-fait.css';
    A « BD » (ligne claire) par défaut ; B « Circuit au trait » avec ?illu=trait dans l'adresse.
    La variante isométrique en points précédente : proofs/archive/S03Produit-v2-iso.astro */
 const art = (id: string) => ({
-  a: { src: `/media/s03/${id[0]}-bd-900.webp`, set: `/media/s03/${id[0]}-bd-600.webp 600w, /media/s03/${id[0]}-bd-900.webp 900w` },
-  b: { src: `/media/s03/${id[1]}-trait-900.webp`, set: `/media/s03/${id[1]}-trait-600.webp 600w, /media/s03/${id[1]}-trait-900.webp 900w` },
+  a: { src: `/media/s03/${id[0]}-bd-900.webp`, set: `/media/s03/${id[0]}-bd-640.webp 640w, /media/s03/${id[0]}-bd-760.webp 760w, /media/s03/${id[0]}-bd-900.webp 900w` },
+  b: { src: `/media/s03/${id[1]}-trait-900.webp`, set: `/media/s03/${id[1]}-trait-640.webp 640w, /media/s03/${id[1]}-trait-760.webp 760w, /media/s03/${id[1]}-trait-900.webp 900w` },
 });
 
 const cards = [
@@ -53,8 +53,8 @@ const fork = [
       {cards.map((c) => (
         <article class="lf-card" data-bloc={c.bloc}>
           <div class="lf-art">
-            <img class="v-a" src={c.art.a.src} srcset={c.art.a.set} sizes="(max-width: 1000px) 92vw, 400px" width="900" height="600" alt={c.alt} loading="lazy" decoding="async" />
-            <img class="v-b" src={c.art.b.src} srcset={c.art.b.set} sizes="(max-width: 1000px) 92vw, 400px" width="900" height="600" alt={c.alt} loading="lazy" decoding="async" />
+            <img class="v-a" src={c.art.a.src} srcset={c.art.a.set} sizes="(max-width: 1000px) min(92vw, 520px), 400px" width="900" height="600" alt={c.alt} loading="lazy" decoding="async" />
+            <img class="v-b" src={c.art.b.src} srcset={c.art.b.set} sizes="(max-width: 1000px) min(92vw, 520px), 400px" width="900" height="600" alt={c.alt} loading="lazy" decoding="async" />
           </div>
           <h3>{c.title}</h3>
           <p>{c.text}</p>

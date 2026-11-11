@@ -11,8 +11,8 @@ const canaux = ['Homegate', 'ImmoScout24', 'immobilier.ch', 'Properstar', 'Meta 
 <!-- S11 · Footer (révélé au défilement) -->
 <footer class="foot2 fx" id="foot2">
   <picture class="fx-bg" aria-hidden="true">
-    <source media="(max-width: 700px)" srcset="/media/footer/crepuscule-m-1000.webp" />
-    <img src="/media/footer/crepuscule-2400.webp" srcset="/media/footer/crepuscule-1600.webp 1600w, /media/footer/crepuscule-2400.webp 2400w" sizes="100vw" width="2400" height="1005" alt="" loading="lazy" decoding="async" />
+    <source media="(max-width: 700px)" data-srcset="/media/footer/crepuscule-m-1000.webp" />
+    <img data-srcset="/media/footer/crepuscule-1600.webp 1600w, /media/footer/crepuscule-2400.webp 2400w" sizes="100vw" width="2400" height="1005" alt="" decoding="async" />
   </picture>
   <div class="f-top fx-top" data-bloc="S11.1">
     <div class="fx-brand">
@@ -29,3 +29,22 @@ const canaux = ['Homegate', 'ImmoScout24', 'immobilier.ch', 'Properstar', 'Meta 
   </nav>
   <div class="f-legal fx-legal mono"><span>© 2026 Lotivio · Ava Vision · Développé en Suisse</span><span>Données de démonstration</span></div>
 </footer>
+<script>
+  // Le footer est fixe derrière la page : le navigateur le croit visible et chargerait l'image tout de suite.
+  // L'image n'est donc posée que lorsque app.ts marque l'approche du bas de page (.is-near).
+  const foot = document.getElementById('foot2');
+  const load = () => {
+    // Sources d'abord, image ensuite (srcset seul, sans src) : le navigateur ne télécharge que la bonne taille.
+    foot?.querySelectorAll<HTMLElement>('[data-srcset]').forEach((el) => {
+      el.setAttribute('srcset', el.dataset.srcset!);
+      el.removeAttribute('data-srcset');
+    });
+  };
+  if (foot) {
+    if (foot.classList.contains('is-near')) load();
+    else {
+      const mo = new MutationObserver(() => { if (foot.classList.contains('is-near')) { load(); mo.disconnect(); } });
+      mo.observe(foot, { attributes: true, attributeFilter: ['class'] });
+    }
+  }
+</script>
