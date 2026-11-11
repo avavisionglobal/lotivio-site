@@ -1,19 +1,31 @@
 ---
+// S11 · Footer (réf. capture « Fable » de Diego, 11.11.2026) : paysage au crépuscule en fond,
+// logo + phrase et bouton en haut, colonnes de liens, mentions en bas (grand « lotivio. » retiré le 11.11, demande de Diego).
+// Image : Higgsfield Soul Location (job fc8327c5…), agrandie en 4K (job 63059e00…) puis éclaircie ;
+// lot assets/footer/2026-11-11-crepuscule-soul-location/.
+// Version précédente (fond orange) : proofs/archive/S11Footer-v1-orange.astro
 import { SITE } from '../config';
+import '../styles/s11-footer.css';
+const canaux = ['Homegate', 'ImmoScout24', 'immobilier.ch', 'Properstar', 'Meta Ads', 'WhatsApp'];
 ---
 <!-- S11 · Footer (révélé au défilement) -->
-<footer class="foot2" id="foot2">
-  <div class="f-top">
-    <div class="f-brand" data-bloc="S11.1">
-      <p>🇨🇭 Le CRM immobilier développé pour les agences et promoteurs suisses. Vos canaux, vos échanges et votre suivi commercial réunis.</p>
-      <a class="f-cta magnet" href="#demo">Réserver une démo <span aria-hidden="true">→</span></a>
+<footer class="foot2 fx" id="foot2">
+  <picture class="fx-bg" aria-hidden="true">
+    <source media="(max-width: 700px)" srcset="/media/footer/crepuscule-m-1000.webp" />
+    <img src="/media/footer/crepuscule-2400.webp" srcset="/media/footer/crepuscule-1600.webp 1600w, /media/footer/crepuscule-2400.webp 2400w" sizes="100vw" width="2400" height="1005" alt="" loading="lazy" decoding="async" />
+  </picture>
+  <div class="f-top fx-top" data-bloc="S11.1">
+    <div class="fx-brand">
+      <a class="fx-logo" href="#top" aria-label="Lotivio, retour en haut"><img src="/brand/lotivio-mark.svg" alt="" width="30" height="30" /><span>lotivio<i>.</i></span></a>
+      <p>Le CRM immobilier développé pour les agences et promoteurs suisses. Vos canaux, vos échanges et votre suivi commercial réunis.</p>
     </div>
-    <nav class="f-cols" aria-label="Pied de page" data-bloc="S11.2">
-      <div><h2>Produit</h2><a href="#s03">Demandes reçues</a><a href="#s03">Assistant WhatsApp</a><a href="#s03">Dictée vocale</a><a href="#direction">Diffusion</a></div>
-      <div><h2>Agence</h2><a href="#mise-en-place">Mise en place</a><a href="#faq">Questions</a><a href="#demo">Réserver une démo</a></div>
-      <div><h2>Compte</h2><a href={SITE.appUrl}>Se connecter</a><a href={SITE.privacyUrl}>Confidentialité</a></div>
-    </nav>
+    <a class="fx-cta magnet" href="#demo">Réserver une démo <span aria-hidden="true">↗</span></a>
   </div>
-  <div class="f-legal mono"><span>© 2026 Lotivio · Ava Vision</span><span>Données de démonstration</span></div>
-  <div class="f-word" aria-hidden="true" data-fword>lotivio<i>.</i></div>
+  <nav class="f-cols fx-cols" aria-label="Pied de page" data-bloc="S11.2">
+    <div><h2>Produit</h2><a href="#s03">Demandes reçues</a><a href="#s03">Assistant WhatsApp</a><a href="#s03">Dictée vocale</a><a href="#direction">Diffusion</a></div>
+    <div><h2>Agence</h2><a href="#mise-en-place">Mise en place</a><a href="#faq">Questions</a><a href="#demo">Réserver une démo</a></div>
+    <div><h2>Canaux</h2>{canaux.map((c) => <span>{c}</span>)}</div>
+    <div><h2>Compte</h2><a href={SITE.appUrl}>Se connecter</a><a href={SITE.privacyUrl}>Confidentialité</a></div>
+  </nav>
+  <div class="f-legal fx-legal mono"><span>© 2026 Lotivio · Ava Vision · Développé en Suisse</span><span>Données de démonstration</span></div>
 </footer>

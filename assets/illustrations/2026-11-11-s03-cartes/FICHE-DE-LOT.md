@@ -14,3 +14,15 @@
 **Interdits.** Aucun texte, aucune lettre, aucun chiffre, aucun logo (pas de logo WhatsApp ni de portail), pas de mascotte ni de robot (règle du film), pas de halo ni de dégradé gratuit.
 
 **Générateur.** GPT Image 2.5 (`gpt-image-2.5-sunburst`, qualité medium, 1536x1024). Illustration sans personne réaliste (règle du 5.10.2026). Coût et identifiants : non fournis par le CLI, notés « inconnu ».
+
+## Fabrication (11.11.2026)
+
+- 6 images générées en un lot, 1536 × 1024 (`generated/`, prompts dans `prompts-gpt.jsonl`), sans retouche.
+- Modèle demandé : `gpt-image-2.5-sunburst`, qualité medium. Le CLI n'a pas confirmé le modèle effectivement utilisé.
+- Identifiants et coût : inconnus (le CLI ne les renvoie pas).
+- Contrôle : aucun faux texte en gros plan (brochure, bulles, check-list), aucun logo, aucune mascotte. Les personnages de la variante A sont dessinés et ne représentent personne de réel.
+- Exports : `public/media/s03/{A1,A2,A3,B1,B2,B3}-*-{600,900}.webp`.
+- Planches de revue : `PLANCHE-A.jpg`, `PLANCHE-B.jpg`.
+- Intégration : S03, variante A par défaut, variante B avec `?illu=trait`.
+
+Statut : livré en local, choix de la variante attendu de Diego.

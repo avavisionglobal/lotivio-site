@@ -412,21 +412,11 @@ h1 .o,.h2 .o,.final .o{font-style:normal;color:var(--orange)}
 .page{position:relative;z-index:1;background:#fff}
 .foot2{position:fixed;left:0;right:0;bottom:0;z-index:0;background:#EB6E2C;color:#fff;overflow:hidden;padding:56px var(--pad) 0;min-height:560px;display:flex;flex-direction:column}
 .f-top{display:grid;grid-template-columns:1.2fr 2fr;gap:40px}
-.f-brand p{font-size:18px;line-height:1.45;max-width:24em;color:rgba(255,255,255,.92)}
-.f-cta{display:inline-flex;gap:8px;margin-top:22px;background:var(--ink);color:#fff;border-radius:999px;padding:13px 22px;font-size:15px;font-weight:500}
-.f-cta:hover{background:#fff;color:var(--ink)}
 .f-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:30px}
-.f-cols h5{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;font-weight:400;color:rgba(255,255,255,.7);margin-bottom:14px}
 .f-cols a{display:block;margin-top:8px;font-size:16px}
 .f-cols a:hover{text-decoration:underline;text-underline-offset:3px}
 .f-legal{display:flex;justify-content:space-between;margin-top:56px;padding-top:16px;border-top:1px solid rgba(255,255,255,.3);color:rgba(255,255,255,.8)}
-.f-word{margin-top:auto;font-family:var(--disp);font-variation-settings:"wdth" 118;font-weight:800;font-size:27.5vw;letter-spacing:-.065em;line-height:.74;white-space:nowrap;
-  transform:translateY(16%);margin-left:-.04em;
-  background:linear-gradient(180deg,rgba(255,255,255,.45) 0%,#fff 38%);-webkit-background-clip:text;background-clip:text;color:transparent}
-.f-word i{font-style:normal;-webkit-text-fill-color:#141414;color:#141414}
 /* Mot découpé en lettres par l'animation : le dégradé passe sur chaque lettre */
-.f-word.is-split{background:none}
-.f-word .fw-c{background:linear-gradient(180deg,rgba(255,255,255,.45) 0%,#fff 38%);-webkit-background-clip:text;background-clip:text;color:transparent;will-change:transform}
 @media (max-width:1000px){
   .f-top{grid-template-columns:1fr}
   .f-cols{grid-template-columns:1fr 1fr}
@@ -501,8 +491,7 @@ h1 .o,.h2 .o,.final .o{font-style:normal;color:var(--orange)}
   .ins .n{font-size:58px}
   .faq summary{font-size:17px;padding:18px 0}.faq details p{font-size:15px}
   .cta10 h2{font-size:38px}.chk li{font-size:15px}
-  .book{padding:18px}.days b{font-size:17px}.slots button{padding:10px 0;font-size:14px}
-  .f-brand p{font-size:16px}.f-cols a{font-size:15px}
+  .book{padding:18px}.days b{font-size:17px}.slots button{padding:10px 0;font-size:14px}.f-cols a{font-size:15px}
   .f-legal{flex-direction:column;gap:6px}
 }
 
@@ -802,9 +791,6 @@ html.lenis{scroll-behavior:auto}
 
 /* S11 · « lotivio. » : un seul masque dégradé sur le mot entier, au lieu d'un dégradé de texte
    et d'un calque par lettre (7 calques géants à peindre d'un coup → image de 700 ms) */
-.f-word,.f-word.is-split{background:none;-webkit-background-clip:border-box;background-clip:border-box;color:#fff;
-  -webkit-mask-image:linear-gradient(180deg,rgba(0,0,0,.45) 0%,#000 38%);mask-image:linear-gradient(180deg,rgba(0,0,0,.45) 0%,#000 38%)}
-.f-word .fw-c{background:none;-webkit-background-clip:border-box;background-clip:border-box;color:inherit;will-change:auto}
 
 /* =================================================================
    S00 · Barre de navigation en verre dépoli quand on a quitté le haut de page

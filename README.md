@@ -90,7 +90,7 @@ Ce qui fait la vitesse (à préserver) :
 - l'intro ne se joue qu'une fois par visite (sessionStorage) ;
 - pendant l'intro, le titre et le sous-titre du hero sont posés à leur place sous le rideau (pas masqués) : ils comptent comme affichés dès le premier rendu (`hero-circuit.css`, fin du bloc d'animations). Masqués, le LCP mobile passait à 4,8 s.
 
-Mesure du 11 novembre 2026 (hero « circuit », titres en éclair, S07 animée), machine chargée : mobile 90 à 91, FCP et LCP 1,4 à 1,7 s, TBT 370 ms, CLS 0,01, 419 Ko ; bureau 100. À refaire machine au repos.
+Mesure du 11 novembre 2026, 9 h 30 (sans intro, hero avec photo, S02/S03 refaites, titres en éclair, S07 animée), machine chargée : mobile 90 au meilleur passage, FCP 1,4 s, LCP 2,4 s (élément LCP : photo du hero `main-lotivio-640.webp`, 66 Ko), TBT 340 ms, CLS 0, 480 Ko ; bureau 100 (LCP 0,7 s). À refaire machine au repos. Piste : variante mobile plus légère de la photo du hero.
 
 Écart d'accessibilité connu : le texte blanc sur l'orange de marque #EB6E2C (bouton du hero) a un contraste de 3:1, sous le seuil AA de 4,5:1.
 

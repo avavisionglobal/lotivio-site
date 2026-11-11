@@ -15,6 +15,33 @@ Format d'une entrée :
 
 ---
 
+## 2026-11-11 — Footer : image en 4K plus lumineuse, grand « lotivio. » retiré
+- Décision :
+  - L'image du crépuscule est conservée, agrandie en 4K (Higgsfield Upscale, job 63059e00, 2 crédits), puis éclaircie en local sans bandes.
+  - Le voile sombre du footer est allégé.
+  - Le grand « lotivio. » est retiré ; le petit logo reste en haut à gauche, comme sur la référence Fable.
+  - Le hero reçoit une version mobile plus légère de la photo de la main (480 px, 31 Ko), sur la piste de vitesse donnée par l'autre session.
+- Raison : retour de Diego (« le logo doit être supprimé. L'image est bien, mais il faut une image de meilleure qualité et un peu plus lumineuse »).
+- Remplace / modifie : footer de l'entrée précédente du même jour.
+- Statut : proposition à valider. « Le logo » a été compris comme le grand mot en contour posé sur l'image ; à confirmer.
+- Source : conversation Diego / Claude Code, 11 novembre 2026.
+
+## 2026-11-11 — Illustrations des cartes S03 (deux variantes) et footer « crépuscule »
+- Décision :
+  - Les trois cartes de S03 ont de vraies illustrations en tête de carte, en deux variantes à choisir :
+    - A « BD » (ligne claire, une touche d'orange), affichée par défaut ;
+    - B « Circuit au trait » (isométrique au trait fin, fils et points orange), visible avec `?illu=trait` dans l'adresse.
+    Elles sont générées avec GPT Image 2.5 (6 images, coût inconnu) ; fiche : assets/illustrations/2026-11-11-s03-cartes/FICHE-DE-LOT.md. Elles remplacent les blocs isométriques en points (proofs/archive/S03Produit-v2-iso.astro).
+  - Le footer passe du fond orange à un paysage au crépuscule (réf. Fable) :
+    - image : mer de brouillard, Alpes en silhouette, horizon orangé ; générée avec Higgsfield Soul Location (4 variantes, 0,48 crédit, job fc8327c5 retenu) ; fiche : assets/footer/2026-11-11-crepuscule-soul-location/README.md ;
+    - mise en page : logo et phrase à gauche, bouton blanc « Réserver une démo ↗ » à droite, quatre colonnes (Produit, Agence, Canaux, Compte), mentions en bas ;
+    - le grand « lotivio. » est gardé, en contour fin, avec son point orange.
+- Raison : demandes de Diego (« des choses différentes […] deux variantes, vraiment bien faites, un petit peu comme en bande dessinée, et un autre […] en rapport avec la DA du site » ; « au niveau du footer, on mette une belle image […] avec Higgsfield »).
+- Remplace / modifie : le footer orange du 9.11 (proofs/archive/S11Footer-v1-orange.astro).
+- Vérifié : 1440 et 390 px, build.
+- Statut : proposition à valider (choix A ou B attendu).
+- Source : conversation Diego / Claude Code, 11 novembre 2026.
+
 ## 2026-11-11 — Hero épuré avec une main, S02 « Lotivio en bref », S03 en fils et cartes, intro retirée
 - Décision :
   - Hero v3, plus lisible :

@@ -2,13 +2,11 @@
 // Défilement : Lenis réglé comme meotis.ch (lerp 0.11, molette ×1).
 // Apparitions : transitions CSS déclenchées une fois par une classe `.in` (global.css,
 // « Apparitions façon meotis.ch ») — le navigateur les joue hors du fil JavaScript.
-// GSAP ne sert plus qu'aux effets liés au défilement (scrub), au mot « lotivio. » du footer
-// (SplitText) et au texte « décodé » (ScrambleText).
+// GSAP ne sert plus qu'aux effets liés au défilement (scrub) et au texte « décodé » (ScrambleText).
 // Les titres sont animés par flash.ts (éclair orange mot par mot, réf. fourmula.ai).
 // Si l'utilisateur demande moins de mouvement, rien n'est animé et le contenu reste visible.
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { SplitText } from 'gsap/SplitText';
 import { ScrambleTextPlugin } from 'gsap/ScrambleTextPlugin';
 import Lenis from 'lenis';
 
@@ -18,7 +16,7 @@ const $ = <T extends Element = HTMLElement>(s: string, r: ParentNode = document)
 const $$ = <T extends Element = HTMLElement>(s: string, r: ParentNode = document) => [...r.querySelectorAll<T>(s)];
 const tick = () => new Promise<void>((r) => setTimeout(r, 0));
 
-gsap.registerPlugin(ScrollTrigger, SplitText, ScrambleTextPlugin);
+gsap.registerPlugin(ScrollTrigger, ScrambleTextPlugin);
 // (init() est lancé en fin de fichier, une fois toutes les fonctions déclarées)
 
 /* ---------- Déclencheur unique des apparitions ---------- */
@@ -162,16 +160,9 @@ async function init() {
   const card = $('.cta10-card');
   if (card) gsap.fromTo(card, { scale: 0.93 }, { scale: 1, ease: 'none', scrollTrigger: { trigger: card, start: 'top bottom', end: 'top 35%', scrub: true } });
 
-  // S11 · le mot « lotivio. » monte lettre par lettre.
-  const word = $('[data-fword]'), foot = $('#foot2'), page = $('#page');
-  if (word && foot && page) {
-    // Pas de masque : la hauteur de ligne (0.74) couperait les lettres ; le footer rogne déjà le bas.
-    const s = SplitText.create(word, { type: 'chars', charsClass: 'fw-c' });
-    word.classList.add('is-split');
-    gsap.fromTo(s.chars, { yPercent: 110 }, {
-      yPercent: 0, ease: 'none', stagger: 0.06,
-      scrollTrigger: { trigger: page, start: 'bottom bottom', end: () => `bottom ${innerHeight - foot.offsetHeight * 0.85}px`, scrub: true, invalidateOnRefresh: true },
-    });
+  // S11 · le haut du footer descend en place pendant que la page le découvre.
+  const foot = $('#foot2'), page = $('#page');
+  if (foot && page && $('.f-top', foot)) {
     gsap.fromTo('.f-top', { y: -60, autoAlpha: 0.2 }, {
       y: 0, autoAlpha: 1, ease: 'none',
       scrollTrigger: { trigger: page, start: 'bottom bottom', end: () => `bottom ${innerHeight - foot.offsetHeight * 0.6}px`, scrub: true, invalidateOnRefresh: true },

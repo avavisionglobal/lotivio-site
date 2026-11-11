@@ -1,0 +1,38 @@
+/* =================================================================
+   S11 · Footer « crépuscule » (réf. Fable, 11.11.2026)
+   Surcharge le footer orange de global.css : même mécanique de révélation (#foot2, .f-top, [data-fword]).
+   ================================================================= */
+.foot2.fx{background:#0C111A;color:#fff;padding:64px var(--pad) 40px;min-height:640px;isolation:isolate}
+.foot2.fx .fx-legal{margin-top:auto}
+.foot2.fx .fx-cols{margin-bottom:56px}
+.fx-bg{position:absolute;inset:0;z-index:-2}
+.fx-bg img{width:100%;height:100%;object-fit:cover;object-position:50% 70%}
+/* Voile : le haut reste sombre pour le texte, l'horizon orange et la brume restent visibles en bas. */
+.foot2.fx::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background:linear-gradient(180deg,rgba(9,12,19,.62) 0%,rgba(9,12,19,.36) 40%,rgba(9,12,19,0) 68%,rgba(9,12,19,.18) 100%)}
+
+.fx-top{display:flex;justify-content:space-between;align-items:flex-start;gap:40px;max-width:1440px;width:100%;margin:0 auto;padding-bottom:36px;border-bottom:1px solid rgba(255,255,255,.14)}
+.fx-logo{display:inline-flex;align-items:center;gap:10px;font-family:var(--disp);font-variation-settings:"wdth" 118;font-weight:700;font-size:28px;letter-spacing:-.04em;color:#fff}
+.fx-logo img{width:30px;height:30px;border-radius:8px;box-shadow:0 0 0 1px rgba(255,255,255,.25)}
+.fx-logo i{font-style:normal;color:var(--orange)}
+.fx-brand p{margin-top:18px;max-width:30em;font-size:15px;line-height:1.55;color:rgba(255,255,255,.78)}
+.fx-cta{flex:none;display:inline-flex;align-items:center;gap:12px;background:#fff;color:var(--ink);padding:5px 5px 5px 16px;font-size:14px;font-weight:500;margin-top:6px;transition:background .2s}
+.fx-cta span{display:grid;place-items:center;width:30px;height:30px;background:var(--ink);color:#fff;font-size:13px;transition:transform .25s var(--ease),background .2s}
+.fx-cta:hover{background:var(--orange);color:#fff}
+.fx-cta:hover span{transform:rotate(45deg)}
+
+.fx-cols{display:grid;grid-template-columns:repeat(4,1fr);gap:30px;max-width:1440px;width:100%;margin:40px auto 0}
+.fx-cols h2{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;font-weight:500;color:#fff;margin-bottom:16px}
+.fx-cols a,.fx-cols span{display:block;margin-top:9px;font-size:14px;color:rgba(255,255,255,.8)}
+.foot2.fx .fx-cols,.foot2.fx .fx-legal,.foot2.fx .fx-brand{text-shadow:0 1px 14px rgba(9,12,19,.75)}
+.fx-cols a:hover{color:#fff;text-decoration:underline;text-underline-offset:3px}
+
+.fx-legal{max-width:1440px;width:100%;margin:48px auto 0;padding-top:16px;border-top:1px solid rgba(255,255,255,.14);color:rgba(255,255,255,.6)}
+
+@media (max-width:1000px){
+  .foot2.fx{min-height:0;padding-top:48px}
+  .foot2.fx::before{background:linear-gradient(180deg,rgba(9,12,19,.7) 0%,rgba(9,12,19,.5) 55%,rgba(9,12,19,.2) 100%)}
+  .fx-top{flex-direction:column;gap:24px}
+  .fx-cols{grid-template-columns:1fr 1fr;gap:28px 20px}
+  .fx-legal{flex-direction:column;gap:6px}
+}
