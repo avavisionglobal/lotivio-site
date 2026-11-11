@@ -49,13 +49,13 @@ type Src = { name: string; logo: string; lw: number; lh: number; label?: string;
 // chip : position du jeton sur grand écran ; chipM : position sur mobile (null = masqué).
 // pause : temps de repos entre deux impulsions ; start : décalage initial (négatif = déjà en route).
 const sources: Src[] = [
-  { name: 'Homegate', logo: '/media/logos/homegate.svg', lw: 74, lh: 13, pts: [[-260, 420], [330, 420], [330, 620], [720, 620]], chip: [170, 420], chipM: [470, 620], pause: 6.4, start: -1.2 },
-  { name: 'ImmoScout24', logo: '/media/logos/immoscout24.svg', lw: 37, lh: 22, pts: [[-260, 540], [200, 540], [200, 670], [720, 670]], chip: [92, 540], chipM: null, pause: 9.2, start: -6.5 },
-  { name: 'Meta Ads', logo: '/media/logos/meta-64.webp', lw: 65, lh: 13, pts: [[-260, 680], [90, 680], [90, 720], [720, 720]], chip: [330, 720], chipM: [545, 720], pause: 5.6, start: -3.4 },
+  { name: 'Homegate', logo: '/media/logos/homegate.svg', lw: 74, lh: 13, pts: [[-260, 420], [330, 420], [330, 620], [720, 620]], chip: [170, 420], chipM: [548, 620], pause: 6.4, start: -1.2 },
+  { name: 'ImmoScout24', logo: '/media/logos/immoscout24.svg', lw: 37, lh: 22, pts: [[-260, 540], [210, 540], [210, 670], [720, 670]], chip: [128, 540], chipM: null, pause: 9.2, start: -6.5 },
+  { name: 'Meta Ads', logo: '/media/logos/meta-64.webp', lw: 65, lh: 13, pts: [[-260, 680], [90, 680], [90, 720], [720, 720]], chip: [330, 720], chipM: [552, 720], pause: 5.6, start: -3.4 },
   { name: 'Votre site', logo: '', lw: 0, lh: 0, label: 'Votre site', pts: [[-260, 800], [520, 800], [520, 770], [720, 770]], chip: [290, 800], chipM: null, pause: 10.5, start: -9.8 },
-  { name: 'WhatsApp', logo: '/media/logos/whatsapp.svg', lw: 16, lh: 16, label: 'WhatsApp', pts: [[1700, 430], [1110, 430], [1110, 615], [720, 615]], chip: [1290, 430], chipM: [945, 615], pause: 7.2, start: -4.6 },
-  { name: 'immobilier.ch', logo: '/media/logos/immobilier-ch.svg', lw: 85, lh: 12, pts: [[1700, 560], [1250, 560], [1250, 665], [720, 665]], chip: [1372, 560], chipM: null, pause: 8.6, start: -8.1 },
-  { name: 'Properstar', logo: '/media/logos/properstar-logo-84.webp', lw: 71, lh: 11, pts: [[1700, 650], [1370, 650], [1370, 715], [720, 715]], chip: [1120, 715], chipM: [905, 715], pause: 6.1, start: -2.4 },
+  { name: 'WhatsApp', logo: '/media/logos/whatsapp.svg', lw: 16, lh: 16, label: 'WhatsApp', pts: [[1700, 430], [1110, 430], [1110, 615], [720, 615]], chip: [1290, 430], chipM: [896, 615], pause: 7.2, start: -4.6 },
+  { name: 'immobilier.ch', logo: '/media/logos/immobilier-ch.svg', lw: 85, lh: 12, pts: [[1700, 560], [1200, 560], [1200, 665], [720, 665]], chip: [1302, 560], chipM: null, pause: 8.6, start: -8.1 },
+  { name: 'Properstar', logo: '/media/logos/properstar-logo-84.webp', lw: 71, lh: 11, pts: [[1700, 650], [1370, 650], [1370, 715], [720, 715]], chip: [1120, 715], chipM: [892, 715], pause: 6.1, start: -2.4 },
 ];
 
 const wires = sources.map((s) => {
@@ -71,7 +71,7 @@ const wires = sources.map((s) => {
 // Fils sans impulsion : finitions du circuit, tige sous l'objet.
 const decor: P[][] = [
   [[-260, 250], [60, 250], [60, 330], [150, 330], [150, 372]],
-  [[1700, 300], [1330, 300], [1330, 382]],
+  [[1700, 300], [1318, 300], [1318, 382]],
   [[1700, 820], [1460, 820], [1460, 980]],
   [[705, 700], [705, 980]],
   [[720, 700], [720, 980]],
@@ -79,18 +79,16 @@ const decor: P[][] = [
 ];
 // Liaison de l'objet vers la carte « Demandes reçues » : une impulsion la parcourt à chaque arrivée.
 const feed = route([[720, 740], [930, 740], [930, 800]]);
-const ends: P[] = [[150, 372], [1330, 382]];
+const ends: P[] = [[150, 372], [1318, 382]];
 
 // Petits « outils » posés sur les fils (finitions, comme sur la référence).
-const tools: { at: P; g: string; v?: boolean; m?: boolean }[] = [
+const tools: { at: P; g: string; v?: boolean }[] = [
   { at: [60, 292], g: 'dots', v: true },
   { at: [330, 525], g: 'bars', v: true },
-  { at: [1250, 612], g: 'dots', v: true },
+  { at: [1200, 612], g: 'dots', v: true },
   { at: [1110, 520], g: 'x', v: true },
-  { at: [200, 608], g: 'grid', v: true },
+  { at: [210, 608], g: 'grid', v: true },
   { at: [1540, 820], g: 'bars' },
-  { at: [610, 620], g: 'pins', m: true },
-  { at: [835, 715], g: 'pins', m: true },
 ];
 
 /* ---------- Symbole Lotivio, gravé dans l'objet ---------- */
@@ -138,7 +136,7 @@ const words = (list: string[], from: number) => list.map((w, i) => `<span class=
     </svg>
 
     {tools.map((t) => (
-      <span class={`tool-c g-${t.g}${t.v ? ' v' : ''}${t.m ? ' m-only' : ''}`} style={`left:${px(t.at[0])}px;top:${t.at[1]}px`}><i></i><i></i><i></i></span>
+      <span class={`tool-c g-${t.g}${t.v ? ' v' : ''}`} style={`left:${px(t.at[0])}px;top:${t.at[1]}px`}><i></i><i></i><i></i></span>
     ))}
 
     {wires.map((w) => (
@@ -150,7 +148,7 @@ const words = (list: string[], from: number) => list.map((w, i) => `<span class=
       </span>
     ))}
 
-    <span class="tile-c" style={`left:${px(1330)}px;top:341px`}><img src="/brand/lotivio-mark.svg" alt="" width="22" height="22" /></span>
+    <span class="tile-c" style={`left:${px(1318)}px;top:341px`}><img src="/brand/lotivio-mark.svg" alt="" width="22" height="22" /></span>
 
     <div class="hub" id="hub" style={`left:${px(HUB[0])}px;top:${HUB[1]}px`}>
       <div class="hub-in">

@@ -31,6 +31,8 @@ npm run images     # régénère les WebP de public/media depuis assets/
 | `src/scripts/app.ts` | Comportements : trames de code, démos animées, réglages, réservation, film, menu |
 | `src/scripts/texhover.ts` | Lentille de code au survol des trames |
 | `src/scripts/motion.ts` | Animations GSAP + Lenis (chargé quand le navigateur est libre) |
+| `src/scripts/flash.ts` | Titres : éclair orange mot par mot |
+| `src/scripts/bento.ts` | Rythme des illustrations animées de S07 |
 | `src/styles/global.css` | Styles (issus de la maquette `proofs/a-orbite.html`, purgés) + ajouts de production en fin de fichier |
 | `proofs/` | Maquettes HTML de conception (hors site) |
 
@@ -41,12 +43,12 @@ Chaque section et bloc porte un attribut `data-bloc="Sxx.n"` identique au nom du
 Niveau visé : fourmula.ai et meotis.ch.
 
 - Défilement doux (Lenis) ; ancres internes animées.
-- Premier écran : entrée en CSS (titre, sous-titre, boutons, fenêtre de l'app), sans attendre le JavaScript.
-- Titres révélés ligne par ligne sous masque (SplitText) ; labels « décodés » (ScrambleText).
+- Premier écran : hero « circuit » (`S01Hero.astro`, `hero-circuit.css`, `hero.ts`), entrée en CSS sans attendre le JavaScript ; les mots du titre montent sous masque en passant par l'orange.
+- Titres de section (`data-flash`, `src/scripts/flash.ts`) : éclair orange mot par mot comme sur fourmula.ai — un mot toutes les 0,1 s apparaît en orange puis reprend sa couleur (en encre sur la section orange S07B). Labels « décodés » (ScrambleText).
 - Blocs révélés par lots, compteur « 4 h », tuiles de la file, collages en parallaxe (S03).
 - S04 : la ligne active s'allume au défilement.
 - S06 : panneaux empilés ; le précédent recule et s'assombrit.
-- S07 : piste horizontale pilotée par le défilement ; les cartes se redressent en entrant.
+- S07 : piste horizontale pilotée par le défilement ; les cartes se redressent en entrant. Chaque carte porte une illustration bento animée (boucle de 9 s, `src/scripts/bento.ts`) : `data-steps` liste les étapes en ms, le script pose `k1`, `k2`… et le CSS (bloc « S07 · illustrations bento ») fait les transitions. Scène en em : elle se réduit d'un bloc sur mobile. Les classes internes sont spécifiques (`plg`, `scn`, `stp`…) pour ne pas hériter des styles d'autres sections.
 - S07B : les porte-clés viennent se suspendre au tableau.
 - S08.3 : l'éventail de brochures s'ouvre.
 - S10 : la carte se redresse.

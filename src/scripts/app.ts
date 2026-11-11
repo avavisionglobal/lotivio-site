@@ -77,39 +77,6 @@ texBySection.forEach((_, host) => texIo.observe(host));
 const all = () => setTimeout(() => enqueue([...texBySection.values()].flat()), 1500);
 if (document.readyState === 'complete') all(); else addEventListener('load', all);
 
-/* ---------- S01 · file de demandes en direct ---------- */
-(() => {
-  const feed = $('#feed'); if (!feed) return;
-  const data = [
-    ['Homegate', 'David Grosjean', 'Clos des Vergers · Lot A2', 'Nouveau', 'n'],
-    ['WhatsApp', 'Nathalie Girard', 'Les Terrasses du Vignoble', 'Qualifié', 'q'],
-    ['Site internet', 'Yann Renaud', 'Résidence Lac & Lumière', 'Brochure envoyée', 'b'],
-    ['immobilier.ch', 'Claire Monnier', 'Les Terrasses · Attique', 'Nouveau', 'n'],
-    ['Meta Ads', 'Marc Vuilleumier', 'Clos des Vergers · Lot C1', 'Qualifié', 'q'],
-    ['Properstar', 'Léa Perrin', 'Résidence Lac & Lumière', 'Nouveau', 'n'],
-    ['Pipeline', 'Famille Aubry', 'Les Terrasses · Lot B2', 'Vendu', 'v'],
-    ['ImmoScout24', 'Sophie Jeanneret', 'Clos des Vergers · Lot A4', 'Nouveau', 'n'],
-  ];
-  let n = 0, count = 12, minute = 47;
-  const row = (d: string[], t: string) => {
-    const r = el('div', 'row new'), who = el('div', 'who');
-    who.append(el('b', null, d[1]), el('span', null, d[2]));
-    r.append(el('span', 'tm', t), el('span', 'src', d[0]), who, el('span', 'st ' + d[4], d[3]));
-    setTimeout(() => r.classList.remove('new'), 1400);
-    return r;
-  };
-  for (let i = 0; i < 5; i++) feed.append(row(data[(i + 3) % data.length], '21:' + (40 - i * 3)));
-  const countEl = $('#count'), clock = $('#clock'), mark = $('#mark');
-  loopWhenVisible(feed, () => {
-    const d = data[n++ % data.length]; minute = (minute + 1) % 60;
-    const t = '21:' + String(minute).padStart(2, '0');
-    feed.prepend(row(d, t)); if (feed.children.length > 7) feed.lastElementChild!.remove();
-    if (d[4] === 'n' && countEl) countEl.textContent = ++count + " demandes aujourd'hui";
-    if (clock) clock.textContent = t;
-    if (mark) mark.style.left = Math.min(98, (n % 12) * 8.5) + '%';
-  }, 2400);
-})();
-
 const belowFold = () => {
 
 /* ---------- S03 · onde de la dictée ---------- */

@@ -15,6 +15,57 @@ Format d'une entrée :
 
 ---
 
+## 2026-11-11 — Titres en éclair orange et illustrations animées de S07
+- Décision :
+  - Tous les titres de section (H2 et titres des cartes S03) s'animent comme sur fourmula.ai, mesuré sur leur site :
+    - à l'entrée dans l'écran, chaque mot apparaît en orange puis reprend sa couleur ;
+    - un mot démarre toutes les 0,1 s, ce qui fait glisser l'orange d'un mot à l'autre avant que le titre se stabilise ;
+    - sur la section orange (S07B), l'éclair passe en encre.
+  - Cette animation remplace les révélations ligne par ligne (SplitText) des titres.
+  - Les maquettes statiques des cinq cartes « 🇨🇭 Pensé pour votre agence » (S07) sont remplacées par des illustrations bento animées, en boucle de 9 s :
+    1. Atelier : la carte de fonctionnement de l'agence se dessine (sources, demande, qui répond, qui relance).
+    2. Branchements : chaque canal se connecte à Lotivio dans son sens réel. Les portails, Meta Ads et le site sont entrants, WhatsApp va dans les deux sens et Outlook ne sert qu'à l'envoi.
+    3. Parcours : le premier contact et la brochure partent seuls, tandis que la relance attend la validation de l'agent.
+    4. Assistant : il lit la fiche projet et les consignes avant de répondre, et la réponse cite sa source.
+    5. Mise en route : import des contacts, équipe en ligne, première demande prise en charge.
+  - Toutes les données affichées sont des données de démonstration, sans chiffre de performance.
+- Raison : demandes de Diego (« un mot qui se mette en orange et passe sur un autre avant de se stabiliser » ; « les illustrations pour chaque carte en motion design comme un bento design […] d'une grande qualité »).
+- Remplace / modifie :
+  - révélation des titres par lignes du 9.11 ;
+  - maquettes S07 et réglages cliquables de S07.3, dont le code est retiré d'app.ts.
+  - La demande d'un hero « plus travaillé » est traitée dans l'entrée « Hero circuit » ci-dessous. Son titre reprend le même langage : chaque mot monte sous un masque et passe par l'orange.
+  - Les règles CSS et le code de l'ancien hero, devenus inutiles, sont retirés.
+- Fichiers :
+  - src/scripts/flash.ts (titres) ;
+  - src/scripts/bento.ts (rythme des scènes) ;
+  - src/components/S07MiseEnPlace.astro ;
+  - global.css, blocs « Titres : éclair orange » et « S07 · illustrations bento ».
+- Technique :
+  - les animations sont en CSS ;
+  - une scène ne tourne que si sa carte est à l'écran ;
+  - avec moins de mouvement, ou sans JavaScript, chaque scène s'affiche complète et immobile.
+- Vérifié :
+  - 10 largeurs de 320 à 1920 px, sans défilement horizontal ;
+  - les cinq scènes en mouvement et en état final ;
+  - build sans erreur.
+- Statut : proposition à valider.
+- Source : conversation Diego / Claude Code, 11 novembre 2026, référence https://fourmula.ai/.
+
+## 2026-11-11 — Hero « circuit » sur le modèle de Synais
+- Décision :
+  - Le premier écran reprend la composition de la référence Synais fournie par Diego : titre centré bicolore (« écrivent partout. » en taupe), fils de circuit fins qui convergent vers un objet central, petits outils gravés posés sur les fils, tuile blanche Lotivio, texte « /en bref/ » en bas à gauche, deux cartes sombres en bas à droite.
+  - Les « outils » sur les fils sont les vrais canaux : Homegate, ImmoScout24, immobilier.ch, Properstar, Meta Ads, WhatsApp, votre site.
+  - Les connexions se voient : une impulsion orange part de chaque source, allume son jeton au passage, entre dans l'objet Lotivio, puis une impulsion part vers la carte « Demandes reçues », dont le compteur monte.
+  - L'objet central est l'icône Lotivio en volume, construite en CSS, avec une lumière orange à sa base. Pas de main ni de photo : aucune génération faite.
+  - Les logos ne sont plus dans le titre, la bande « Vos canaux, connectés » et la fenêtre « demandes_recues » sont retirées du hero : les canaux sont désormais sur les fils.
+  - Textes : ceux de Figma v6 sont conservés et répartis entre le sous-titre et le bloc « /en bref/ ». Cartes : données de démonstration.
+- Raison : demande de Diego (« quelque chose de très similaire […] avec les mêmes détails de finition et autres outils en arrière-plan qui suivent les fils et que l'on voit les connexions »).
+- Remplace / modifie : hero variante 1 du 9.11 (archivé dans proofs/archive/S01Hero-v1-avant-circuit.astro). La trame de code ASCII n'est plus dans le hero ; elle reste dans les autres sections.
+- Fichiers : src/components/S01Hero.astro, src/styles/hero-circuit.css, src/scripts/hero.ts.
+- Vérifié : 390, 1280×800, 1440×900, 1920×1080, mouvement réduit, build.
+- Statut : proposition à valider.
+- Source : conversation Diego / Claude Code, 11 novembre 2026, capture Synais.
+
 ## 2026-11-09 — Barre de navigation dépolie, vitesse et adaptation aux écrans
 - Décision :
   - Quand on quitte le haut de page, le menu repose sur une bande en verre dépoli, lisible sur tous les fonds.

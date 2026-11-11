@@ -17,12 +17,12 @@ function wrap(node: Node, words: HTMLElement[]) {
         if (!p) continue;
         if (/^\s+$/.test(p)) { frag.append(p); continue; }
         const s = document.createElement('span');
-        s.className = 'fw'; s.textContent = p;
+        s.className = 'flw'; s.textContent = p;
         words.push(s); frag.append(s);
       }
       n.replaceWith(frag);
     } else if (n instanceof HTMLElement && n.tagName !== 'BR') {
-      if (n.matches(ATOMIC)) { n.classList.add('fw'); words.push(n); }
+      if (n.matches(ATOMIC)) { n.classList.add('flw'); words.push(n); }
       else wrap(n, words);
     }
   }
@@ -31,7 +31,7 @@ function wrap(node: Node, words: HTMLElement[]) {
 if (!reduced) {
   const io = new IntersectionObserver((es) => es.forEach((e) => {
     if (!e.isIntersecting) return;
-    e.target.classList.add('fl-in');
+    e.target.classList.add('flh-in');
     io.unobserve(e.target);
   }), { rootMargin: '0px 0px -12% 0px' });
 
@@ -39,7 +39,7 @@ if (!reduced) {
     const words: HTMLElement[] = [];
     wrap(h, words);
     words.forEach((w, i) => w.style.setProperty('--i', String(i)));
-    h.classList.add('fl');
+    h.classList.add('flh');
     io.observe(h);
   });
 }
