@@ -2,8 +2,9 @@
 // Défilement : Lenis réglé comme meotis.ch (lerp 0.11, molette ×1).
 // Apparitions : transitions CSS déclenchées une fois par une classe `.in` (global.css,
 // « Apparitions façon meotis.ch ») — le navigateur les joue hors du fil JavaScript.
-// GSAP ne sert plus qu'aux effets liés au défilement (scrub), au découpage des titres
+// GSAP ne sert plus qu'aux effets liés au défilement (scrub), au mot « lotivio. » du footer
 // (SplitText) et au texte « décodé » (ScrambleText).
+// Les titres sont animés par flash.ts (éclair orange mot par mot, réf. fourmula.ai).
 // Si l'utilisateur demande moins de mouvement, rien n'est animé et le contenu reste visible.
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -60,22 +61,11 @@ async function init() {
 
   await tick(); // étape courte : le navigateur reprend la main entre deux groupes
   /* ---------- Préparation des apparitions (avant d'activer les états cachés) ---------- */
-  // Titres découpés en lignes (SplitText) ; les lignes reçoivent leur rang pour le décalage CSS.
-  // Découpage paresseux : un titre n'est découpé qu'un écran avant d'arriver (pas tous au chargement).
-  const split = (h: Element) => SplitText.create(h, { type: 'lines', mask: 'lines', autoSplit: true, linesClass: 'sl', onSplit: (self) => index(self.lines) });
-  const splitIo = new IntersectionObserver((es) => es.forEach((e) => {
-    if (!e.isIntersecting) return;
-    splitIo.unobserve(e.target); split(e.target);
-  }), { rootMargin: '0px 0px 100% 0px' });
-  $$('[data-split]').forEach((h) => {
-    if (h.closest('#hs-track')) return; // titre de la piste horizontale S07 : traité avec la piste
-    if (h.getBoundingClientRect().top < innerHeight * 1.2) split(h); else splitIo.observe(h);
-  });
-  $$('[data-lines]').forEach((h) => index($$('.li', h)));
+  // Les titres (data-flash) sont animés par flash.ts : éclair orange mot par mot, en CSS.
   $$('[data-stagger], [data-tiles]').forEach((g) => index([...g.children]));
   $$('.bfan').forEach((f) => index($$('.bp', f)));
   // Tout ce qui est déjà à l'écran est marqué visible avant d'activer les états cachés.
-  const targets = $$('[data-reveal], [data-split], [data-lines], [data-stagger], [data-tiles], .f-stage, .bfan, .flow4 .pn')
+  const targets = $$('[data-reveal], [data-stagger], [data-tiles], .f-stage, .bfan, .flow4 .pn')
     .filter((el) => !el.closest('#hs-track'));
   targets.forEach((el) => { if (el.getBoundingClientRect().top < innerHeight * 0.92) el.classList.add('in'); });
   root.classList.add('rv-on');
@@ -157,15 +147,6 @@ async function init() {
     $$('.oc', track).forEach((card) => {
       gsap.from(card, { rotate: 3, y: 50, scale: 0.95, ease: 'none', scrollTrigger: { trigger: card, containerAnimation: tween, start: 'left right', end: 'left 60%', scrub: true } });
     });
-    const intro = $('.hs-intro', track);
-    if (intro) {
-      const h = $('h2', intro)!;
-      // Le déclencheur de ce titre est le bloc d'intro (.hs-intro), pas le titre lui-même :
-      // on le marque « in » pour que seule la règle .hs-intro:not(.in) s'applique.
-      h.classList.add('in');
-      SplitText.create(h, { type: 'lines', mask: 'lines', linesClass: 'sl', onSplit: (self) => index(self.lines) });
-      watch(intro);
-    }
     return () => { ScrollTrigger.removeEventListener('refreshInit', setH); sec.style.height = ''; };
   });
 

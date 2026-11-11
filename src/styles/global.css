@@ -796,6 +796,17 @@ html.lenis{scroll-behavior:auto}
   .hv1 [data-intro-stage]{transform-origin:50% 0;animation:in-stage 1.6s cubic-bezier(.16,1,.3,1) backwards .6s}
 }
 
+/* =================================================================
+   Titres : éclair orange mot par mot (réf. fourmula.ai, mesuré sur leur site)
+   Un mot toutes les 0,1 s ; chacun apparaît en 0,15 s, reste orange ~0,3 s
+   puis reprend sa couleur. Mots découpés par flash.ts.
+   ================================================================= */
+:root{--flash:#EB6E2C;--flash-2:#F39150}
+.why{--flash:#141414;--flash-2:#3a2316} /* titre blanc sur fond orange : l'éclair passe en encre */
+@keyframes fw{0%{opacity:0;color:var(--flash)}27%{opacity:1;color:var(--flash)}62%{color:var(--flash)}80%{color:var(--flash-2)}100%{opacity:1}}
+.fl:not(.fl-in) .fw{opacity:0}
+.fl.fl-in .fw{animation:fw .56s linear both;animation-delay:calc(var(--i) * .1s)}
+
 /* Le footer fixe reste masqué tant qu'on n'approche pas du bas (évite les décalages comptés au chargement) */
 .js .foot2{visibility:hidden}
 .js .foot2.is-near{visibility:visible}

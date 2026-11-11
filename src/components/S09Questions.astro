@@ -14,7 +14,7 @@ const ld = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: q
   <div class="faq">
     <div class="lab" data-scramble>Vos questions, avant de changer</div>
     <div class="r">
-      <h2 class="h2 faq-h" data-split>Votre agence.<span class="g">Vos questions.</span></h2>
+      <h2 class="h2 faq-h" data-flash>Votre agence.<span class="g">Vos questions.</span></h2>
       {qa.map(([q, a], i) => (
         <details open={i === 0} data-bloc={`S09.${i + 1}`} data-reveal><summary>{q}</summary><p>{a}</p></details>
       ))}

@@ -153,23 +153,6 @@ const belowFold = () => {
   stage(); loopWhenVisible(tool, stage, 1500);
 })();
 
-/* ---------- S07.3 · réglages cliquables ---------- */
-(() => {
-  const chain = $('#chain'); if (!chain) return;
-  const v = (k: string) => $(`.seg[data-k="${k}"] [aria-pressed="true"]`)?.textContent ?? '';
-  const draw = () => {
-    const steps = ['Demande', v('first') === 'Automatique' ? 'Message automatique' : "Message validé par l'agent", 'Brochure · ' + v('bro'), v('rel') === 'Aucune' ? 'Pas de relance' : 'Relance · ' + v('rel')];
-    const parts: HTMLElement[] = [];
-    steps.forEach((s, i) => { if (i) parts.push(el('i', null, '→')); parts.push(el('span', null, s)); });
-    chain.replaceChildren(...parts);
-  };
-  $$('.seg').forEach((seg) => seg.addEventListener('click', (e) => {
-    const b = (e.target as HTMLElement).closest('button'); if (!b) return;
-    $$('button', seg).forEach((x) => x.setAttribute('aria-pressed', x === b ? 'true' : 'false')); draw();
-  }));
-  draw();
-})();
-
 /* ---------- S08.2 · interrupteurs de diffusion ---------- */
 $$('[data-diff] > div').forEach((row) => {
   const sw = $('.sw', row)!; const label = row.firstElementChild!.textContent;

@@ -1,48 +1,219 @@
 ---
-import sharp from 'sharp';
+// S01 · Hero « circuit » (réf. Synais, capture fournie par Diego le 11.11.2026) :
+// les canaux de l'agence sont posés sur des fils qui convergent vers l'objet Lotivio.
+// Une impulsion part de chaque source, allume son jeton au passage, arrive dans Lotivio
+// et fait monter le compteur de la carte « Demandes reçues ». Données de démonstration.
+// Version précédente : proofs/archive/S01Hero-v1-avant-circuit.astro
+import fs from 'node:fs';
+import '../styles/hero-circuit.css';
 import path from 'node:path';
-const raw: [string, string, number][] = [
-  ['/media/logos/homegate.svg', 'Homegate', 30],
-  ['/media/logos/immoscout24.svg', 'ImmoScout24', 38],
-  ['/media/logos/immobilier-ch.svg', 'immobilier.ch', 20],
-  ['/media/logos/properstar-logo-84.webp', 'Properstar', 24],
-  ['/media/logos/meta-64.webp', 'Meta', 22],
+
+/* ---------- Géométrie : repère de 1440 × 960 (scène), fils prolongés de 240 de chaque côté ---------- */
+type P = [number, number];
+const R = 14; // rayon des coudes
+
+/** Tracé orthogonal à coudes arrondis. */
+function route(pts: P[], r = R) {
+  let d = `M${pts[0][0]} ${pts[0][1]}`;
+  for (let i = 1; i < pts.length - 1; i++) {
+    const [px, py] = pts[i - 1], [cx, cy] = pts[i], [nx, ny] = pts[i + 1];
+    const l1 = Math.hypot(cx - px, cy - py), l2 = Math.hypot(nx - cx, ny - cy);
+    const k = Math.min(r, l1 / 2, l2 / 2);
+    const ax = cx - ((cx - px) / l1) * k, ay = cy - ((cy - py) / l1) * k;
+    const bx = cx + ((nx - cx) / l2) * k, by = cy + ((ny - cy) / l2) * k;
+    d += ` L${ax.toFixed(1)} ${ay.toFixed(1)} Q${cx} ${cy} ${bx.toFixed(1)} ${by.toFixed(1)}`;
+  }
+  const [lx, ly] = pts[pts.length - 1];
+  return d + ` L${lx} ${ly}`;
+}
+const length = (pts: P[]) => pts.slice(1).reduce((s, p, i) => s + Math.hypot(p[0] - pts[i][0], p[1] - pts[i][1]), 0);
+/** Distance parcourue le long du tracé jusqu'au point le plus proche de `q`. */
+function along(pts: P[], q: P) {
+  let best = Infinity, at = 0, acc = 0;
+  for (let i = 1; i < pts.length; i++) {
+    const [ax, ay] = pts[i - 1], [bx, by] = pts[i];
+    const L = Math.hypot(bx - ax, by - ay);
+    const t = Math.max(0, Math.min(1, ((q[0] - ax) * (bx - ax) + (q[1] - ay) * (by - ay)) / (L * L || 1)));
+    const dd = Math.hypot(ax + (bx - ax) * t - q[0], ay + (by - ay) * t - q[1]);
+    if (dd < best) { best = dd; at = acc + L * t; }
+    acc += L;
+  }
+  return at;
+}
+
+const HUB: P = [720, 690];
+const SPEED = 330; // unités par seconde
+const DASH = 46;   // longueur de l'impulsion
+
+type Src = { name: string; logo: string; lw: number; lh: number; label?: string; pts: P[]; chip: P; chipM: P | null; pause: number; start: number };
+// chip : position du jeton sur grand écran ; chipM : position sur mobile (null = masqué).
+// pause : temps de repos entre deux impulsions ; start : décalage initial (négatif = déjà en route).
+const sources: Src[] = [
+  { name: 'Homegate', logo: '/media/logos/homegate.svg', lw: 74, lh: 13, pts: [[-260, 420], [330, 420], [330, 620], [720, 620]], chip: [170, 420], chipM: [470, 620], pause: 6.4, start: -1.2 },
+  { name: 'ImmoScout24', logo: '/media/logos/immoscout24.svg', lw: 37, lh: 22, pts: [[-260, 540], [200, 540], [200, 670], [720, 670]], chip: [92, 540], chipM: null, pause: 9.2, start: -6.5 },
+  { name: 'Meta Ads', logo: '/media/logos/meta-64.webp', lw: 65, lh: 13, pts: [[-260, 680], [90, 680], [90, 720], [720, 720]], chip: [330, 720], chipM: [545, 720], pause: 5.6, start: -3.4 },
+  { name: 'Votre site', logo: '', lw: 0, lh: 0, label: 'Votre site', pts: [[-260, 800], [520, 800], [520, 770], [720, 770]], chip: [290, 800], chipM: null, pause: 10.5, start: -9.8 },
+  { name: 'WhatsApp', logo: '/media/logos/whatsapp.svg', lw: 16, lh: 16, label: 'WhatsApp', pts: [[1700, 430], [1110, 430], [1110, 615], [720, 615]], chip: [1290, 430], chipM: [945, 615], pause: 7.2, start: -4.6 },
+  { name: 'immobilier.ch', logo: '/media/logos/immobilier-ch.svg', lw: 85, lh: 12, pts: [[1700, 560], [1250, 560], [1250, 665], [720, 665]], chip: [1372, 560], chipM: null, pause: 8.6, start: -8.1 },
+  { name: 'Properstar', logo: '/media/logos/properstar-logo-84.webp', lw: 71, lh: 11, pts: [[1700, 650], [1370, 650], [1370, 715], [720, 715]], chip: [1120, 715], chipM: [905, 715], pause: 6.1, start: -2.4 },
 ];
-// Largeur déclarée d'après les proportions réelles du fichier : pas de saut de mise en page.
-const strip = await Promise.all(raw.map(async ([src, alt, h]) => {
-  const m = await sharp(path.resolve(process.cwd(), 'public' + src)).metadata();
-  return { src, alt, h, w: Math.round((h * (m.width ?? h)) / (m.height ?? h)) };
-}));
+
+const wires = sources.map((s) => {
+  const L = length(s.pts);
+  const lead = s.pause * SPEED;  // l'impulsion « attend » avant le début du tracé
+  const o0 = DASH + lead, o1 = -(L + 8);
+  const D = (o0 - o1) / SPEED;   // durée d'un cycle
+  // Moment où l'impulsion passe sur le jeton : son allumage est calé sur ce passage.
+  const flash = (q: P | null) => (q ? s.start + ((lead + along(s.pts, q)) / (o0 - o1)) * D : 0);
+  return { ...s, d: route(s.pts), o0, o1, D, dl: flash(s.chip), dlm: flash(s.chipM) };
+});
+
+// Fils sans impulsion : finitions du circuit, tige sous l'objet.
+const decor: P[][] = [
+  [[-260, 250], [60, 250], [60, 330], [150, 330], [150, 372]],
+  [[1700, 300], [1330, 300], [1330, 382]],
+  [[1700, 820], [1460, 820], [1460, 980]],
+  [[705, 700], [705, 980]],
+  [[720, 700], [720, 980]],
+  [[735, 700], [735, 980]],
+];
+// Liaison de l'objet vers la carte « Demandes reçues » : une impulsion la parcourt à chaque arrivée.
+const feed = route([[720, 740], [930, 740], [930, 800]]);
+const ends: P[] = [[150, 372], [1330, 382]];
+
+// Petits « outils » posés sur les fils (finitions, comme sur la référence).
+const tools: { at: P; g: string; v?: boolean; m?: boolean }[] = [
+  { at: [60, 292], g: 'dots', v: true },
+  { at: [330, 525], g: 'bars', v: true },
+  { at: [1250, 612], g: 'dots', v: true },
+  { at: [1110, 520], g: 'x', v: true },
+  { at: [200, 608], g: 'grid', v: true },
+  { at: [1540, 820], g: 'bars' },
+  { at: [610, 620], g: 'pins', m: true },
+  { at: [835, 715], g: 'pins', m: true },
+];
+
+/* ---------- Symbole Lotivio, gravé dans l'objet ---------- */
+const svg = fs.readFileSync(path.resolve(process.cwd(), 'assets/brand/lotivio-mark.svg'), 'utf8');
+const markD = [...svg.matchAll(/<path transform="[^"]+" d="([^"]+)"/g)].map((m) => m[1]);
+const squircle = markD[0], symbol = markD[markD.length - 1];
+const T = 'translate(0 512) scale(0.1 -0.1)';
+const px = (x: number) => x + 240;
+// Titre : chaque mot monte sous un masque (même langage que les titres de section).
+const words = (list: string[], from: number) => list.map((w, i) => `<span class="hw"><span class="hwi" style="--i:${from + i}">${w}</span></span>`).join(' ');
 ---
 <!-- S01 · Hero -->
-<header class="hv1" id="top">
-  <pre class="tex" data-src="/media/lac-480.webp" data-w="1" data-r=".36" aria-hidden="true"></pre>
-  <span class="chip" data-bloc="S01.1" data-intro><b>🇨🇭</b>Développé pour la Suisse</span>
-  <h1 data-bloc="S01.2" data-intro-title>
-    <span class="ln">Vos prospects écrivent <span class="inl" aria-hidden="true"><span style="background-image:url(/media/logos/smg-96.webp)"></span><span style="background-image:url(/media/logos/immobilier-ch-96.webp)"></span><span style="background-image:url(/media/logos/properstar-96.webp)"></span><span style="background-image:url(/media/logos/whatsapp.svg);background-size:70%;background-color:#fff"></span></span> partout.</span>
-    <span class="ln">Gardez le fil de chaque acheteur<i class="o">.</i></span>
-  </h1>
-  <p class="sub" data-bloc="S01.3" data-intro>Le CRM immobilier développé pour la Suisse. Portails, Meta Ads, site : vos demandes arrivent dans Lotivio. Envoyez vos e-mails et WhatsApp, retrouvez le suivi de chaque acheteur et voyez quels projets attirent des prospects.</p>
-  <div class="row-b" data-bloc="S01.4" data-intro>
-    <a class="btn b-or magnet" href="#demo">Réserver une démo</a>
-    <button class="btn b-gh" type="button" data-film>Voir le film · 1 min</button>
-  </div>
-  <div class="stage1" data-bloc="S01.5-6" data-intro-stage>
-    <div class="frame">
-      <div class="win" role="img" aria-label="Aperçu de la file Demandes reçues, données de démonstration">
-        <div class="win-bar"><span class="t"><span class="dot" style="border-radius:50%"></span>demandes_recues — Démo Immobilier NE</span><span id="clock">21:47</span></div>
-        <div class="feed" id="feed"></div>
-        <div class="ticks"><span class="mono" id="count">12 demandes aujourd'hui</span><div class="scale"><i id="mark"></i></div><span class="mono">arrivées seules</span></div>
-      </div>
-      <aside class="side" aria-label="Fiche acheteur, données de démonstration"><span class="mono">Fiche acheteur</span><h3>Nathalie Girard</h3>
-        <div class="tags"><span style="background:rgba(173,70,255,.25);color:#D9B4FF">Qualifié</span><span>Meta Ads</span><span>Les Terrasses du Vignoble</span></div>
-        <div class="kv1"><div><span>Recherche</span><span>3.5 pièces · Milvignes</span></div><div><span>Budget max</span><span>CHF 1'100'000</span></div><div><span>Brochure</span><span class="hot">Consultée 3×</span></div><div><span>Dernier échange</span><span>WhatsApp · hier 21:50</span></div><div><span>Prochaine étape</span><span>Visite samedi 10:00</span></div></div>
-      </aside>
+<header class="hc" id="top">
+  <div class="hc-head">
+    <p class="hc-kick" data-bloc="S01.1" data-intro>Développé pour la <span class="ch" aria-hidden="true"><svg viewBox="0 0 32 32"><rect width="32" height="32" rx="6" fill="#E2231A"/><path d="M13 7h6v6h6v6h-6v6h-6v-6H7v-6h6z" fill="#fff"/></svg></span> Suisse</p>
+    <h1 data-bloc="S01.2" data-intro-title>
+      <span class="ln"><Fragment set:html={words(['Vos', 'prospects'], 0)} /> <span class="tn"><Fragment set:html={words(['écrivent', 'partout.'], 2)} /></span></span>
+      <span class="ln"><Fragment set:html={words(['Gardez', 'le', 'fil', 'de', 'chaque'], 4)} /> <span class="hw"><span class="hwi" style="--i:9">acheteur<i class="o">.</i></span></span></span>
+    </h1>
+    <p class="sub" data-bloc="S01.3" data-intro>Le CRM immobilier développé pour la Suisse. <span class="br">Portails, Meta Ads, site&nbsp;: vos demandes arrivent dans Lotivio.</span></p>
+    <div class="row-b" data-bloc="S01.4" data-intro>
+      <a class="btn b-or magnet" href="#demo">Réserver une démo</a>
+      <button class="btn b-gh" type="button" data-film>Voir le film · 1 min</button>
     </div>
   </div>
-  <div class="sources" data-bloc="S01.7">
-    <span class="mono">Vos canaux, connectés</span>
-    {strip.map(({ src, alt, h, w }) => <img class="lg" src={src} alt={alt} width={w} height={h} style={`height:${h}px`} decoding="async" />)}
-    <span class="lgw"><img src="/media/logos/whatsapp.svg" alt="" width="28" height="28" style="height:28px" decoding="async" />WhatsApp</span><span class="s">Votre site</span>
+
+  <div class="hc-stage" aria-hidden="true">
+  <div class="hc-scene" data-bloc="S01.5">
+    <svg class="hc-wires" viewBox="-240 0 1920 960" width="1920" height="960" fill="none">
+      <g class="w-static">
+        {decor.map((pts, i) => <path class="w" d={route(pts)} pathLength="1" style={`--i:${(i % 4) + 2}`} />)}
+        {wires.map((w, i) => <path class="w" d={w.d} pathLength="1" style={`--i:${i % 4}`} />)}
+        <path class="w" d={feed} pathLength="1" style="--i:5" />
+        {ends.map(([x, y]) => <circle class="w-end" cx={x} cy={y} r="3.5" />)}
+      </g>
+      <g class="w-pulses">
+        {wires.map((w) => (
+          <g class="pz" data-src={w.name} style={`--o0:${w.o0.toFixed(0)};--o1:${w.o1.toFixed(0)};--d:${w.D.toFixed(2)}s;--s:${w.start}s`}>
+            <path class="p-halo" d={w.d} />
+            <path class="p-core" d={w.d} />
+          </g>
+        ))}
+        <path class="p-feed" id="p-feed" d={feed} pathLength="100" />
+      </g>
+    </svg>
+
+    {tools.map((t) => (
+      <span class={`tool-c g-${t.g}${t.v ? ' v' : ''}${t.m ? ' m-only' : ''}`} style={`left:${px(t.at[0])}px;top:${t.at[1]}px`}><i></i><i></i><i></i></span>
+    ))}
+
+    {wires.map((w) => (
+      <span class={`src-c${w.chipM ? '' : ' d-only'}`} data-src={w.name}
+        style={`--x:${px(w.chip[0])}px;--y:${w.chip[1]}px;--xm:${px((w.chipM ?? w.chip)[0])}px;--ym:${(w.chipM ?? w.chip)[1]}px;--d:${w.D.toFixed(2)}s;--dl:${w.dl.toFixed(2)}s;--dlm:${w.dlm.toFixed(2)}s`}>
+        {w.logo && <img src={w.logo} alt="" width={w.lw} height={w.lh} style={`height:${w.lh}px`} decoding="async" />}
+        {!w.logo && <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.8 3 2.8 15 0 18M12 3c-2.8 3-2.8 15 0 18"/></svg>}
+        {w.label && <b>{w.label}</b>}
+      </span>
+    ))}
+
+    <span class="tile-c" style={`left:${px(1330)}px;top:341px`}><img src="/brand/lotivio-mark.svg" alt="" width="22" height="22" /></span>
+
+    <div class="hub" id="hub" style={`left:${px(HUB[0])}px;top:${HUB[1]}px`}>
+      <div class="hub-in">
+        <i class="hub-floor"></i>
+        <i class="hub-base"></i>
+        <i class="hub-glow"></i>
+        <div class="hub-body">
+          <svg class="hub-mark" viewBox="0 0 512 512">
+            <defs>
+              <clipPath id="hub-clip"><path transform={T} d={squircle} /></clipPath>
+              <linearGradient id="hub-g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1f1f22"/><stop offset="1" stop-color="#0a0a0c"/></linearGradient>
+            </defs>
+            <g clip-path="url(#hub-clip)"><path transform={T} d={symbol} fill="url(#hub-g)" /></g>
+          </svg>
+          <i class="hub-led"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <div class="hc-foot">
+    <div class="hc-info" data-bloc="S01.6" data-intro>
+      <span class="mono"><svg width="11" height="11" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2v20M2 12h20M5 5l14 14M19 5L5 19" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>/en bref/</span>
+      <p>Envoyez vos e-mails et WhatsApp, retrouvez le suivi de chaque acheteur <span>et voyez quels projets attirent des prospects.</span></p>
+    </div>
+
+    <div class="hc-cards" data-bloc="S01.7" data-intro-cards>
+      <article class="dcard" aria-label="Demandes reçues cette semaine, données de démonstration">
+        <div class="dc-top">
+          <div><b>Demandes reçues</b><span>Cette semaine · démo</span></div>
+          <div class="dc-ctl" aria-hidden="true"><i></i><i></i><span>Toutes ▾</span></div>
+        </div>
+        <div class="dc-val"><span id="hc-n">38</span> demandes</div>
+        <div class="dc-badge"><span class="up" id="hc-up">+1</span><span id="hc-last">Homegate · à l'instant</span></div>
+        <div class="dc-foot">
+          <svg class="donut" viewBox="0 0 36 36" aria-hidden="true">
+            <circle r="14" cx="18" cy="18" stroke="#3a3a3a" />
+            <circle r="14" cx="18" cy="18" stroke="#F2F1EE" pathLength="100" stroke-dasharray="49 51" />
+            <circle r="14" cx="18" cy="18" stroke="#EB6E2C" pathLength="100" stroke-dasharray="36 64" stroke-dashoffset="-50" />
+          </svg>
+          <ul><li><i style="background:#F2F1EE"></i>Portails <b>19</b></li><li><i style="background:#EB6E2C"></i>Meta Ads <b>14</b></li><li><i style="background:#5a5a5a"></i>Site <b>5</b></li></ul>
+        </div>
+      </article>
+      <article class="dcard" aria-label="Stock du projet Les Terrasses du Vignoble, données de démonstration">
+        <div class="dc-top">
+          <div><b>Stock · Les Terrasses</b><span>Projet de démonstration</span></div>
+          <div class="dc-ctl" aria-hidden="true"><i></i><i></i><span>Lots ▾</span></div>
+        </div>
+        <div class="dc-val">12 lots</div>
+        <div class="dc-badge"><span class="up g">5 vendus</span><span>3 réservés</span></div>
+        <div class="dc-foot">
+          <svg class="donut" viewBox="0 0 36 36" aria-hidden="true">
+            <circle r="14" cx="18" cy="18" stroke="#3a3a3a" />
+            <circle r="14" cx="18" cy="18" stroke="#5FD49A" pathLength="100" stroke-dasharray="41 59" />
+            <circle r="14" cx="18" cy="18" stroke="#EB6E2C" pathLength="100" stroke-dasharray="24 76" stroke-dashoffset="-42" />
+          </svg>
+          <ul><li><i style="background:#5FD49A"></i>Vendus <b>5</b></li><li><i style="background:#EB6E2C"></i>Réservés <b>3</b></li><li><i style="background:#5a5a5a"></i>Disponibles <b>4</b></li></ul>
+        </div>
+      </article>
+    </div>
   </div>
 </header>
+<script>
+  import '../scripts/hero.ts';
+</script>

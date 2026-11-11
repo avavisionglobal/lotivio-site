@@ -35,8 +35,10 @@ import Film from '../components/Film.astro';
   <S11Footer />
   <Film />
   <script>
+    import '../scripts/flash.ts';
     import '../scripts/app.ts';
     import '../scripts/texhover.ts';
+    import '../scripts/bento.ts';
     // La couche d'animation (GSAP + Lenis) se charge quand le navigateur est libre :
     // le premier écran s'affiche sans l'attendre.
     const loadMotion = () => import('../scripts/motion.ts');

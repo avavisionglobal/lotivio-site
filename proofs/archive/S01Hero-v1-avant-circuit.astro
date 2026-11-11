@@ -1,0 +1,57 @@
+---
+import sharp from 'sharp';
+import path from 'node:path';
+const raw: [string, string, number][] = [
+  ['/media/logos/homegate.svg', 'Homegate', 30],
+  ['/media/logos/immoscout24.svg', 'ImmoScout24', 38],
+  ['/media/logos/immobilier-ch.svg', 'immobilier.ch', 20],
+  ['/media/logos/properstar-logo-84.webp', 'Properstar', 24],
+  ['/media/logos/meta-64.webp', 'Meta', 22],
+];
+// Largeur déclarée d'après les proportions réelles du fichier : pas de saut de mise en page.
+const strip = await Promise.all(raw.map(async ([src, alt, h]) => {
+  const m = await sharp(path.resolve(process.cwd(), 'public' + src)).metadata();
+  return { src, alt, h, w: Math.round((h * (m.width ?? h)) / (m.height ?? h)) };
+}));
+
+// Titre découpé en mots au moment du build : chaque mot monte sous un masque en passant
+// par l'orange (global.css, « S01 · chorégraphie d'entrée »). --i règle le décalage.
+let wi = 0;
+const w = (s: string) => s.split(' ').map((t) => `<span class="hw"><span class="hwi" style="--i:${wi++}">${t}</span></span>`).join(' ');
+const logos = ['smg-96.webp', 'immobilier-ch-96.webp', 'properstar-96.webp'];
+const line1 = `${w('Vos prospects écrivent')} <span class="inl" aria-hidden="true">${logos
+  .map((f) => `<span style="--i:${wi++};background-image:url(/media/logos/${f})"></span>`).join('')}<span style="--i:${wi++};background-image:url(/media/logos/whatsapp.svg);background-size:70%;background-color:#fff"></span></span> ${w('partout.')}`;
+const line2 = `${w('Gardez le fil de chaque acheteur')}<i class="o" style="--i:${wi++}">.</i>`;
+---
+<!-- S01 · Hero -->
+<header class="hv1" id="top">
+  <pre class="tex" data-src="/media/lac-480.webp" data-w="1" data-r=".36" aria-hidden="true"></pre>
+  <span class="chip" data-bloc="S01.1" data-intro><b>🇨🇭</b>Développé pour la Suisse</span>
+  <h1 data-bloc="S01.2" data-intro-title>
+    <span class="ln" set:html={line1} />
+    <span class="ln" set:html={line2} />
+  </h1>
+  <p class="sub" data-bloc="S01.3" data-intro>Le CRM immobilier développé pour la Suisse. Portails, Meta Ads, site : vos demandes arrivent dans Lotivio. Envoyez vos e-mails et WhatsApp, retrouvez le suivi de chaque acheteur et voyez quels projets attirent des prospects.</p>
+  <div class="row-b" data-bloc="S01.4" data-intro>
+    <a class="btn b-or magnet" href="#demo">Réserver une démo</a>
+    <button class="btn b-gh" type="button" data-film>Voir le film · 1 min</button>
+  </div>
+  <div class="stage1" data-bloc="S01.5-6" data-intro-stage>
+    <div class="frame">
+      <div class="win" role="img" aria-label="Aperçu de la file Demandes reçues, données de démonstration">
+        <div class="win-bar"><span class="t"><span class="dot" style="border-radius:50%"></span>demandes_recues — Démo Immobilier NE</span><span id="clock">21:47</span></div>
+        <div class="feed" id="feed"></div>
+        <div class="ticks"><span class="mono" id="count">12 demandes aujourd'hui</span><div class="scale"><i id="mark"></i></div><span class="mono">arrivées seules</span></div>
+      </div>
+      <aside class="side" aria-label="Fiche acheteur, données de démonstration"><span class="mono">Fiche acheteur</span><h3>Nathalie Girard</h3>
+        <div class="tags"><span style="background:rgba(173,70,255,.25);color:#D9B4FF">Qualifié</span><span>Meta Ads</span><span>Les Terrasses du Vignoble</span></div>
+        <div class="kv1"><div><span>Recherche</span><span>3.5 pièces · Milvignes</span></div><div><span>Budget max</span><span>CHF 1'100'000</span></div><div><span>Brochure</span><span class="hot">Consultée 3×</span></div><div><span>Dernier échange</span><span>WhatsApp · hier 21:50</span></div><div><span>Prochaine étape</span><span>Visite samedi 10:00</span></div></div>
+      </aside>
+    </div>
+  </div>
+  <div class="sources" data-bloc="S01.7">
+    <span class="mono">Vos canaux, connectés</span>
+    {strip.map(({ src, alt, h, w }, i) => <img class="lg" src={src} alt={alt} width={w} height={h} style={`height:${h}px;--i:${i + 1}`} decoding="async" />)}
+    <span class="lgw" style={`--i:${strip.length + 1}`}><img src="/media/logos/whatsapp.svg" alt="" width="28" height="28" style="height:28px" decoding="async" />WhatsApp</span><span class="s" style={`--i:${strip.length + 2}`}>Votre site</span>
+  </div>
+</header>
