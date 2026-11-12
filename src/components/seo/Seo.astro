@@ -1,0 +1,52 @@
+---
+// Balises SEO communes à toutes les pages : titre, description, canonique, langue, réseaux sociaux,
+// icônes et données structurées. Une page légale ou d'erreur passe noindex.
+import { SITE, LEGAL } from '../../config';
+interface Props { title?: string; description?: string; path?: string; noindex?: boolean; ld?: object[] }
+const { title = SITE.title, description = SITE.description, path = Astro.url.pathname, noindex = false, ld = [] } = Astro.props;
+const canonical = new URL(path, SITE.url).href;
+const og = new URL('/og-image.jpg', SITE.url).href;
+const org = `${SITE.url}/#org`;
+const graph = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Organization', '@id': org, name: LEGAL.company, alternateName: LEGAL.brand, url: SITE.url,
+      logo: new URL('/brand/icon-512.png', SITE.url).href, email: LEGAL.email,
+      address: { '@type': 'PostalAddress', streetAddress: LEGAL.street, postalCode: LEGAL.zip, addressLocality: LEGAL.city, addressCountry: 'CH' },
+      ...(LEGAL.ide ? { taxID: LEGAL.ide } : {}),
+    },
+    { '@type': 'WebSite', '@id': `${SITE.url}/#website`, url: SITE.url, name: SITE.name, inLanguage: 'fr-CH', publisher: { '@id': org } },
+    { '@type': 'WebPage', '@id': `${canonical}#page`, url: canonical, name: title, description, inLanguage: 'fr-CH', isPartOf: { '@id': `${SITE.url}/#website` } },
+    ...ld,
+  ],
+};
+---
+<title>{title}</title>
+<meta name="description" content={description} />
+<meta name="robots" content={noindex ? 'noindex, follow' : 'index, follow, max-image-preview:large, max-snippet:-1'} />
+{!noindex && <>
+  <link rel="canonical" href={canonical} />
+  <link rel="alternate" hreflang="fr-CH" href={canonical} />
+  <link rel="alternate" hreflang="x-default" href={canonical} />
+</>}
+<meta name="theme-color" content="#F7F6F3" />
+<link rel="icon" href="/favicon.ico" sizes="32x32" />
+<link rel="icon" href="/brand/lotivio-mark.svg" type="image/svg+xml" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+<link rel="manifest" href="/site.webmanifest" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="fr_CH" />
+<meta property="og:site_name" content={SITE.name} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonical} />
+<meta property="og:image" content={og} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content={SITE.title} />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={og} />
+<script type="application/ld+json" set:html={JSON.stringify(graph)} />

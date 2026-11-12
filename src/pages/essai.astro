@@ -1,0 +1,22 @@
+---
+// Page de travail : V1 de la section « Essayez Lotivio » (12.11.2026), isolée de l'accueil
+// le temps de valider la direction. Une fois validée, S05BEssai s'insère dans index.astro après S06Parcours.
+import Base from '../layouts/Base.astro';
+import Btn from '../components/ui/Btn.astro';
+import S05BEssai from '../components/S05BEssai.astro';
+---
+<Base>
+  <header class="ess-page-top">
+    <a class="logo" href="/" aria-label="Lotivio, accueil"><img src="/brand/lotivio-mark.svg" alt="" width="26" height="26" /><span>lotivio<i>.</i></span></a>
+    <Btn label="Réserver une démo" href="/#demo" size="sm" />
+  </header>
+  <main id="contenu" class="ess-page">
+    <S05BEssai />
+  </main>
+</Base>
+
+<style>
+  .ess-page-top{display:flex;justify-content:space-between;align-items:center;padding:22px var(--pad)}
+  .ess-page{padding-bottom:120px}
+  .ess-page :global(.ess-head){margin-top:40px}
+</style>

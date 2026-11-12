@@ -56,12 +56,59 @@ const leads = [
   { img: 'l4', name: 'Isabelle Monnier', bien: 'Les Terrasses · Attique', ch: 'is', from: 'ImmoScout24', br: 'E-mail', agent: 'Marc R.' },
   { img: 'l5', name: 'Lucas Berset', bien: 'Clos des Vergers · Lot C1', ch: 'si', from: 'Votre site', br: 'E-mail', agent: 'David L.' },
 ];
-const rel = [
-  ['/media/residence-800.webp', 'Brochure consultée 3×', 'Céline Favre', 'Les Terrasses du Vignoble · Lot B3', '50% 50%'],
-  ['/media/lac-800.webp', 'Sans réponse depuis 5 jours', 'Justine Perret', 'Résidence Lac & Lumière · Lot D1', '50% 50%'],
-  ['/media/residence-portrait-600.webp', 'Match envoyé · 1re relance', 'Aurélie Matthey', 'Clos des Vergers · Lot A2', '50% 30%'],
+// Panneau 03 : relances priorisées, signaux, critères et compte rendu dicté (src/scripts/qualif.ts).
+// Mêmes personnes de démonstration que les panneaux 01 et 02. « Chaud » et la priorité sont des règles ;
+// la dictée produit un brouillon à confirmer. Les critères de Thomas Rochat viennent de Max (lead Meta Ads).
+const P = (k: string) => `/media/${k[0] === 'c' ? 'contacts' : 'leads'}/${k}.webp`;
+const qRows = [
+  { id: 'c3', img: P('c3'), name: 'Monique Matthey', bien: 'Clos des Vergers · Lot A2', sig: 'Match envoyé · 1re relance', ico: 'send', age: 'Il y a 12 j' },
+  { id: 'c6', img: P('c6'), name: 'Claude Jeanneret', bien: 'Clos des Vergers · Lot C1', sig: 'Match envoyé', ico: 'send', age: 'Il y a 9 j' },
+  { id: 'c1', img: P('c1'), name: 'Céline Favre', bien: 'Les Terrasses · Lot B4', sig: 'Brochure consultée 2×', ico: 'eye', age: 'Il y a 2 j' },
+  { id: 'l4', img: P('l4'), name: 'Isabelle Monnier', bien: 'Les Terrasses · Attique', sig: 'Brochure consultée 1×', ico: 'eye', age: 'Il y a 6 j' },
+  { id: 'l1', img: P('l1'), name: 'Thomas Rochat', bien: 'Les Terrasses · Lot B3', sig: 'Nouveau · Meta Ads', ico: 'new', age: 'Hier' },
+  { id: 'l2', img: P('l2'), name: 'Laura Girardin', bien: 'Clos des Vergers · Lot A2', sig: 'Sans réponse · 3 j', ico: 'clock', age: 'Il y a 3 j' },
+  { id: 'c2', img: P('c2'), name: 'Marc Vuilleumier', bien: 'Les Terrasses · Lot C2', sig: 'Sans réponse · 4 j', ico: 'clock', age: 'Il y a 4 j' },
 ];
-const lots = Array.from({ length: 24 }, (_, i) => String.fromCharCode(65 + Math.floor(i / 8)) + ((i % 8) + 1));
+const qScen = [
+  { id: 'c1', sig: 'Brochure consultée 3×', ico: 'eye', hot: true, crit: ['4.5 pièces', 'Littoral', '≤ CHF 1,3 mio'],
+    sigs: [['Match envoyé · Lot B4', 'Il y a 9 j'], ['Brochure ouverte', 'Lundi'], ['Brochure consultée 3×', 'Aujourd’hui']],
+    tx: [['Rappel fait. Elle a revu la brochure du B4 avec son mari, '], ['le prix leur convient', 0], ['. Une question sur '], ['la place de parc', 1], ['. '], ['La rappeler jeudi', 2], [' avec le plan du sous-sol.']],
+    ex: [['Intérêt', 'Élevé'], ['Objection', 'Place de parc'], ['Relance', 'Jeudi']], done: 'Relance · jeudi' },
+  { id: 'l1', sig: 'Qualifié par Max', ico: 'check', hot: true, crit: ['4.5 pièces', 'Littoral', '≤ CHF 1,3 mio'],
+    sigs: [['Demande Meta Ads', 'Hier 21:47'], ['Brochure envoyée · WhatsApp', 'Hier 21:48'], ['Critères reçus · Max', 'Hier 21:52']],
+    tx: [['Appel avec Thomas Rochat. Il tient à '], ['une terrasse', 0], [', '], ['budget validé par sa banque', 1], ['. '], ['Visite samedi à 10 h', 2], ['.']],
+    ex: [['Critère', 'Terrasse'], ['Budget', 'Confirmé'], ['Visite', 'Samedi 10:00']], done: 'Visite · samedi' },
+  { id: 'c2', sig: 'Sans réponse · 5 j', ico: 'clock', hot: false, crit: ['4.5 pièces', 'Neuchâtel', '≤ CHF 1,25 mio'],
+    sigs: [['Match envoyé · Lot C2', 'Il y a 12 j'], ['1re relance', 'Il y a 5 j'], ['Sans réponse depuis 5 jours', 'Aujourd’hui']],
+    tx: [['Marc rappelé. '], ['Le projet l’intéresse toujours', 0], [', il attend '], ['l’accord de sa banque', 1], ['. '], ['Reprendre contact dans dix jours', 2], ['.']],
+    ex: [['Intérêt', 'Maintenu'], ['Frein', 'Financement'], ['Relance', 'Dans 10 jours']], done: 'Relance · 10 jours' },
+];
+const qi: Record<string, string> = {
+  eye: '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>',
+  send: '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4z"/></svg>',
+  clock: '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>',
+  check: '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5 9-10"/></svg>',
+  new: '<svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="5"/></svg>',
+};
+const q0 = qScen[0];
+// Panneau 04 : tableau de bord de commercialisation (src/scripts/pilotage.ts). Trois projets de démonstration ;
+// stock : d = disponible, r = réservé, v = vendu (lots A1–D6). pipe = Qualifié, Réservation, Notaire, Vendu.
+// src = acheteurs (réservés + vendus) par canal, dans l'ordre de SRC. Un acheteur traverse le pipeline à chaque tour.
+const SRC = [['hg', 'Homegate'], ['me', 'Meta Ads'], ['is', 'ImmoScout24'], ['im', 'immobilier.ch'], ['si', 'Votre site'], ['ps', 'Properstar']];
+const projects = [
+  { name: 'Les Terrasses du Vignoble', st: 'vvrvdvvrdddrvvrdvdrdvddr', pipe: [38, 4, 2, 9], val: 18.4, delai: 68, src: [5, 3, 3, 1, 2, 1],
+    buyer: { img: P('c1'), name: 'Céline Favre', lot: 'B4', src: 'hg' } },
+  { name: 'Clos des Vergers', st: 'vdrdvddddrvdddvrddvdddrd', pipe: [24, 3, 1, 5], val: 9.1, delai: 81, src: [2, 3, 1, 1, 2, 0],
+    buyer: { img: P('c6'), name: 'Claude Jeanneret', lot: 'C1', src: 'me' } },
+  { name: 'Résidence Lac & Lumière', st: 'vvvvrvvvrvvdvrvdvvdvrrdd', pipe: [17, 3, 2, 14], val: 26.8, delai: 59, src: [4, 4, 3, 5, 2, 1],
+    buyer: { img: P('l3'), name: 'Pierre-Alain Droz', lot: 'D1', src: 'im' } },
+];
+const pj = projects[0];
+const lotIds = Array.from({ length: 24 }, (_, i) => 'ABCD'[Math.floor(i / 6)] + ((i % 6) + 1));
+const cnt = (s: string, c: string) => [...s].filter((x) => x === c).length;
+const srcMax = Math.max(...pj.src);
+const C = 2 * Math.PI * 34;
+const stages = [['Qualifié', '#3B5BDB'], ['Réservation', '#EB6E2C'], ['Notaire', '#9A4A1C'], ['Vendu', '#1A1A1A']];
 ---
 <!-- S05 · Parcours — titre -->
 <div class="steps-head steps-par" id="parcours" data-bloc="S05">
@@ -135,21 +182,76 @@ const lots = Array.from({ length: 24 }, (_, i) => String.fromCharCode(65 + Math.
         )}
         {i === 2 && (
           <div class="stage">
-            <div class="rel">
-              {rel.map(([img, sig, name, proj, pos]) => (
-                <div class="rc"><img src={img} alt="" width="800" height="533" loading="lazy" decoding="async" style={`object-position:${pos}`} /><span class="sig">{sig}</span>
-                  <span class="acts"><span title="Traité"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg></span><span class="go" title="Relancer"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" aria-hidden="true"><path d="M4 12h14M13 6l6 6-6 6"/></svg></span></span>
-                  <span class="who"><b>{name}</b><span>{proj}</span></span></div>
-              ))}
+            <div class="qf" role="img" aria-label="Relances priorisées : un signal (brochure consultée, critères reçus, absence de réponse) fait remonter un contact ; sa fiche montre ses critères et ses signaux, puis le compte rendu dicté devient un brouillon à confirmer. Données de démonstration." data-rows={JSON.stringify(qRows)} data-scen={JSON.stringify(qScen)} data-ico={JSON.stringify(qi)}>
+              <div class="qf-col qf-list">
+                <div class="qf-h"><span class="ld-k">Relance</span><span class="qf-ct"><b class="qf-n">7</b> relances à traiter</span></div>
+                <div class="qf-rows">
+                  {[qRows[2], qRows[0], qRows[1], qRows[3]].map((r, k) => (
+                    <div class={`qf-r${k === 0 ? ' sel hot' : ''}`} data-id={r.id} style={`--i:${k}`}>
+                      <img src={r.img} alt="" width="160" height="160" loading="lazy" decoding="async" />
+                      <span class="qf-who"><span class="qf-l1"><b>{r.name}</b><small>{r.bien}</small></span>
+                        <span class="qf-sig"><span class="qf-si" set:html={qi[k === 0 ? q0.ico : r.ico]} /><span class="qf-st">{k === 0 ? q0.sig : r.sig}</span></span></span>
+                      <span class="qf-acts"><span class="qf-a go" title="Relancer"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4z"/></svg></span><span class="qf-a" title="Traité"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg></span></span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div class="qf-col qf-card">
+                <div class="qf-id">
+                  <img class="qf-ph" src={qRows[2].img} alt="" width="160" height="160" loading="lazy" decoding="async" />
+                  <span><b class="qf-nm">{qRows[2].name}</b><small class="qf-bn">{qRows[2].bien}</small></span>
+                  <span class="qf-hot qf-hot-c">Chaud</span>
+                </div>
+                <div class="qf-sec"><span class="ld-k">Critères</span><div class="qf-crit">{q0.crit.map((c) => <span>{c}</span>)}</div></div>
+                <div class="qf-sec"><span class="ld-k">Signaux</span><div class="qf-sigs">{q0.sigs.map(([t, d], k) => <div class={k === 2 ? 'nw' : ''}><i></i><span>{t}</span><small>{d}</small></div>)}</div></div>
+              </div>
+              <div class="qf-col qf-voice">
+                <div class="qf-dic">
+                  <span class="ld-k">Compte rendu dicté</span>
+                  <div class="qf-dh"><span class="qf-mic"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></span><span class="qf-wave" aria-hidden="true">{Array.from({ length: 22 }, (_, k) => <i style={`--k:${k}`}></i>)}</span></div>
+                  <p class="qf-tx">{q0.tx.map(([t, k]) => (k === undefined ? t : <mark class="on">{t}</mark>))}</p>
+                  <div class="qf-ex">{q0.ex.map(([k, v]) => <span class="on"><small>{k}</small>{v}</span>)}</div>
+                  <div class="qf-ok"><span class="qf-draft">Brouillon à confirmer</span><span class="qf-btn">Confirmer</span></div>
+                </div>
+              </div>
             </div>
           </div>
         )}
         {i === 3 && (
-          <div class="stage" style="padding:12px">
-            <div class="sale">
-              <div class="bgl">{lots.map((l) => <span>{l}</span>)}</div>
-              <div class="tool"><div class="in" id="tool"><img src="/brand/lotivio-mark.svg" alt="" width="24" height="24" /><span class="lot">Lot B4</span><span class="stg">Qualifié</span><span class="stg">Réservation</span><span class="stg">Notaire</span><span class="stg">Vendu</span><span class="av">SK</span></div></div>
-              <div class="crumb">Pipeline &nbsp;/&nbsp; <b>Les Terrasses du Vignoble</b></div>
+          <div class="stage">
+            <div class="pdash" role="img" aria-label="Tableau de bord de commercialisation : stock des lots (disponibles, réservés, vendus), origine des acheteurs par canal, taux de commercialisation et pipeline jusqu'à la vente. Données de démonstration." data-proj={JSON.stringify(projects)}>
+              <div class="pl-top">
+                <div class="pl-tabs"><span class="pl-ind" aria-hidden="true"></span>{projects.map((p, k) => <span class={`pl-tab${k === 0 ? ' on' : ''}`}>{p.name}</span>)}</div>
+                <span class="pl-live"><i></i>Vue d’ensemble</span>
+              </div>
+              <div class="pl-grid">
+                <div class="pl-t pl-stock">
+                  <div class="pl-th"><span class="ld-k">Stock · 24 lots</span>
+                    <span class="pl-leg"><span class="d"><i></i>Disponible <b data-c="d">{cnt(pj.st, 'd')}</b></span><span class="r"><i></i>Réservé <b data-c="r">{cnt(pj.st, 'r')}</b></span><span class="v"><i></i>Vendu <b data-c="v">{cnt(pj.st, 'v')}</b></span></span></div>
+                  <div class="pl-lots">{lotIds.map((l, k) => <span class={pj.st[k]} style={`--r:${Math.floor(k / 6)};--c:${k % 6}`}>{l}</span>)}</div>
+                </div>
+                <div class="pl-t pl-kpi">
+                  <span class="ld-k">Commercialisation</span>
+                  <div class="pl-ring">
+                    <svg viewBox="0 0 80 80" aria-hidden="true"><circle cx="40" cy="40" r="34" class="bg" /><circle cx="40" cy="40" r="34" class="ar-r" style={`stroke-dasharray:${(cnt(pj.st, 'r') / 24) * C} ${C};stroke-dashoffset:${-(cnt(pj.st, 'v') / 24) * C}`} /><circle cx="40" cy="40" r="34" class="ar-v" style={`stroke-dasharray:${(cnt(pj.st, 'v') / 24) * C} ${C}`} /></svg>
+                    <span><b class="pl-pct">{Math.round((cnt(pj.st, 'v') / 24) * 100)}</b><small>% vendu</small></span>
+                  </div>
+                  <div class="pl-kvs"><div class="pl-kv"><small>Valeur pipeline</small><b>CHF <span class="pl-val">{pj.val.toFixed(1).replace('.', ',')}</span> mio</b></div>
+                  <div class="pl-kv"><small>Délai moyen</small><b><span class="pl-del">{pj.delai}</span> j</b></div></div>
+                </div>
+                <div class="pl-t pl-src">
+                  <span class="ld-k">Origine des acheteurs</span>
+                  <div class="pl-bars">{SRC.map(([id, nm], k) => (
+                    <div class="pl-b" data-s={id}><span class="pl-bn">{nm}</span><span class="pl-bt"><i style={`--w:${(pj.src[k] / srcMax) * 100}%`}></i></span><b>{pj.src[k]}</b></div>
+                  ))}</div>
+                </div>
+                <div class="pl-t pl-pipe">
+                  {stages.map(([nm, col], k) => (
+                    <div class="pl-sg" style={`--col:${col}`}><span class="pl-sh"><i></i>{nm}<b>{pj.pipe[k]}</b></span><span class="pl-slot"></span></div>
+                  ))}
+                  <div class="pl-card" style="--x:0"><img src={pj.buyer.img} alt="" width="160" height="160" loading="lazy" decoding="async" /><span><b>{pj.buyer.name}</b><small>Lot {pj.buyer.lot}</small></span></div>
+                </div>
+              </div>
             </div>
           </div>
         )}
@@ -159,6 +261,7 @@ const lots = Array.from({ length: 24 }, (_, i) => String.fromCharCode(65 + Math.
 </section>
 <div class="par-end" data-bloc="S06.5"><Btn label="Découvrir ce parcours en démo" href="#demo" /></div>
 <script>
-  import '../scripts/matching.ts';
-  import '../scripts/leads.ts';
+  // Scènes du parcours : chargées quand le navigateur est libre (elles sont sous le premier écran).
+  const go = () => { import('../scripts/matching.ts'); import('../scripts/leads.ts'); import('../scripts/qualif.ts'); import('../scripts/pilotage.ts'); };
+  if ('requestIdleCallback' in window) requestIdleCallback(go, { timeout: 2000 }); else setTimeout(go, 400);
 </script>

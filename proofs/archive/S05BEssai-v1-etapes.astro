@@ -1,0 +1,184 @@
+---
+import Btn from './ui/Btn.astro';
+import '../styles/s05-essai.css';
+// S05B · « Essayez Lotivio » — V1 du 12.11.2026 (demande de Diego : une démonstration en étapes,
+// de la création de la promotion au score de matching). Simulation dans la page : rien n'est envoyé ni enregistré.
+// Garde-fous (claims gate, PROJECT.md « Produit ») :
+// - WhatsApp automatique (Max) : seulement pour les leads Meta Ads ;
+// - premier contact, canal de brochure, relance et délai : réglés AVEC l'agence à la mise en place ;
+// - seuls les clics sur le lien de la brochure sont suivis ;
+// - « Chaud », la priorité des relances et le score de matching sont des règles, pas l'IA.
+// Logique et rendu de la fenêtre : src/scripts/essai.ts.
+const sources = [
+  ['hg', 'Homegate'],
+  ['is', 'ImmoScout24'],
+  ['im', 'immobilier.ch'],
+  ['me', 'Meta Ads'],
+  ['si', 'Votre site'],
+];
+---
+<section class="ess-sec" id="essai" data-bloc="S05B" aria-labelledby="ess-title">
+  <div class="steps-head ess-head">
+    <h2 class="h2 ess-h2" id="ess-title">Essayez Lotivio<span class="g">sur votre prochaine promotion.</span></h2>
+    <p>Six étapes, de la création de la promotion au bon lot pour chaque acheteur. Simulation avec des données fictives : aucun message n’est envoyé.</p>
+  </div>
+
+  <div class="ess" data-ess>
+    <!-- Rail : les étapes et leurs réglages -->
+    <div class="ess-rail">
+      <div class="ess-top">
+        <span class="mono">Étape <b data-ess-cur>1</b> / 6</span>
+        <span class="ess-bar" aria-hidden="true"><i data-ess-bar></i></span>
+      </div>
+
+      <ol class="ess-steps">
+        <!-- 01 · Promotion -->
+        <li class="es is-cur" data-step="0">
+          <button class="es-h" type="button" aria-expanded="true"><span class="es-n">01</span><span class="es-t">Créez votre promotion</span><span class="es-sum" data-sum></span></button>
+          <div class="es-c">
+            <p>Le nom, le lieu, les lots. Lotivio prépare la page, la grille des lots et la diffusion.</p>
+            <label class="es-f"><span>Nom de la promotion</span><input type="text" name="nom" value="Les Vergers" maxlength="40" autocomplete="off" /></label>
+            <label class="es-f"><span>Localité</span><input type="text" name="loc" value="Kerzers" maxlength="30" autocomplete="off" /></label>
+            <div class="es-f"><span id="es-lots-l">Nombre de lots</span>
+              <div class="es-seg" role="radiogroup" aria-labelledby="es-lots-l" data-name="lots">
+                <button type="button" role="radio" aria-checked="true" data-v="6" class="is-on">6</button>
+                <button type="button" role="radio" aria-checked="false" data-v="12">12</button>
+                <button type="button" role="radio" aria-checked="false" data-v="24">24</button>
+              </div>
+            </div>
+            <p class="es-hint">Dans l’app, la grille peut aussi être importée depuis un PDF.</p>
+            <div class="es-go"><Btn label="Publier la promotion" data-act="0" /><Btn label="Étape suivante" tone="light" size="sm" data-next="0" class="es-next" hidden /></div>
+          </div>
+        </li>
+
+        <!-- 02 · Demande -->
+        <li class="es" data-step="1">
+          <button class="es-h" type="button" aria-expanded="false" disabled><span class="es-n">02</span><span class="es-t">Une demande arrive</span><span class="es-sum" data-sum></span></button>
+          <div class="es-c">
+            <p>Choisissez d’où vient l’acheteur. Sa source reste attachée à sa fiche jusqu’à la signature.</p>
+            <div class="es-f"><span id="es-src-l">Canal</span>
+              <div class="es-seg seg-src" role="radiogroup" aria-labelledby="es-src-l" data-name="src">
+                {sources.map(([id, name], k) => (
+                  <button type="button" role="radio" aria-checked={k === 0 ? 'true' : 'false'} data-v={id} class={k === 0 ? 'is-on' : ''}>{name}</button>
+                ))}
+              </div>
+            </div>
+            <div class="es-go"><Btn label="Recevoir la demande" data-act="1" /><Btn label="Étape suivante" tone="light" size="sm" data-next="1" class="es-next" hidden /></div>
+          </div>
+        </li>
+
+        <!-- 03 · Brochure -->
+        <li class="es" data-step="2">
+          <button class="es-h" type="button" aria-expanded="false" disabled><span class="es-n">03</span><span class="es-t">La brochure part</span><span class="es-sum" data-sum></span></button>
+          <div class="es-c">
+            <p>Premier contact et brochure, selon le canal de l’acheteur et vos réglages.</p>
+            <div class="es-f"><span id="es-fc-l">Premier contact</span>
+              <div class="es-seg" role="radiogroup" aria-labelledby="es-fc-l" data-name="fc">
+                <button type="button" role="radio" aria-checked="true" data-v="auto" class="is-on">Automatique</button>
+                <button type="button" role="radio" aria-checked="false" data-v="agent">Validé par l’agent</button>
+              </div>
+            </div>
+            <div class="es-f"><span id="es-br-l">Brochure</span>
+              <div class="es-seg" role="radiogroup" aria-labelledby="es-br-l" data-name="br">
+                <button type="button" role="radio" aria-checked="false" data-v="wa">WhatsApp</button>
+                <button type="button" role="radio" aria-checked="true" data-v="mail" class="is-on">E-mail</button>
+                <button type="button" role="radio" aria-checked="false" data-v="dl">Déjà téléchargée</button>
+              </div>
+              <small class="es-why" data-why-br></small>
+            </div>
+            <div class="es-go"><Btn label="Envoyer la brochure" data-act="2" /><Btn label="Étape suivante" tone="light" size="sm" data-next="2" class="es-next" hidden /></div>
+          </div>
+        </li>
+
+        <!-- 04 · Relance -->
+        <li class="es" data-step="3">
+          <button class="es-h" type="button" aria-expanded="false" disabled><span class="es-n">04</span><span class="es-t">Pas de réponse ? La relance part</span><span class="es-sum" data-sum></span></button>
+          <div class="es-c">
+            <p>Sans réponse après le délai choisi, Lotivio relance, ou place le contact dans vos relances à traiter.</p>
+            <div class="es-f"><span id="es-rc-l">Relancer par</span>
+              <div class="es-seg" role="radiogroup" aria-labelledby="es-rc-l" data-name="rc">
+                <button type="button" role="radio" aria-checked="false" data-v="wa">WhatsApp</button>
+                <button type="button" role="radio" aria-checked="true" data-v="mail" class="is-on">E-mail</button>
+                <button type="button" role="radio" aria-checked="false" data-v="none">Ma liste</button>
+              </div>
+              <small class="es-why" data-why-rc></small>
+            </div>
+            <div class="es-f"><span id="es-rd-l">Après</span>
+              <div class="es-seg" role="radiogroup" aria-labelledby="es-rd-l" data-name="rd">
+                <button type="button" role="radio" aria-checked="false" data-v="2">2 jours</button>
+                <button type="button" role="radio" aria-checked="true" data-v="3" class="is-on">3 jours</button>
+                <button type="button" role="radio" aria-checked="false" data-v="5">5 jours</button>
+              </div>
+            </div>
+            <div class="es-go"><Btn label="Avancer de 3 jours" data-act="3" /><Btn label="Étape suivante" tone="light" size="sm" data-next="3" class="es-next" hidden /></div>
+          </div>
+        </li>
+
+        <!-- 05 · Priorité des appels -->
+        <li class="es" data-step="4">
+          <button class="es-h" type="button" aria-expanded="false" disabled><span class="es-n">05</span><span class="es-t">Qui appeler en premier</span><span class="es-sum" data-sum></span></button>
+          <div class="es-c">
+            <p>Lotivio compte les clics sur le lien de la brochure. Plus l’acheteur y revient, plus il remonte dans votre liste d’appels.</p>
+            <div class="es-f"><span>Simulez l’intérêt de <b data-first>l’acheteur</b></span>
+              <button class="es-click" type="button" data-click><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>Ouvrir la brochure <em data-clicks>0×</em></button>
+            </div>
+            <div class="es-go"><Btn label="Étape suivante" data-next="4" class="es-next" hidden /></div>
+          </div>
+        </li>
+
+        <!-- 06 · Matching -->
+        <li class="es" data-step="5">
+          <button class="es-h" type="button" aria-expanded="false" disabled><span class="es-n">06</span><span class="es-t">Le bon lot pour chaque acheteur</span><span class="es-sum" data-sum></span></button>
+          <div class="es-c">
+            <p>Ajustez les critères de <b data-first>l’acheteur</b> : le score de chaque lot se recalcule.</p>
+            <div class="es-f"><span id="es-pc-l">Pièces</span>
+              <div class="es-seg" role="radiogroup" aria-labelledby="es-pc-l" data-name="pc">
+                <button type="button" role="radio" aria-checked="false" data-v="2.5">2.5</button>
+                <button type="button" role="radio" aria-checked="false" data-v="3.5">3.5</button>
+                <button type="button" role="radio" aria-checked="true" data-v="4.5" class="is-on">4.5</button>
+                <button type="button" role="radio" aria-checked="false" data-v="5.5">5.5</button>
+              </div>
+            </div>
+            <label class="es-f"><span>Budget maximum · <b data-budget-out>CHF 1’000’000</b></span>
+              <input type="range" name="budget" min="400000" max="2200000" step="10000" value="1000000" />
+            </label>
+            <div class="es-f"><span id="es-zn-l">Zone recherchée</span>
+              <div class="es-seg" role="radiogroup" aria-labelledby="es-zn-l" data-name="zn">
+                <button type="button" role="radio" aria-checked="true" data-v="loc" class="is-on" data-loc-label>Kerzers</button>
+                <button type="button" role="radio" aria-checked="false" data-v="reg">La région</button>
+                <button type="button" role="radio" aria-checked="false" data-v="out">Ailleurs</button>
+              </div>
+            </div>
+            <div class="es-end">
+              <Btn label="Voir Lotivio sur mes projets" href="/#demo" />
+              <button class="es-restart" type="button" data-restart>Recommencer</button>
+            </div>
+          </div>
+        </li>
+      </ol>
+    </div>
+
+    <!-- Fenêtre : l'écran Lotivio correspondant -->
+    <div class="ess-stage">
+      <div class="ew">
+        <div class="ew-bar"><span class="ew-t"><img src="/brand/lotivio-mark.svg" alt="" width="16" height="16" />app.lotivio.ch</span><span>Démo · données fictives</span></div>
+        <div class="ew-body">
+          <nav class="ew-nav" aria-hidden="true">
+            <span data-nav="pro">Promotions</span>
+            <span data-nav="dem">Demandes</span>
+            <span data-nav="rel">Relance</span>
+            <span data-nav="mat">Matching</span>
+            <span data-nav="pip">Pipeline</span>
+          </nav>
+          <div class="ew-main" data-ess-main aria-live="polite"></div>
+        </div>
+      </div>
+      <p class="ess-note" data-ess-note></p>
+      <noscript><p class="ess-note">La simulation a besoin de JavaScript.</p></noscript>
+    </div>
+  </div>
+</section>
+
+<script>
+  import '../scripts/essai.ts';
+</script>

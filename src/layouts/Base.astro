@@ -1,16 +1,18 @@
 ---
 import '@fontsource-variable/geist';
 import '@fontsource-variable/geist-mono';
-import '@fontsource-variable/archivo/standard.css';
+import '../styles/fonts.css';
 import '../styles/global.css';
+import Seo from '../components/seo/Seo.astro';
 import { SITE } from '../config';
-import archivoWoff from '@fontsource-variable/archivo/files/archivo-latin-standard-normal.woff2?url';
+import archivoWoff from '../assets/fonts/archivo-lotivio-latin.woff2?url';
 import geistWoff from '@fontsource-variable/geist/files/geist-latin-wght-normal.woff2?url';
 
-const canonical = new URL(Astro.url.pathname, SITE.url).href;
-const og = new URL('/og-image.jpg', SITE.url).href;
-const jsonLd = {
-  '@context': 'https://schema.org',
+// /essai (page de travail) n'est jamais indexée ; les autres pages Base le sont.
+const noindex = Astro.url.pathname.startsWith('/essai');
+
+// Page d'accueil : le produit et ses deux prix affichés (S09B, prix de Diego du 12.11.2026).
+const app = {
   '@type': 'SoftwareApplication',
   name: 'Lotivio',
   applicationCategory: 'BusinessApplication',
@@ -18,8 +20,15 @@ const jsonLd = {
   description: SITE.description,
   url: SITE.url,
   inLanguage: 'fr-CH',
-  areaServed: 'CH',
-  publisher: { '@type': 'Organization', name: 'Ava Vision' },
+  areaServed: { '@type': 'Country', name: 'Suisse' },
+  publisher: { '@id': `${SITE.url}/#org` },
+  offers: [
+    { '@type': 'Offer', name: 'Mise en place', price: '6500', priceCurrency: 'CHF', url: `${SITE.url}/#tarifs` },
+    {
+      '@type': 'Offer', name: 'Abonnement', url: `${SITE.url}/#tarifs`,
+      priceSpecification: { '@type': 'UnitPriceSpecification', minPrice: '450', priceCurrency: 'CHF', billingDuration: 'P1M', unitText: 'mois' },
+    },
+  ],
 };
 ---
 <!doctype html>
@@ -27,25 +36,9 @@ const jsonLd = {
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{SITE.title}</title>
-    <meta name="description" content={SITE.description} />
-    <link rel="canonical" href={canonical} />
-    <meta name="theme-color" content="#F7F6F3" />
-    <link rel="icon" href="/brand/lotivio-mark.svg" type="image/svg+xml" />
-    <link rel="apple-touch-icon" href="/brand/icon-512.png" />
     <link rel="preload" as="font" type="font/woff2" href={archivoWoff} crossorigin />
     <link rel="preload" as="font" type="font/woff2" href={geistWoff} crossorigin />
-    <meta property="og:type" content="website" />
-    <meta property="og:locale" content="fr_CH" />
-    <meta property="og:site_name" content="Lotivio" />
-    <meta property="og:title" content={SITE.title} />
-    <meta property="og:description" content={SITE.description} />
-    <meta property="og:url" content={canonical} />
-    <meta property="og:image" content={og} />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+    <Seo ld={noindex ? [] : [app]} noindex={noindex} />
     <script is:inline>document.documentElement.classList.add('js');</script>
   </head>
   <body>

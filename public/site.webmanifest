@@ -1,0 +1,13 @@
+{
+  "name": "Lotivio",
+  "short_name": "Lotivio",
+  "lang": "fr-CH",
+  "start_url": "/",
+  "display": "browser",
+  "background_color": "#F7F6F3",
+  "theme_color": "#F7F6F3",
+  "icons": [
+    { "src": "/brand/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "/apple-touch-icon.png", "sizes": "180x180", "type": "image/png" }
+  ]
+}

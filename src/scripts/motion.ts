@@ -124,9 +124,18 @@ async function init() {
     setH();
     ScrollTrigger.addEventListener('refreshInit', setH);
     const tween = gsap.to(track, { x: () => -dist(), ease: 'none', scrollTrigger: { trigger: sec, start: 'top top', end: 'bottom bottom', scrub: true, invalidateOnRefresh: true } });
-    // Chaque carte arrive légèrement inclinée et se redresse.
+    // Chaque carte arrive légèrement inclinée et se redresse. Elle doit être droite au plus tard quand la piste
+    // s'arrête : la dernière carte ne passe jamais le repère des 60 %, sa fin est donc ramenée à sa position finale.
+    const finalLeft = (card: HTMLElement) =>
+      card.getBoundingClientRect().left - track.getBoundingClientRect().left + (track.parentElement?.getBoundingClientRect().left ?? 0) - dist();
     $$('.oc', track).forEach((card) => {
-      gsap.from(card, { rotate: 3, y: 50, scale: 0.95, ease: 'none', scrollTrigger: { trigger: card, containerAnimation: tween, start: 'left right', end: 'left 60%', scrub: true } });
+      gsap.from(card, {
+        rotate: 3, y: 50, scale: 0.95, ease: 'none',
+        scrollTrigger: {
+          trigger: card, containerAnimation: tween, start: 'left right', scrub: true, invalidateOnRefresh: true,
+          end: () => `left ${Math.max(innerWidth * 0.6, finalLeft(card) + 8)}px`,
+        },
+      });
     });
     return () => { ScrollTrigger.removeEventListener('refreshInit', setH); sec.style.height = ''; };
   });
@@ -188,19 +197,6 @@ async function init() {
     gsap.fromTo(menu, { autoAlpha: 0, y: -10, scale: 0.96 }, { autoAlpha: 1, y: 0, scale: 1, duration: 0.5, ease: 'expo.out' });
     gsap.fromTo($$('li, .menu-cta', menu), { autoAlpha: 0, y: 14 }, { autoAlpha: 1, y: 0, duration: 0.55, ease: 'expo.out', stagger: 0.04, delay: 0.05 });
   });
-
-  /* ---------- Boutons magnétiques ---------- */
-  if (matchMedia('(hover: hover) and (pointer: fine)').matches) {
-    $$('.magnet').forEach((b) => {
-      const xTo = gsap.quickTo(b, 'x', { duration: 0.6, ease: 'power3' });
-      const yTo = gsap.quickTo(b, 'y', { duration: 0.6, ease: 'power3' });
-      b.addEventListener('pointermove', (e) => {
-        const r = b.getBoundingClientRect();
-        xTo((e.clientX - r.left - r.width / 2) * 0.3); yTo((e.clientY - r.top - r.height / 2) * 0.4);
-      });
-      b.addEventListener('pointerleave', () => { gsap.to(b, { x: 0, y: 0, duration: 0.9, ease: 'elastic.out(1, 0.35)' }); });
-    });
-  }
 
   // Recalcul des positions seulement si quelque chose peut encore changer les hauteurs.
   // ScrollTrigger calcule déjà ses positions à la création : un recalcul de plus après coup

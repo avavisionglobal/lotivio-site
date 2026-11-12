@@ -1,30 +1,91 @@
 ---
 import Btn from './ui/Btn.astro';
-// S09B · Tarifs (textes et prix de Diego, 12.11.2026), après la FAQ.
-// Deux cartes : mise en place (claire) et abonnement (sombre, trame de code + loupe au survol), un bouton.
+// S09B · Tarifs (textes et prix de Diego, 12.11.2026), après la FAQ. v2 : panneau gris chaud pour sortir du
+// blanc sur blanc ; deux vraies cartes de prix (prix animé, contenu, bouton). Version précédente :
+// proofs/archive/S09BTarifs-v1-deux-cartes.astro.
+// Contenu : étapes de la mise en place reprises de S07 et de l'introduction de Diego ; l'abonnement ne liste
+// que ce que son texte garantit (« selon la formule choisie, avec hébergement, maintenance, mises à jour et support »).
 import '../styles/s09b-tarifs.css';
+const steps = [
+  ['Atelier', 'Votre façon de travailler devient le point de départ.'],
+  ['Contacts et canaux', 'Reprise de vos contacts, connexion de vos portails, de Meta Ads et de votre site.'],
+  ['Réglages du suivi', 'Premier contact, brochure, relances : réglés selon votre organisation.'],
+  ['Prise en main', 'Avec votre équipe, jusqu’à la première demande traitée.'],
+];
+const incl = [
+  ['Lotivio configuré pour votre agence', 'Demandes, matching, relances, pipeline et stock.'],
+  ['Hébergement', ''],
+  ['Maintenance et mises à jour', ''],
+  ['Support pour votre équipe', ''],
+];
+const check = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg>';
 ---
 <!-- S09B · Tarifs -->
 <section class="tf" id="tarifs" data-bloc="S09B">
-  <div class="tf-head">
-    <span class="tf-lab" data-bloc="S09B.1"><i aria-hidden="true"></i>Tarifs</span>
-    <h2 class="tf-h" data-bloc="S09B.2" data-flash>Votre agence équipée.<span class="g">Votre équipe accompagnée.</span></h2>
-    <p class="tf-p" data-bloc="S09B.3">Nous installons Lotivio selon votre façon de travailler : reprise de vos contacts, connexion de vos outils, configuration et prise en main avec votre équipe. Vous disposez ensuite d’un CRM maintenu et accompagné pour suivre vos acheteurs et commercialiser vos biens.</p>
+  <div class="tf-panel">
+    <div class="tf-head">
+      <span class="tf-lab" data-bloc="S09B.1"><i aria-hidden="true"></i>Tarifs</span>
+      <h2 class="tf-h" data-bloc="S09B.2" data-flash>Votre agence équipée.<span class="g">Votre équipe accompagnée.</span></h2>
+      <p class="tf-p" data-bloc="S09B.3">Nous installons Lotivio selon votre façon de travailler : reprise de vos contacts, connexion de vos outils, configuration et prise en main avec votre équipe. Vous disposez ensuite d’un CRM maintenu et accompagné pour suivre vos acheteurs et commercialiser vos biens.</p>
+    </div>
+
+    <div class="tf-cards">
+      <article class="tf-card" data-bloc="S09B.4" data-reveal>
+        <div class="tf-top">
+          <span class="tf-k"><b>01</b>Une seule fois</span>
+          <h3>Mise en place</h3>
+          <p class="tf-s">Pour préparer Lotivio au fonctionnement de votre agence.</p>
+        </div>
+        <p class="tf-price" aria-label="CHF 6’500.– une seule fois"><span class="cur">CHF</span><span class="amt" data-to="6500">6’500</span><span class="dash">.–</span></p>
+        <div class="tf-body">
+          <span class="tf-li-h">Les étapes</span>
+          <ol class="tf-steps">
+            {steps.map(([t, d], k) => (
+              <li style={`--k:${k}`}><i>{k + 1}</i><span><b>{t}</b><small>{d}</small></span></li>
+            ))}
+          </ol>
+        </div>
+        <div class="tf-cta"><Btn label="Parlons de votre mise en place" href="#demo" /></div>
+      </article>
+
+      <article class="tf-card dk" data-bloc="S09B.5" data-reveal>
+        <pre class="tex tf-tex" data-src="/media/tex/lac.svg" data-w=".5" data-r=".6" aria-hidden="true"></pre>
+        <div class="tf-top">
+          <span class="tf-k"><b>02</b>Chaque mois</span>
+          <h3>Abonnement</h3>
+          <p class="tf-s">Selon la formule choisie.</p>
+        </div>
+        <p class="tf-price" aria-label="dès CHF 450.– par mois"><span class="from">dès</span><span class="cur">CHF</span><span class="amt" data-to="450">450</span><span class="dash">.–</span><span class="per">/mois</span></p>
+        <div class="tf-body">
+          <span class="tf-li-h">Compris</span>
+          <ul class="tf-incl">
+            {incl.map(([t, d], k) => (
+              <li style={`--k:${k}`}><i set:html={check} /><span><b>{t}</b>{d && <small>{d}</small>}</span></li>
+            ))}
+          </ul>
+        </div>
+        <div class="tf-cta"><Btn label="Découvrir Lotivio pour mon agence" href="#demo" tone="light" /></div>
+      </article>
+    </div>
   </div>
-  <div class="tf-cards" data-stagger>
-    <article class="tf-card" data-bloc="S09B.4">
-      <span class="tf-k">01 · Une seule fois</span>
-      <h3>Mise en place</h3>
-      <p class="tf-price"><span class="cur">CHF</span>6’500.–</p>
-      <p class="tf-t">Une seule fois, pour préparer Lotivio au fonctionnement de votre agence.</p>
-    </article>
-    <article class="tf-card dk" data-bloc="S09B.5">
-      <pre class="tex tf-tex" data-src="/media/tex/lac.svg" data-w=".5" data-r=".6" aria-hidden="true"></pre>
-      <span class="tf-k">02 · Chaque mois</span>
-      <h3>Abonnement</h3>
-      <p class="tf-price"><span class="from">dès</span><span class="cur">CHF</span>450.–<span class="per">/mois</span></p>
-      <p class="tf-t">Selon la formule choisie, avec hébergement, maintenance, mises à jour et support.</p>
-    </article>
-  </div>
-  <div class="tf-end" data-bloc="S09B.6"><Btn label="Découvrir Lotivio pour mon agence" href="#demo" class="magnet" /></div>
 </section>
+<script>
+  // Les prix défilent jusqu'à leur valeur à l'apparition de la carte (sans JS ou en mouvement réduit : prix fixe).
+  const fmt = (n: number) => String(n).replace(/\B(?=(\d{3})+(?!\d))/g, '’');
+  if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.querySelectorAll<HTMLElement>('.tf .amt[data-to]').forEach((el) => {
+      const to = Number(el.dataset.to);
+      new IntersectionObserver(([e], io) => {
+        if (!e.isIntersecting) return;
+        io.disconnect();
+        const t0 = performance.now(), D = 1400;
+        const step = (t: number) => {
+          const p = Math.min(1, (t - t0) / D), k = 1 - Math.pow(1 - p, 4);
+          el.textContent = fmt(Math.round((to * k) / 10) * 10 || 0);
+          if (p < 1) requestAnimationFrame(step); else el.textContent = fmt(to);
+        };
+        requestAnimationFrame(step);
+      }, { threshold: 0.5 }).observe(el);
+    });
+  }
+</script>

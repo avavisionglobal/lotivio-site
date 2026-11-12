@@ -1,37 +1,85 @@
 /* =================================================================
-   S09B · Tarifs (12.11.2026) — DA du site : gris chaud, encre, orange en touches,
-   carte sombre avec trame de code (loupe au survol, texhover.ts).
+   S09B · Tarifs v2 (12.11.2026) — panneau gris chaud (la section se détache de la FAQ blanche et
+   prépare la carte sombre de la démo), deux cartes de prix : claire (mise en place, frise d'étapes)
+   et sombre (abonnement, trame de code + loupe au survol, texhover.ts). v1 : proofs/archive/.
    ================================================================= */
-.tf{padding:var(--sp-sec,160px) var(--pad) 0}
+.tf{padding:var(--sp-sec,140px) var(--pad) 0}
+.tf-panel{position:relative;max-width:1320px;margin:0 auto;padding:clamp(64px,7vw,104px) clamp(20px,5vw,64px) clamp(28px,4vw,56px);border-radius:36px;background:var(--warm);
+  box-shadow:inset 0 0 0 1px var(--warm-line)}
 .tf-head{display:flex;flex-direction:column;align-items:center;text-align:center;max-width:1000px;margin:0 auto}
 .tf-lab{display:inline-flex;align-items:center;gap:9px;font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--orange)}
 .tf-lab i{width:7px;height:7px;background:var(--orange);border-radius:1px}
 .tf-h{margin-top:24px;font-family:var(--disp);font-variation-settings:"wdth" 104;font-weight:500;font-size:clamp(36px,4.2vw,64px);line-height:1.02;letter-spacing:-.048em}
 .tf-h .g{display:block;color:var(--grey)}
 .tf-p{max-width:38em;margin-top:24px;font-size:16.5px;line-height:1.6;color:var(--muted);text-wrap:balance}
-.tf-cards{display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:1080px;margin:clamp(48px,6vw,72px) auto 0}
-.tf-card{position:relative;isolation:isolate;overflow:hidden;display:flex;flex-direction:column;min-height:360px;padding:34px 34px 32px;border-radius:26px;background:var(--warm);box-shadow:inset 0 0 0 1px var(--warm-line)}
-.tf-card.dk{background:#141414;color:#F3F1EC;box-shadow:none}
-.tf-tex{z-index:-1;right:-6px;top:-4px;left:auto;color:#3A3835;opacity:.9;
-  mask-image:radial-gradient(85% 85% at 100% 0%,#000 25%,transparent 70%);-webkit-mask-image:radial-gradient(85% 85% at 100% 0%,#000 25%,transparent 70%)}
-.tf-k{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+
+/* Cartes */
+.tf-cards{display:grid;grid-template-columns:1fr 1fr;gap:14px;max-width:1120px;margin:clamp(48px,6vw,72px) auto 0}
+.tf-card{position:relative;isolation:isolate;overflow:hidden;display:flex;flex-direction:column;padding:12px;border-radius:28px;background:#fff;color:var(--ink);
+  box-shadow:0 1px 0 rgba(0,0,0,.02),0 30px 60px -40px rgba(60,40,10,.35)}
+.tf-card.dk{background:#141414;color:#F3F1EC;box-shadow:0 30px 60px -30px rgba(0,0,0,.55)}
+.tf-tex{z-index:-1;right:-6px;bottom:-4px;top:auto;left:auto;color:#3A3835;opacity:.9;
+  mask-image:radial-gradient(90% 60% at 100% 100%,#000 30%,transparent 75%);-webkit-mask-image:radial-gradient(90% 60% at 100% 100%,#000 30%,transparent 75%)}
+/* En-tête de carte : bloc teinté en haut, comme une étiquette */
+.tf-top{padding:22px 22px 26px;border-radius:18px;background:var(--warm-2);box-shadow:inset 0 0 0 1px #ECEAE4}
+.tf-card.dk .tf-top{background:rgba(255,255,255,.04);box-shadow:inset 0 0 0 1px rgba(255,255,255,.08);backdrop-filter:blur(2px)}
+.tf-k{display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.tf-k b{display:grid;place-items:center;min-width:26px;height:20px;padding:0 6px;border-radius:6px;background:var(--ink);color:#fff;font-weight:400;letter-spacing:.02em}
 .tf-card.dk .tf-k{color:#FF9C61}
-.tf-card h3{margin-top:20px;font-family:var(--disp);font-variation-settings:"wdth" 104;font-weight:500;font-size:26px;letter-spacing:-.03em}
-.tf-price{display:flex;align-items:baseline;flex-wrap:wrap;gap:0 8px;margin-top:auto;padding-top:48px;font-family:var(--disp);font-variation-settings:"wdth" 104;font-weight:500;
-  font-size:clamp(48px,5.4vw,78px);line-height:1;letter-spacing:-.05em;font-variant-numeric:tabular-nums}
-.tf-price .cur{font-size:.32em;letter-spacing:0;font-family:var(--mono);font-weight:400;color:var(--muted);transform:translateY(-.15em)}
-.tf-price .from{font-size:.3em;letter-spacing:-.01em;font-family:var(--sans);font-weight:500;color:var(--muted)}
-.tf-price .per{font-size:.3em;letter-spacing:-.01em;font-family:var(--sans);font-weight:500;color:var(--muted)}
+.tf-card.dk .tf-k b{background:var(--orange);color:#fff}
+.tf-card h3{margin-top:18px;font-family:var(--disp);font-variation-settings:"wdth" 104;font-weight:500;font-size:clamp(26px,2.3vw,32px);letter-spacing:-.035em}
+.tf-s{margin-top:6px;font-size:15px;line-height:1.5;color:var(--muted)}
+.tf-card.dk .tf-s{color:rgba(243,241,236,.62)}
+/* Prix */
+.tf-price{display:flex;align-items:baseline;flex-wrap:wrap;gap:0 8px;padding:34px 22px 6px;font-family:var(--disp);font-variation-settings:"wdth" 104;font-weight:500;
+  font-size:clamp(54px,5.6vw,84px);line-height:1;letter-spacing:-.05em;font-variant-numeric:tabular-nums}
+.tf-price .amt{min-width:2.4ch}
+.tf-price .dash{margin-left:-8px;margin-right:4px}
+.tf-price .cur{font-size:.26em;letter-spacing:.02em;font-family:var(--mono);font-weight:400;color:var(--muted);transform:translateY(-.2em)}
+.tf-price .from,.tf-price .per{font-size:.27em;letter-spacing:-.01em;font-family:var(--sans);font-weight:500;color:var(--muted)}
 .tf-card.dk .tf-price .cur,.tf-card.dk .tf-price .from,.tf-card.dk .tf-price .per{color:rgba(243,241,236,.55)}
-.tf-t{margin-top:18px;padding-top:18px;border-top:1px solid var(--warm-line);font-size:15px;line-height:1.55;color:var(--muted);max-width:30em}
-.tf-card.dk .tf-t{border-top-color:#2E2C2A;color:rgba(243,241,236,.66)}
-.tf-end{display:flex;justify-content:center;margin-top:44px}
-.tf-btn{padding:15px 24px;font-size:15.5px}
-.tf-btn span{transition:transform .25s var(--ease)}
-.tf-btn:hover span{transform:rotate(45deg)}
-@media (max-width:800px){
-  .tf-cards{grid-template-columns:1fr}
-  .tf-card{min-height:0;padding:28px 24px}
-  .tf-price{padding-top:36px}
+/* Contenu */
+.tf-body{display:flex;flex-direction:column;gap:14px;margin:22px 22px 0;padding-top:22px;border-top:1px solid #ECEAE4}
+.tf-card.dk .tf-body{border-top-color:#2E2C2A}
+.tf-li-h{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.tf-card.dk .tf-li-h{color:rgba(243,241,236,.5)}
+.tf-steps,.tf-incl{list-style:none;margin:0;padding:0;display:grid;gap:14px}
+.tf-steps li,.tf-incl li{display:grid;grid-template-columns:26px minmax(0,1fr);gap:14px;align-items:start}
+.tf-steps li span,.tf-incl li span{display:grid;gap:3px;padding-top:3px}
+.tf-steps b,.tf-incl b{font-size:15px;font-weight:600;letter-spacing:-.01em}
+.tf-steps small,.tf-incl small{font-size:13.5px;line-height:1.45;color:var(--muted)}
+.tf-card.dk .tf-incl small{color:rgba(243,241,236,.6)}
+/* Frise de la mise en place : pastilles numérotées reliées par un fil qui se remplit */
+.tf-steps li{position:relative}
+.tf-steps li:not(:last-child)::before,.tf-steps li:not(:last-child)::after{content:"";position:absolute;left:12px;top:26px;bottom:-14px;width:2px;background:#E2DFD8}
+.tf-steps li:not(:last-child)::after{background:var(--orange);transform-origin:top}
+.tf-steps i{position:relative;z-index:1;display:grid;place-items:center;width:26px;height:26px;border-radius:50%;background:#fff;box-shadow:inset 0 0 0 1.5px var(--ink);
+  font-family:var(--mono);font-style:normal;font-size:11px;color:var(--ink)}
+.tf-steps li:last-child i{background:var(--orange);box-shadow:none;color:#fff}
+/* Compris dans l'abonnement */
+.tf-incl i{display:grid;place-items:center;width:26px;height:26px;border-radius:8px;background:rgba(235,110,44,.16);color:#FF9C61}
+.tf-cta{margin-top:auto;padding:30px 22px 12px}
+.tf-cta .cbtn{width:100%;justify-content:space-between}
+
+/* Apparition : la frise se remplit, les lignes arrivent l'une après l'autre */
+@media (prefers-reduced-motion:no-preference){
+  .rv-on .tf-card .tf-steps li,.rv-on .tf-card .tf-incl li{transition:opacity .7s ease calc(.35s + var(--k) * .12s),transform .9s cubic-bezier(.16,1,.3,1) calc(.35s + var(--k) * .12s)}
+  .rv-on .tf-card:not(.in) .tf-steps li,.rv-on .tf-card:not(.in) .tf-incl li{opacity:0;transform:translateY(14px)}
+  .rv-on .tf-steps li::after{transition:transform .5s cubic-bezier(.65,0,.35,1) calc(.6s + var(--k) * .35s)}
+  .rv-on .tf-card:not(.in) .tf-steps li::after{transform:scaleY(0)}
 }
-@media (max-width:520px){.tf-h{font-size:32px}.tf-p{font-size:15px}.tf-btn{white-space:normal}}
+
+@media (max-width:900px){
+  .tf-cards{grid-template-columns:1fr;max-width:560px}
+}
+@media (max-width:520px){
+  .tf{padding-left:12px;padding-right:12px}
+  .tf-panel{border-radius:28px;padding:56px 14px 14px}
+  .tf-h{font-size:32px}.tf-p{font-size:15px}
+  .tf-card{padding:8px;border-radius:24px}
+  .tf-top{padding:18px 16px 20px}
+  .tf-price{padding:28px 16px 4px}
+  .tf-body{margin:18px 16px 0}
+  .tf-cta{padding:24px 12px 8px}
+  .tf-cta .cbtn{white-space:normal}
+}

@@ -31,10 +31,10 @@ import Film from '../components/Film.astro';
   <S11Footer />
   <Film />
   <script>
-    import '../scripts/flash.ts';
-    import '../scripts/app.ts';
-    import '../scripts/texhover.ts';
-    import '../scripts/bento.ts';
+    // Comportements des sections (titres, trames de code, démos, réservation, menu) : lancés juste après
+    // le premier affichage, quand le navigateur est libre. Le premier écran (hero.ts) n'attend pas.
+    const later = (fn: () => void, t = 1000) => ('requestIdleCallback' in window ? requestIdleCallback(fn, { timeout: t }) : setTimeout(fn, 200));
+    requestAnimationFrame(() => later(() => { import('../scripts/flash.ts'); import('../scripts/app.ts'); import('../scripts/texhover.ts'); }));
     // La couche d'animation (GSAP + Lenis) se charge quand le navigateur est libre :
     // le premier écran s'affiche sans l'attendre.
     const loadMotion = () => import('../scripts/motion.ts');

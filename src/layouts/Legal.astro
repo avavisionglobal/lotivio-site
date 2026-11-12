@@ -1,0 +1,31 @@
+---
+// Pages légales et page d'erreur : même en-tête SEO que le site, mais une feuille de style légère
+// (pas le CSS ni les scripts d'animation de l'accueil).
+import '@fontsource-variable/geist';
+import '../styles/fonts.css';
+import '../styles/legal.css';
+import Seo from '../components/seo/Seo.astro';
+import { SITE, LEGAL } from '../config';
+interface Props { title: string; description: string; noindex?: boolean }
+const { title, description, noindex = false } = Astro.props;
+---
+<!doctype html>
+<html lang="fr-CH">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <Seo title={title} description={description} noindex={noindex} />
+  </head>
+  <body class="lg">
+    <a class="lg-skip" href="#contenu">Aller au contenu</a>
+    <header class="lg-top">
+      <a class="lg-logo" href="/" aria-label="Lotivio, accueil"><img src="/brand/lotivio-mark.svg" alt="" width="28" height="28" /><span>lotivio<i>.</i></span></a>
+      <a class="lg-back" href="/">Retour au site</a>
+    </header>
+    <main id="contenu" class="lg-main"><slot /></main>
+    <footer class="lg-foot">
+      <span>© 2026 {SITE.name} · {LEGAL.company}</span>
+      <nav aria-label="Informations légales"><a href={SITE.legalUrl}>Mentions légales</a><a href={SITE.privacyUrl}>Confidentialité</a></nav>
+    </footer>
+  </body>
+</html>

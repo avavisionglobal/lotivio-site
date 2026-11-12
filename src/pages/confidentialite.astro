@@ -1,0 +1,55 @@
+---
+// Politique de confidentialité du site vitrine (nLPD ; RGPD lorsque applicable). Projet rédigé le 12.11.2026
+// à partir de ce que le site fait réellement : aucun cookie, aucun outil de mesure ni ressource tierce,
+// hébergement Vercel, formulaire de demande de démo (nom, e-mail, agence, téléphone facultatif, créneau).
+// À faire valider par Diego ; à compléter quand la destination du formulaire de démo sera branchée.
+import Legal from '../layouts/Legal.astro';
+import { SITE, LEGAL } from '../config';
+---
+<Legal title="Politique de confidentialité — Lotivio" description="Quelles données le site Lotivio traite, pourquoi, combien de temps, et comment exercer vos droits.">
+  <h1>Politique de confidentialité</h1>
+  <p class="lg-up">Dernière mise à jour : {LEGAL.updated}</p>
+
+  <p>Cette politique explique comment {LEGAL.company} traite les données personnelles collectées sur ce site, conformément à la loi fédérale sur la protection des données (nLPD) et, lorsqu’il s’applique, au règlement général sur la protection des données de l’Union européenne (RGPD).</p>
+  <p>Elle concerne uniquement ce site de présentation. L’utilisation de l’application Lotivio par les agences fait l’objet d’une <a href={LEGAL.appPrivacyUrl}>politique distincte</a>.</p>
+
+  <h2>Responsable du traitement</h2>
+  <address>
+    <strong>{LEGAL.company}</strong><br />
+    {LEGAL.street}<br />
+    {LEGAL.zip} {LEGAL.city}, {LEGAL.country}<br />
+    E-mail : <a href={`mailto:${LEGAL.email}`}>{LEGAL.email}</a>
+  </address>
+
+  <h2>Données traitées et finalités</h2>
+  <h3>Consultation du site</h3>
+  <p>Lorsque vous consultez le site, notre hébergeur enregistre des données techniques : adresse IP, date et heure de la visite, page demandée, navigateur, système d’exploitation et page de provenance. Elles servent à afficher le site, à en assurer la sécurité et à corriger les erreurs.</p>
+  <h3>Demande de démonstration</h3>
+  <p>Si vous demandez une démonstration, nous traitons les informations que vous saisissez : nom et prénom, e-mail professionnel, agence, numéro de téléphone (facultatif) et créneau choisi. Elles servent uniquement à organiser la démonstration et à vous recontacter à ce sujet.</p>
+  <h3>Contact par e-mail</h3>
+  <p>Si vous nous écrivez, nous traitons votre adresse e-mail et le contenu de votre message pour vous répondre.</p>
+
+  <h2>Cookies et mesure d’audience</h2>
+  <p>Ce site n’utilise aucun cookie, aucun outil de mesure d’audience et aucun outil publicitaire. Les polices, images et vidéos sont servies depuis notre propre site, sans faire appel à des services tiers.</p>
+
+  <h2>Destinataires et transfert à l’étranger</h2>
+  <p>Vos données ne sont ni vendues ni louées. Elles sont accessibles à notre équipe et à nos prestataires techniques, dans la mesure nécessaire à leur mission :</p>
+  <ul>
+    <li>notre hébergeur, {LEGAL.host} ;</li>
+    <li>notre fournisseur de messagerie, pour les échanges par e-mail.</li>
+  </ul>
+  <p>Certaines données peuvent ainsi être traitées hors de Suisse, notamment aux États-Unis. Dans ce cas, nous veillons à ce que des garanties appropriées soient en place, par exemple des clauses contractuelles types reconnues par le Préposé fédéral à la protection des données et à la transparence (PFPDT).</p>
+
+  <h2>Durée de conservation</h2>
+  <p>Les journaux techniques de l’hébergeur sont conservés pour une durée limitée. Les données d’une demande de démonstration ou d’un échange par e-mail sont conservées le temps nécessaire pour y donner suite et pour la relation qui peut en découler, puis supprimées, sous réserve des obligations légales de conservation.</p>
+
+  <h2>Vos droits</h2>
+  <p>Vous pouvez à tout moment demander l’accès à vos données, leur rectification ou leur effacement, vous opposer à leur traitement ou demander leur remise dans un format courant. Écrivez-nous à <a href={`mailto:${LEGAL.email}`}>{LEGAL.email}</a>.</p>
+  <p>Vous pouvez également déposer une plainte auprès du Préposé fédéral à la protection des données et à la transparence (PFPDT) ou, si le RGPD s’applique, auprès de l’autorité de protection des données de votre pays de résidence.</p>
+
+  <h2>Sécurité</h2>
+  <p>Le site est servi exclusivement en connexion chiffrée (HTTPS). Nous prenons des mesures techniques et organisationnelles adaptées pour protéger vos données.</p>
+
+  <h2>Modifications</h2>
+  <p>Nous pouvons adapter cette politique, par exemple si le site évolue. La version publiée sur cette page fait foi. Pour les informations sur l’éditeur, voir les <a href={SITE.legalUrl}>mentions légales</a>.</p>
+</Legal>

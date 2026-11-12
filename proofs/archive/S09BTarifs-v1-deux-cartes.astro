@@ -1,0 +1,30 @@
+---
+import Btn from './ui/Btn.astro';
+// S09B · Tarifs (textes et prix de Diego, 12.11.2026), après la FAQ.
+// Deux cartes : mise en place (claire) et abonnement (sombre, trame de code + loupe au survol), un bouton.
+import '../styles/s09b-tarifs.css';
+---
+<!-- S09B · Tarifs -->
+<section class="tf" id="tarifs" data-bloc="S09B">
+  <div class="tf-head">
+    <span class="tf-lab" data-bloc="S09B.1"><i aria-hidden="true"></i>Tarifs</span>
+    <h2 class="tf-h" data-bloc="S09B.2" data-flash>Votre agence équipée.<span class="g">Votre équipe accompagnée.</span></h2>
+    <p class="tf-p" data-bloc="S09B.3">Nous installons Lotivio selon votre façon de travailler : reprise de vos contacts, connexion de vos outils, configuration et prise en main avec votre équipe. Vous disposez ensuite d’un CRM maintenu et accompagné pour suivre vos acheteurs et commercialiser vos biens.</p>
+  </div>
+  <div class="tf-cards" data-stagger>
+    <article class="tf-card" data-bloc="S09B.4">
+      <span class="tf-k">01 · Une seule fois</span>
+      <h3>Mise en place</h3>
+      <p class="tf-price"><span class="cur">CHF</span>6’500.–</p>
+      <p class="tf-t">Une seule fois, pour préparer Lotivio au fonctionnement de votre agence.</p>
+    </article>
+    <article class="tf-card dk" data-bloc="S09B.5">
+      <pre class="tex tf-tex" data-src="/media/tex/lac.svg" data-w=".5" data-r=".6" aria-hidden="true"></pre>
+      <span class="tf-k">02 · Chaque mois</span>
+      <h3>Abonnement</h3>
+      <p class="tf-price"><span class="from">dès</span><span class="cur">CHF</span>450.–<span class="per">/mois</span></p>
+      <p class="tf-t">Selon la formule choisie, avec hébergement, maintenance, mises à jour et support.</p>
+    </article>
+  </div>
+  <div class="tf-end" data-bloc="S09B.6"><Btn label="Découvrir Lotivio pour mon agence" href="#demo" /></div>
+</section>

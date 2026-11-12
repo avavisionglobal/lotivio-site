@@ -20,13 +20,13 @@ const canaux = ['Homegate', 'ImmoScout24', 'immobilier.ch', 'Properstar', 'Meta 
       <a class="fx-logo" href="#top" aria-label="Lotivio, retour en haut"><img src="/brand/lotivio-mark.svg" alt="" width="30" height="30" /><span>lotivio<i>.</i></span></a>
       <p>Le CRM immobilier développé pour les agences et promoteurs suisses. Vos canaux, vos échanges et votre suivi commercial réunis.</p>
     </div>
-    <Btn label="Réserver une démo" href="#demo" tone="light" class="fx-go magnet" />
+    <Btn label="Réserver une démo" href="#demo" tone="light" class="fx-go" />
   </div>
   <nav class="f-cols fx-cols" aria-label="Pied de page" data-bloc="S11.2">
     <div><h2>Produit</h2><a href="#s03">Demandes reçues</a><a href="#s03">Assistant WhatsApp</a><a href="#s03">Dictée vocale</a></div>
     <div><h2>Agence</h2><a href="#mise-en-place">Mise en place</a><a href="#faq">Questions</a><a href="#tarifs">Tarifs</a><a href="#demo">Réserver une démo</a></div>
     <div><h2>Canaux</h2>{canaux.map((c) => <span>{c}</span>)}</div>
-    <div><h2>Compte</h2><a href={SITE.appUrl}>Se connecter</a><a href={SITE.privacyUrl}>Confidentialité</a></div>
+    <div><h2>Compte</h2><a href={SITE.appUrl}>Se connecter</a><a href={SITE.privacyUrl}>Confidentialité</a><a href={SITE.legalUrl}>Mentions légales</a></div>
   </nav>
   <div class="f-legal fx-legal mono"><span>© 2026 Lotivio · Ava Vision · Développé en Suisse</span><span>Données de démonstration</span></div>
 </footer>

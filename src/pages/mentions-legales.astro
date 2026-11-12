@@ -1,0 +1,39 @@
+---
+// Mentions légales (impressum, art. 3 al. 1 let. s LCD) : identité, adresse et e-mail de l'éditeur.
+// Projet rédigé le 12.11.2026, à faire valider par Diego. IDE et forme juridique : config.ts (LEGAL).
+import Legal from '../layouts/Legal.astro';
+import { SITE, LEGAL } from '../config';
+---
+<Legal title="Mentions légales — Lotivio" description="Éditeur du site Lotivio, contact, hébergement et propriété intellectuelle.">
+  <h1>Mentions légales</h1>
+  <p class="lg-up">Dernière mise à jour : {LEGAL.updated}</p>
+
+  <h2>Éditeur du site</h2>
+  <address>
+    <strong>{LEGAL.company}</strong>{LEGAL.form && <> ({LEGAL.form})</>}<br />
+    {LEGAL.street}<br />
+    {LEGAL.zip} {LEGAL.city}, {LEGAL.country}<br />
+    E-mail : <a href={`mailto:${LEGAL.email}`}>{LEGAL.email}</a>
+    {LEGAL.ide && <><br />Numéro IDE : {LEGAL.ide}</>}
+  </address>
+  <p>Lotivio est un CRM immobilier développé et exploité par {LEGAL.company} ({LEGAL.brand}).</p>
+
+  <h2>Hébergement</h2>
+  <p>Ce site est hébergé par {LEGAL.host}.</p>
+
+  <h2>Propriété intellectuelle</h2>
+  <p>Les textes, visuels, illustrations, logos et éléments graphiques de ce site appartiennent à {LEGAL.company} ou sont utilisés avec autorisation. Toute reproduction, totale ou partielle, nécessite un accord écrit préalable.</p>
+  <p>Les noms et logos de Homegate, ImmoScout24, immobilier.ch, Properstar, Meta et WhatsApp appartiennent à leurs titulaires respectifs. Ils sont cités uniquement pour décrire les canaux qui peuvent être connectés à Lotivio.</p>
+
+  <h2>Données de démonstration</h2>
+  <p>Les écrans, noms, projets, chiffres et portraits présentés sur ce site sont fictifs et servent uniquement à illustrer le fonctionnement de Lotivio.</p>
+
+  <h2>Responsabilité</h2>
+  <p>Les informations publiées sur ce site sont fournies à titre indicatif et peuvent être modifiées à tout moment. {LEGAL.company} ne répond pas du contenu des sites externes vers lesquels ce site renvoie.</p>
+
+  <h2>Protection des données</h2>
+  <p>Le traitement de vos données personnelles est décrit dans notre <a href={SITE.privacyUrl}>politique de confidentialité</a>.</p>
+
+  <h2>Droit applicable</h2>
+  <p>Ce site et son utilisation sont soumis au droit suisse.</p>
+</Legal>
