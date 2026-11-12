@@ -176,7 +176,7 @@ const ICON: Record<string, string> = {
           <div class="dc-num"><span id="hc-n">38</span><span class="dc-up" id="hc-up">+1</span></div>
           <div class="dc-bars" aria-hidden="true">
             {week.map((w) => (
-              <span class={`bar${w.today ? ' now' : ''}${w.v ? '' : ' off'}`}>
+              <span class={`dc-bar${w.today ? ' now' : ''}${w.v ? '' : ' off'}`}>
                 <i id={w.today ? 'hc-today' : undefined} style={`--v:${w.v ? Math.min(w.v / BAR_MAX, 1) : 0.06}`}></i><em>{w.d}</em>
               </span>
             ))}

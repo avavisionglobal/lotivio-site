@@ -36,6 +36,20 @@ Format d'une entrée :
 - Statut : proposition à valider
 - Source : demande de Diego, 12.11.2026 (captures S07, S08, S10)
 
+
+## 2026-11-12 — Panneau 02 « Leads » : demandes en direct et suivi réglé avec l'agence
+- Décision : la scène « Sources branchées » est remplacée par une scène en trois colonnes, dans l'esprit du panneau 01.
+  - À gauche, les canaux connectés (Homegate, ImmoScout24, immobilier.ch, Properstar, Meta Ads, votre site) avec leur compteur.
+  - Au centre, « Demandes reçues · Aujourd'hui » : une pastille vole du canal vers la liste, la demande s'insère en haut (visage, nom, bien, canal), puis son statut avance : Nouveau → Premier contact envoyé → Brochure · e-mail ou WhatsApp → Agent.
+  - À droite, « Votre suivi » : les trois étapes réglées avec l'agence se cochent en même temps.
+  - La brochure part par WhatsApp seulement pour les leads Meta Ads, par e-mail pour les autres canaux (limite vérifiée de l'app).
+  - Entrée : les trois colonnes arrivent floutées de gauche, du bas et de droite.
+  - Les demandes s'enchaînent tant que le panneau est visible (script src/scripts/leads.ts).
+  - Cinq nouveaux portraits de démonstration générés avec Higgsfield Soul 2.0 (environ 0,6 crédit ; lot assets/avatars/2026-11-12-leads-soul2).
+- Raison : demande de Diego (« améliorer l'interface, l'illustration qui est en place », section Leads), après validation du panneau 01.
+- Statut : proposition à valider.
+- Source : message de Diego, 12 novembre 2026.
+
 ## 2026-11-12 — Panneau 01 « Base clients » animé ; bouton désactivé lisible
 - Décision :
   - Entrée « distribution de cartes » : les six contacts arrivent floutés et inclinés, puis se posent.
