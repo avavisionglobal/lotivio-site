@@ -1,9 +1,11 @@
 ---
-// S01 · Hero (réf. Synais, captures fournies par Diego le 11.11.2026), version 3 « épurée » :
-// titre court en deux tons, une main qui tient l'objet Lotivio, cinq canaux posés sur des fils fins.
-// Une impulsion à la fois part d'un canal, arrive dans l'objet et fait monter la carte « Demandes reçues ».
-// Photo : Higgsfield Soul 2.0 (job c31cb2a1…), détourée (job d86eb069…), logo Lotivio posé en composition.
-// Sources de la photo : assets/hero/2026-11-11-main-soul2/. Versions précédentes : proofs/archive/S01Hero-v1…, -v2….
+import Btn from './ui/Btn.astro';
+// S01 · Hero (réf. Synais, captures fournies par Diego le 11.11.2026), version 4 « téléphone » (test du 12.11.2026) :
+// titre court en deux tons, une main qui tient un téléphone ouvert sur Lotivio, cinq canaux posés sur des fils fins.
+// Une impulsion à la fois part d'un canal, arrive dans le téléphone : la demande s'ajoute à l'écran
+// et la carte « Demandes reçues » monte.
+// Photo : Higgsfield Soul 2.0 (job 13c081fd…), détourée (job 88f5f37f…), écran vierge ; l'interface est en HTML.
+// Sources de la photo : assets/hero/2026-11-12-telephone-soul2/. Version précédente (objet carré) : proofs/archive/S01Hero-v3-boitier.astro.
 import '../styles/hero-circuit.css';
 
 /* ---------- Géométrie : scène de 1920 × 960, cadre utile de 1440 px à partir de x = 240 ---------- */
@@ -35,16 +37,16 @@ function along(pts: P[], q: P) {
   return at;
 }
 
-const DEV: P = [720, 690]; // (la photo est descendue de 40 px : les fils finissent sous l'objet)          // centre de l'objet dans la photo, en coordonnées de scène
+const PHONE_X = 720, PHONE_TOP = 615; // axe et haut du téléphone, en coordonnées de scène (les fils finissent derrière lui)
 const SPEED = 300, DASH = 46, CYCLE = 12, STEP = CYCLE / 5; // une arrivée toutes les 2,4 s
 
 type Src = { name: string; icon: string; pts: P[]; tile: P; tileM: P | null };
 const sources: Src[] = [
-  { name: 'Homegate', icon: 'homegate', pts: [[-260, 450], [260, 450], [260, 630], [720, 630]], tile: [260, 540], tileM: [478, 630] },
-  { name: 'WhatsApp', icon: 'whatsapp', pts: [[1700, 470], [1170, 470], [1170, 645], [720, 645]], tile: [1170, 558], tileM: [962, 645] },
-  { name: 'Meta Ads', icon: 'meta', pts: [[-260, 610], [110, 610], [110, 700], [720, 700]], tile: [400, 700], tileM: [455, 700] },
-  { name: 'immobilier.ch', icon: 'immo', pts: [[1700, 640], [1340, 640], [1340, 715], [720, 715]], tile: [1030, 715], tileM: [985, 715] },
-  { name: 'Votre site', icon: 'site', pts: [[-260, 790], [500, 790], [500, 760], [720, 760]], tile: [300, 790], tileM: null },
+  { name: 'Homegate', icon: 'homegate', pts: [[-260, 450], [260, 450], [260, 690], [720, 690]], tile: [260, 570], tileM: [478, 690] },
+  { name: 'WhatsApp', icon: 'whatsapp', pts: [[1700, 470], [1170, 470], [1170, 705], [720, 705]], tile: [1170, 588], tileM: [962, 705] },
+  { name: 'Meta Ads', icon: 'meta', pts: [[-260, 610], [110, 610], [110, 750], [720, 750]], tile: [400, 750], tileM: [455, 750] },
+  { name: 'immobilier.ch', icon: 'immo', pts: [[1700, 640], [1340, 640], [1340, 765], [720, 765]], tile: [1030, 765], tileM: [985, 765] },
+  { name: 'Votre site', icon: 'site', pts: [[-260, 820], [500, 820], [500, 800], [720, 800]], tile: [300, 820], tileM: null },
 ];
 const wires = sources.map((s, i) => {
   const L = length(s.pts), o1 = -(L + 8), o0 = o1 + CYCLE * SPEED, start = -i * STEP - 0.4;
@@ -57,18 +59,35 @@ const decor: P[][] = [
   [[1700, 830], [1470, 830], [1470, 980]],
 ];
 const ends: P[] = [[70, 382], [1300, 404]];
-const feed = route([[720, 770], [945, 770], [945, 805]]);
+const feed = route([[720, 840], [945, 840], [945, 880]]);
 const tools: { at: P; g: string; v?: boolean }[] = [
-  { at: [110, 655], g: 'dots', v: true },
-  { at: [1340, 678], g: 'bars', v: true },
+  { at: [110, 680], g: 'dots', v: true },
+  { at: [1340, 702], g: 'bars', v: true },
   { at: [70, 340], g: 'grid', v: true },
   { at: [1470, 900], g: 'dots', v: true },
 ];
 const px = (x: number) => x + 240;
 
-// Photo : centre de l'objet à (410, 408) dans le recadrage de 980 × 1828 px.
-const IMG_W = 440, k = IMG_W / 980;
-const img = { w: IMG_W, h: Math.round(1828 * k), left: px(DEV[0]) - Math.round(410 * k), top: DEV[1] - Math.round(408 * k) + 40 };
+// Photo : recadrage de 1160 × 1968 px ; axe du téléphone à x = 779, haut du téléphone à y = 16.
+// L'écran (verre) occupe x 527 → 1033, y 32 → 1072 : l'interface HTML s'y pose en pourcentages.
+const IMG_W = 500, k = IMG_W / 1160;
+const img = { w: IMG_W, h: Math.round(1968 * k), left: px(PHONE_X) - Math.round(779 * k), top: PHONE_TOP - Math.round(16 * k) };
+
+// Écran du téléphone : demandes de démonstration (personnes et lots fictifs).
+const leads = [
+  { src: 'Meta Ads', name: 'Camille Rochat', lot: 'Les Terrasses · Lot B4', t: '6 min' },
+  { src: 'Homegate', name: 'Luca Bernasconi', lot: 'Clos des Vergers · Lot A2', t: '18 min' },
+  { src: 'Votre site', name: 'Inès Moreau', lot: 'Les Terrasses · Lot C1', t: '42 min' },
+  { src: 'immobilier.ch', name: 'Julien Favre', lot: 'Clos des Vergers · Lot A5', t: '1 h' },
+  { src: 'WhatsApp', name: 'Sophie Girard', lot: 'Les Terrasses · Lot B2', t: '2 h' },
+];
+const srcIcon = (n: string) => ICON[sources.find((s) => s.name === n)!.icon];
+
+// Carte « Demandes reçues » : 38 cette semaine (lun. → jeu.), le jour en cours monte à chaque arrivée.
+const week = [{ d: 'L', v: 8 }, { d: 'M', v: 11 }, { d: 'M', v: 9 }, { d: 'J', v: 10, today: true }, { d: 'V' }, { d: 'S' }, { d: 'D' }];
+const BAR_MAX = 20;
+// Carte « Stock » : 12 lots, 5 vendus (s), 3 réservés (r), 4 libres (f).
+const lots = 'ssrfsrsffrsf'.split('').map((s, i) => ({ s, id: `${'AB'[Math.floor(i / 6)]}${(i % 6) + 1}` }));
 
 const ICON: Record<string, string> = {
   homegate: '<span class="ic-hg" style="background-image:url(/media/logos/homegate.svg)"></span>',
@@ -88,8 +107,8 @@ const ICON: Record<string, string> = {
     </h1>
     <p class="sub" data-bloc="S01.3">Centralisez vos demandes, simplifiez la qualification de vos prospects et sachez qui relancer. Identifiez les canaux qui vous apportent des acheteurs et gérez la diffusion de vos biens au même endroit.</p>
     <div class="row-b" data-bloc="S01.4">
-      <a class="btn b-or magnet" href="#demo">Réserver une démo</a>
-      <button class="btn b-gh" type="button" data-film>Voir le film · 1 min</button>
+      <Btn label="Réserver une démo" href="#demo" class="magnet" />
+      <Btn label="Voir le film · 1 min" tone="light" data-film />
     </div>
   </div>
 
@@ -124,9 +143,22 @@ const ICON: Record<string, string> = {
       <span class="tile-c" style={`left:${px(1300)}px;top:362px`} aria-hidden="true"><img src="/brand/lotivio-mark.svg" alt="" width="22" height="22" /></span>
 
       <div class="hand" id="hand" style={`left:${img.left}px;top:${img.top}px;width:${img.w}px;height:${img.h}px`}>
-        <img src="/media/hero/main-lotivio-960.webp" srcset="/media/hero/main-lotivio-480.webp 480w, /media/hero/main-lotivio-640.webp 640w, /media/hero/main-lotivio-960.webp 960w" sizes="(max-width: 639px) 273px, (max-width: 1000px) 344px, 440px"
-          width="960" height="1791" alt="Une main tient l'objet Lotivio, d'où partent les fils vers les canaux de l'agence" fetchpriority="high" decoding="async" />
-        <i class="dev-glow" aria-hidden="true"></i>
+        <div class="hand-in">
+          <img src="/media/hero/main-telephone-960.webp" srcset="/media/hero/main-telephone-480.webp 480w, /media/hero/main-telephone-640.webp 640w, /media/hero/main-telephone-960.webp 960w" sizes="(max-width: 639px) 310px, (max-width: 1000px) 390px, 500px"
+            width="960" height="1629" alt="Une main tient un téléphone ouvert sur Lotivio : les demandes des canaux de l'agence y arrivent" fetchpriority="high" decoding="async" />
+          <div class="ph" aria-hidden="true">
+            <div class="ph-status"><span>9:41</span><i class="ph-island"></i><span class="ph-sig"><svg width="11" height="7" viewBox="0 0 11 7"><rect x="0" y="4.5" width="2" height="2.5" rx=".5"/><rect x="3" y="3" width="2" height="4" rx=".5"/><rect x="6" y="1.5" width="2" height="5.5" rx=".5"/><rect x="9" y="0" width="2" height="7" rx=".5"/></svg><svg width="15" height="7" viewBox="0 0 15 7"><rect x=".5" y=".5" width="12" height="6" rx="1.6" fill="none" stroke="currentColor" opacity=".45"/><rect x="2" y="2" width="8" height="3" rx=".8"/><rect x="13.4" y="2.3" width="1.1" height="2.4" rx=".5" opacity=".45"/></svg></span></div>
+            <div class="ph-bar"><span class="ph-brand"><img src="/brand/lotivio-mark.svg" alt="" width="13" height="13" />Lotivio</span><span class="ph-av">SK</span></div>
+            <p class="ph-kick">Votre journée</p>
+            <p class="ph-h">Bonjour Sarah,<br /><span class="ph-hn"><b id="ph-n">5</b> nouvelles demandes.</span></p>
+            <p class="ph-sec"><b>Demandes reçues</b><span>Tout voir</span></p>
+            <ul class="ph-list" id="ph-list">
+              {leads.map((l) => (
+                <li><span class="ph-src" set:html={srcIcon(l.src)} /><span class="ph-who"><b>{l.name}</b><span>{l.lot}</span></span><time>{l.t}</time></li>
+              ))}
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -139,30 +171,25 @@ const ICON: Record<string, string> = {
 
     <div class="hc-cards" data-bloc="S01.7">
       <article class="dcard" aria-label="Demandes reçues cette semaine, données de démonstration">
-        <div class="dc-top"><div><b>Demandes reçues</b><span>Cette semaine · démo</span></div><span class="dc-sel" aria-hidden="true">Toutes ▾</span></div>
-        <div class="dc-val"><span id="hc-n">38</span></div>
-        <div class="dc-badge"><span class="up" id="hc-up">+1</span><span id="hc-last">Homegate · à l'instant</span></div>
-        <div class="dc-foot">
-          <svg class="donut" viewBox="0 0 36 36" aria-hidden="true">
-            <circle r="14" cx="18" cy="18" stroke="#3a3a3a" />
-            <circle r="14" cx="18" cy="18" stroke="#F2F1EE" pathLength="100" stroke-dasharray="49 51" />
-            <circle r="14" cx="18" cy="18" stroke="#EB6E2C" pathLength="100" stroke-dasharray="36 64" stroke-dashoffset="-50" />
-          </svg>
-          <ul><li><i style="background:#F2F1EE"></i>Portails</li><li><i style="background:#EB6E2C"></i>Meta Ads</li><li><i style="background:#5a5a5a"></i>Site</li></ul>
+        <div class="dc-h"><b>Demandes reçues</b><span>Cette semaine</span></div>
+        <div class="dc-row">
+          <div class="dc-num"><span id="hc-n">38</span><span class="dc-up" id="hc-up">+1</span></div>
+          <div class="dc-bars" aria-hidden="true">
+            {week.map((w) => (
+              <span class={`bar${w.today ? ' now' : ''}${w.v ? '' : ' off'}`}>
+                <i id={w.today ? 'hc-today' : undefined} style={`--v:${w.v ? Math.min(w.v / BAR_MAX, 1) : 0.06}`}></i><em>{w.d}</em>
+              </span>
+            ))}
+          </div>
         </div>
+        <p class="dc-last"><i class="dc-live"></i><span id="hc-last">Homegate · à l'instant</span></p>
       </article>
-      <article class="dcard" aria-label="Stock du projet Les Terrasses du Vignoble, données de démonstration">
-        <div class="dc-top"><div><b>Stock · Les Terrasses</b><span>Projet de démonstration</span></div><span class="dc-sel" aria-hidden="true">Lots ▾</span></div>
-        <div class="dc-val">12 lots</div>
-        <div class="dc-badge"><span class="up g">5 vendus</span><span>3 réservés</span></div>
-        <div class="dc-foot">
-          <svg class="donut" viewBox="0 0 36 36" aria-hidden="true">
-            <circle r="14" cx="18" cy="18" stroke="#3a3a3a" />
-            <circle r="14" cx="18" cy="18" stroke="#5FD49A" pathLength="100" stroke-dasharray="41 59" />
-            <circle r="14" cx="18" cy="18" stroke="#EB6E2C" pathLength="100" stroke-dasharray="24 76" stroke-dashoffset="-42" />
-          </svg>
-          <ul><li><i style="background:#5FD49A"></i>Vendus</li><li><i style="background:#EB6E2C"></i>Réservés</li><li><i style="background:#5a5a5a"></i>Disponibles</li></ul>
+      <article class="dcard" aria-label="Stock du projet Les Terrasses : 5 lots vendus, 3 réservés, 4 libres, données de démonstration">
+        <div class="dc-h"><b>Les Terrasses</b><span>12 lots</span></div>
+        <div class="dc-lots" aria-hidden="true">
+          {lots.map((l, i) => <span class={`lot ${l.s}`} style={`--i:${i}`}>{l.id}</span>)}
         </div>
+        <ul class="dc-leg"><li><i class="s"></i>5 vendus</li><li><i class="r"></i>3 réservés</li><li><i class="f"></i>4 libres</li></ul>
       </article>
     </div>
   </div>

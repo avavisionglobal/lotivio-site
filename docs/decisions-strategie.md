@@ -23,6 +23,69 @@ Format d'une entrée :
 
 
 
+
+
+
+## 2026-11-12 — Trames de code : immeubles dessinés, loupe plus discrète
+- Décision :
+  - Les trames de code ne partent plus des photos (résidence, lac) mais de quatre dessins d'immeubles en aplats contrastés, faits pour se lire en caractères : `public/media/tex/facade.svg` (façade à balcons + grue), `chantier.svg` (gros œuvre, échafaudage, grue), `quartier.svg` (maisons, PPE, tour, immeuble en chantier, grue), `lac.svg` (deux résidences au bord du lac). S07 : façade, chantier, quartier ; S08 Direction : façade, lac, chantier ; S08 CTA et S10 démo : quartier ; S09 tarifs : lac.
+  - Les trames statiques sont recadrées sans déformation (`cover`).
+  - Loupe au survol atténuée : rayon 170 → 130 px, code un ton seulement plus marqué que la trame (#A29C90 sur fond clair, #615D56 sur fond sombre, au lieu de #5C574E / #B3ADA3), bord plus fondu, opacité 0,75, moitié moins de points orange.
+- Raison : retour de Diego : « le texte, on ne le voit pas lorsqu'il y a l'animation » ; « qu'on puisse apercevoir avec ce bout de code un bout d'immeuble […] actuellement ce n'est pas le cas ».
+- Remplace / modifie : sources photo des trames (entrée « trame de code tirée d'une résidence ») et couleurs de la loupe (src/scripts/texhover.ts). Les photos restent utilisées ailleurs (intro S00, lots S06).
+- Statut : proposition à valider
+- Source : demande de Diego, 12.11.2026 (captures S07, S08, S10)
+
+## 2026-11-12 — Panneau 01 « Base clients » animé ; bouton désactivé lisible
+- Décision :
+  - Entrée « distribution de cartes » : les six contacts arrivent floutés et inclinés, puis se posent.
+  - Une ligne de balayage parcourt la base. Les jauges se remplissent pendant que les scores défilent jusqu'à leur valeur, et les correspondances (≥ 85) s'allument avec un léger rebond.
+  - Jauges vivantes : tant que le panneau est visible, la scène passe d'un lot à l'autre toutes les 5,6 s et recalcule les jauges :
+    - B4, 4.5 pièces : 3 contacts retenus ;
+    - A2, 3.5 pièces : 2 contacts ;
+    - C1, 5.5 pièces : 1 contact.
+  - La barre « Campagne e-mail ciblée » est visible dès l'entrée ; les visages retenus s'y empilent et le nombre se met à jour.
+  - Script : src/scripts/matching.ts.
+  - Bouton désactivé (« Continuer » de la démo) : il n'est plus transparent. Il reste noir, avec un texte et une flèche atténués.
+- Raison : retour de Diego (« c'est top […] le bouton noir en bas, on ne le voit pas à cause de l'animation […] un peu plus moderne, des animations de jauge qui bouge, une animation d'entrée plus waouh »).
+- Statut : proposition à valider.
+- Source : message de Diego, 12 novembre 2026.
+
+## 2026-11-12 — Panneau 01 « Base clients » : visages des contacts et jauges de matching
+- Décision :
+  - La scène du panneau 01 montre maintenant six contacts de démonstration (réf. « Adjust look » de fourmula.ai) :
+    - portraits réalistes générés avec Higgsfield Soul 2.0 (6 images, environ 0,72 crédit ; lot assets/avatars/2026-11-12-contacts-soul2) ;
+    - sous chaque visage : nom, recherche (« 4.5 p. · Littoral · ≤ 1,3 mio ») et jauge de correspondance sur 100.
+  - Les trois correspondances retenues (94, 89, 86) s'allument en orange à l'apparition du panneau.
+  - En haut : le nouveau lot (« Lot B4 · 4.5 pièces · CHF 1'240'000 »). En bas : la campagne e-mail ciblée pour les trois contacts.
+- Raison : demande de Diego (« des avatars de personnes avec une petite jauge de matching […] pour qu'ils comprennent que leur base client, on peut déjà l'utiliser »).
+- Remplace / modifie : la scène « matching » avec initiales du même jour.
+- Garde-fou : contacts et personnes fictifs (données de démonstration). Le score est une règle, pas l'IA.
+- Statut : proposition à valider.
+- Source : message de Diego, 12 novembre 2026.
+
+## 2026-11-12 — Un seul bouton sur tout le site ; section Tarifs
+- Décision :
+  - Bouton unique (composant src/components/ui/Btn.astro, styles src/styles/buttons.css) :
+    - forme : rectangle encre, texte blanc, carré blanc avec une flèche ↗ ;
+    - au survol, le fond se remplit d'orange de gauche à droite ; dans le carré, la flèche sort en haut à droite et une nouvelle, orange, entre par le bas à gauche ;
+    - variante claire (fond blanc, carré encre), même forme et même animation, sur fond sombre et pour le bouton secondaire du hero ;
+    - utilisé partout : menu, menu déroulant, hero (2), Sur mesure, parcours, mise en place, CTA, FAQ, tarifs, footer, formulaire de démo (2) ;
+    - les boutons dessinés dans les scènes animées (imitation de l'app) ne changent pas.
+  - Nouvelle section Tarifs (S09B, après la FAQ) :
+    - étiquette « Tarifs » ;
+    - titre « Votre agence équipée. / Votre équipe accompagnée. » et introduction de Diego ;
+    - carte claire « Mise en place — CHF 6'500.– » (une seule fois) ;
+    - carte sombre « Abonnement — dès CHF 450.–/mois », avec trame de code et loupe au survol ;
+    - bouton « Découvrir Lotivio pour mon agence ↗ » ;
+    - « Tarifs » ajouté au menu et au footer.
+- Raison : demandes de Diego (« il faut tous faire les mêmes […] une meilleure animation […] que ça se transforme en orange ou juste la flèche » ; textes et prix de la section Pricing).
+- Remplace / modifie :
+  - les boutons pilule orange, gris, noirs et blancs de chaque section ;
+  - le point « Prix public affiché ou sur demande ? » de PROJECT.md : prix affichés. Le prix accordé à Procité (mise en place CHF 4'500) reste un cas particulier non affiché.
+- Statut : décidée.
+- Source : messages de Diego, 12 novembre 2026.
+
 ## 2026-11-12 — Section « L'IA, dans votre quotidien » (S04) retirée
 - Décision :
   - S04 est retirée de la page.

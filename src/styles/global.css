@@ -737,8 +737,8 @@ html.lenis{scroll-behavior:auto}
    ================================================================= */
 .tex-lens{position:absolute;left:0;top:0;width:var(--lens,280px);height:var(--lens,280px);border-radius:50%;overflow:hidden;pointer-events:none;opacity:0;
   transition:opacity .45s var(--ease),scale .6s var(--ease);scale:.6;will-change:transform,opacity;
-  -webkit-mask-image:radial-gradient(closest-side,#000 38%,rgba(0,0,0,.6) 66%,transparent 100%);mask-image:radial-gradient(closest-side,#000 38%,rgba(0,0,0,.6) 66%,transparent 100%)}
-.is-lit>.tex-lens{opacity:1;scale:1}
+  -webkit-mask-image:radial-gradient(closest-side,#000 18%,rgba(0,0,0,.45) 55%,transparent 100%);mask-image:radial-gradient(closest-side,#000 18%,rgba(0,0,0,.45) 55%,transparent 100%)}
+.is-lit>.tex-lens{opacity:.75;scale:1}
 .tex-hi{position:absolute;left:0;top:0;margin:0;font-family:var(--mono);font-size:9px;line-height:9px;letter-spacing:.5px;white-space:pre;user-select:none;will-change:transform;color:var(--hi,#7E786D)}
 .tex-hi b{color:var(--orange);font-weight:400}
 

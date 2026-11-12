@@ -1,4 +1,5 @@
 ---
+import Btn from './ui/Btn.astro';
 import '../styles/s06-parcours.css';
 // Textes de Diego du 12.11.2026. Version précédente : proofs/archive/S06Parcours-v1-demande-signature.astro
 const panels = [
@@ -11,12 +12,50 @@ const panels = [
   { b: 'S06.4', g: 'g4', code: '(Pilotage)', h: ['Voyez ce qui se vend.', 'Comprenez d’où viennent les acheteurs.'],
     p: 'Suivez vos dossiers jusqu’à la signature, retrouvez les lots disponibles, réservés ou vendus et l’origine de vos acheteurs. Vous avez les informations pour décider quels contacts reprendre, quels biens mettre en avant et quelles actions d’acquisition poursuivre.' },
 ];
-// Matching (panneau 01) : données de démonstration. Le score est une règle (budget, zone, type, surface, pièces…), pas l'IA.
-const matches = [
-  ['CF', 'Céline Favre', '4.5 p. · Littoral · ≤ 1,3 mio', 92],
-  ['MV', 'Marc Vuilleumier', '4.5 p. · Neuchâtel · ≤ 1,25 mio', 87],
-  ['JP', 'Justine Perret', '4 p. · Littoral · ≤ 1,2 mio', 74],
-] as const;
+// Matching (panneau 01) : contacts de démonstration, portraits générés (Higgsfield Soul 2.0,
+// lot assets/avatars/2026-11-12-contacts-soul2). Le score est une règle (budget, zone, type, surface, pièces…), pas l'IA.
+// m = correspondance retenue pour la campagne (score ≥ 85).
+const contacts = [
+  { img: 'c1', name: 'Céline Favre', crit: '4.5 p. · Littoral · ≤ 1,3 mio' },
+  { img: 'c2', name: 'Marc Vuilleumier', crit: '4.5 p. · Neuchâtel · ≤ 1,25 mio' },
+  { img: 'c3', name: 'Monique Matthey', crit: '3.5 p. · Littoral · ≤ 1,1 mio' },
+  { img: 'c4', name: 'Yann Renaud', crit: '4.5 p. · Milvignes · ≤ 1,3 mio' },
+  { img: 'c5', name: 'Nadia Perret', crit: '4 p. · Boudry · ≤ 1 mio' },
+  { img: 'c6', name: 'Claude Jeanneret', crit: '5.5 p. · Littoral · ≤ 1,8 mio' },
+];
+// Trois lots de démonstration : la scène passe de l'un à l'autre et recalcule les scores (src/scripts/matching.ts).
+// Correspondance retenue : score ≥ 85.
+const mLots = [
+  { img: '/media/residence-480.webp', label: 'Lot B4 · 4.5 pièces · CHF 1’240’000', sc: [94, 89, 71, 86, 63, 58] },
+  { img: '/media/lac-480.webp', label: 'Lot A2 · 3.5 pièces · CHF 890’000', sc: [66, 58, 93, 61, 88, 42] },
+  { img: '/media/residence-portrait-480.webp', label: 'Lot C1 · 5.5 pièces · CHF 1’690’000', sc: [71, 77, 49, 68, 40, 95] },
+];
+const MATCH = 85;
+// Panneau 02 : demandes de démonstration qui arrivent en direct (src/scripts/leads.ts). Portraits générés (Higgsfield Soul 2.0,
+// lot assets/avatars/2026-11-12-leads-soul2). Brochure : WhatsApp pour les leads Meta Ads, e-mail pour les autres canaux.
+const ic = {
+  hg: '<span class="ic-hg" style="background-image:url(/media/logos/homegate.svg)"></span>',
+  is: '<img src="/media/logos/immoscout24.svg" alt="" width="34" height="20" style="width:26px;height:auto">',
+  im: '<img src="/media/logos/immobilier-ch-96.webp" alt="" width="20" height="20">',
+  ps: '<img src="/media/logos/properstar-96.webp" alt="" width="20" height="20">',
+  me: '<span class="ic-meta" style="background-image:url(/media/logos/meta-64.webp)"></span>',
+  si: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.8 3 2.8 15 0 18M12 3c-2.8 3-2.8 15 0 18"/></svg>',
+};
+const channels = [
+  { id: 'hg', name: 'Homegate', n: 9, icon: ic.hg },
+  { id: 'is', name: 'ImmoScout24', n: 5, icon: ic.is },
+  { id: 'im', name: 'immobilier.ch', n: 4, icon: ic.im },
+  { id: 'ps', name: 'Properstar', n: 2, icon: ic.ps },
+  { id: 'me', name: 'Meta Ads', n: 8, icon: ic.me },
+  { id: 'si', name: 'Votre site', n: 3, icon: ic.si },
+];
+const leads = [
+  { img: 'l1', name: 'Thomas Rochat', bien: 'Les Terrasses · Lot B3', ch: 'me', from: 'Meta Ads', br: 'WhatsApp', agent: 'Sarah K.' },
+  { img: 'l2', name: 'Laura Girardin', bien: 'Clos des Vergers · Lot A2', ch: 'hg', from: 'Homegate', br: 'E-mail', agent: 'David L.' },
+  { img: 'l3', name: 'Pierre-Alain Droz', bien: 'Lac & Lumière · Lot D1', ch: 'im', from: 'immobilier.ch', br: 'E-mail', agent: 'Sarah K.' },
+  { img: 'l4', name: 'Isabelle Monnier', bien: 'Les Terrasses · Attique', ch: 'is', from: 'ImmoScout24', br: 'E-mail', agent: 'Marc R.' },
+  { img: 'l5', name: 'Lucas Berset', bien: 'Clos des Vergers · Lot C1', ch: 'si', from: 'Votre site', br: 'E-mail', agent: 'David L.' },
+];
 const rel = [
   ['/media/residence-800.webp', 'Brochure consultée 3×', 'Céline Favre', 'Les Terrasses du Vignoble · Lot B3', '50% 50%'],
   ['/media/lac-800.webp', 'Sans réponse depuis 5 jours', 'Justine Perret', 'Résidence Lac & Lumière · Lot D1', '50% 50%'],
@@ -40,25 +79,58 @@ const lots = Array.from({ length: 24 }, (_, i) => String.fromCharCode(65 + Math.
         <p class="lede">{p.p}</p>
         {i === 0 && (
           <div class="stage">
-            <div class="mt" role="img" aria-label="Matching d'un lot avec les contacts de la base, données de démonstration">
-              <div class="mt-lot">
-                <img src="/media/residence-800.webp" alt="" width="800" height="533" loading="lazy" decoding="async" />
-                <div class="mt-lot-b"><span class="mt-k">Nouveau lot</span><b>Les Terrasses du Vignoble · Lot B4</b><span>4.5 pièces · 128 m² · CHF 1'240'000</span><span class="mt-chip">Disponible</span></div>
+            <div class="av" role="img" aria-label="Matching d'un nouveau lot avec les contacts de la base : jauges de correspondance, correspondances retenues et campagne e-mail ciblée. Données de démonstration." data-lots={JSON.stringify(mLots)} data-match={MATCH}>
+              <div class="av-h">
+                <div><h4>Contacts correspondants</h4><span class="av-sub">Votre base · recherches enregistrées</span></div>
+                <span class="av-lot"><img src={mLots[0].img} alt="" width="480" height="320" loading="lazy" decoding="async" /><span><small>Nouveau lot</small><span class="av-lot-t">{mLots[0].label}</span></span></span>
               </div>
-              <div class="mt-list">
-                <div class="mt-h"><span>Contacts correspondants</span><b>3</b></div>
-                {matches.map(([ini, name, crit, sc]) => (
-                  <div class="mt-row"><span class="mt-av">{ini}</span><span class="mt-who"><b>{name}</b><small>{crit}</small></span><span class="mt-sc"><i style={`--w:${sc}%`}></i><span><b>{sc}</b>/100</span></span></div>
+              <div class="av-grid">
+                <span class="av-scan" aria-hidden="true"></span>
+                {contacts.map((c, k) => (
+                  <div class={`av-c${mLots[0].sc[k] >= MATCH ? ' m' : ''}`} style={`--k:${k}`}>
+                    <div class="av-ph"><img src={`/media/contacts/${c.img}.webp`} alt="" width="300" height="300" loading="lazy" decoding="async" /><span class="av-r"></span></div>
+                    <div class="av-b"><b>{c.name}</b><small>{c.crit}</small>
+                      <span class="av-g"><i style={`--w:${mLots[0].sc[k]}%`}></i><em>{mLots[0].sc[k]}</em></span></div>
+                  </div>
                 ))}
-                <div class="mt-camp"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg><span>Campagne e-mail ciblée · 3 contacts</span><em>Prête</em></div>
+              </div>
+              <div class="av-camp">
+                <span class="av-stack" aria-hidden="true">{contacts.map((c, k) => <img class={mLots[0].sc[k] >= MATCH ? 'on' : ''} src={`/media/contacts/${c.img}.webp`} alt="" width="300" height="300" loading="lazy" decoding="async" />)}</span>
+                <span>Campagne e-mail ciblée · <b class="av-n">{mLots[0].sc.filter((v) => v >= MATCH).length}</b> contacts sélectionnés</span>
+                <em><i></i>Prête</em>
               </div>
             </div>
           </div>
         )}
         {i === 1 && (
           <div class="stage">
-            <h4>Sources branchées</h4><div class="sub">Cette semaine</div>
-            <div class="srcs" id="srcs"></div>
+            <div class="ld" role="img" aria-label="Demandes reçues en direct depuis les canaux connectés, avec le suivi configuré pour l'agence. Données de démonstration." data-leads={JSON.stringify(leads)}>
+              <div class="ld-col ld-src">
+                <span class="ld-k">Canaux connectés</span>
+                {channels.map((c) => (
+                  <div class="ld-ch" data-ch={c.id}><span class="ld-ic" set:html={c.icon} /><span class="ld-nm">{c.name}</span><b class="ld-ct">{c.n}</b></div>
+                ))}
+              </div>
+              <div class="ld-col ld-feed">
+                <div class="ld-fh"><span class="ld-k">Demandes reçues</span><span class="ld-live"><i></i>Aujourd’hui · <b class="ld-tot">31</b></span></div>
+                <div class="ld-list">
+                  {leads.slice(0, 4).map((l, k) => (
+                    <div class="ld-it st3">
+                      <img src={`/media/leads/${l.img}.webp`} alt="" width="160" height="160" loading="lazy" decoding="async" />
+                      <span class="ld-who"><b>{l.name}</b><small>{l.bien}</small></span>
+                      <span class="ld-meta"><span class="ld-from">{l.from}</span><span class="ld-st">Agent · {l.agent}</span></span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div class="ld-col ld-flow">
+                <span class="ld-k">Votre suivi</span>
+                <div class="ld-step" data-s="1"><i></i><span><b>Premier contact</b><small>Envoyé automatiquement</small></span></div>
+                <div class="ld-step" data-s="2"><i></i><span><b>Brochure</b><small class="ld-br">E-mail ou WhatsApp selon le canal</small></span></div>
+                <div class="ld-step" data-s="3"><i></i><span><b>Agent</b><small class="ld-ag">Attribué selon le projet</small></span></div>
+                <span class="ld-note">Réglé avec votre agence</span>
+              </div>
+            </div>
           </div>
         )}
         {i === 2 && (
@@ -85,4 +157,8 @@ const lots = Array.from({ length: 24 }, (_, i) => String.fromCharCode(65 + Math.
     </article>
   ))}
 </section>
-<div class="par-end" data-bloc="S06.5"><a class="par-btn" href="#demo">Découvrir ce parcours en démo<span aria-hidden="true">↗</span></a></div>
+<div class="par-end" data-bloc="S06.5"><Btn label="Découvrir ce parcours en démo" href="#demo" /></div>
+<script>
+  import '../scripts/matching.ts';
+  import '../scripts/leads.ts';
+</script>

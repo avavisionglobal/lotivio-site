@@ -1,0 +1,21 @@
+---
+// Bouton unique du site (demande de Diego, 12.11.2026) : rectangle encre, texte blanc, carré blanc avec flèche.
+// Survol : le fond se remplit d'orange de gauche à droite ; la flèche sort en haut à droite
+// et une nouvelle entre par le bas à gauche. Variante claire (tone="light") pour les fonds sombres.
+import '../../styles/buttons.css';
+interface Props {
+  label: string;
+  href?: string;
+  tone?: 'dark' | 'light';
+  size?: 'md' | 'sm';
+  class?: string;
+  [attr: string]: unknown;
+}
+const { label, href, tone = 'dark', size = 'md', class: cls = '', ...rest } = Astro.props;
+const Tag = href ? 'a' : 'button';
+const arrow = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4.5 11.5l7-7M6 4.5h5.5V10" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+---
+<Tag class={`cbtn cbtn-${tone} cbtn-${size} ${cls}`} href={href} type={href ? undefined : (rest.type as string) ?? 'button'} {...rest}>
+  <span class="cbtn-t">{label}</span>
+  <span class="cbtn-a" aria-hidden="true"><i set:html={arrow} /><i set:html={arrow} /></span>
+</Tag>

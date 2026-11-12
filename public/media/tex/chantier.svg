@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="1400" viewBox="0 0 1000 1400">
+  <!-- Source de trame de code : promotion en chantier (grue, étages en gros œuvre, étages finis). -->
+  <defs>
+    <pattern id="win" x="260" y="920" width="136" height="160" patternUnits="userSpaceOnUse">
+      <rect x="22" y="44" width="92" height="96" fill="#262626"/>
+    </pattern>
+    <pattern id="slab" x="0" y="600" width="1000" height="160" patternUnits="userSpaceOnUse"><rect width="1000" height="24" fill="#3A3A3A"/></pattern>
+    <pattern id="col" x="260" y="0" width="136" height="1400" patternUnits="userSpaceOnUse"><rect width="24" height="1400" fill="#5A5A5A"/></pattern>
+    <pattern id="scaf" x="900" y="600" width="60" height="80" patternUnits="userSpaceOnUse">
+      <rect width="8" height="80" fill="#4A4A4A"/><rect width="60" height="8" fill="#4A4A4A"/><path d="M0 80 L60 0" stroke="#4A4A4A" stroke-width="7"/>
+    </pattern>
+  </defs>
+  <rect width="1000" height="1400" fill="#fff"/>
+  <!-- grue -->
+  <g fill="#262626">
+    <rect x="122" y="80" width="30" height="1320"/>
+    <rect x="0" y="80" width="990" height="24"/>
+    <rect x="0" y="104" width="76" height="62"/>
+    <rect x="152" y="104" width="56" height="44"/>
+    <rect x="637" y="104" width="6" height="400"/>
+    <rect x="560" y="500" width="160" height="28"/>
+  </g>
+  <g stroke="#262626" stroke-width="9" fill="none"><path d="M137 10 L990 82 M137 10 L0 82 M137 10 V80"/></g>
+  <!-- gros œuvre : dalles et poteaux -->
+  <rect x="260" y="600" width="440" height="24" fill="#3A3A3A"/>
+  <rect x="260" y="624" width="680" height="296" fill="url(#col)"/>
+  <rect x="260" y="760" width="680" height="160" fill="url(#slab)"/>
+  <rect x="260" y="600" width="440" height="24" fill="#3A3A3A"/>
+  <rect x="900" y="600" width="60" height="800" fill="url(#scaf)"/>
+  <!-- étages finis -->
+  <rect x="260" y="920" width="680" height="480" fill="#A0A0A0"/>
+  <rect x="260" y="920" width="680" height="480" fill="url(#win)"/>
+  <rect x="240" y="920" width="720" height="480" fill="url(#slab)"/>
+  <rect y="1376" width="1000" height="24" fill="#4A4A4A"/>
+</svg>

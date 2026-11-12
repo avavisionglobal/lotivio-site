@@ -1,0 +1,155 @@
+/* =================================================================
+   S01 · Hero v3 « épuré » (réf. Synais, 11.11.2026)
+   Titre court en deux tons, une main qui tient l'objet Lotivio, cinq canaux sur des fils fins.
+   Scène : 1920 × 960 px, alignée en bas du hero, centrée ; cadre utile de 1440 px à partir de x = 240.
+   ================================================================= */
+.hc{--hc-bg:var(--warm-2);--wire:#DAD5CB;--taupe:#A1998D;--h:clamp(800px,100svh,900px);
+  position:relative;height:var(--h);overflow:hidden;background:var(--hc-bg);text-align:center;isolation:isolate}
+
+/* ---------- Texte ---------- */
+.hc-head{position:relative;z-index:3;padding-top:calc(150px - (900px - var(--h)) / 2)}
+.hc-kick{display:inline-flex;align-items:center;gap:7px;font-size:13px;color:var(--ink)}
+.hc-kick .ch{display:inline-block;width:14px;height:14px}
+.hc-kick .ch svg{display:block;width:100%;height:100%}
+.hc h1{font-family:var(--disp);font-variation-settings:"wdth" 102;font-weight:500;font-size:clamp(38px,4vw,58px);line-height:1.04;letter-spacing:-.045em;margin:20px auto 0;padding:0 24px}
+.hc h1 .ln{display:block;white-space:nowrap}
+.hc h1 .tn{color:var(--taupe)}
+.hc h1 .o{font-style:normal;color:var(--orange)}
+.hc .sub{font-size:15.5px;line-height:1.5;color:var(--muted);max-width:39em;margin:18px auto 0;padding:0 24px;text-wrap:balance}
+.hc .row-b{display:flex;gap:10px;justify-content:center;margin-top:26px}
+
+/* ---------- Scène ---------- */
+.hc-stage{position:absolute;inset:0;z-index:1;pointer-events:none}
+.hc-scene{position:absolute;left:50%;bottom:0;width:1920px;height:960px;margin-left:-960px}
+.hc-wires{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.hc .w{stroke:var(--wire);stroke-width:1.4;stroke-dasharray:1 0}
+.hc .w-end{fill:var(--hc-bg);stroke:#CBC5BA;stroke-width:1.4}
+.hc .p-core,.hc .p-halo{stroke-linecap:round;stroke-dasharray:46 6000;stroke-dashoffset:var(--o0)}
+.hc .p-core{stroke:var(--orange);stroke-width:1.8}
+.hc .p-halo{stroke:rgba(235,110,44,.16);stroke-width:7}
+.hc .p-feed{stroke:var(--orange);stroke-width:1.8;stroke-linecap:round;stroke-dasharray:16 300;stroke-dashoffset:16;opacity:0}
+@keyframes hc-pulse{from{stroke-dashoffset:var(--o0)}to{stroke-dashoffset:var(--o1)}}
+@keyframes hc-feed{0%{opacity:1;stroke-dashoffset:16}85%{opacity:1}100%{opacity:0;stroke-dashoffset:-100}}
+
+/* Tuiles des canaux : icône seule, gravée, qui prend sa couleur au passage de l'impulsion. */
+.src-t{position:absolute;left:var(--x);top:var(--y);transform:translate(-50%,-50%);display:grid;place-items:center;width:38px;height:38px;border-radius:11px;
+  background:#F3F1EC;box-shadow:inset 0 1px 0 #fff,0 0 0 1px #E2DED6,0 8px 18px -12px rgba(60,48,36,.35);color:#8F8A81}
+.src-t img,.src-t svg,.src-t span{display:block;filter:grayscale(1);opacity:.5}
+.src-t img{width:20px;height:20px;border-radius:5px}
+.src-t .ic-hg{width:20px;height:20px;background:left center/auto 20px no-repeat}
+.src-t .ic-meta{width:27px;height:18px;background:left center/auto 18px no-repeat}
+.src-t::after{content:"";position:absolute;inset:0;border-radius:inherit;box-shadow:0 0 0 1px var(--orange),0 0 20px -4px rgba(235,110,44,.5);opacity:0}
+
+.tool-c{position:absolute;transform:translate(-50%,-50%);display:flex;align-items:center;justify-content:center;gap:3px;width:34px;height:16px;border-radius:6px;
+  background:#EFECE6;box-shadow:inset 0 1px 2px rgba(60,48,36,.10),0 1px 0 #fff,0 0 0 1px #E1DDD5}
+.tool-c.v{width:16px;height:34px;flex-direction:column}
+.tool-c i{display:block;width:3px;height:3px;border-radius:50%;background:#C8C2B7}
+.tool-c.g-bars i{width:1.5px;height:7px;border-radius:1px}
+.tool-c.v.g-bars i{width:7px;height:1.5px}
+.tool-c.g-grid i{width:4px;height:4px;border-radius:1px}
+.tile-c{position:absolute;transform:translate(-50%,-50%);display:grid;place-items:center;width:46px;height:46px;border-radius:12px;background:#fff;
+  box-shadow:0 0 0 1px #ECE9E3,0 12px 26px -12px rgba(60,48,36,.35)}
+.tile-c img{width:22px;height:22px}
+
+/* ---------- La main ---------- */
+.hand{position:absolute;z-index:2}
+.hand img{display:block;width:100%;height:auto;filter:drop-shadow(0 30px 40px rgba(60,44,28,.18))}
+.dev-glow{position:absolute;left:24%;width:44%;top:39%;height:14%;border-radius:50%;
+  background:radial-gradient(closest-side,rgba(255,150,80,.55),rgba(235,110,44,0));mix-blend-mode:screen;opacity:0;pointer-events:none}
+@keyframes dev-hit{0%{opacity:1}100%{opacity:0}}
+
+/* ---------- Bas du hero ---------- */
+.hc-foot{position:absolute;left:0;right:0;bottom:0;max-width:1440px;margin:0 auto;z-index:3;display:flex;justify-content:space-between;align-items:flex-end;gap:24px;
+  padding:0 var(--pad) 22px;text-align:left;pointer-events:none}
+.hc-info{max-width:390px;padding-bottom:6px}
+.hc-info .mono{display:inline-flex;align-items:center;gap:7px;color:var(--muted);text-transform:none;letter-spacing:.02em}
+.hc-info p{margin-top:12px;font-family:var(--disp);font-variation-settings:"wdth" 100;font-weight:450;font-size:20px;line-height:1.2;letter-spacing:-.025em;color:var(--ink)}
+.hc-info p span{color:var(--taupe)}
+.hc-cards{display:flex;gap:8px;pointer-events:auto}
+.dcard{width:232px;background:#1A1918;color:#EDEDED;border-radius:9px;padding:13px 13px 11px;font-size:11px;box-shadow:inset 0 0 0 1px #2B2927,0 34px 60px -30px rgba(30,20,10,.55)}
+.dc-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.dc-top b{display:block;font-size:11.5px;font-weight:500}
+.dc-top span{display:block;margin-top:3px;font-size:9.5px;color:#86827C}
+.dc-sel{flex:none;margin:0!important;background:#262423;box-shadow:inset 0 0 0 1px #34312E;border-radius:4px;padding:3px 6px;font-size:9px!important;color:#B9B5AE!important}
+.dc-val{margin-top:12px;font-size:20px;font-weight:500;letter-spacing:-.02em;color:#fff}
+.dc-val span{display:inline-block;font-variant-numeric:tabular-nums}
+.dc-badge{display:flex;align-items:center;gap:7px;margin-top:6px;font-size:10px;color:#86827C}
+.dc-badge .up{font-family:var(--mono);font-size:9.5px;border-radius:4px;padding:2px 6px;background:rgba(235,110,44,.16);color:#F29A5E}
+.dc-badge .up.g{background:rgba(14,131,69,.24);color:#5FD49A}
+.dc-foot{display:flex;align-items:center;gap:12px;margin-top:11px;padding-top:10px;border-top:1px solid #2B2927}
+.donut{flex:none;width:38px;height:38px;transform:rotate(-90deg)}
+.donut circle{fill:none;stroke-width:5}
+.dc-foot ul{list-style:none;display:grid;gap:4px;font-size:9.5px;color:#9A968F}
+.dc-foot li i{display:inline-block;width:6px;height:6px;border-radius:50%;margin-right:5px;vertical-align:1px}
+@keyframes hc-bump{0%{transform:translateY(-35%);opacity:0}100%{transform:none;opacity:1}}
+.dc-val span.bump,.dc-badge .up.bump{animation:hc-bump .5s cubic-bezier(.16,1,.3,1)}
+
+/* ---------- Mouvement ----------
+   Vitesse : le sous-titre et les boutons ne sont jamais masqués au chargement (LCP).
+   Le titre monte très vite (≤ 0,6 s) ; le reste arrive ensuite en fondu. */
+@keyframes hc-up{from{opacity:0;transform:translateY(18px)}}
+@keyframes hc-rise{from{transform:translate3d(0,110%,0)}}
+@keyframes hc-tint{0%,45%{color:var(--orange)}}
+@keyframes hc-dot{0%{transform:scale(0)}55%{transform:scale(1.9)}78%{transform:scale(.85)}100%{transform:none}}
+@keyframes hc-draw{from{stroke-dashoffset:1;stroke-dasharray:1 1}to{stroke-dashoffset:0;stroke-dasharray:1 1}}
+@keyframes hc-fade{from{opacity:0}}
+@keyframes hc-pop{from{opacity:0;transform:translate(-50%,-50%) scale(.7)}}
+@keyframes hc-hand{from{opacity:0;transform:translateY(90px)}}
+@keyframes hc-float{0%,100%{translate:0 0}50%{translate:0 -7px}}
+@keyframes hc-ring{0%{opacity:1}22%,100%{opacity:0}}
+@keyframes hc-logo{0%{filter:none;opacity:1}26%,100%{filter:grayscale(1);opacity:.5}}
+@media (prefers-reduced-motion:no-preference){
+  .hc .hw{display:inline-block;clip-path:inset(-.4em -.3em -.16em -.3em)}
+  .hc .hwi{display:inline-block;animation:hc-rise .9s cubic-bezier(.16,1,.3,1) backwards,hc-tint .9s ease-out backwards;animation-delay:calc(var(--i) * .05s)}
+  .hc h1 .o{display:inline-block;animation:hc-dot .8s cubic-bezier(.34,1.56,.64,1) backwards .45s}
+  .hc .w{animation:hc-draw 1.8s cubic-bezier(.6,0,.2,1) backwards calc(.3s + var(--i) * .1s)}
+  .hc .w-end,.hc .tool-c{animation:hc-fade .8s ease-out backwards 1.2s}
+  .hc .src-t,.hc .tile-c{animation:hc-pop .8s cubic-bezier(.34,1.56,.64,1) backwards 1s}
+  .hc .hand{animation:hc-hand 1.3s cubic-bezier(.16,1,.3,1) backwards .25s}
+  .hc .hand img{animation:hc-float 8s ease-in-out infinite 1.6s}
+  .hc .hc-info,.hc .hc-cards{animation:hc-up 1s var(--ease) backwards .8s}
+  .hc .w-pulses{animation:hc-fade .6s ease-out backwards 1.8s}
+  .hc .p-core,.hc .p-halo{animation:hc-pulse var(--d) linear var(--s) infinite}
+  .hc .src-t::after{animation:hc-ring var(--d) linear var(--dl) infinite}
+  .hc .src-t img,.hc .src-t svg,.hc .src-t span{animation:hc-logo var(--d) linear var(--dl) infinite}
+  .hc .p-feed.go{animation:hc-feed .8s linear}
+  .hc .hand.hit .dev-glow{animation:dev-hit 1.1s ease-out}
+  .hc.is-off *,.hc.is-off *::after{animation-play-state:paused}
+}
+
+/* ---------- Petits écrans d'ordinateur ---------- */
+@media (min-width:1001px) and (max-width:1280px){
+  .hc-scene{transform:scale(.92);transform-origin:50% 100%}
+  .hc-info p{font-size:18px}
+  .dcard{width:214px}
+}
+@media (min-width:1001px) and (max-width:1160px){.hc-scene{transform:scale(.84)}}
+
+/* ---------- Mobile et tablette : la main sous les boutons, sans les cartes ---------- */
+@media (max-width:1000px){
+  .hc{height:auto;padding-bottom:32px}
+  .hc-head{padding-top:112px}
+  .hc h1 .ln{white-space:normal}
+  .hc-stage{position:relative;inset:auto;height:330px;margin-top:0;overflow:hidden;
+    -webkit-mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent),linear-gradient(180deg,#000 72%,transparent);
+    -webkit-mask-composite:source-in;
+    mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent),linear-gradient(180deg,#000 72%,transparent);mask-composite:intersect}
+  .hc-scene{left:50%;top:50%;bottom:auto;margin:0;transform:translate(-50%,-50%) scale(var(--k,.62)) translateY(-262px)}
+  .src-t{left:var(--xm);top:var(--ym);transform:translate(-50%,-50%) scale(1.3)}
+  .src-t.d-only,.tool-c,.tile-c{display:none}
+  .hc .src-t::after,.hc .src-t img,.hc .src-t svg,.hc .src-t span{animation-delay:var(--dlm)}
+  .hc-foot{position:relative;flex-direction:column;align-items:center;padding:0 16px;text-align:center}
+  .hc-info{max-width:330px;padding:0}
+  .hc-cards{display:none}
+}
+@media (max-width:1000px) and (prefers-reduced-motion:no-preference){
+  .hc .src-t{animation-name:hc-pop-m}
+}
+@keyframes hc-pop-m{from{opacity:0;transform:translate(-50%,-50%) scale(.9)}}
+@media (min-width:640px) and (max-width:1000px){.hc-stage{height:420px}.hc-scene{--k:.78}}
+@media (max-width:520px){
+  .hc h1{font-size:34px;padding:0 16px}
+  .hc .sub{font-size:15px;padding:0 16px}
+  .hc .row-b{flex-wrap:wrap;padding:0 16px}
+  .hc .btn{padding:12px 16px;font-size:14px}
+}

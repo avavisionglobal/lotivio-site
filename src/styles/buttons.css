@@ -1,0 +1,48 @@
+/* =================================================================
+   Bouton unique du site (12.11.2026) — composant src/components/ui/Btn.astro
+   ================================================================= */
+.cbtn{--bg:var(--ink);--fg:#fff;--sq:#fff;--ar:var(--ink);--fill:var(--orange);--fill-fg:#fff;--sq-h:#fff;--ar-h:var(--orange);
+  position:relative;isolation:isolate;overflow:hidden;display:inline-flex;align-items:center;gap:14px;
+  padding:6px 6px 6px 20px;border:0;border-radius:0;background:var(--bg);color:var(--fg);
+  font:inherit;font-size:15px;font-weight:500;letter-spacing:-.005em;line-height:1.2;text-align:left;cursor:pointer;
+  transition:color .45s cubic-bezier(.65,0,.35,1)}
+.cbtn-light{--bg:#fff;--fg:var(--ink);--sq:var(--ink);--ar:#fff;--sq-h:#fff;--ar-h:var(--orange)}
+.cbtn-sm{gap:10px;padding:4px 4px 4px 14px;font-size:13.5px}
+/* Remplissage orange, de gauche à droite à l'entrée, vers la droite à la sortie */
+.cbtn::before{content:"";position:absolute;inset:0;z-index:-1;background:var(--fill);transform:scaleX(0);transform-origin:100% 50%;transition:transform .55s cubic-bezier(.65,0,.35,1)}
+.cbtn-t{position:relative}
+.cbtn-a{position:relative;flex:none;display:grid;place-items:center;width:34px;height:34px;overflow:hidden;background:var(--sq);color:var(--ar);
+  transition:background .45s cubic-bezier(.65,0,.35,1),color .45s cubic-bezier(.65,0,.35,1)}
+.cbtn-sm .cbtn-a{width:28px;height:28px}
+.cbtn-a i{position:absolute;inset:0;display:grid;place-items:center;transition:transform .5s cubic-bezier(.65,0,.35,1)}
+.cbtn-a svg{width:15px;height:15px}
+.cbtn-sm .cbtn-a svg{width:13px;height:13px}
+.cbtn-a i+i{transform:translate(-120%,120%)}
+
+@media (hover:hover){
+  .cbtn:hover{color:var(--fill-fg)}
+  .cbtn:hover::before{transform:scaleX(1);transform-origin:0 50%}
+  .cbtn:hover .cbtn-a{background:var(--sq-h);color:var(--ar-h)}
+  .cbtn:hover .cbtn-a i:first-child{transform:translate(120%,-120%)}
+  .cbtn:hover .cbtn-a i+i{transform:none;transition-delay:.06s}
+}
+.cbtn:focus-visible{outline:2px solid var(--orange);outline-offset:3px}
+.cbtn:active{transform:scale(.98)}
+/* Désactivé : le bouton reste lisible (pas de transparence), mais il est clairement inactif. */
+.cbtn[disabled]{cursor:not-allowed;--fg:rgba(255,255,255,.62);--sq:#3A3936;--ar:rgba(255,255,255,.55)}
+.cbtn-light[disabled]{--fg:var(--muted);--sq:#D9D6D0;--ar:#fff}
+.cbtn[disabled]::before{display:none}
+.cbtn[disabled]:hover{color:var(--fg)}
+.cbtn[disabled] .cbtn-a i:first-child{transform:none}
+.cbtn[disabled] .cbtn-a i+i{transform:translate(-120%,120%)}
+.cbtn[aria-busy="true"]{opacity:.6;cursor:progress}
+@media (prefers-reduced-motion:reduce){
+  .cbtn::before{transition:none}.cbtn-a i{transition:none}
+}
+
+/* Placement selon le contexte */
+.menu .menu-go,.book .bk-go{display:flex;width:100%;justify-content:space-between}
+.menu .menu-go{margin-top:8px}
+.book .bk-go{margin-top:16px}
+.fx-go,.cx-btn{flex:none}
+.fx-go{margin-top:6px}

@@ -1,4 +1,5 @@
 ---
+import Btn from './ui/Btn.astro';
 import '../styles/s09-faq.css';
 // Textes de Diego du 12.11.2026. Version précédente : proofs/archive/S09Questions-v1.astro
 const qa = [
@@ -22,7 +23,7 @@ const ld = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: q
       {qa.map(([q, a], i) => (
         <details open={i === 0} data-bloc={`S09.${i + 1}`} data-reveal><summary>{q}</summary><p>{a}</p></details>
       ))}
-      <div class="faq-end" data-bloc="S09.9"><p>Une question propre à votre agence&nbsp;?</p><a class="par-btn" href="#demo">Parlons de votre fonctionnement<span aria-hidden="true">↗</span></a></div>
+      <div class="faq-end" data-bloc="S09.9"><p>Une question propre à votre agence&nbsp;?</p><Btn label="Parlons de votre fonctionnement" href="#demo" /></div>
     </div>
   </div>
   <script type="application/ld+json" set:html={JSON.stringify(ld)} />

@@ -35,7 +35,7 @@ function drawTexture(pre: HTMLElement) {
     const w = parseFloat(pre.dataset.w || '.6'), ratio = parseFloat(pre.dataset.r || '.42');
     const cols = Math.max(40, Math.round((Math.min(innerWidth, 1600) * w) / 6.1)), rows = Math.round(cols * ratio);
     const color = getComputedStyle(pre).color;
-    pre.replaceChildren(asciiCanvas(img, { cols, rows, color, accent: ORANGE, accentRate: 0.004 }));
+    pre.replaceChildren(asciiCanvas(img, { cols, rows, color, accent: ORANGE, accentRate: 0.004, cover: true })); // recadrage sans déformation : l'immeuble garde ses proportions
     requestAnimationFrame(() => pre.classList.add('drawn')); // fondu d'apparition (CSS)
   };
 }

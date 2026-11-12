@@ -10,13 +10,13 @@ const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 /** Trame de la taille du bloc, image recadrée façon « cover », dessinée dans un canvas. */
 const texture = (img: HTMLImageElement, W: number, H: number, color: string) =>
-  asciiCanvas(img, { cols: Math.ceil(W / charWidth()), rows: Math.ceil(H / LINE_HEIGHT), color, accent: '#EB6E2C', accentRate: 0.006, cover: true, floor: true });
+  asciiCanvas(img, { cols: Math.ceil(W / charWidth()), rows: Math.ceil(H / LINE_HEIGHT), color, accent: '#EB6E2C', accentRate: 0.003, cover: true, floor: true });
 
 function lens(pre: HTMLElement) {
   const host = pre.parentElement;
   if (!host || host.dataset.lens) return;
   host.dataset.lens = '1';
-  const R = host.matches('.hv1') ? 210 : 170;
+  const R = host.matches('.hv1') ? 170 : 130; // lentille plus petite : elle accompagne le pointeur sans couvrir les paragraphes
   let wrap: HTMLDivElement | null = null, inner: HTMLDivElement | null = null, img: HTMLImageElement | null = null;
   let size = '', hi = '#5C574E', raf = 0, active = false, ready = false, x = 0, y = 0, tx = 0, ty = 0, cx = 0, cy = 0;
 
@@ -34,9 +34,10 @@ function lens(pre: HTMLElement) {
     wrap.style.setProperty('--lens', R * 2 + 'px');
     const cs = getComputedStyle(pre);
     if (cs.zIndex !== 'auto') wrap.style.zIndex = cs.zIndex;
-    // Fond sombre (trame foncée) : code plus clair ; fond clair : code plus foncé que la trame.
+    // Code à peine plus marqué que la trame (fond clair : un ton plus foncé ; fond sombre : un ton plus clair).
+    // Avant : gris très foncé, qui couvrait les textes posés dessus (retour de Diego, 12.11.2026).
     const [r, g, b] = (cs.color.match(/\d+/g) ?? ['200', '200', '200']).map(Number);
-    hi = host.matches('.hv1') ? '#9A9488' : (r * 0.3 + g * 0.59 + b * 0.11) / 255 < 0.45 ? '#B3ADA3' : '#5C574E'; // hero : plus clair, le texte reste lisible
+    hi = (r * 0.3 + g * 0.59 + b * 0.11) / 255 < 0.45 ? '#615D56' : '#A29C90';
     inner = document.createElement('div'); inner.className = 'tex-hi';
     wrap.append(inner); pre.after(wrap);
     img = new Image(); img.decoding = 'async'; img.src = pre.dataset.src!;

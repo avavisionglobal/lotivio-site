@@ -1,11 +1,12 @@
 ---
+import Btn from './ui/Btn.astro';
 import { SITE, DEMO } from '../config';
 const writeHref = DEMO.email ? `mailto:${DEMO.email}?subject=${encodeURIComponent('Lotivio — question')}` : '#demo';
 ---
 <!-- S10 · Appel final -->
 <section class="cta10" id="demo">
   <div class="cta10-card" data-reveal>
-    <pre class="tex cta10-tex" data-src="/media/residence-480.webp" data-w=".95" data-r=".42" aria-hidden="true"></pre>
+    <pre class="tex cta10-tex" data-src="/media/tex/quartier.svg" data-w=".95" data-r=".42" aria-hidden="true"></pre>
     <div class="cta10-l" data-bloc="S10.1">
       <span class="eyb">Démo</span>
       <h2 data-flash>Voyons comment<span class="g">votre agence travaille<i class="o">.</i></span></h2>
@@ -29,7 +30,7 @@ const writeHref = DEMO.email ? `mailto:${DEMO.email}?subject=${encodeURIComponen
           {['09:00', '10:00', '11:00', '14:00', '15:00', '16:00'].map((h) => <button type="button" aria-pressed="false">{h}</button>)}
         </div>
         <div class="tz">Heure suisse</div>
-        <button type="button" class="go" id="bk-next" disabled>Continuer</button>
+        <Btn label="Continuer" id="bk-next" class="bk-go" disabled />
       </div>
 
       <div class="bk-p" data-step="2" hidden>
@@ -39,7 +40,7 @@ const writeHref = DEMO.email ? `mailto:${DEMO.email}?subject=${encodeURIComponen
         <label class="fld"><span>Agence</span><input name="agency" autocomplete="organization" required /></label>
         <label class="fld"><span>Téléphone <em>(facultatif)</em></span><input name="phone" type="tel" autocomplete="tel" /></label>
         <p class="bk-legal">Vos coordonnées servent uniquement à organiser la démo. <a href={SITE.privacyUrl} target="_blank" rel="noopener">Confidentialité</a></p>
-        <button type="submit" class="go" id="bk-send">Demander la démo</button>
+        <Btn label="Demander la démo" type="submit" id="bk-send" class="bk-go" />
       </div>
 
       <div class="bk-p bk-done" data-step="3" hidden role="status" aria-live="polite">

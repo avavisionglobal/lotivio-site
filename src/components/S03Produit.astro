@@ -1,4 +1,5 @@
 ---
+import Btn from './ui/Btn.astro';
 // S03 · Sur mesure, les trois engagements (réf. « AI solutions built for every enterprise team », capture de Diego du 11.11.2026).
 // Textes de Diego du 12.11.2026. Version « Demandes / WhatsApp / Dictée » : proofs/archive/S03Produit-v3-cartes-fonctions.astro
 // Sous le paragraphe de S02 : des fils partent d'un point, se divisent vers trois cartes claires.
@@ -62,7 +63,7 @@ const fork = [
         </article>
       ))}
     </div>
-    <div class="lf-end" data-bloc="S03.4"><a class="lf-btn lf-btn-l" href="#demo">Parlons du fonctionnement de votre agence<span aria-hidden="true">↗</span></a></div>
+    <div class="lf-end" data-bloc="S03.4"><Btn label="Parlons du fonctionnement de votre agence" href="#demo" tone="light" /></div>
   </div>
 </section>
 <script>

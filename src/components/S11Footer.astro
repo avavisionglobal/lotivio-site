@@ -1,4 +1,5 @@
 ---
+import Btn from './ui/Btn.astro';
 // S11 · Footer (réf. capture « Fable » de Diego, 11.11.2026) : paysage au crépuscule en fond,
 // logo + phrase et bouton en haut, colonnes de liens, mentions en bas (grand « lotivio. » retiré le 11.11, demande de Diego).
 // Image : Higgsfield Soul Location (job fc8327c5…), agrandie en 4K (job 63059e00…) puis éclaircie ;
@@ -19,7 +20,7 @@ const canaux = ['Homegate', 'ImmoScout24', 'immobilier.ch', 'Properstar', 'Meta 
       <a class="fx-logo" href="#top" aria-label="Lotivio, retour en haut"><img src="/brand/lotivio-mark.svg" alt="" width="30" height="30" /><span>lotivio<i>.</i></span></a>
       <p>Le CRM immobilier développé pour les agences et promoteurs suisses. Vos canaux, vos échanges et votre suivi commercial réunis.</p>
     </div>
-    <a class="fx-cta magnet" href="#demo">Réserver une démo <span aria-hidden="true">↗</span></a>
+    <Btn label="Réserver une démo" href="#demo" tone="light" class="fx-go magnet" />
   </div>
   <nav class="f-cols fx-cols" aria-label="Pied de page" data-bloc="S11.2">
     <div><h2>Produit</h2><a href="#s03">Demandes reçues</a><a href="#s03">Assistant WhatsApp</a><a href="#s03">Dictée vocale</a></div>

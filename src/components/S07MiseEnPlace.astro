@@ -1,7 +1,8 @@
 ---
+import Btn from './ui/Btn.astro';
 import '../styles/s07-mise-en-place.css';
 // Textes de Diego du 12.11.2026 (4 cartes). Version à 5 cartes : proofs/archive/S07MiseEnPlace-v1-5-cartes.astro
-const tex = ['/media/residence-480.webp', '/media/lac-480.webp', '/media/residence-portrait-480.webp'];
+const tex = ['/media/tex/facade.svg', '/media/tex/chantier.svg', '/media/tex/quartier.svg'];
 
 // Illustrations animées (bento) : chaque scène est jouée par src/scripts/bento.ts,
 // qui pose les classes d'étape k1, k2… sur .il selon data-steps (ms) ; les mouvements sont
@@ -212,5 +213,5 @@ const curveR = (y: number) => `M260 ${y}C228 ${y} 228 124 216 124`;
   </div>
   <div class="swipe" aria-hidden="true"><i><b></b><b></b><b></b></i>Faire glisser</div>
 </section>
-<div class="par-end hs-end" data-bloc="S07.6"><a class="par-btn" href="#demo">Parlons de votre mise en place<span aria-hidden="true">↗</span></a></div>
+<div class="par-end hs-end" data-bloc="S07.6"><Btn label="Parlons de votre mise en place" href="#demo" /></div>
 

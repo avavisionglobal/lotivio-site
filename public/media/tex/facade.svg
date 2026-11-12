@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="1400" viewBox="0 0 1000 1400">
+  <!-- Source de trame de code (convertie en caractères par src/scripts/ascii.ts).
+       Aplats très contrastés : ciel blanc = vide, murs gris = « - », vitrages sombres = « % », dalles = « # ». -->
+  <defs>
+    <pattern id="win" x="80" y="344" width="140" height="176" patternUnits="userSpaceOnUse">
+      <rect x="22" y="48" width="96" height="112" fill="#262626"/><rect x="66" y="48" width="8" height="112" fill="#A0A0A0"/>
+    </pattern>
+    <pattern id="slab" x="0" y="520" width="1000" height="176" patternUnits="userSpaceOnUse"><rect width="1000" height="24" fill="#3A3A3A"/></pattern>
+    <pattern id="rail" x="0" y="520" width="1000" height="176" patternUnits="userSpaceOnUse"><rect y="120" width="1000" height="56" fill="#C4C4C4" opacity=".82"/></pattern>
+  </defs>
+  <rect width="1000" height="1400" fill="#fff"/>
+  <!-- grue derrière l'immeuble -->
+  <g fill="#262626">
+    <rect x="858" y="104" width="28" height="1296"/>
+    <rect x="300" y="104" width="690" height="22"/>
+    <rect x="930" y="126" width="60" height="50"/>
+    <rect x="842" y="126" width="56" height="40"/>
+    <rect x="418" y="126" width="6" height="190"/><rect x="404" y="312" width="34" height="30"/>
+  </g>
+  <g stroke="#262626" stroke-width="9" fill="none"><path d="M872 40 L300 106 M872 40 L990 106 M872 40 V104"/></g>
+  <!-- attique -->
+  <rect x="200" y="338" width="600" height="22" fill="#3A3A3A"/>
+  <rect x="220" y="360" width="560" height="160" fill="#A0A0A0"/>
+  <rect x="220" y="360" width="560" height="160" fill="url(#win)"/>
+  <!-- corps principal : cinq étages à balcons filants -->
+  <rect x="80" y="520" width="840" height="880" fill="#A0A0A0"/>
+  <rect x="80" y="520" width="840" height="880" fill="url(#win)"/>
+  <rect x="40" y="520" width="920" height="880" fill="url(#rail)"/>
+  <rect x="40" y="520" width="920" height="880" fill="url(#slab)"/>
+  <rect y="1376" width="1000" height="24" fill="#4A4A4A"/>
+</svg>
