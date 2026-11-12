@@ -1,10 +1,22 @@
 ---
+import '../styles/s06-parcours.css';
+// Textes de Diego du 12.11.2026. Version précédente : proofs/archive/S06Parcours-v1-demande-signature.astro
 const panels = [
-  { b: 'S06.1', g: 'g1', code: '(Acquisition)', h: ['Vos canaux.', 'Une seule file.'], box: ['Homegate, ImmoScout24, immobilier.ch, Properstar', 'Meta Lead Ads et formulaire de votre site'], say: ['La source et le bien', 'suivent la demande.', 'Vous avez le contexte.'] },
-  { b: 'S06.2', g: 'g2', code: '(Leads Meta Ads)', h: ['Le premier', 'échange est lancé.'], box: ['Max envoie la brochure sur WhatsApp', 'Avec le consentement du prospect'], say: ['Pièces, zone, budget :', 'l’IA pose les questions', 'et complète la fiche.'] },
-  { b: 'S06.3', g: 'g3', code: '(Relance)', h: ['Vous savez', 'qui relancer.'], box: ['Les signaux d’intérêt restent visibles', 'Le suivi est consigné dans le CRM'], say: ['Le contexte est là.', 'Vous reprenez le fil', 'avec l’acheteur.'] },
-  { b: 'S06.4', g: 'g4', code: '(Commercialisation)', h: ['Chaque vente', 'a son suivi.'], box: ['De la qualification à la signature', 'Réservé, vendu : le stock suit l’avancée'], say: ['Vous voyez où en est', 'chaque acheteur,', 'sur chaque projet.'] },
+  { b: 'S06.1', g: 'g1', code: '(Base clients)', h: ['Vos futurs acheteurs sont peut-être', 'déjà dans votre base.'],
+    p: 'À chaque nouvelle promotion, retrouvez les contacts dont les critères correspondent à vos biens. Budget, secteur, surface, nombre de pièces : le matching rapproche vos lots des recherches enregistrées. Réactivez ces contacts avec une campagne e-mail ciblée et donnez une nouvelle occasion à votre base de générer des ventes.' },
+  { b: 'S06.2', g: 'g2', code: '(Leads)', h: ['Vos leads arrivent.', 'Le suivi fonctionne à votre façon.'],
+    p: 'Portails immobiliers, Meta Ads, votre site : les demandes des canaux connectés alimentent directement votre base clients. Premier contact, envoi de brochure, intervention de l’agent : nous configurons le suivi selon votre organisation. Votre équipe retrouve ses prospects, leur contexte et les actions à mener au même endroit.' },
+  { b: 'S06.3', g: 'g3', code: '(Qualification)', h: ['Qualifiez mieux.', 'Sachez qui rappeler en priorité.'],
+    p: 'Qui attend votre retour ? Qui a cliqué plusieurs fois sur la brochure ? Retrouvez les critères de recherche, les signaux d’intérêt et les relances prioritaires pour concentrer vos efforts. Après une visite, dictez votre compte rendu : l’IA prépare les informations à valider pour poursuivre le suivi.' },
+  { b: 'S06.4', g: 'g4', code: '(Pilotage)', h: ['Voyez ce qui se vend.', 'Comprenez d’où viennent les acheteurs.'],
+    p: 'Suivez vos dossiers jusqu’à la signature, retrouvez les lots disponibles, réservés ou vendus et l’origine de vos acheteurs. Vous avez les informations pour décider quels contacts reprendre, quels biens mettre en avant et quelles actions d’acquisition poursuivre.' },
 ];
+// Matching (panneau 01) : données de démonstration. Le score est une règle (budget, zone, type, surface, pièces…), pas l'IA.
+const matches = [
+  ['CF', 'Céline Favre', '4.5 p. · Littoral · ≤ 1,3 mio', 92],
+  ['MV', 'Marc Vuilleumier', '4.5 p. · Neuchâtel · ≤ 1,25 mio', 87],
+  ['JP', 'Justine Perret', '4 p. · Littoral · ≤ 1,2 mio', 74],
+] as const;
 const rel = [
   ['/media/residence-800.webp', 'Brochure consultée 3×', 'Céline Favre', 'Les Terrasses du Vignoble · Lot B3', '50% 50%'],
   ['/media/lac-800.webp', 'Sans réponse depuis 5 jours', 'Justine Perret', 'Résidence Lac & Lumière · Lot D1', '50% 50%'],
@@ -13,40 +25,40 @@ const rel = [
 const lots = Array.from({ length: 24 }, (_, i) => String.fromCharCode(65 + Math.floor(i / 8)) + ((i % 8) + 1));
 ---
 <!-- S05 · Parcours — titre -->
-<div class="steps-head" id="parcours" data-bloc="S05">
-  <h2 class="h2" data-flash>De la demande<span class="g">à la signature.</span></h2>
-  <p>Un même suivi, à chaque étape. Exemple avec un lead Meta Ads. Données de démonstration.</p>
+<div class="steps-head steps-par" id="parcours" data-bloc="S05">
+  <h2 class="h2 h2-par" data-flash>Voici comment Lotivio transforme<span class="g">votre façon de commercialiser une promotion.</span></h2>
+  <p>Votre prochaine promotion commence avec un potentiel : les acheteurs que vous connaissez déjà et ceux qui vous découvrent. Exploitez votre base, organisez les nouvelles demandes et concentrez vos efforts sur les contacts à faire avancer. Lotivio relie chaque étape de votre commercialisation.</p>
 </div>
 <!-- S06 · Parcours — 4 panneaux -->
-<section class="flow4" aria-label="Parcours d'une demande en quatre étapes">
+<section class="flow4" aria-label="Commercialiser une promotion en quatre étapes">
   {panels.map((p, i) => (
     <article class={`pn ${p.g}`} data-bloc={p.b}>
       <span class="pn-dim" aria-hidden="true"></span>
       <div class="pn-in">
         <div class="code">{p.code}</div>
         <div class="top"><h3>{p.h[0]}<br />{p.h[1]}</h3><span class="num">0{i + 1}</span></div>
-        <div class="box"><div>{p.box[0]}</div><div>{p.box[1]}</div></div>
-        <div class="say"><p>{p.say[0]}<span>{p.say[1]}</span><span>{p.say[2]}</span></p><a href="#demo">Réserver une démo</a><span></span></div>
+        <p class="lede">{p.p}</p>
         {i === 0 && (
           <div class="stage">
-            <h4>Sources branchées</h4><div class="sub">Cette semaine</div>
-            <div class="srcs" id="srcs"></div>
+            <div class="mt" role="img" aria-label="Matching d'un lot avec les contacts de la base, données de démonstration">
+              <div class="mt-lot">
+                <img src="/media/residence-800.webp" alt="" width="800" height="533" loading="lazy" decoding="async" />
+                <div class="mt-lot-b"><span class="mt-k">Nouveau lot</span><b>Les Terrasses du Vignoble · Lot B4</b><span>4.5 pièces · 128 m² · CHF 1'240'000</span><span class="mt-chip">Disponible</span></div>
+              </div>
+              <div class="mt-list">
+                <div class="mt-h"><span>Contacts correspondants</span><b>3</b></div>
+                {matches.map(([ini, name, crit, sc]) => (
+                  <div class="mt-row"><span class="mt-av">{ini}</span><span class="mt-who"><b>{name}</b><small>{crit}</small></span><span class="mt-sc"><i style={`--w:${sc}%`}></i><span><b>{sc}</b>/100</span></span></div>
+                ))}
+                <div class="mt-camp"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg><span>Campagne e-mail ciblée · 3 contacts</span><em>Prête</em></div>
+              </div>
+            </div>
           </div>
         )}
         {i === 1 && (
           <div class="stage">
-            <div class="qual" id="qual">
-              <div class="qcard qchat"><span class="lbl"><span class="spin"></span>Qualification…</span>
-                <div class="bub">Bonjour ! Voici la brochure des Terrasses du Vignoble. Que recherchez-vous ?</div>
-                <div class="bub me">Un appartement</div>
-                <div class="bub">Combien de pièces ?</div>
-                <div class="bub me">4.5, plutôt au littoral</div>
-              </div>
-              <div class="qcard qslot"><span class="spin"></span><span class="k">Type</span><span class="v">Appartement</span></div>
-              <div class="qcard qslot"><span class="spin"></span><span class="k">Pièces</span><span class="v">4.5</span></div>
-              <div class="qcard qslot"><span class="spin"></span><span class="k">Zone</span><span class="v">Littoral</span></div>
-              <div class="qcard qslot"><span class="spin"></span><span class="k">Budget</span><span class="v">≤ 1,3 mio</span><span class="badge">Qualifié</span></div>
-            </div>
+            <h4>Sources branchées</h4><div class="sub">Cette semaine</div>
+            <div class="srcs" id="srcs"></div>
           </div>
         )}
         {i === 2 && (
@@ -73,3 +85,4 @@ const lots = Array.from({ length: 24 }, (_, i) => String.fromCharCode(65 + Math.
     </article>
   ))}
 </section>
+<div class="par-end" data-bloc="S06.5"><a class="par-btn" href="#demo">Découvrir ce parcours en démo<span aria-hidden="true">↗</span></a></div>

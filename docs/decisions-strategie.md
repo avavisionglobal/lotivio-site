@@ -17,6 +17,42 @@ Format d'une entrée :
 
 
 
+
+
+## 2026-11-12 — Mise en place (S07) : « Votre équipe a des biens à vendre. Nous préparons votre Lotivio. »
+- Décision :
+  - L'étiquette « 🇨🇭 Pensé pour votre agence » est conservée. Titre et introduction de Diego.
+  - Quatre cartes au lieu de cinq, textes de Diego, illustrations animées existantes :
+    - 01 « Votre façon de travailler devient notre point de départ. » — scène de l'atelier ;
+    - 02 « Retrouvez vos contacts. Connectez vos canaux. » — scène des branchements ;
+    - 03 « Déléguez des tâches. Gardez la main sur la relation. » — scène du parcours (automatique ou validé par l'agent) ;
+    - 04 « Prenez la main sur vos propres projets. » — scène de mise en route (import, équipe, première demande).
+  - L'ancienne carte « L'IA connaît vos projets » est retirée : son contenu est repris dans le texte de la carte 03.
+  - Nouveau bouton après la section : « Parlons de votre mise en place ↗ » (vers #demo).
+  - Le titre d'introduction est un peu réduit (nouvelle feuille src/styles/s07-mise-en-place.css).
+- Raison : textes fournis par Diego.
+- Remplace / modifie : S07 à 5 cartes (archive : proofs/archive/S07MiseEnPlace-v1-5-cartes.astro).
+- Statut : décidée (textes de Diego).
+- Source : message de Diego, 12 novembre 2026.
+
+## 2026-11-12 — Parcours (S05–S06) : « Voici comment Lotivio transforme votre façon de commercialiser une promotion »
+- Décision :
+  - Titre et introduction remplacent « De la demande à la signature » (textes de Diego).
+  - Les quatre panneaux empilés gardent leur mécanique : couleurs, grand numéro, scène animée. Chacun prend un titre de Diego et un paragraphe, à la place des encadrés courts :
+    - 01 « Vos futurs acheteurs sont peut-être déjà dans votre base. » — nouvelle scène de matching : un lot, trois contacts avec leur score sur 100 et une campagne e-mail ciblée (données de démonstration) ;
+    - 02 « Vos leads arrivent. Le suivi fonctionne à votre façon. » — scène des sources branchées ;
+    - 03 « Qualifiez mieux. Sachez qui rappeler en priorité. » — scène des relances avec signaux ;
+    - 04 « Voyez ce qui se vend. Comprenez d'où viennent les acheteurs. » — scène du pipeline.
+  - La scène de qualification WhatsApp est retirée.
+  - Le lien « Réserver une démo » de chaque panneau est remplacé par un seul bouton après les panneaux : « Découvrir ce parcours en démo ↗ » (vers #demo).
+- Raison : textes fournis par Diego.
+- Remplace / modifie : S05–S06 du 9.11 (archive : proofs/archive/S06Parcours-v1-demande-signature.astro).
+- À vérifier :
+  - la campagne e-mail ciblée depuis le matching : l'app a des brouillons de campagne (IA) et une page Campagnes, mais l'envoi d'une campagne e-mail n'est pas dans la liste des capacités vérifiées de PROJECT.md ;
+  - « l'origine de vos acheteurs » : la source de chaque demande est bien suivie.
+- Statut : décidée (textes de Diego).
+- Source : message de Diego, 12 novembre 2026.
+
 ## 2026-11-12 — Section « Sur mesure » (S02 + S03) : nouveaux textes et illustration « mise en place »
 - Décision :
   - S02 : étiquette « Sur mesure ». Titre : « Votre façon de vendre. / Un CRM configuré pour la suivre. » (2e ligne en ton atténué). Introduction : « Qui reçoit les demandes ? Comment envoyez-vous les brochures ? Quand l'agent reprend-il la conversation ? Nous partons de votre fonctionnement pour installer Lotivio autour de votre équipe, de vos projets et de vos canaux. »

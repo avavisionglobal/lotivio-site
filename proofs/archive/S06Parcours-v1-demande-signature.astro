@@ -1,0 +1,75 @@
+---
+const panels = [
+  { b: 'S06.1', g: 'g1', code: '(Acquisition)', h: ['Vos canaux.', 'Une seule file.'], box: ['Homegate, ImmoScout24, immobilier.ch, Properstar', 'Meta Lead Ads et formulaire de votre site'], say: ['La source et le bien', 'suivent la demande.', 'Vous avez le contexte.'] },
+  { b: 'S06.2', g: 'g2', code: '(Leads Meta Ads)', h: ['Le premier', 'échange est lancé.'], box: ['Max envoie la brochure sur WhatsApp', 'Avec le consentement du prospect'], say: ['Pièces, zone, budget :', 'l’IA pose les questions', 'et complète la fiche.'] },
+  { b: 'S06.3', g: 'g3', code: '(Relance)', h: ['Vous savez', 'qui relancer.'], box: ['Les signaux d’intérêt restent visibles', 'Le suivi est consigné dans le CRM'], say: ['Le contexte est là.', 'Vous reprenez le fil', 'avec l’acheteur.'] },
+  { b: 'S06.4', g: 'g4', code: '(Commercialisation)', h: ['Chaque vente', 'a son suivi.'], box: ['De la qualification à la signature', 'Réservé, vendu : le stock suit l’avancée'], say: ['Vous voyez où en est', 'chaque acheteur,', 'sur chaque projet.'] },
+];
+const rel = [
+  ['/media/residence-800.webp', 'Brochure consultée 3×', 'Céline Favre', 'Les Terrasses du Vignoble · Lot B3', '50% 50%'],
+  ['/media/lac-800.webp', 'Sans réponse depuis 5 jours', 'Justine Perret', 'Résidence Lac & Lumière · Lot D1', '50% 50%'],
+  ['/media/residence-portrait-600.webp', 'Match envoyé · 1re relance', 'Aurélie Matthey', 'Clos des Vergers · Lot A2', '50% 30%'],
+];
+const lots = Array.from({ length: 24 }, (_, i) => String.fromCharCode(65 + Math.floor(i / 8)) + ((i % 8) + 1));
+---
+<!-- S05 · Parcours — titre -->
+<div class="steps-head" id="parcours" data-bloc="S05">
+  <h2 class="h2" data-flash>De la demande<span class="g">à la signature.</span></h2>
+  <p>Un même suivi, à chaque étape. Exemple avec un lead Meta Ads. Données de démonstration.</p>
+</div>
+<!-- S06 · Parcours — 4 panneaux -->
+<section class="flow4" aria-label="Parcours d'une demande en quatre étapes">
+  {panels.map((p, i) => (
+    <article class={`pn ${p.g}`} data-bloc={p.b}>
+      <span class="pn-dim" aria-hidden="true"></span>
+      <div class="pn-in">
+        <div class="code">{p.code}</div>
+        <div class="top"><h3>{p.h[0]}<br />{p.h[1]}</h3><span class="num">0{i + 1}</span></div>
+        <div class="box"><div>{p.box[0]}</div><div>{p.box[1]}</div></div>
+        <div class="say"><p>{p.say[0]}<span>{p.say[1]}</span><span>{p.say[2]}</span></p><a href="#demo">Réserver une démo</a><span></span></div>
+        {i === 0 && (
+          <div class="stage">
+            <h4>Sources branchées</h4><div class="sub">Cette semaine</div>
+            <div class="srcs" id="srcs"></div>
+          </div>
+        )}
+        {i === 1 && (
+          <div class="stage">
+            <div class="qual" id="qual">
+              <div class="qcard qchat"><span class="lbl"><span class="spin"></span>Qualification…</span>
+                <div class="bub">Bonjour ! Voici la brochure des Terrasses du Vignoble. Que recherchez-vous ?</div>
+                <div class="bub me">Un appartement</div>
+                <div class="bub">Combien de pièces ?</div>
+                <div class="bub me">4.5, plutôt au littoral</div>
+              </div>
+              <div class="qcard qslot"><span class="spin"></span><span class="k">Type</span><span class="v">Appartement</span></div>
+              <div class="qcard qslot"><span class="spin"></span><span class="k">Pièces</span><span class="v">4.5</span></div>
+              <div class="qcard qslot"><span class="spin"></span><span class="k">Zone</span><span class="v">Littoral</span></div>
+              <div class="qcard qslot"><span class="spin"></span><span class="k">Budget</span><span class="v">≤ 1,3 mio</span><span class="badge">Qualifié</span></div>
+            </div>
+          </div>
+        )}
+        {i === 2 && (
+          <div class="stage">
+            <div class="rel">
+              {rel.map(([img, sig, name, proj, pos]) => (
+                <div class="rc"><img src={img} alt="" width="800" height="533" loading="lazy" decoding="async" style={`object-position:${pos}`} /><span class="sig">{sig}</span>
+                  <span class="acts"><span title="Traité"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg></span><span class="go" title="Relancer"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" aria-hidden="true"><path d="M4 12h14M13 6l6 6-6 6"/></svg></span></span>
+                  <span class="who"><b>{name}</b><span>{proj}</span></span></div>
+              ))}
+            </div>
+          </div>
+        )}
+        {i === 3 && (
+          <div class="stage" style="padding:12px">
+            <div class="sale">
+              <div class="bgl">{lots.map((l) => <span>{l}</span>)}</div>
+              <div class="tool"><div class="in" id="tool"><img src="/brand/lotivio-mark.svg" alt="" width="24" height="24" /><span class="lot">Lot B4</span><span class="stg">Qualifié</span><span class="stg">Réservation</span><span class="stg">Notaire</span><span class="stg">Vendu</span><span class="av">SK</span></div></div>
+              <div class="crumb">Pipeline &nbsp;/&nbsp; <b>Les Terrasses du Vignoble</b></div>
+            </div>
+          </div>
+        )}
+      </div>
+    </article>
+  ))}
+</section>

@@ -1,0 +1,5 @@
+/* S07 · Mise en place (textes de Diego, 12.11.2026) : titre d'introduction plus long, cartes à titres en deux phrases. */
+.hs .hs-intro h2{font-size:clamp(38px,3.6vw,56px);line-height:1.04}
+.hs .oc h3{font-size:25px;line-height:1.15}
+.hs-end{padding-top:56px}
+@media (max-width:520px){.hs .hs-intro h2{font-size:34px}.hs .oc h3{font-size:21px}}

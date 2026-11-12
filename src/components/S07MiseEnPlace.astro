@@ -1,4 +1,6 @@
 ---
+import '../styles/s07-mise-en-place.css';
+// Textes de Diego du 12.11.2026 (4 cartes). Version à 5 cartes : proofs/archive/S07MiseEnPlace-v1-5-cartes.astro
 const tex = ['/media/residence-480.webp', '/media/lac-480.webp', '/media/residence-portrait-480.webp'];
 
 // Illustrations animées (bento) : chaque scène est jouée par src/scripts/bento.ts,
@@ -33,15 +35,15 @@ const curveR = (y: number) => `M260 ${y}C228 ${y} 228 124 216 124`;
 <section class="hs" id="mise-en-place">
   <div class="hs-intro hs-intro-m" style="padding:0 var(--pad) 22px">
     <span class="eyb">🇨🇭 Pensé pour votre agence</span>
-    <h2 data-flash>Votre méthode.<br />Votre Lotivio.</h2>
-    <p>Chaque agence suisse a ses outils. Chaque agent, ses habitudes. Nous partons de votre quotidien pour connecter vos canaux et régler votre suivi.</p>
+    <h2 data-flash>Votre équipe a des biens à vendre.<br />Nous préparons votre Lotivio.</h2>
+    <p>De la reprise de vos contacts à la prise en main, nous installons Lotivio selon votre fonctionnement. Vous définissez vos besoins avec nous ; nous prenons en charge les connexions et les réglages.</p>
   </div>
   <div class="hs-pin">
     <div class="hs-track" id="hs-track">
       <div class="hs-intro" data-bloc="S07.0">
         <span class="eyb" data-scramble>🇨🇭 Pensé pour votre agence</span>
-        <h2 data-flash>Votre méthode.<br />Votre Lotivio.</h2>
-        <p>Chaque agence suisse a ses outils. Chaque agent, ses habitudes. Nous partons de votre quotidien pour connecter vos canaux et régler votre suivi.</p>
+        <h2 data-flash>Votre équipe a des biens à vendre.<br />Nous préparons votre Lotivio.</h2>
+        <p>De la reprise de vos contacts à la prise en main, nous installons Lotivio selon votre fonctionnement. Vous définissez vos besoins avec nous ; nous prenons en charge les connexions et les réglages.</p>
       </div>
 
       <!-- S07.1 · Atelier : la carte de fonctionnement de l'agence se dessine -->
@@ -83,8 +85,8 @@ const curveR = (y: number) => `M260 ${y}C228 ${y} 228 124 216 124`;
             </div>
           </div>
         </div>
-        <h3>On part de votre quotidien</h3>
-        <p>D’où viennent vos demandes ? Qui répond, qui relance ? Nous définissons le fonctionnement de Lotivio avec votre équipe.</p>
+        <h3>Votre façon de travailler devient notre point de départ.</h3>
+        <p>Nous regardons comment votre équipe reçoit, qualifie et relance ses contacts. Ensemble, nous identifions les tâches à simplifier et les étapes à automatiser pour concentrer la mise en place sur ce qui vous sera utile.</p>
       </article>
 
       <!-- S07.2 · Branchements : chaque canal se connecte, dans le bon sens -->
@@ -132,8 +134,8 @@ const curveR = (y: number) => `M260 ${y}C228 ${y} 228 124 216 124`;
             </div>
           </div>
         </div>
-        <h3>Vos outils, connectés</h3>
-        <p>Portails, site, Meta Ads, WhatsApp professionnel et envoi via Outlook : nous configurons les connexions utiles à votre agence.</p>
+        <h3>Retrouvez vos contacts. Connectez vos canaux.</h3>
+        <p>Nous importons votre base de contacts et configurons les connexions utiles à votre agence : portails, site, Meta Ads, WhatsApp professionnel et envoi d’e-mails. Vous retrouvez vos contacts existants et vos nouvelles demandes dans le même environnement.</p>
       </article>
 
       <!-- S07.3 · Parcours : l'agence choisit ce qui part seul et ce que l'agent valide -->
@@ -168,51 +170,13 @@ const curveR = (y: number) => `M260 ${y}C228 ${y} 228 124 216 124`;
             </div>
           </div>
         </div>
-        <h3>Vous décidez du suivi</h3>
-        <p>Premier contact, envoi de brochure, relance : nous définissons avec vous ce qui part automatiquement et ce que l’agent valide.</p>
-      </article>
-
-      <!-- S07.4 · Assistant : la réponse s'appuie sur la fiche projet et les consignes -->
-      <article class="oc" data-bloc="S07.4"><pre class="tex ctex" data-src={tex[0]} data-w=".38" data-r=".95" aria-hidden="true"></pre>
-        <span class="nb">4</span>
-        <div class="ill" aria-hidden="true">
-          <div class="il il4" data-steps="300,1400,2100,3600,5000" data-loop="9000">
-            <div class="t t-doc">
-              <span class="ilb">Fiche projet</span>
-              <div class="scn doc4">
-                <b class="pj">Les Terrasses du Vignoble</b>
-                <span class="scan"></span>
-                <span class="lot"><b>A2</b>4.5 p.<em class="x">Vendu</em></span>
-                <span class="lot hit"><b>B4</b>3.5 p.<em class="y">Disponible</em></span>
-                <span class="lot"><b>C1</b>2.5 p.<em class="z">Réservé</em></span>
-              </div>
-            </div>
-            <div class="t t-rules">
-              <span class="ilb">Consignes</span>
-              <div class="scn rules">
-                <span class="ru r1"><em class="ok"><Fragment set:html={ico.check} /></em>Vouvoyer</span>
-                <span class="ru r2"><em class="ok"><Fragment set:html={ico.check} /></em>Prix si demandé</span>
-                <span class="ru r3"><em class="ok"><Fragment set:html={ico.check} /></em>Visite le samedi</span>
-              </div>
-            </div>
-            <div class="t t-chat">
-              <div class="t-h"><span class="ilb">Conversation</span><span class="live"><img src="/media/logos/whatsapp.svg" alt="" width="12" height="12" />Démo</span></div>
-              <div class="scn chat4">
-                <span class="bq">Le lot B4 est-il encore disponible ?</span>
-                <span class="typ"><i></i><i></i><i></i></span>
-                <span class="ba">Oui, le lot B4 (3.5 pièces) est disponible. Souhaitez-vous le visiter samedi matin ?</span>
-                <span class="srcx"><i></i>Source : fiche projet · lot B4</span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <h3>L’IA connaît vos projets</h3>
-        <p>Nous réglons l’assistant avec vos fiches projet, votre ton et vos consignes. Ses réponses s’appuient sur les informations de l’agence.</p>
+        <h3>Déléguez des tâches. Gardez la main sur la relation.</h3>
+        <p>Nous réglons les automatismes avec vous : ce qui peut partir seul, ce que l’agent valide et quand il intervient. Votre assistant IA s’appuie sur vos fiches projet, votre ton et vos consignes pour accompagner le suivi.</p>
       </article>
 
       <!-- S07.5 · Mise en route : import, équipe en ligne, première demande prise en charge -->
       <article class="oc" data-bloc="S07.5"><pre class="tex ctex" data-src={tex[1]} data-w=".38" data-r=".95" aria-hidden="true"></pre>
-        <span class="nb">5</span>
+        <span class="nb">4</span>
         <div class="ill" aria-hidden="true">
           <div class="il il5" data-steps="300,600,2900,3500,4800,6000" data-loop="9000">
             <div class="t t-imp">
@@ -241,10 +205,12 @@ const curveR = (y: number) => `M260 ${y}C228 ${y} 228 124 216 124`;
             </div>
           </div>
         </div>
-        <h3>Vos agents prennent la main</h3>
-        <p>Import des contacts et prise en main sur vos projets : l’équipe apprend à traiter ses demandes et à retrouver son suivi.</p>
+        <h3>Prenez la main sur vos propres projets.</h3>
+        <p>Votre équipe apprend à utiliser Lotivio avec ses biens et ses situations du quotidien. Traiter une demande, retrouver un acheteur, préparer une relance : nous vous accompagnons dans la prise en main pour que chacun sache comment l’utiliser.</p>
       </article>
     </div>
   </div>
   <div class="swipe" aria-hidden="true"><i><b></b><b></b><b></b></i>Faire glisser</div>
 </section>
+<div class="par-end hs-end" data-bloc="S07.6"><a class="par-btn" href="#demo">Parlons de votre mise en place<span aria-hidden="true">↗</span></a></div>
+
