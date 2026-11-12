@@ -15,6 +15,35 @@ Format d'une entrée :
 
 ---
 
+
+
+## 2026-11-12 — Section « Sur mesure » (S02 + S03) : nouveaux textes et illustration « mise en place »
+- Décision :
+  - S02 : étiquette « Sur mesure ». Titre : « Votre façon de vendre. / Un CRM configuré pour la suivre. » (2e ligne en ton atténué). Introduction : « Qui reçoit les demandes ? Comment envoyez-vous les brochures ? Quand l'agent reprend-il la conversation ? Nous partons de votre fonctionnement pour installer Lotivio autour de votre équipe, de vos projets et de vos canaux. »
+  - S03 : les trois cartes, sous les fils, reprennent les trois blocs de Diego : « Vos habitudes deviennent le point de départ. », « Votre assistant IA, à vos côtés au quotidien. », « La mise en place se fait avec vous. » Les boutons de chaque carte sont remplacés par un seul bouton sous les cartes, « Parlons du fonctionnement de votre agence ↗ » (vers #demo).
+  - Carte 3 : nouvelle illustration « mise en place » dans les deux variantes, BD et trait (GPT Image 2.5, 2 images, coût inconnu). Les illustrations « dictée » ne sont plus utilisées sur le site.
+  - Le paragraphe « Lotivio réunit… » (11.11) est remplacé (archives : proofs/archive/S02Temps-v2-enbref.astro, S03Produit-v3-cartes-fonctions.astro).
+- Raison : textes fournis par Diego.
+- À vérifier : « import des contacts » ne figure pas dans la liste des capacités vérifiées (PROJECT.md). Il est vrai s'il s'agit d'un service fait par l'équipe à la mise en place.
+- Statut : décidée (textes de Diego) ; illustrations : variante A ou B à choisir.
+- Source : message de Diego, 12 novembre 2026.
+
+## 2026-11-12 — Hero : nouveau texte, « Jusqu'à 5 heures gagnées par semaine »
+- Décision :
+  - Titre : « Jusqu'à 5 heures gagnées par semaine. / Plus de temps pour vendre vos biens. » (2e ligne en taupe).
+  - Sous-titre : « Centralisez vos demandes, simplifiez la qualification de vos prospects et sachez qui relancer. Identifiez les canaux qui vous apportent des acheteurs et gérez la diffusion de vos biens au même endroit. »
+  - Bloc bas gauche : étiquette « /mise en place/ » (au lieu de « /en bref/ »), texte « Nous installons et configurons Lotivio selon votre façon de travailler. »
+- Raison : textes fournis par Diego.
+- Remplace / modifie :
+  - le titre « Gardez le fil de chaque acheteur. » et son sous-titre (11.11) ;
+  - le chiffre autorisé le 9.11 (« jusqu'à 4 h par semaine et par agent »).
+- À trancher :
+  - S07B « Pourquoi maintenant ? » affiche encore « jusqu'à 4 h par semaine et par agent » : il faut aligner les deux chiffres ;
+  - aucune source écrite n'est encore jointe pour 4 h ni pour 5 h ;
+  - le hero ne précise plus « par agent ».
+- Statut : décidée (textes de Diego) ; cohérence du chiffre avec S07B : à trancher.
+- Source : message de Diego, 12 novembre 2026.
+
 ## 2026-11-11 — Footer : image en 4K plus lumineuse, grand « lotivio. » retiré
 - Décision :
   - L'image du crépuscule est conservée, agrandie en 4K (Higgsfield Upscale, job 63059e00, 2 crédits), puis éclaircie en local sans bandes.

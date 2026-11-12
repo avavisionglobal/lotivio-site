@@ -2,7 +2,7 @@
    S03 · Ce que Lotivio fait (réf. capture « AI solutions… », 11.11.2026)
    Suite de la section sombre S02 : fils qui se divisent, trois cartes claires.
    ================================================================= */
-.lf{background:#17130F;color:#F3EEE6;padding:0 var(--pad) clamp(110px,11vw,160px)}
+.lf{position:relative;background:#17130F;color:#F3EEE6;padding:0 var(--pad) clamp(110px,11vw,160px);margin-top:-1px} /* -1px : pas de liseré entre S02 et S03 */
 .lf-in{max-width:1200px;margin:0 auto}
 .lf-fork{display:block;width:100%;height:auto;overflow:visible}
 .lf-w{stroke-width:1.6;stroke-dasharray:1 0}
@@ -11,6 +11,8 @@
 .lf-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:2px}
 .lf-card{display:flex;flex-direction:column;background:#F4F3F1;color:var(--ink);padding:28px 24px 24px}
 .lf-card p{flex:1}
+.lf-end{display:flex;justify-content:center;margin-top:48px}
+
 .lf-art{position:relative;aspect-ratio:3/2;margin:-28px -24px 24px;overflow:hidden;background:#F1F0EE}
 .lf-art img{display:block;width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--ease)}
 .lf-art .v-b{display:none}
@@ -45,3 +47,9 @@
   .lf{padding-top:8px}
   .lf-card{min-height:0}
 }
+
+/* Bouton unique sous les cartes (blanc sur fond sombre) */
+.lf-end .lf-btn{margin-top:0;font-size:14px;padding:5px 5px 5px 16px;background:#fff;color:var(--ink)}
+.lf-end .lf-btn span{width:30px;height:30px;background:var(--ink);color:#fff}
+.lf-end .lf-btn:hover{background:var(--orange);color:#fff}
+.lf-card{padding-bottom:30px}

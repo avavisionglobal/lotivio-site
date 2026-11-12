@@ -1,0 +1,71 @@
+---
+// S03 · Ce que Lotivio fait (réf. « AI solutions built for every enterprise team », capture de Diego du 11.11.2026).
+// Sous le paragraphe de S02 : des fils partent d'un point, se divisent vers trois cartes claires.
+// Chaque carte : illustration (deux variantes à choisir), titre, texte, petit bouton.
+// Contenus repris de la version précédente (proofs/archive/S03Produit-v1-bento.astro).
+import '../styles/s03-fait.css';
+
+/* ---------- Illustrations : deux variantes (lot assets/illustrations/2026-11-11-s03-cartes, GPT Image 2.5) ----------
+   A « BD » (ligne claire) par défaut ; B « Circuit au trait » avec ?illu=trait dans l'adresse.
+   La variante isométrique en points précédente : proofs/archive/S03Produit-v2-iso.astro */
+const art = (id: string) => ({
+  a: { src: `/media/s03/${id[0]}-bd-900.webp`, set: `/media/s03/${id[0]}-bd-640.webp 640w, /media/s03/${id[0]}-bd-760.webp 760w, /media/s03/${id[0]}-bd-900.webp 900w` },
+  b: { src: `/media/s03/${id[1]}-trait-900.webp`, set: `/media/s03/${id[1]}-trait-640.webp 640w, /media/s03/${id[1]}-trait-760.webp 760w, /media/s03/${id[1]}-trait-900.webp 900w` },
+});
+
+const cards = [
+  {
+    bloc: 'S03.1', title: 'Demandes reçues', href: '#parcours', cta: 'Voir le parcours',
+    text: 'Portails, Meta Ads, votre site : chaque demande arrive avec sa source, le bien et les critères de l’acheteur. Sans copier-coller.',
+    alt: 'Une agente à son bureau ; les demandes des portails et du site arrivent dans un seul bac', art: art(['A1-demandes', 'B1-demandes']),
+  },
+  {
+    bloc: 'S03.2', title: 'Assistant WhatsApp', href: '#ia', cta: 'Voir l’IA',
+    text: 'Pour vos leads Meta Ads, la brochure part sur WhatsApp, l’assistant pose les questions et la fiche se remplit.',
+    alt: 'Le soir, une prospecte reçoit la brochure et échange sur son téléphone', art: art(['A2-whatsapp', 'B2-whatsapp']),
+  },
+  {
+    bloc: 'S03.3', title: 'Dictée vocale', href: '#demo', cta: 'Réserver une démo',
+    text: 'En sortant d’une visite, l’agent dicte. Intérêt, budget, relance : il relit et valide avant d’enregistrer.',
+    alt: 'Un agent sort d’une visite et dicte son compte rendu ; une liste se coche', art: art(['A3-dictee', 'B3-dictee']),
+  },
+];
+
+// Fils : un point de départ au centre, quatre arrivées (carte 1, deux sur la carte 2, carte 3).
+const W = 1200, H = 190, ends = [0.162, 0.397, 0.603, 0.838].map((f) => f * W);
+const fork = [
+  `M600 0 C600 70 560 86 500 98 L${ends[0] + 56} 150 Q${ends[0]} 162 ${ends[0]} ${H - 6}`,
+  `M600 0 C600 84 ${ends[1]} 96 ${ends[1]} ${H - 6}`,
+  `M600 0 C600 84 ${ends[2]} 96 ${ends[2]} ${H - 6}`,
+  `M600 0 C600 70 640 86 700 98 L${ends[3] - 56} 150 Q${ends[3]} 162 ${ends[3]} ${H - 6}`,
+];
+---
+<!-- S03 · Ce que Lotivio fait -->
+<section class="lf" id="s03" aria-label="Ce que Lotivio fait">
+  <div class="lf-in">
+    <svg class="lf-fork" viewBox={`0 0 ${W} ${H}`} width={W} height={H} fill="none" aria-hidden="true" data-reveal>
+      <defs><linearGradient id="lf-g" x1="0" y1="0" x2="0" y2={H} gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#F3EEE6" stop-opacity="0" /><stop offset=".45" stop-color="#F3EEE6" stop-opacity=".45" /><stop offset="1" stop-color="#F3EEE6" stop-opacity=".95" /></linearGradient></defs>
+      {fork.map((d, i) => <path class="lf-w" d={d} stroke="url(#lf-g)" pathLength="1" style={`--i:${i}`} />)}
+      {fork.map((d, i) => <path class="lf-p" d={d} pathLength="100" style={`--i:${i}`} />)}
+      {ends.map((x, i) => <circle class="lf-dot" cx={x} cy={H - 6} r="4.5" style={`--i:${i}`} />)}
+    </svg>
+    <div class="lf-cards" data-stagger>
+      {cards.map((c) => (
+        <article class="lf-card" data-bloc={c.bloc}>
+          <div class="lf-art">
+            <img class="v-a" src={c.art.a.src} srcset={c.art.a.set} sizes="(max-width: 1000px) min(92vw, 520px), 400px" width="900" height="600" alt={c.alt} loading="lazy" decoding="async" />
+            <img class="v-b" src={c.art.b.src} srcset={c.art.b.set} sizes="(max-width: 1000px) min(92vw, 520px), 400px" width="900" height="600" alt={c.alt} loading="lazy" decoding="async" />
+          </div>
+          <h3>{c.title}</h3>
+          <p>{c.text}</p>
+          <a class="lf-btn" href={c.href}>{c.cta}<span aria-hidden="true">↗</span></a>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+<script>
+  // Choix de la variante d'illustration par l'adresse : ?illu=trait (B) ; par défaut, la BD (A).
+  const v = new URLSearchParams(location.search).get('illu');
+  if (v === 'trait' || v === 'b') document.getElementById('s03')?.setAttribute('data-illu', 'b');
+</script>

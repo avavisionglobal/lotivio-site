@@ -1,7 +1,8 @@
 ---
-// S03 · Ce que Lotivio fait (réf. « AI solutions built for every enterprise team », capture de Diego du 11.11.2026).
+// S03 · Sur mesure, les trois engagements (réf. « AI solutions built for every enterprise team », capture de Diego du 11.11.2026).
+// Textes de Diego du 12.11.2026. Version « Demandes / WhatsApp / Dictée » : proofs/archive/S03Produit-v3-cartes-fonctions.astro
 // Sous le paragraphe de S02 : des fils partent d'un point, se divisent vers trois cartes claires.
-// Chaque carte : illustration (deux variantes à choisir), titre, texte, petit bouton.
+// Chaque carte : illustration (deux variantes à choisir), titre, texte ; un seul bouton sous les cartes.
 // Contenus repris de la version précédente (proofs/archive/S03Produit-v1-bento.astro).
 import '../styles/s03-fait.css';
 
@@ -15,19 +16,19 @@ const art = (id: string) => ({
 
 const cards = [
   {
-    bloc: 'S03.1', title: 'Demandes reçues', href: '#parcours', cta: 'Voir le parcours',
-    text: 'Portails, Meta Ads, votre site : chaque demande arrive avec sa source, le bien et les critères de l’acheteur. Sans copier-coller.',
+    bloc: 'S03.1', title: 'Vos habitudes deviennent le point de départ.',
+    text: 'Nous définissons avec vous le parcours d’une demande, du premier contact à la relance. Les connexions et les réglages répondent à votre organisation.',
     alt: 'Une agente à son bureau ; les demandes des portails et du site arrivent dans un seul bac', art: art(['A1-demandes', 'B1-demandes']),
   },
   {
-    bloc: 'S03.2', title: 'Assistant WhatsApp', href: '#ia', cta: 'Voir l’IA',
-    text: 'Pour vos leads Meta Ads, la brochure part sur WhatsApp, l’assistant pose les questions et la fiche se remplit.',
+    bloc: 'S03.2', title: 'Votre assistant IA, à vos côtés au quotidien.',
+    text: 'Qualification de vos leads Meta Ads sur WhatsApp, préparation de vos comptes rendus dictés, rédaction de vos descriptions de biens : votre assistant IA automatise les tâches répétitives et vous aide à préparer la suite. Moins de saisie et de rédaction, plus de temps pour vos clients.',
     alt: 'Le soir, une prospecte reçoit la brochure et échange sur son téléphone', art: art(['A2-whatsapp', 'B2-whatsapp']),
   },
   {
-    bloc: 'S03.3', title: 'Dictée vocale', href: '#demo', cta: 'Réserver une démo',
-    text: 'En sortant d’une visite, l’agent dicte. Intérêt, budget, relance : il relit et valide avant d’enregistrer.',
-    alt: 'Un agent sort d’une visite et dicte son compte rendu ; une liste se coche', art: art(['A3-dictee', 'B3-dictee']),
+    bloc: 'S03.3', title: 'La mise en place se fait avec vous.',
+    text: 'Connexion des canaux, import des contacts, configuration et prise en main : nous accompagnons votre équipe sur ses propres projets.',
+    alt: 'Réunion de mise en place : une conseillère et l’équipe de l’agence autour d’un ordinateur', art: art(['A4-miseenplace', 'B4-miseenplace']),
   },
 ];
 
@@ -41,7 +42,7 @@ const fork = [
 ];
 ---
 <!-- S03 · Ce que Lotivio fait -->
-<section class="lf" id="s03" aria-label="Ce que Lotivio fait">
+<section class="lf" id="s03" aria-label="Lotivio configuré pour votre agence">
   <div class="lf-in">
     <svg class="lf-fork" viewBox={`0 0 ${W} ${H}`} width={W} height={H} fill="none" aria-hidden="true" data-reveal>
       <defs><linearGradient id="lf-g" x1="0" y1="0" x2="0" y2={H} gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#F3EEE6" stop-opacity="0" /><stop offset=".45" stop-color="#F3EEE6" stop-opacity=".45" /><stop offset="1" stop-color="#F3EEE6" stop-opacity=".95" /></linearGradient></defs>
@@ -58,10 +59,10 @@ const fork = [
           </div>
           <h3>{c.title}</h3>
           <p>{c.text}</p>
-          <a class="lf-btn" href={c.href}>{c.cta}<span aria-hidden="true">↗</span></a>
         </article>
       ))}
     </div>
+    <div class="lf-end" data-bloc="S03.4"><a class="lf-btn lf-btn-l" href="#demo">Parlons du fonctionnement de votre agence<span aria-hidden="true">↗</span></a></div>
   </div>
 </section>
 <script>

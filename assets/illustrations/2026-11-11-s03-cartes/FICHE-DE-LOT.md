@@ -26,3 +26,13 @@
 - Intégration : S03, variante A par défaut, variante B avec `?illu=trait`.
 
 Statut : livré en local, choix de la variante attendu de Diego.
+
+## Complément du 12.11.2026 : carte « La mise en place se fait avec vous »
+
+- 2 images générées, une par variante, 1536 × 1024 :
+  - `A4-miseenplace-bd-gpt-v01.png` ;
+  - `B4-miseenplace-trait-gpt-v01.png`.
+- Prompts : `prompts-gpt-v2.jsonl`. Planche de revue : `PLANCHE-mise-en-place.jpg`.
+- Même modèle demandé (`gpt-image-2.5-sunburst`, qualité medium). Identifiants et coût : inconnus.
+- Contrôle : aucun texte, aucun logo. Le tableau mural ne contient que des pictogrammes.
+- Les images A3 et B3 (dictée) ne sont plus utilisées sur le site : exports retirés de `public/media/s03/`, originaux conservés dans `generated/`.
