@@ -124,9 +124,18 @@ async function init() {
     setH();
     ScrollTrigger.addEventListener('refreshInit', setH);
     const tween = gsap.to(track, { x: () => -dist(), ease: 'none', scrollTrigger: { trigger: sec, start: 'top top', end: 'bottom bottom', scrub: true, invalidateOnRefresh: true } });
-    // Chaque carte arrive légèrement inclinée et se redresse.
+    // Chaque carte arrive légèrement inclinée et se redresse. Elle doit être droite au plus tard quand la piste
+    // s'arrête : la dernière carte ne passe jamais le repère des 60 %, sa fin est donc ramenée à sa position finale.
+    const finalLeft = (card: HTMLElement) =>
+      card.getBoundingClientRect().left - track.getBoundingClientRect().left + (track.parentElement?.getBoundingClientRect().left ?? 0) - dist();
     $$('.oc', track).forEach((card) => {
-      gsap.from(card, { rotate: 3, y: 50, scale: 0.95, ease: 'none', scrollTrigger: { trigger: card, containerAnimation: tween, start: 'left right', end: 'left 60%', scrub: true } });
+      gsap.from(card, {
+        rotate: 3, y: 50, scale: 0.95, ease: 'none',
+        scrollTrigger: {
+          trigger: card, containerAnimation: tween, start: 'left right', scrub: true, invalidateOnRefresh: true,
+          end: () => `left ${Math.max(innerWidth * 0.6, finalLeft(card) + 8)}px`,
+        },
+      });
     });
     return () => { ScrollTrigger.removeEventListener('refreshInit', setH); sec.style.height = ''; };
   });

@@ -15,6 +15,161 @@ Format d'une entrée :
 
 ---
 
+## 2026-11-12 — Démo interactive sur l'accueil, en lead magnet ; « Tester le produit » remplace le film
+- Décision :
+  - La démo (S05B) entre dans la page d'accueil, après le Parcours (#essai). Elle reste floutée derrière un formulaire : prénom, nom, e-mail professionnel, téléphone, accord de contact (lien Confidentialité). La démo démarre à l'envoi (« Bienvenue {prénom} ») ; un visiteur déjà inscrit y accède directement (mémoire du navigateur).
+  - Envoi : le navigateur appelle /api/lead (fonction Vercel api/lead.ts, branchée sur le serveur de dev en local). Validation côté serveur, champ piège et délai minimal contre les robots, puis transmission au webhook Lotivio /api/webhooks/lead (source site_web) avec la clé de l'organisation, gardée côté serveur. Sans les variables LOTIVIO_LEAD_URL / LOTIVIO_LEAD_KEY / LOTIVIO_ORG_ID, rien n'est transmis (mode essai). Une panne du webhook n'empêche pas le visiteur d'accéder à la démo ; elle est journalisée sans données personnelles en clair.
+  - « Voir le film · 1 min » (premier écran) et « Voir le film » (section Démo) deviennent « Tester le produit » → #essai ; le film n'est plus chargé sur la page. Lien « Tester le produit » ajouté au menu.
+- À décider avant la mise en ligne : l'organisation Lotivio qui reçoit ces leads et sa clé webhook (variables Vercel, Production uniquement). Le webhook envoie automatiquement un WhatsApp de bienvenue aux nouveaux contacts avec téléphone : à accepter ou à couper pour ces leads. Vérifier sur une Preview que Vercel sert bien /api/lead avec le projet Astro statique.
+- Raison : demande de Diego (« mettre ça en ligne en lead magnet : les gens doivent entrer e-mail, téléphone, nom et prénom » ; « voir le film : plutôt tester le produit, partout »).
+- Statut : implémenté en local, non publié.
+- Source : messages de Diego, 12 novembre 2026.
+
+## 2026-11-12 — Démo guidée, étape 4.1 : rapport business
+- Décision : la Vue d'ensemble devient « Rapport de commercialisation » (Les Vergers, 90 jours) :
+  - 5 indicateurs cliquables (le calcul s'affiche) : Budget marketing CHF 12'590 · Demandes 42 (2,3 par lot, 3,2 par semaine) · Coût par demande CHF 300 · Demandes par rendez-vous 3,5 (12 visites, CHF 1'049 par visite) · Coût par acquisition CHF 1'574 (8 acheteurs réservés ou vendus, 0,17 % du prix moyen d'un lot).
+  - « Provenance et conversion » gardée, avec deux colonnes en plus : budget et coût par demande par canal ; un clic sur un canal donne son coût par demande et par acheteur.
+  - « Ce qui se vend » (lots par type) est retiré, remplacé par « Marché et prix » : vélocité de vente (64 j par lot contre 92 j pour le marché, 1,6 lot par mois), prix obtenu (CHF 8'050/m² contre 7'600 pour le marché, +6 %), taux de demande (2,3 demandes par lot).
+  - Gestes guidés : « Coût par acquisition », puis la ligne « Meta Ads ».
+- Tous les chiffres sont fictifs (démo).
+- Ce qui existe dans l'app (vérifié le 12.11.2026 dans ava-crm) : dépense Meta par projet et CPL / CPL qualifié (meta-spend-report.tsx, sync des dépenses via l'API Meta) ; vélocité de vente par projet et par typologie (lot-status-history.ts) ; statistiques marché anonymes par canton, dès 3 agences (market-stats.ts, médiane de prix au m², délai de vente). Ce qui n'existe pas tel quel : un budget global incluant Google Ads et les coûts des portails, le coût par acquisition et les demandes par rendez-vous sur un seul écran de rapport.
+- Raison : demande de Diego (« un rapport plus business : vélocité du marché, prix, taux de demande, nombre de demandes par rendez-vous, coût par demande, coût par acquisition par rapport au budget marketing ; provenance et conversion à garder ; ce qui se vend, non »).
+- Version précédente archivée : proofs/archive/essai-v9-avant-rapport-business.ts.
+- Statut : proposition à valider.
+- Source : message de Diego, 12 novembre 2026.
+
+## 2026-11-12 — Démo guidée : l'acheteur de l'étape 2 arrive dans la gestion des leads
+- Décision :
+  - Thomas Rochat, l'acheteur qui fait le parcours de l'étape 2 (publicité → site → formulaire → WhatsApp ou e-mail), apparaît à l'étape 3 dans le tunnel, marqué « Nouveau », en tête de la colonne qui correspond à sa réponse : visite demandée → Demandes · À rappeler ; question → Demandes · Max en conversation ; 3 critères donnés → Qualifiés · Critères reçus ; pas intéressé → Demandes, reste dans la base ; e-mail → Demandes · Brochure ouverte. Sans étape 2 jouée : Demandes · Max en conversation.
+  - 3.1 « Tunnel de vente » : un seul geste guidé, cliquer sur Thomas (où il en est, prochaine action).
+  - 3.2 « Qui appeler en premier » : on clique sur l'en-tête de la colonne « Demandes » (« Qui appeler › ») et le classement s'ouvre (retour « ‹ Tunnel de vente »). Thomas y figure avec ce qu'il a répondu. Geste final : appeler Céline, en tête.
+- Raison : demande de Diego (« le même acheteur doit arriver dans la gestion des leads […] lorsqu'on clique dans Demandes, ça met le classement de qui appeler en premier »).
+- Version précédente archivée : proofs/archive/essai-v8-avant-lien-acheteur.ts.
+- Statut : proposition à valider.
+- Source : message de Diego, 12 novembre 2026.
+
+## 2026-11-12 — Démo guidée, étape 2 : sans l'exemple des portails
+- Décision : la sous-étape « Les portails » est retirée du parcours ; l'étape 2 montre uniquement l'exemple du site (2.1 Publicité et site, 2.2 La conversation). Le code de la sous-étape reste en place, non affiché.
+- Raison : demande de Diego (« supprime l'exemple portail, on montre uniquement l'exemple du site web »).
+- Statut : proposition à valider.
+- Source : message de Diego, 12 novembre 2026.
+
+## 2026-11-12 — Démo guidée, étape 1 : envoi de la brochure aux contacts matchés
+- Décision : après le matching, sous-étape 1.2 « Envoi de la brochure » : bouton « Envoyer la brochure aux 23 contacts » sur l'écran du matching → choix WhatsApp ou e-mail → l'IA rédige le message (texte qui s'écrit seul) → « Envoyer ». En WhatsApp, l'audience est de 14 contacts (accord WhatsApp).
+- Raison : demande de Diego (« ajoute quand même l'étape où on envoie par WhatsApp ou par e-mail la brochure aux contacts qui ont été matchés »).
+- À vérifier dans l'app : l'envoi groupé par WhatsApp n'existe pas dans le code au 11.11.2026 (voir l'entrée « campagne par e-mail ou WhatsApp »).
+- Statut : proposition à valider.
+- Source : message de Diego, 12 novembre 2026.
+
+## 2026-11-12 — Démo guidée, étape 1 simplifiée : publier, puis « Lancer le matching »
+- Décision : l'étape 1 n'a plus qu'une sous-étape. Importer la grille → générer la description avec l'IA → publier → le bouton « Lancer le matching » apparaît dans l'écran de la promotion publiée → résultat du matching (23 contacts de la base). Fin de l'étape. La sous-étape « Campagne » (e-mail ou WhatsApp, message par l'IA) sort du parcours guidé, et le bouton « Créer une campagne » n'est plus affiché sur l'écran du matching.
+- Raison : demande de Diego (« ça doit être simple et efficace […] une fois publié, il y a directement un bouton matching […] une fois le matching fait, c'est fini, pas besoin de montrer autre chose »).
+- Remplace / modifie : sous-étapes 1.1 La promotion, 1.2 Matching de la base, 1.3 Campagne. Version précédente archivée : proofs/archive/essai-v7-etape1-campagne.ts.
+- Statut : proposition à valider.
+- Source : message de Diego, 12 novembre 2026.
+
+## 2026-11-12 — « Qui appeler maintenant » rejoint l'étape 3 « Gestion des leads »
+- Décision : la sous-étape « Qui appeler maintenant » (classement) quitte l'étape 2 et devient 3.2, après le tunnel de vente (3.1). L'étape 2 « Aller chercher les acheteurs » compte trois sous-étapes : publicité et site, conversation, portails.
+- Raison : demande de Diego.
+- Statut : proposition à valider.
+- Source : message de Diego, 12 novembre 2026.
+
+## 2026-11-12 — Démo guidée : nouvel ordre des étapes, site parcouru, portails
+- Décision :
+  - Nouvel ordre : 1 Nouvelle promotion · 2 Aller chercher les acheteurs · 3 Gestion des leads (tunnel) · 4 Rapport. La qualification fait partie de l'étape 2.
+  - Étape 2 « Aller chercher les acheteurs » : 2.1 Publicité et site (la page de la promotion défile lentement : projet, galerie, appartements, situation, puis formulaire ; le visiteur clique dans le formulaire, qui se remplit champ par champ ; choix WhatsApp ou e-mail ; envoi) · 2.2 La conversation (WhatsApp ou e-mail) · 2.3 Les portails (chemin classique : annonce sur un portail générique, « Contacter l'annonceur », la demande Homegate arrive seule en tête des leads, avec sa source) · 2.4 Qui appeler maintenant.
+- Raison : retour de Diego (« il faut vraiment qu'on voie qu'il arrive sur le site, qu'il scrolle un moment puis qu'il remplisse le formulaire » ; « l'objectif c'est de montrer les étapes de comment un prospect réagit avec Lotivio : nouvelle promotion, aller chercher les acheteurs, la qualification, puis la gestion des leads […] je montrerais aussi simplement les portails, les chemins classiques »).
+- Formulation des portails : « arrivent seules dans Lotivio » (claims gate : jamais « plus aucune saisie »).
+- Remplace / modifie : ordre 1 Promotion · 2 Gestion des leads · 3 Qualification. Version précédente archivée : proofs/archive/essai-v6-avant-reordre.ts.
+- Statut : proposition à valider.
+- Source : message de Diego, 12 novembre 2026.
+
+## 2026-11-12 — Démo guidée, étape 3 : le parcours vu par l'acheteur
+- Décision : l'étape 3 « Qualification » commence du côté de l'acheteur, dans le téléphone :
+  - 3.1 « Côté acheteur » : la publicité des Vergers dans un fil social (maquette générique, sans marque) → « En savoir plus » → page de la promotion sur le site (agence-demo.ch/les-vergers) → formulaire « Recevoir la brochure » avec le choix WhatsApp ou e-mail → confirmation ; la demande arrive dans Lotivio (fiche de Thomas, source « Publicité → formulaire du site »).
+  - 3.2 « La conversation » suit le choix : WhatsApp (Max envoie la brochure, demande si le bien intéresse, réponses rapides) ou e-mail (boîte de réception → e-mail de l'agente → « Voir la brochure » → l'ouverture remonte dans la fiche : « Brochure consultée »).
+  - 3.3 « Qui appeler maintenant » : inchangé ; la ligne de Thomas reprend le canal choisi.
+- Chiffre « jusqu'à 10 fois plus de trafic que les portails » : non affiché (claims gate : aucun chiffre sans source écrite). Le texte dit « Les campagnes Meta et Google amènent bien plus de demandes que les portails ». À remplacer par le chiffre si Diego fournit une source écrite (par exemple la mesure Roccabella août–octobre 2026, qui porte sur le coût par contact, pas sur le volume).
+- À vérifier dans l'app : Max (WhatsApp) ne traite aujourd'hui que les leads Meta Ads (formulaire de la publicité) ; ici la demande passe par le formulaire du site avec le choix du canal. L'envoi automatique de la brochure par e-mail n'existait pas au 5.10.2026 (docs/DEMO_WELCOME.md de l'app).
+- Raison : demande de Diego (« se mettre à la place de l'utilisateur de Facebook qui tombe sur une publicité […] il arrive sur le site, il remplit […] on peut choisir WhatsApp ou e-mail […] ça monte la conversation, puis on explique la qualification »).
+- Remplace / modifie : 3.1 « WhatsApp et brochure » devient 3.2 « La conversation ». Version précédente archivée : proofs/archive/essai-v5-avant-parcours-acheteur.ts.
+- Statut : proposition à valider.
+- Source : message de Diego, 12 novembre 2026.
+
+## 2026-11-12 — Démo guidée, étape 2 : Céline « À rappeler », pas « Qualifiée »
+- Décision : dans le tunnel de vente, Céline Favre passe de la colonne « Qualifiés » à « Demandes », avec la pastille « À rappeler » (brochure consultée 3 fois, pas encore qualifiée). Demandes 17, Qualifiés 13. Laura Girardin sort de l'affichage de la colonne (comptée dans « + autres »). Même traitement pour Pierre-Alain Droz (visite demandée sur WhatsApp) : pastille « À rappeler » au lieu de « RDV demandé ».
+- Raison : retour de Diego (« Céline a demandé trois fois la brochure, elle serait plus à rappeler […] pour moi ce n'est pas qualifié lorsque quelqu'un regarde trois fois la brochure »).
+- Statut : proposition à valider.
+- Source : message de Diego, 12 novembre 2026.
+
+## 2026-11-12 — Démo guidée, 3.2 simplifiée
+- Décision : Céline apparaît d'emblée en tête du classement avec « Brochure consultée 3× » (plus de simulation d'ouvertures). Un seul geste guidé : « Appeler » Céline. Le classement ne montre plus le score de matching ni la disqualification (Jan Meier retiré) ; le tri est retiré : le classement reste dans l'ordre de priorité (Diego : « et aussi priorité »).
+- Raison : demande de Diego (« supprime la simulation de Céline […] on perd du temps ; mets simplement en haut du classement brochure x3 ; ne présente pas le score de matching ni même disqualifier »).
+- Remplace / modifie : entrée « étape 3 : classement qui appeler maintenant » du même jour.
+- Statut : proposition à valider.
+- Source : message de Diego, 12 novembre 2026.
+
+## 2026-11-12 — Démo guidée, étape 3 : deux façons de qualifier, un classement « qui appeler maintenant »
+- Décision :
+  - 3.1 « WhatsApp et brochure » : inchangée (Max envoie la brochure, demande si le bien intéresse ; visite, question, ou 3 questions pour le portefeuille).
+  - 3.2 « Qui appeler maintenant » remplace « Approche 2 · clics brochure » et « Ce que ça donne » : un seul classement des leads de la promotion, avec pour chacun comment on le sait (WhatsApp ou brochure), le signal (RDV demandé, Critères reçus, Chaud, Numéro invalide), le meilleur score de matching, le téléphone et l'action (Appeler / Disqualifier). Tri par Priorité, Score matching ou Plus récents ; les lignes glissent à leur nouvelle place.
+  - Gestes guidés : Céline ouvre la brochure 2 fois (elle passe en « Chaud » et monte en tête) → tri par score matching → disqualifier Jan Meier (numéro invalide, WhatsApp non délivré) → retour au tri par priorité → appeler Céline.
+- Vérification : le statut « Disqualifié » existe (contacts) ; l'erreur Twilio 63024 « Numéro WhatsApp invalide » est connue de l'app (twilio-error-labels.ts). Le classement croisé (WhatsApp + brochure + RDV) sur un seul écran avec tri est une présentation : l'app a la liste Relance (priorisée par règles) et les signaux, pas cet écran exact.
+- Raison : demande de Diego (« simplifier et mettre en avant qu'on a plusieurs options pour qualifier les leads et savoir où téléphoner de suite […] un classement avec un tri […] disqualifier lorsque le numéro de téléphone n'est pas correct »).
+- Remplace / modifie : sous-étapes 3.2 et 3.3 de la V4 (archivées dans proofs/archive/essai-v4-etape3-relance.ts).
+- Statut : proposition à valider.
+- Source : message de Diego, 12 novembre 2026.
+
+## 2026-11-12 — Démo guidée, étape 2 : un seul écran, le tunnel de vente du projet
+- Décision : l'étape 2 « Gestion des leads » passe de deux sous-étapes (tri par onglets, arbre d'état avec trois promotions) à un seul écran : le tunnel de vente des Vergers en six colonnes (Demandes 16, Qualifiés 14, Visite 4, Réservation 2, Notaire 1, Vendu 5 ; total 42). Chaque personne est placée dans sa colonne, avec une pastille quand l'agent doit agir (Max en conversation, RDV demandé, À engager, Sans réponse, Chaud). Un clic sur une personne ouvre en bas sa position sur le tunnel, « Où il en est » et la prochaine action. Deux gestes guidés : Céline Favre, puis Pierre-Alain Droz (RDV demandé).
+- Raison : retour de Diego (« il y a trop de boutons et d'étapes, je me suis moi-même perdu ; il faut quelque chose de plus simple qui permet de visualiser sur un seul écran les leads du projet et où ils se trouvent dans le tunnel de vente »).
+- Remplace / modifie : sous-étapes 2.1 « Trier les demandes » et 2.2 « Arbre d'état » de la V4 (archivées dans proofs/archive/essai-v4-etape2-arbre.ts). Le lot réservé B3 devient B4 pour rester cohérent avec Céline (lot B3 visé à l'étape 3).
+- Statut : proposition à valider.
+- Source : message de Diego, 12 novembre 2026.
+
+## 2026-11-12 — Démo guidée : campagne par e-mail ou WhatsApp, textes rédigés par l'IA
+- Décision :
+  - Étape 1.3 « Campagne » : le canal se choisit (E-mail ou WhatsApp). En WhatsApp, l'audience devient « 14 contacts · accord WhatsApp » et l'aperçu montre le message avec la brochure et deux réponses rapides. La phrase « Les campagnes partent par e-mail. WhatsApp sert aux conversations de Max avec les leads Meta Ads. » est supprimée (demande de Diego).
+  - Bouton « Générer avec l'IA » là où l'agent écrit : description de la promotion (1.1, avant publication) et message de la campagne (1.3, objet compris pour l'e-mail). Le texte s'écrit lettre après lettre ; l'agent relit avant de publier ou d'envoyer.
+  - Parcours guidé 1.1 : importer la grille → générer la description → publier. 1.3 : créer la campagne → choisir le canal → générer le message → envoyer.
+- Vérification : la rédaction par l'IA existe dans l'app (brouillons de campagne, descriptions ; PROJECT.md, « Produit »). Les campagnes WhatsApp en masse n'existent pas dans le code au 11.11.2026 (campagnes = e-mail, Brevo ou boîte de l'agent) : fonction à développer avant de la présenter comme disponible hors démo ; l'envoi WhatsApp marketing demande l'accord du contact et un modèle approuvé.
+- Raison : demande de Diego (« il faut que le WhatsApp soit aussi une possibilité, et lors de l'écriture des textes […] on peut voir que l'on peut générer ceci avec l'IA »).
+- Statut : proposition à valider.
+- Source : message de Diego, 12 novembre 2026.
+
+## 2026-11-12 — « Essayez Lotivio » V4 : parcours guidé, le visiteur fait les gestes de l'agent
+- Décision :
+  - Le visiteur n'a plus à suivre une démonstration jouée par Diego : à chaque sous-étape, une consigne « À vous » au-dessus de l'app dit quoi faire, et un repère orange (anneau pulsé et étiquette) entoure l'élément à cliquer. Seul cet élément réagit ; un clic ailleurs fait vibrer le repère. À la fin d'une sous-étape, le bouton « Continuer · … » s'anime. « Passer » et la flèche arrière restent disponibles ; les étapes et sous-étapes sont cliquables. Après la dernière : exploration libre.
+  - Étape 3.1 réécrite selon Diego : Max envoie la brochure puis demande d'abord si le bien intéresse (« Je peux répondre à vos questions ou vous proposer une visite »). Le visiteur répond à la place du prospect avec des boutons de réponse sur le téléphone :
+    - « Je souhaite visiter » → Max transmet à l'agente → Bloqué · RDV demandé (l'agent reprend la main) ;
+    - « J'ai une question » → Max répond depuis la fiche projet, propose une visite ;
+    - « Pas vraiment » → Max envoie le lien du site, propose 3 questions (type, pièces, budget) pour trouver un bien du portefeuille → Qualifié, Préqualifié par l'IA, 2 biens d'autres promotions proposés ; ou « Non merci » → fin polie avec STOP.
+  - 3.3 « Ce que ça donne » reprend la réponse choisie pour Thomas.
+  - Étape 4.2 : le rapport devient le « Rapport au propriétaire » de la promotion (PDF par projet existant dans l'app : mandat, synthèse, évolution mensuelle, biens du mandat, communications).
+- À aligner dans l'app : le premier message réel de Max (src/lib/whatsapp-first-contact.ts, modèle WhatsApp pré-approuvé) envoie la brochure et demande directement les critères. Le scénario « intérêt d'abord, puis visite / question / portefeuille » est la demande de Diego : il faut adapter le modèle et le parcours de Max avant de le présenter comme le comportement du produit en dehors d'une démo.
+- Raison : retour de Diego sur la V3 (« il faut juste guider la personne qui clique […] lui dire où il clique […] une petite explication en haut » ; WhatsApp : « d'abord […] est-ce que vous êtes intéressé par ce bien, avez-vous des questions […] sinon proposer le lien du site ou une petite qualification […] dans notre portefeuille »).
+- Remplace / modifie : entrée V3 du même jour (lecture automatique). V3 archivée dans proofs/archive/essai-v3-auto.ts et s05-essai-v3-auto.css.
+- Statut : proposition à valider.
+- Source : message de Diego, 12 novembre 2026.
+
+## 2026-11-12 — « Essayez Lotivio » V3 : le parcours d'un agent sur une promotion, en 4 étapes
+- Décision :
+  - La V2 (visite libre en 7 chapitres) est remplacée par le parcours client d'un agent, étape par étape, joué dans la même réplique de l'app (page de travail /essai, scène orange).
+  - Bandeau des 4 étapes, sous-étapes avec barres de progression, légende par sous-étape. Chaque étape se joue seule puis s'arrête ; « Sous-étape suivante » / « Étape N » enchaîne. Précédent, pause, flèches du clavier. Un clic dans l'app = exploration libre.
+  - Étape 1 · Nouvelle promotion : 1.1 l'agent crée Les Vergers (Kerzers) et importe la grille des lots depuis un PDF (18 lots), publication et diffusion ; 1.2 matching avec la base (23 contacts au-dessus de 70) ; 1.3 campagne e-mail ciblée envoyée aux 23 contacts.
+  - Étape 2 · Gestion des leads : 2.1 tri des demandes par promotion et par état (Max en conversation, Bloqué · Question / RDV demandé, À engager, Qualifié, Sans réponse · relance automatique) ; 2.2 arbre d'état de chaque promotion active (Demandes → états → Qualifié → Visite → Réservation → Notaire → Vendu), trois promotions fictives (Les Vergers · Kerzers, Le Clos · Morat, Rive Sud · Estavayer).
+  - Étape 3 · Qualification : 3.1 approche agent WhatsApp (Max, lead Meta Ads : brochure, questions, critères, Qualifié, Préqualifié par l'IA, matching) ; 3.2 approche clics sur la brochure (Céline : 1×, 2×, 3× → « Chaud », remonte en tête des relances) ; 3.3 ce que ça donne (deux fiches : critères complets et lots proposés / intérêt prouvé, avec la prochaine action).
+  - Étape 4 · Rapport : 4.1 Vue d'ensemble filtrée sur Les Vergers (provenance et conversion par canal jusqu'aux acheteurs, lots vendus par type) ; 4.2 Rapport KPI Global 90 jours exporté en PDF (indicateurs, résultats par projet, funnel).
+- Vérifié dans le code de l'app (origin/main 5b7fbfa2, 11.11.2026) : états des demandes (lead-card.tsx), relance automatique (leads-timing.ts), modèles de rapports et export PDF (rapports-client.tsx), provenance par source (vue-ensemble/types.ts).
+- Écarts avec la demande, à trancher par Diego :
+  - Campagnes par WhatsApp : n'existent pas dans le code. Les campagnes partent par e-mail (Brevo ou boîte de l'agent) ; WhatsApp = conversations de Max avec les leads Meta Ads. L'écran le montre ainsi (WhatsApp grisé, avec l'explication).
+  - L'arbre d'état sur un seul schéma n'est pas un écran de l'app : il assemble les états de l'inbox Leads et les étapes du pipeline, filtrés par promotion.
+  - Le rapport PDF montré couvre l'agence avec une ligne par projet ; un filtre de rapport par promotion n'a pas été trouvé dans le code.
+- Raison : retour de Diego sur la V2 (« ce que je demande, c'est que l'on fasse le parcours client d'un agent immobilier d'une promotion step by step et que l'on regarde comment fonctionne Lotivio »), avec les 4 points : matching et campagnes, gestion des leads et arbre d'état, deux approches de qualification, rapport concret.
+- Remplace / modifie : entrée V2 du même jour. V2 archivée dans proofs/archive/*-v2-visite.*
+- Statut : proposition à valider.
+- Source : message de Diego, 12 novembre 2026.
+
 ## 2026-11-12 — « Essayez Lotivio » V2 : réplique de l'app en visite guidée et exploration libre
 - Décision :
   - La V1 en six étapes à valider une par une est remplacée par une réplique interactive de l'app, au langage de l'app réelle (DESIGN.md de ava-crm : sidebar noire, cartes blanches hairline, Archivo), dessinée en 1280 × 800 et réduite à la largeur de la page, sur une scène orange.
@@ -40,6 +195,45 @@ Format d'une entrée :
 - Remplace / modifie : rien (nouvelle section). Captation de leads dans la simulation : non, renvoi vers le formulaire existant.
 - Statut : proposition à valider.
 - Source : message de Diego, 12 novembre 2026.
+
+## 2026-11-12 — Accélérer l'indexation
+- Fait :
+  - fichier de validation Google Search Console publié (commit 6224fa6) ;
+  - clé IndexNow publiée (public/50c974ba67748c34533d024ac707c049.txt, commit 6641ac2) ; accueil et pages légales soumis à IndexNow (HTTP 202) ;
+  - déploiements faits depuis une copie propre du commit : la correction de la carte 4 (S07) et le travail de la page /essai restent en local.
+- Non abouti : redirection de lotivio-site.vercel.app vers lotivio.ch par vercel.json (règle par domaine non appliquée par Vercel). À faire dans Vercel → Domains → lotivio-site.vercel.app → Redirect 308 vers lotivio.ch ; règle à retirer de vercel.json au prochain déploiement. La canonique de la copie pointe déjà vers lotivio.ch.
+- À faire par Diego :
+  - Search Console : sitemap https://lotivio.ch/sitemap-index.xml et demande d'indexation de l'accueil ;
+  - Bing Webmaster Tools : import depuis Search Console ;
+  - liens vers lotivio.ch : fiche Google Business, page LinkedIn, sites Ava Vision / Contrast, annuaires suisses.
+- Statut : en cours.
+- Source : demande de Diego, 12 novembre 2026.
+
+---
+
+## 2026-11-12 — Mise en ligne sur lotivio.ch
+- Décision :
+  - La version locale (commit 0cf4a5d) est déployée en production sur le projet Vercel lotivio-site (équipe crm-real-estates-projects) par la ligne de commande.
+  - Adresse principale : https://lotivio.ch.
+  - www.lotivio.ch redirige en 308 vers lotivio.ch.
+  - DNS Infomaniak : A @ → 216.150.1.1 ; CNAME www → 116f91129c749363.vercel-dns-016.com.
+  - app.lotivio.ch (projet ava-crm) est inchangé.
+- Vérifié en ligne :
+  - HTTPS valide sur les deux adresses ; http → https ;
+  - pages légales, sitemap, robots.txt et favicon ; 404 en noindex ;
+  - cache d'un an sur /_astro, d'une semaine sur /media ; en-têtes de sécurité présents ; HTML compressé de 50 Ko.
+  - Lighthouse sur lotivio.ch :
+    - mobile : performance 99, accessibilité 96, bonnes pratiques 100, SEO 100 ;
+    - ordinateur : performance 100, accessibilité 96, bonnes pratiques 100, SEO 100.
+- Restent ouverts :
+  - formulaire de démo sans destination (affiche « bientôt disponible ») ;
+  - IDE et forme juridique dans les mentions légales ;
+  - commit non poussé sur GitHub (identifiant git local « lotivioldo » refusé sur avavisionglobal/lotivio-site) ;
+  - projet Vercel non relié à Git (déploiements manuels).
+- Statut : décidée.
+- Source : demande de Diego, 12 novembre 2026 (« pousser la dernière version locale en prod »).
+
+---
 
 ## 2026-11-12 — SEO technique, vitesse et pages légales avant la mise en ligne
 - Décision : aucun texte du site n'est modifié. Changements techniques :
