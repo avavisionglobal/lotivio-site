@@ -1,0 +1,55 @@
+/* =================================================================
+   S08 · Appel à l'action, v2 « DA Lotivio » (12.11.2026)
+   Carte gris chaud, trame de code sur les bords (loupe au survol), fils + impulsions orange vers le bouton.
+   ================================================================= */
+.cx{padding:clamp(80px,9vw,130px) var(--pad) 0}
+.cx-card{position:relative;max-width:1320px;margin:0 auto;border-radius:30px;overflow:hidden;isolation:isolate;background:var(--warm);
+  box-shadow:inset 0 0 0 1px var(--warm-line)}
+/* Trame de code : visible sur les bords, effacée au centre pour la lecture. */
+.cx-tex{z-index:-1;left:0;top:0;width:100%;color:#CFCBC2;opacity:.9;
+  mask-image:radial-gradient(58% 64% at 50% 46%,transparent 46%,#000 88%);-webkit-mask-image:radial-gradient(58% 64% at 50% 46%,transparent 46%,#000 88%)}
+.cx-in{position:relative;display:flex;flex-direction:column;align-items:center;text-align:center;padding:clamp(72px,8vw,112px) clamp(24px,5vw,72px) 44px}
+.cx-lab{display:inline-flex;align-items:center;gap:9px;font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--orange)}
+.cx-lab i{width:7px;height:7px;background:var(--orange);border-radius:1px}
+.cx-h{margin-top:26px;font-family:var(--disp);font-variation-settings:"wdth" 104;font-weight:500;font-size:clamp(34px,3.9vw,60px);line-height:1.02;letter-spacing:-.048em;max-width:17em;color:var(--ink);text-wrap:balance}
+.cx-h .g{display:block;color:var(--grey)}
+.cx-p{max-width:37em;margin-top:24px;font-size:16.5px;line-height:1.6;color:var(--muted);text-wrap:balance}
+.cx-pts{display:grid;grid-template-columns:repeat(3,1fr);width:100%;max-width:1000px;margin-top:clamp(48px,6vw,68px);border-top:1px solid var(--warm-line);border-bottom:1px solid var(--warm-line);background:rgba(247,246,243,.72)}
+.cx-pts>div{padding:30px 28px 28px;text-align:left}
+.cx-pts>div+div{border-left:1px solid var(--warm-line)}
+.cx-pts dt{display:flex;align-items:baseline;gap:10px;font-family:var(--disp);font-variation-settings:"wdth" 104;font-weight:500;font-size:clamp(28px,2.7vw,40px);letter-spacing:-.04em;line-height:1;color:var(--ink);white-space:nowrap}
+.cx-pts dt::before{content:"";flex:none;width:8px;height:8px;background:var(--orange);border-radius:1px;transform:translateY(-.35em)}
+.cx-pts dd{margin-top:14px;font-size:14px;line-height:1.5;color:var(--muted)}
+
+/* Le bouton est « branché » : deux fils amènent des impulsions orange jusqu'à lui. */
+.cx-go{display:flex;align-items:center;width:100%;max-width:1000px;margin-top:clamp(44px,5vw,60px)}
+.cx-wire{flex:1 1 0;min-width:0;width:auto;height:2px;overflow:visible}
+.cx-wire.r{transform:scaleX(-1)}
+.cx-wire .w{stroke:var(--warm-line);stroke-width:1.5;vector-effect:non-scaling-stroke;fill:none}
+.cx-wire .p{stroke:var(--orange);stroke-width:2;vector-effect:non-scaling-stroke;fill:none;stroke-linecap:round;stroke-dasharray:9 200;stroke-dashoffset:9;opacity:0}
+.cx-node{flex:none;width:9px;height:9px;border-radius:50%;background:var(--warm);box-shadow:inset 0 0 0 1.5px #C9C3B8;margin:0 10px}
+.cx-btn{flex:none;padding:15px 24px;font-size:15.5px}
+.cx-btn span{transition:transform .25s var(--ease)}
+.cx-btn:hover span{transform:rotate(45deg)}
+.cx-note{margin-top:26px;font-size:12px;color:var(--grey)}
+
+@keyframes cx-pulse{0%{opacity:1;stroke-dashoffset:9}80%{opacity:1}100%{opacity:0;stroke-dashoffset:-100}}
+@keyframes cx-node{0%,78%{box-shadow:inset 0 0 0 1.5px #C9C3B8;background:var(--warm)}84%{box-shadow:inset 0 0 0 1.5px var(--orange),0 0 0 5px rgba(235,110,44,.18);background:var(--orange)}100%{box-shadow:inset 0 0 0 1.5px #C9C3B8;background:var(--warm)}}
+@media (prefers-reduced-motion:no-preference){
+  .cx-card.in .cx-wire .p{animation:cx-pulse 2.6s cubic-bezier(.45,0,.2,1) infinite}
+  .cx-card.in .cx-wire.r .p{animation-delay:1.3s}
+  .cx-card.in .cx-node{animation:cx-node 2.6s linear infinite}
+  .cx-card.in .cx-node:last-of-type{animation-delay:1.3s}
+}
+
+@media (max-width:800px){
+  .cx-card{border-radius:22px}
+  .cx-tex{mask-image:linear-gradient(180deg,#000,transparent 22%,transparent 80%,#000);-webkit-mask-image:linear-gradient(180deg,#000,transparent 22%,transparent 80%,#000)}
+  .cx-pts{grid-template-columns:1fr;max-width:420px;border:0;background:none}
+  .cx-pts>div{padding:20px 0;border-top:1px solid var(--warm-line)}
+  .cx-pts>div+div{border-left:0}
+  .cx-pts>div:last-child{border-bottom:1px solid var(--warm-line)}
+  .cx-wire,.cx-node{display:none}
+  .cx-go{justify-content:center}
+}
+@media (max-width:520px){.cx{padding-left:12px;padding-right:12px}.cx-h{font-size:31px}.cx-p{font-size:15px}.cx-btn{white-space:normal;text-align:left}}

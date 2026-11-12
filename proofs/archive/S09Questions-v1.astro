@@ -1,0 +1,24 @@
+---
+const qa = [
+  ['Où sont stockées les données ?', "Dans l'Union européenne, à Francfort. Chaque agence est isolée des autres : un agent ne voit que les données de son organisation."],
+  ['Quels canaux peut-on connecter ?', 'Homegate, ImmoScout24, immobilier.ch, Properstar, Meta Lead Ads et le formulaire de votre site. Nous vérifions vos outils à la mise en place. La diffusion se configure par agence.'],
+  ['Lotivio lit-il mon WhatsApp personnel ?', "Non. Lotivio passe par un numéro WhatsApp professionnel de l'agence. Les conversations de ce numéro arrivent dans la fiche du contact."],
+  ['Qu’est-ce que l’IA fait à ma place ?', 'Max qualifie les leads Meta Ads sur WhatsApp avec leur consentement. Vous pouvez le mettre en pause. Pour la dictée, l’IA prépare un compte rendu que vous relisez et validez.'],
+  ['Mes e-mails sont-ils dans l’historique ?', 'Vos e-mails envoyés depuis Lotivio sont consignés dans le suivi. Vous pouvez les envoyer via Outlook ; les réponses reçues restent dans votre boîte Outlook.'],
+  ['Combien ça coûte ?', 'Une mise en place, puis un abonnement mensuel. Nous précisons les connexions et les réglages nécessaires à votre agence pour vous proposer un périmètre et un prix.'],
+];
+const ld = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: qa.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })) };
+---
+<!-- S09 · Questions (FAQ) -->
+<section class="sec" id="faq">
+  <div class="faq">
+    <div class="lab" data-scramble>Vos questions, avant de changer</div>
+    <div class="r">
+      <h2 class="h2 faq-h" data-flash>Votre agence.<span class="g">Vos questions.</span></h2>
+      {qa.map(([q, a], i) => (
+        <details open={i === 0} data-bloc={`S09.${i + 1}`} data-reveal><summary>{q}</summary><p>{a}</p></details>
+      ))}
+    </div>
+  </div>
+  <script type="application/ld+json" set:html={JSON.stringify(ld)} />
+</section>

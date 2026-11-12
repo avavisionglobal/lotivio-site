@@ -1,0 +1,30 @@
+---
+// S08 · Appel à l'action après la mise en place (réf. bloc « Essential Tools » de Synais, capture de Diego du 12.11.2026).
+// Grande carte arrondie sur fond de soie lumineuse (GPT Image 2.5, lot assets/cta/2026-11-12-fond-soie),
+// titre en deux tons, texte, trois points clés séparés par des filets, un bouton. Textes de Diego.
+import '../styles/s08-cta.css';
+const points = [
+  { v: 'Jusqu’à 5 h', t: 'gagnées par semaine.*' },
+  { v: '24 h/24', t: 'votre assistant IA peut qualifier vos leads Meta Ads sur WhatsApp, avec leur consentement.' },
+  { v: '1 seul espace', t: 'pour vos contacts, vos biens et votre suivi commercial.' },
+];
+---
+<!-- S08 · Appel à l'action -->
+<section class="cx" id="pourquoi-lotivio" data-bloc="S08">
+  <div class="cx-card" data-reveal>
+    <picture class="cx-bg" aria-hidden="true">
+      <source media="(max-width: 700px)" srcset="/media/cta/soie-900.webp" />
+      <img src="/media/cta/soie-1600.webp" alt="" width="1600" height="1067" loading="lazy" decoding="async" />
+    </picture>
+    <div class="cx-in">
+      <span class="cx-tag" data-bloc="S08.1"><svg width="10" height="10" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2v20M2 12h20M5 5l14 14M19 5L5 19" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg>Pourquoi Lotivio</span>
+      <h2 class="cx-h" data-bloc="S08.2" data-flash>Et si votre prochaine promotion<span class="dim">vous demandait moins de gestion&nbsp;?</span></h2>
+      <p class="cx-p" data-bloc="S08.3">Retrouver un contact, envoyer une brochure, préparer une relance : ces tâches prennent du temps à votre équipe. Lotivio centralise le suivi et automatise une partie du travail pour vous laisser plus de temps avec vos acheteurs.</p>
+      <dl class="cx-pts" data-bloc="S08.4">
+        {points.map((p) => <div><dt>{p.v}</dt><dd>{p.t}</dd></div>)}
+      </dl>
+      <a class="cx-btn magnet" href="#demo" data-bloc="S08.5">Découvrir Lotivio pour mon agence<span aria-hidden="true">↗</span></a>
+      <p class="cx-note">* Selon votre organisation et les canaux connectés.</p>
+    </div>
+  </div>
+</section>

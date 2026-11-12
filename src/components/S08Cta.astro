@@ -1,0 +1,34 @@
+---
+// S08 · Appel à l'action après la mise en place, version 2 « DA Lotivio » (12.11.2026).
+// La v1 (fond de soie) n'a pas plu à Diego : proofs/archive/S08Cta-v1-soie.astro.
+// Carte claire en gris chaud, trame de code tirée d'une résidence sur les bords (loupe au survol, src/scripts/texhover.ts),
+// deux fils qui amènent des impulsions orange jusqu'au bouton. Textes de Diego.
+import '../styles/s08-cta.css';
+const points = [
+  { v: 'Jusqu’à 5 h', t: 'gagnées par semaine.*' },
+  { v: '24 h/24', t: 'votre assistant IA peut qualifier vos leads Meta Ads sur WhatsApp, avec leur consentement.' },
+  { v: '1 seul espace', t: 'pour vos contacts, vos biens et votre suivi commercial.' },
+];
+---
+<!-- S08 · Appel à l'action -->
+<section class="cx" id="pourquoi-lotivio" data-bloc="S08">
+  <div class="cx-card" data-reveal>
+    <pre class="tex cx-tex" data-src="/media/residence-480.webp" data-w="1" data-r=".52" aria-hidden="true"></pre>
+    <div class="cx-in">
+      <span class="cx-lab" data-bloc="S08.1"><i aria-hidden="true"></i>Pourquoi Lotivio</span>
+      <h2 class="cx-h" data-bloc="S08.2" data-flash>Et si votre prochaine promotion<span class="g">vous demandait moins de gestion&nbsp;?</span></h2>
+      <p class="cx-p" data-bloc="S08.3">Retrouver un contact, envoyer une brochure, préparer une relance : ces tâches prennent du temps à votre équipe. Lotivio centralise le suivi et automatise une partie du travail pour vous laisser plus de temps avec vos acheteurs.</p>
+      <dl class="cx-pts" data-bloc="S08.4">
+        {points.map((p) => <div><dt>{p.v}</dt><dd>{p.t}</dd></div>)}
+      </dl>
+      <div class="cx-go" data-bloc="S08.5">
+        <svg class="cx-wire l" viewBox="0 0 400 2" preserveAspectRatio="none" aria-hidden="true"><path class="w" d="M0 1H400" /><path class="p" d="M0 1H400" pathLength="100" /></svg>
+        <i class="cx-node" aria-hidden="true"></i>
+        <a class="btn b-or magnet cx-btn" href="#demo">Découvrir Lotivio pour mon agence <span aria-hidden="true">↗</span></a>
+        <i class="cx-node" aria-hidden="true"></i>
+        <svg class="cx-wire r" viewBox="0 0 400 2" preserveAspectRatio="none" aria-hidden="true"><path class="w" d="M0 1H400" /><path class="p" d="M0 1H400" pathLength="100" /></svg>
+      </div>
+      <p class="cx-note">* Selon votre organisation et les canaux connectés.</p>
+    </div>
+  </div>
+</section>

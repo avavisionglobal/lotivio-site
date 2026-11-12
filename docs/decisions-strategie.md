@@ -19,6 +19,60 @@ Format d'une entrée :
 
 
 
+
+
+
+
+## 2026-11-12 — Section « L'IA, dans votre quotidien » (S04) retirée
+- Décision :
+  - S04 est retirée de la page.
+  - Le menu perd son lien « IA ».
+  - La pastille du menu indique « Produit · Parcours · Mise en place ».
+  - La section « Sur mesure » (S02–S03) enchaîne désormais directement sur le parcours (S05–S06).
+- Raison : demande de Diego.
+- Effet : l'IA reste présentée dans la carte « Votre assistant IA, à vos côtés au quotidien » (S03), dans le panneau 03 du parcours, dans S07 (carte 03) et dans la FAQ. Le fichier S04IA.astro reste sur le disque, inutilisé.
+- Statut : décidée.
+- Source : message de Diego, 12 novembre 2026.
+
+## 2026-11-12 — CTA (S08) refait dans la DA Lotivio
+- Décision :
+  - Le fond de soie est retiré.
+  - Nouvelle carte : gris chaud (#F1F0EC) et trame de code tirée d'une résidence sur les bords, avec la loupe qui fait réapparaître le code au survol de la souris (mécanisme du site).
+  - Étiquette orange en police technique « Pourquoi Lotivio » et titre encre et gris.
+  - Les trois points clés ont un carré orange et sont séparés par des filets.
+  - Le bouton orange « Découvrir Lotivio pour mon agence ↗ » est « branché » : deux fils amènent des impulsions orange jusqu'à lui.
+- Raison : retour de Diego (« je n'aime pas du tout […] il faut que ce soit beaucoup plus la DA de Lotivio […] avec peut-être une animation au toucher »).
+- Remplace / modifie : S08 v1 « soie » du même jour (archives : proofs/archive/S08Cta-v1-soie.astro, s08-cta-v1-soie.css).
+- Statut : proposition à valider.
+- Source : message de Diego, 12 novembre 2026.
+
+## 2026-11-12 — Nouvelle section CTA (S08) et nouvelle FAQ (S09)
+- Décision :
+  - S08, juste après « Pensé pour votre agence » (réf. bloc « Essential Tools » de Synais) :
+    - présentation : grande carte arrondie sur fond de soie lumineuse, générée avec GPT Image 2.5 (2 variantes, coût inconnu ; variante crème et orange retenue ; lot assets/cta/2026-11-12-fond-soie) ;
+    - textes : étiquette « Pourquoi Lotivio », titre « Et si votre prochaine promotion / vous demandait moins de gestion ? », texte de Diego ;
+    - trois points séparés par des filets : « Jusqu'à 5 h gagnées par semaine.* », « 24 h/24 », « 1 seul espace » ;
+    - bouton « Découvrir Lotivio pour mon agence ↗ ».
+  - Note de l'astérisque : « * Selon votre organisation et les canaux connectés. » (formulation de Claude, à valider).
+  - S09 FAQ :
+    - titre « Les réponses / avant de vous lancer. » ;
+    - huit questions et réponses de Diego, qui remplacent les six précédentes ;
+    - bloc final « Une question propre à votre agence ? » avec le bouton « Parlons de votre fonctionnement ↗ » ;
+    - données structurées FAQPage mises à jour (8 questions).
+  - Les questions « Où sont stockées les données ? » et « Mes e-mails sont-ils dans l'historique ? » ne figurent plus sur le site.
+- Source du chiffre 5 h, selon Diego : « retours de nos clients recueillis par formulaire ». Les réponses brutes sont à joindre au dossier.
+- Remplace / modifie : FAQ du 9.11 (archive : proofs/archive/S09Questions-v1.astro).
+- Statut : décidée (textes de Diego) ; note de l'astérisque : à valider.
+- Source : messages de Diego, 12 novembre 2026.
+
+## 2026-11-12 — Sections « Pourquoi maintenant ? » (S07B) et « Pour piloter votre activité » (S08) retirées
+- Décision : les deux sections sont retirées de la page. La mise en place (S07) enchaîne directement sur les questions (S09). Le lien « Diffusion » du footer, qui pointait vers S08, est retiré.
+- Raison : demande de Diego.
+- Effet : l'écart entre les 5 h du hero et les 4 h de S07B disparaît, puisque S07B n'est plus affichée.
+- Remplace / modifie : rien d'autre. Les fichiers S07BPourquoi.astro et S08Direction.astro restent sur le disque, inutilisés.
+- Statut : décidée.
+- Source : message de Diego, 12 novembre 2026.
+
 ## 2026-11-12 — Mise en place (S07) : « Votre équipe a des biens à vendre. Nous préparons votre Lotivio. »
 - Décision :
   - L'étiquette « 🇨🇭 Pensé pour votre agence » est conservée. Titre et introduction de Diego.

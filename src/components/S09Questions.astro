@@ -1,11 +1,15 @@
 ---
+import '../styles/s09-faq.css';
+// Textes de Diego du 12.11.2026. Version précédente : proofs/archive/S09Questions-v1.astro
 const qa = [
-  ['Où sont stockées les données ?', "Dans l'Union européenne, à Francfort. Chaque agence est isolée des autres : un agent ne voit que les données de son organisation."],
-  ['Quels canaux peut-on connecter ?', 'Homegate, ImmoScout24, immobilier.ch, Properstar, Meta Lead Ads et le formulaire de votre site. Nous vérifions vos outils à la mise en place. La diffusion se configure par agence.'],
-  ['Lotivio lit-il mon WhatsApp personnel ?', "Non. Lotivio passe par un numéro WhatsApp professionnel de l'agence. Les conversations de ce numéro arrivent dans la fiche du contact."],
-  ['Qu’est-ce que l’IA fait à ma place ?', 'Max qualifie les leads Meta Ads sur WhatsApp avec leur consentement. Vous pouvez le mettre en pause. Pour la dictée, l’IA prépare un compte rendu que vous relisez et validez.'],
-  ['Mes e-mails sont-ils dans l’historique ?', 'Vos e-mails envoyés depuis Lotivio sont consignés dans le suivi. Vous pouvez les envoyer via Outlook ; les réponses reçues restent dans votre boîte Outlook.'],
-  ['Combien ça coûte ?', 'Une mise en place, puis un abonnement mensuel. Nous précisons les connexions et les réglages nécessaires à votre agence pour vous proposer un périmètre et un prix.'],
+  ['J’ai déjà un CRM. Qu’est-ce que Lotivio peut m’apporter ?', 'Lotivio réunit le suivi des acheteurs, le matching avec vos biens, la diffusion et des assistants IA dans un environnement configuré avec votre agence. La démo permet de partir de votre fonctionnement actuel pour identifier ce que Lotivio pourrait simplifier et les outils qu’il pourrait remplacer.'],
+  ['Peut-on reprendre notre base de contacts ?', 'Oui. Nous préparons l’import de vos contacts avec vous, après vérification des données et du format disponibles. Les critères de recherche renseignés pourront ensuite servir au matching avec vos biens et vos nouvelles promotions.'],
+  ['Lotivio fonctionne-t-il avec nos portails et nos outils actuels ?', 'Lotivio peut recevoir les demandes de Homegate, ImmoScout24, immobilier.ch, Properstar, Meta Lead Ads et du formulaire de votre site. L’envoi d’e-mails via Outlook et WhatsApp professionnel fait également partie des connexions possibles. Nous vérifions votre configuration et définissons les connexions utiles à la mise en place.'],
+  ['L’IA va-t-elle contacter tous nos prospects automatiquement ?', 'Vous définissez avec nous les automatismes à activer et les interventions de votre équipe. Aujourd’hui, l’assistant WhatsApp qualifie les leads Meta Ads avec leur consentement ; il peut être mis en pause pour un contact. Les comptes rendus dictés sont préparés sous forme de brouillons que vos agents relisent et valident.'],
+  ['Faut-il utiliser le WhatsApp personnel de nos agents ?', 'Non. Lotivio utilise un numéro WhatsApp professionnel de l’agence. Les conversations de ce numéro sont rattachées aux contacts concernés dans le CRM. Les échanges WhatsApp personnels de vos agents ne sont pas importés.'],
+  ['Notre équipe sera-t-elle accompagnée pour démarrer ?', 'Oui. Nous prenons en charge les connexions et les réglages convenus, puis accompagnons votre équipe dans la prise en main sur ses propres projets. Vos agents apprennent à traiter leurs demandes, retrouver les informations utiles et organiser leur suivi.'],
+  ['Combien coûte Lotivio ?', 'L’offre comprend une mise en place, puis un abonnement mensuel. Nous définissons avec vous les connexions, les réglages et l’accompagnement nécessaires pour vous proposer un périmètre et un prix adaptés à votre agence.'],
+  ['Peut-on vraiment gagner jusqu’à 5 heures par semaine ?', 'Ce chiffre vient des retours de nos clients recueillis par formulaire. Le temps gagné dépend de votre organisation, du volume de demandes et des fonctions utilisées. Lors de la démo, nous examinons les tâches qui prennent du temps à votre équipe et celles que Lotivio peut simplifier ou automatiser.'],
 ];
 const ld = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: qa.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })) };
 ---
@@ -14,10 +18,11 @@ const ld = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: q
   <div class="faq">
     <div class="lab" data-scramble>Vos questions, avant de changer</div>
     <div class="r">
-      <h2 class="h2 faq-h" data-flash>Votre agence.<span class="g">Vos questions.</span></h2>
+      <h2 class="h2 faq-h" data-flash>Les réponses<span class="g">avant de vous lancer.</span></h2>
       {qa.map(([q, a], i) => (
         <details open={i === 0} data-bloc={`S09.${i + 1}`} data-reveal><summary>{q}</summary><p>{a}</p></details>
       ))}
+      <div class="faq-end" data-bloc="S09.9"><p>Une question propre à votre agence&nbsp;?</p><a class="par-btn" href="#demo">Parlons de votre fonctionnement<span aria-hidden="true">↗</span></a></div>
     </div>
   </div>
   <script type="application/ld+json" set:html={JSON.stringify(ld)} />
