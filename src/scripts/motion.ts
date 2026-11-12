@@ -189,19 +189,6 @@ async function init() {
     gsap.fromTo($$('li, .menu-cta', menu), { autoAlpha: 0, y: 14 }, { autoAlpha: 1, y: 0, duration: 0.55, ease: 'expo.out', stagger: 0.04, delay: 0.05 });
   });
 
-  /* ---------- Boutons magnétiques ---------- */
-  if (matchMedia('(hover: hover) and (pointer: fine)').matches) {
-    $$('.magnet').forEach((b) => {
-      const xTo = gsap.quickTo(b, 'x', { duration: 0.6, ease: 'power3' });
-      const yTo = gsap.quickTo(b, 'y', { duration: 0.6, ease: 'power3' });
-      b.addEventListener('pointermove', (e) => {
-        const r = b.getBoundingClientRect();
-        xTo((e.clientX - r.left - r.width / 2) * 0.3); yTo((e.clientY - r.top - r.height / 2) * 0.4);
-      });
-      b.addEventListener('pointerleave', () => { gsap.to(b, { x: 0, y: 0, duration: 0.9, ease: 'elastic.out(1, 0.35)' }); });
-    });
-  }
-
   // Recalcul des positions seulement si quelque chose peut encore changer les hauteurs.
   // ScrollTrigger calcule déjà ses positions à la création : un recalcul de plus après coup
   // relance une mise en page complète (coûteux sur mobile).

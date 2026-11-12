@@ -1,0 +1,37 @@
+/* =================================================================
+   S09B · Tarifs (12.11.2026) — DA du site : gris chaud, encre, orange en touches,
+   carte sombre avec trame de code (loupe au survol, texhover.ts).
+   ================================================================= */
+.tf{padding:var(--sp-sec,160px) var(--pad) 0}
+.tf-head{display:flex;flex-direction:column;align-items:center;text-align:center;max-width:1000px;margin:0 auto}
+.tf-lab{display:inline-flex;align-items:center;gap:9px;font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--orange)}
+.tf-lab i{width:7px;height:7px;background:var(--orange);border-radius:1px}
+.tf-h{margin-top:24px;font-family:var(--disp);font-variation-settings:"wdth" 104;font-weight:500;font-size:clamp(36px,4.2vw,64px);line-height:1.02;letter-spacing:-.048em}
+.tf-h .g{display:block;color:var(--grey)}
+.tf-p{max-width:38em;margin-top:24px;font-size:16.5px;line-height:1.6;color:var(--muted);text-wrap:balance}
+.tf-cards{display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:1080px;margin:clamp(48px,6vw,72px) auto 0}
+.tf-card{position:relative;isolation:isolate;overflow:hidden;display:flex;flex-direction:column;min-height:360px;padding:34px 34px 32px;border-radius:26px;background:var(--warm);box-shadow:inset 0 0 0 1px var(--warm-line)}
+.tf-card.dk{background:#141414;color:#F3F1EC;box-shadow:none}
+.tf-tex{z-index:-1;right:-6px;top:-4px;left:auto;color:#3A3835;opacity:.9;
+  mask-image:radial-gradient(85% 85% at 100% 0%,#000 25%,transparent 70%);-webkit-mask-image:radial-gradient(85% 85% at 100% 0%,#000 25%,transparent 70%)}
+.tf-k{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.tf-card.dk .tf-k{color:#FF9C61}
+.tf-card h3{margin-top:20px;font-family:var(--disp);font-variation-settings:"wdth" 104;font-weight:500;font-size:26px;letter-spacing:-.03em}
+.tf-price{display:flex;align-items:baseline;flex-wrap:wrap;gap:0 8px;margin-top:auto;padding-top:48px;font-family:var(--disp);font-variation-settings:"wdth" 104;font-weight:500;
+  font-size:clamp(48px,5.4vw,78px);line-height:1;letter-spacing:-.05em;font-variant-numeric:tabular-nums}
+.tf-price .cur{font-size:.32em;letter-spacing:0;font-family:var(--mono);font-weight:400;color:var(--muted);transform:translateY(-.15em)}
+.tf-price .from{font-size:.3em;letter-spacing:-.01em;font-family:var(--sans);font-weight:500;color:var(--muted)}
+.tf-price .per{font-size:.3em;letter-spacing:-.01em;font-family:var(--sans);font-weight:500;color:var(--muted)}
+.tf-card.dk .tf-price .cur,.tf-card.dk .tf-price .from,.tf-card.dk .tf-price .per{color:rgba(243,241,236,.55)}
+.tf-t{margin-top:18px;padding-top:18px;border-top:1px solid var(--warm-line);font-size:15px;line-height:1.55;color:var(--muted);max-width:30em}
+.tf-card.dk .tf-t{border-top-color:#2E2C2A;color:rgba(243,241,236,.66)}
+.tf-end{display:flex;justify-content:center;margin-top:44px}
+.tf-btn{padding:15px 24px;font-size:15.5px}
+.tf-btn span{transition:transform .25s var(--ease)}
+.tf-btn:hover span{transform:rotate(45deg)}
+@media (max-width:800px){
+  .tf-cards{grid-template-columns:1fr}
+  .tf-card{min-height:0;padding:28px 24px}
+  .tf-price{padding-top:36px}
+}
+@media (max-width:520px){.tf-h{font-size:32px}.tf-p{font-size:15px}.tf-btn{white-space:normal}}

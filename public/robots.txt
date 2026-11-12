@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /essai/
 
 Sitemap: https://lotivio.ch/sitemap-index.xml

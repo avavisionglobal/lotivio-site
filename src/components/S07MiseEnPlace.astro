@@ -1,13 +1,11 @@
 ---
 import Btn from './ui/Btn.astro';
 import '../styles/s07-mise-en-place.css';
+import '../styles/s07-scenes.css';
 // Textes de Diego du 12.11.2026 (4 cartes). Version à 5 cartes : proofs/archive/S07MiseEnPlace-v1-5-cartes.astro
 const tex = ['/media/tex/facade.svg', '/media/tex/chantier.svg', '/media/tex/quartier.svg'];
 
-// Illustrations animées (bento) : chaque scène est jouée par src/scripts/bento.ts,
-// qui pose les classes d'étape k1, k2… sur .il selon data-steps (ms) ; les mouvements sont
-// des transitions CSS (global.css, « S07 · illustrations bento »). Sans JavaScript ou avec
-// moins de mouvement, la scène s'affiche dans son état final. Données de démonstration.
+// Icônes des illustrations (cartes S07).
 const ico = {
   check: '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.4l2.9 2.8 6-6.4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
   cursor: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3l14 8.2-6.3 1.4 3.6 6.6-2.6 1.4-3.6-6.6L5 18.2z" fill="#141414" stroke="#fff" stroke-width="1.4" stroke-linejoin="round"/></svg>',
@@ -18,19 +16,23 @@ const ico = {
   pdf: '<svg viewBox="0 0 32 40" aria-hidden="true"><path d="M4 2h16l8 8v26a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z" fill="#fff" stroke="#DCDAD4" stroke-width="1.5"/><rect x="5" y="22" width="22" height="10" rx="2" fill="#EB6E2C"/><text x="16" y="29.6" text-anchor="middle" font-size="7" font-family="ui-monospace,monospace" fill="#fff">PDF</text></svg>',
 };
 
-// S07.2 · carte des branchements (coordonnées de la tuile : 374 × 224, centre 187,124)
-const hubL = [
-  { y: 70, html: '<img src="/media/logos/homegate.svg" alt="" width="73" height="12" style="height:1.25em">' },
-  { y: 124, html: '<img src="/media/logos/immoscout24.svg" alt="" width="33" height="20" style="height:2em">' },
-  { y: 178, html: '<img src="/media/logos/immobilier-ch.svg" alt="" width="85" height="12" style="height:1.2em">' },
+// v4 (12.11.2026) : une carte par étape, peu d'éléments, grandes lignes lisibles ; la scène se joue une fois
+// à chaque apparition puis reste immobile (src/scripts/s07.ts, styles s07-scenes.css). Version chargée :
+// proofs/archive/S07MiseEnPlace-v3-scenes-chargees.astro. Portraits de démonstration existants.
+const P = (k: string) => `/media/${k[0] === 'c' ? 'contacts' : 'leads'}/${k}.webp`;
+// Canaux (carte 02) : 3 à gauche, 3 à droite, autour de Lotivio. Repère 338 × 180, centre 169,90.
+const chL = [
+  { y: 30, html: '<img src="/media/logos/homegate.svg" alt="" width="73" height="12" style="height:1.2em">' },
+  { y: 90, html: '<img src="/media/logos/immoscout24.svg" alt="" width="33" height="20" style="height:2em">' },
+  { y: 150, html: '<img src="/media/logos/immobilier-ch.svg" alt="" width="85" height="12" style="height:1.15em">' },
 ];
-const hubR = [
-  { y: 70, html: `<span class="il-i">${ico.globe}</span>Votre site`, dir: 'in' },
-  { y: 124, html: '<img src="/media/logos/whatsapp.svg" alt="" width="18" height="18" style="height:1.8em">WhatsApp', dir: 'both' },
-  { y: 178, html: `<span class="il-i">${ico.mail}</span>Outlook`, dir: 'out' },
+const chR = [
+  { y: 30, html: '<img src="/media/logos/meta-64.webp" alt="" width="68" height="14" style="height:1.35em">' },
+  { y: 90, html: '<img src="/media/logos/whatsapp.svg" alt="" width="18" height="18" style="height:1.6em">WhatsApp' },
+  { y: 150, html: `<span class="il-i">${ico.globe}</span>Votre site` },
 ];
-const curveL = (y: number) => `M114 ${y}C146 ${y} 146 124 158 124`;
-const curveR = (y: number) => `M260 ${y}C228 ${y} 228 124 216 124`;
+const cL = (y: number) => `M100 ${y}C128 ${y} 124 90 139 90`;
+const cR = (y: number) => `M238 ${y}C210 ${y} 214 90 199 90`;
 ---
 <!-- S07 · Mise en place -->
 <section class="hs" id="mise-en-place">
@@ -51,38 +53,15 @@ const curveR = (y: number) => `M260 ${y}C228 ${y} 228 124 216 124`;
       <article class="oc" data-bloc="S07.1"><pre class="tex ctex" data-src={tex[0]} data-w=".38" data-r=".95" aria-hidden="true"></pre>
         <span class="nb">1</span>
         <div class="ill" aria-hidden="true">
-          <div class="il il1" data-steps="300,1000,1700,2100,2700,3300,4600,5600,6700" data-loop="9000">
-            <div class="t t-map">
-              <div class="t-h"><span class="ilb">Votre fonctionnement</span><span class="live"><i></i>Atelier</span></div>
-              <div class="scn map">
-                <svg class="il-svg" viewBox="0 0 346 136">
-                  <path class="dr d1" pathLength="1" d="M94 20C114 20 110 68 128 68" />
-                  <path class="dr d2" pathLength="1" d="M94 68L128 68" />
-                  <path class="dr d3" pathLength="1" d="M94 116C114 116 110 68 128 68" />
-                  <path class="dr d4" pathLength="1" d="M218 68C234 68 228 36 244 36" />
-                  <path class="dr d5" pathLength="1" d="M218 68C234 68 228 100 244 100" />
-                  <path class="pu u1" pathLength="1" d="M94 20C114 20 110 68 128 68L218 68C234 68 228 36 244 36" />
-                  <path class="pu u2" pathLength="1" d="M94 116C114 116 110 68 128 68L218 68C234 68 228 100 244 100" />
-                  <path class="pu u3" pathLength="1" d="M94 68L218 68C234 68 228 36 244 36" />
-                </svg>
-                <span class="nd src s1" style="top:14.7%">Portails</span>
-                <span class="nd src s2" style="top:50%">Votre site</span>
-                <span class="nd src s3" style="top:85.3%">Meta Ads</span>
-                <span class="nd hub1">Demande</span>
-                <span class="nd ag a1" style="top:26.5%"><b>SK</b>répond<em class="ok"><Fragment set:html={ico.check} /></em></span>
-                <span class="nd ag a2" style="top:73.5%"><b>DL</b>relance<em class="ok"><Fragment set:html={ico.check} /></em></span>
-                <span class="cur c1"><Fragment set:html={ico.cursor} /></span>
+          <div class="s7 s7-at" data-s7>
+            <div class="t">
+              <div class="t-h"><span class="lb">Votre fonctionnement</span><span class="live"><i></i>Atelier</span></div>
+              <div class="s7-rows">
+                <div class="s7-r on done" data-t="200" data-d="900"><span class="ic">1</span><span class="tx"><small>D’où viennent vos demandes ?</small><b>Portails, Meta Ads, votre site</b></span><em class="ok"><Fragment set:html={ico.check} /></em></div>
+                <div class="s7-r on done" data-t="1100" data-d="1800"><b class="ia">SK</b><span class="tx"><small>Qui répond ?</small><b>Sarah K.</b></span><em class="ok"><Fragment set:html={ico.check} /></em></div>
+                <div class="s7-r on done" data-t="2000" data-d="2700"><b class="ia o">DL</b><span class="tx"><small>Qui relance ?</small><b>David L. · après 5 jours</b></span><em class="ok"><Fragment set:html={ico.check} /></em></div>
               </div>
-            </div>
-            <div class="t dk t-q">
-              <span class="ilb">À l’atelier</span>
-              <div class="qs"><span class="q q1">D’où viennent vos demandes<i>?</i></span><span class="q q2">Qui répond<i>?</i></span><span class="q q3">Qui relance<i>?</i></span></div>
-              <div class="qd"><i></i><i></i><i></i></div>
-            </div>
-            <div class="t t-team">
-              <span class="ilb">Votre équipe</span>
-              <div class="scn avs"><span class="av v1">SK</span><span class="av v2">DL</span><span class="av v3">MR</span><span class="av v4">AN</span></div>
-              <span class="scn role"><span class="ok"><Fragment set:html={ico.check} /></span>Rôles définis</span>
+              <div class="ft on" data-t="3200"><em class="ok"><Fragment set:html={ico.check} /></em>Rôles définis avec votre équipe</div>
             </div>
           </div>
         </div>
@@ -94,44 +73,19 @@ const curveR = (y: number) => `M260 ${y}C228 ${y} 228 124 216 124`;
       <article class="oc" data-bloc="S07.2"><pre class="tex ctex" data-src={tex[1]} data-w=".38" data-r=".95" aria-hidden="true"></pre>
         <span class="nb">2</span>
         <div class="ill" aria-hidden="true">
-          <div class="il il2" data-steps="200,600,1500,2400,3000" data-loop="9000">
-            <div class="t t-hub">
-              <div class="t-h"><span class="ilb">Branchements</span><span class="live"><i></i>Exemple</span></div>
-              <div class="scn hubz">
-                <svg class="il-svg" viewBox="0 0 374 224">
-                  {hubL.map((n, i) => <path class={`dr d${i + 1}`} pathLength="1" d={curveL(n.y)} />)}
-                  {hubR.map((n, i) => <path class={`dr d${i + 4}`} pathLength="1" d={curveR(n.y)} />)}
-                  <path class="dr d7" pathLength="1" d="M187 62L187 96" />
-                  <path class="dr d8" pathLength="1" d="M187 186L187 152" />
-                  {hubL.map((n, i) => <path class={`pu in u${i + 1}`} pathLength="1" d={curveL(n.y)} />)}
-                  <path class="pu in u4" pathLength="1" d={curveR(70)} />
-                  <path class="pu in u5" pathLength="1" d={curveR(124)} />
-                  <path class="pu out u6" pathLength="1" d="M216 124C228 124 228 124 260 124" />
-                  <path class="pu out u7" pathLength="1" d="M216 124C228 124 228 178 260 178" />
-                  <path class="pu in u8" pathLength="1" d="M187 62L187 96" />
-                  <path class="pu in u9" pathLength="1" d="M187 186L187 152" />
+          <div class="s7 s7-cx" data-s7>
+            <div class="t">
+              <div class="t-h"><span class="lb">Vos canaux</span><span class="live"><i></i>Connectés</span></div>
+              <div class="hub">
+                <svg class="sv" viewBox="0 0 338 180">
+                  {chL.map((n, i) => <path class="dr on" data-t={300 + i * 220} pathLength="1" d={cL(n.y)} />)}
+                  {chR.map((n, i) => <path class="dr on" data-t={410 + i * 220} pathLength="1" d={cR(n.y)} />)}
                 </svg>
-                <span class="core"><img src="/brand/lotivio-mark.svg" alt="" width="34" height="34" /></span>
-                {hubL.map((n, i) => <span class={`plg l n${i + 1}`} style={`top:${(n.y / 224) * 100}%`}><Fragment set:html={n.html} /><em class="ok"><Fragment set:html={ico.check} /></em></span>)}
-                {hubR.map((n, i) => <span class={`plg r n${i + 4} ${n.dir}`} style={`top:${(n.y / 224) * 100}%`}><Fragment set:html={n.html} /><em class="ok"><Fragment set:html={ico.check} /></em></span>)}
-                <span class="plg c n7" style="top:23.2%"><img src="/media/logos/meta-64.webp" alt="" width="68" height="14" style="height:1.35em" /><em class="ok"><Fragment set:html={ico.check} /></em></span>
-                <span class="plg c n8" style="top:89.3%"><img src="/media/logos/properstar-logo-84.webp" alt="" width="84" height="13" style="height:1.3em" /><em class="ok"><Fragment set:html={ico.check} /></em></span>
+                <span class="core on" data-t="100"><img src="/brand/lotivio-mark.svg" alt="" width="34" height="34" /></span>
+                {chL.map((n, i) => <span class="plg pl on done" data-t={300 + i * 220} data-d={650 + i * 220} style={`top:${(n.y / 180) * 100}%`}><Fragment set:html={n.html} /><em class="ok"><Fragment set:html={ico.check} /></em></span>)}
+                {chR.map((n, i) => <span class="plg pr on done" data-t={410 + i * 220} data-d={760 + i * 220} style={`top:${(n.y / 180) * 100}%`}><Fragment set:html={n.html} /><em class="ok"><Fragment set:html={ico.check} /></em></span>)}
               </div>
-            </div>
-            <div class="t t-in">
-              <span class="ilb">Demandes reçues</span>
-              <div class="scn rlist">
-                <span class="rw w1"><b>Homegate</b>Clos des Vergers</span>
-                <span class="rw w2"><b>Meta Ads</b>Les Terrasses</span>
-                <span class="rw w3"><b>Votre site</b>Lac &amp; Lumière</span>
-              </div>
-            </div>
-            <div class="t dk t-out">
-              <span class="ilb">Envois</span>
-              <div class="scn outs">
-                <span class="ot o1"><span class="il-i"><Fragment set:html={ico.mail} /></span>E-mail via Outlook<span class="go"><Fragment set:html={ico.arrow} /></span></span>
-                <span class="ot o2"><img src="/media/logos/whatsapp.svg" alt="" width="14" height="14" />WhatsApp<span class="go"><Fragment set:html={ico.arrow} /></span></span>
-              </div>
+              <div class="s7-r on" data-t="1900"><span class="stk"><img src={P('c1')} alt="" width="160" height="160" loading="lazy" decoding="async" /><img src={P('l2')} alt="" width="160" height="160" loading="lazy" decoding="async" /><img src={P('c4')} alt="" width="160" height="160" loading="lazy" decoding="async" /></span><span class="tx"><small>Contacts et demandes</small><b>Au même endroit</b></span></div>
             </div>
           </div>
         </div>
@@ -143,30 +97,13 @@ const curveR = (y: number) => `M260 ${y}C228 ${y} 228 124 216 124`;
       <article class="oc" data-bloc="S07.3"><pre class="tex ctex" data-src={tex[2]} data-w=".38" data-r=".95" aria-hidden="true"></pre>
         <span class="nb">3</span>
         <div class="ill" aria-hidden="true">
-          <div class="il il3" data-steps="300,1100,1900,2500,3000,3700,4200,4900,6000,6500" data-loop="9000">
-            <div class="t t-flow">
-              <div class="t-h"><span class="ilb">Parcours d’une demande</span><span class="live"><i></i>Exemple</span></div>
-              <div class="scn steps">
-                <span class="trk"><i class="pdot"></i></span>
-                <div class="stp st1"><i class="nd2"></i><span class="nme"><b>Premier contact</b><small class="ss"><span class="sw-a">En file</span><span class="sw-b"><Fragment set:html={ico.check} />Envoyé</span></small></span><span class="tg on"><i></i><span>Auto</span></span></div>
-                <div class="stp st2"><i class="nd2"></i><span class="nme"><b>Brochure · WhatsApp</b><small class="ss"><span class="sw-a">En file</span><span class="sw-b"><Fragment set:html={ico.check} />Envoyée</span></small></span><span class="tg on"><i></i><span>Auto</span></span></div>
-                <div class="stp st3"><i class="nd2"></i><span class="nme"><b>Relance · e-mail</b><small class="ss"><span class="sw-a">En file</span><span class="sw-w">L’agent valide…</span><span class="sw-b"><Fragment set:html={ico.check} />Validée, envoyée</span></small></span><span class="tg flip"><i></i><span class="ta">Auto</span><span class="tb">Agent</span></span></div>
-                <span class="cur c3"><Fragment set:html={ico.cursor} /></span>
-              </div>
-            </div>
-            <div class="t t-bro">
-              <span class="ilb">Brochure</span>
-              <div class="scn bro">
-                <span class="doc"><Fragment set:html={ico.pdf} /></span>
-                <span class="dname">Les Terrasses<small>brochure.pdf</small></span>
-                <span class="wab"><img src="/media/logos/whatsapp.svg" alt="" width="14" height="14" />Brochure envoyée</span>
-              </div>
-            </div>
-            <div class="t dk t-ok">
-              <span class="ilb">À valider</span>
-              <div class="scn val">
-                <span class="vr"><b>SK</b><span>Relance prête<small>Léa Perrin</small></span></span>
-                <span class="btn-v"><span class="v-a">Valider</span><span class="v-b"><Fragment set:html={ico.check} />Validé</span></span>
+          <div class="s7 s7-dl" data-s7>
+            <div class="t">
+              <div class="t-h"><span class="who on" data-t="100"><img src={P('l1')} alt="" width="160" height="160" loading="lazy" decoding="async" /><span><b>Thomas Rochat</b><small>Nouvelle demande · Meta Ads</small></span></span><span class="live"><i></i>Exemple</span></div>
+              <div class="s7-rows">
+                <div class="s7-r on done" data-t="500" data-d="1200"><span class="ic">1</span><span class="tx"><b>Premier contact</b><small class="sta"><span class="a">En attente</span><span class="b">Envoyé automatiquement</span></small></span><span class="md">Auto</span></div>
+                <div class="s7-r on done" data-t="1400" data-d="2100"><span class="ic">2</span><span class="tx"><b>Brochure · WhatsApp</b><small class="sta"><span class="a">En attente</span><span class="b">Envoyée automatiquement</span></small></span><span class="md">Auto</span></div>
+                <div class="s7-r ag on done" data-t="2300" data-d="3600"><span class="ic">3</span><span class="tx"><b>Relance · e-mail</b><small class="sta"><span class="a">À valider par l’agent</span><span class="b">Validée par Sarah K.</span></small></span><span class="md">Agent</span></div>
               </div>
             </div>
           </div>
@@ -179,29 +116,17 @@ const curveR = (y: number) => `M260 ${y}C228 ${y} 228 124 216 124`;
       <article class="oc" data-bloc="S07.5"><pre class="tex ctex" data-src={tex[1]} data-w=".38" data-r=".95" aria-hidden="true"></pre>
         <span class="nb">4</span>
         <div class="ill" aria-hidden="true">
-          <div class="il il5" data-steps="300,600,2900,3500,4800,6000" data-loop="9000">
-            <div class="t t-imp">
-              <div class="t-h"><span class="ilb">Import des contacts</span><span class="stx"><span class="sx-a">En cours</span><span class="sx-b"><Fragment set:html={ico.check} />Terminé</span></span></div>
-              <div class="scn imp">
-                <span class="file"><Fragment set:html={ico.sheet} /><small>contacts.csv</small></span>
-                <span class="flow"><i></i><i></i><i></i></span>
-                <div class="cl">
-                  <span class="cr c1"><b>NG</b><i></i><i class="s"></i></span>
-                  <span class="cr c2"><b>YR</b><i></i><i class="s"></i></span>
-                  <span class="cr c3"><b>CM</b><i></i><i class="s"></i></span>
-                </div>
-                <span class="pbar"><i></i></span><span class="pct"></span>
+          <div class="s7 s7-pm" data-s7>
+            <div class="t">
+              <div class="t-h"><span class="lb">Prise en main</span><span class="live"><i></i>Avec votre équipe</span></div>
+              <div class="s7-team">
+                {['SK', 'DL', 'MR', 'AN'].map((x, k) => <span class={`av v${k} on`} data-t={150 + k * 180}><b>{x}</b><i></i></span>)}
+                <span class="onl on" data-t="950">Équipe en ligne</span>
               </div>
-            </div>
-            <div class="t t-team5">
-              <span class="ilb">Équipe en ligne</span>
-              <div class="scn tm5"><span class="av"><b>SK</b><i></i></span><span class="av"><b>DL</b><i></i></span><span class="av"><b>MR</b><i></i></span><span class="av"><b>AN</b><i></i></span></div>
-            </div>
-            <div class="t dk t-new">
-              <span class="ilb">Nouvelle demande</span>
-              <div class="scn nw">
-                <span class="nc"><b>Homegate</b>Clos des Vergers · Lot A2<span class="tap"></span></span>
-                <span class="take"><b>DL</b>Prise en charge</span>
+              <div class="s7-rows">
+                <div class="s7-r on done" data-t="1200" data-d="1800"><span class="ic">1</span><span class="tx"><b>Traiter une demande</b></span><em class="ok"><Fragment set:html={ico.check} /></em></div>
+                <div class="s7-r on done" data-t="1700" data-d="2400"><span class="ic">2</span><span class="tx"><b>Retrouver un acheteur</b></span><em class="ok"><Fragment set:html={ico.check} /></em></div>
+                <div class="s7-r on done" data-t="2200" data-d="3000"><span class="ic">3</span><span class="tx"><b>Préparer une relance</b></span><em class="ok"><Fragment set:html={ico.check} /></em></div>
               </div>
             </div>
           </div>
@@ -213,5 +138,10 @@ const curveR = (y: number) => `M260 ${y}C228 ${y} 228 124 216 124`;
   </div>
   <div class="swipe" aria-hidden="true"><i><b></b><b></b><b></b></i>Faire glisser</div>
 </section>
+<script>
+  // Scènes de la mise en place : chargées quand le navigateur est libre (sous le premier écran).
+  const go = () => import('../scripts/s07.ts');
+  if ('requestIdleCallback' in window) requestIdleCallback(go, { timeout: 2000 }); else setTimeout(go, 400);
+</script>
 <div class="par-end hs-end" data-bloc="S07.6"><Btn label="Parlons de votre mise en place" href="#demo" /></div>
 

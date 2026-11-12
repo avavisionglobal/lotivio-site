@@ -15,6 +15,169 @@ Format d'une entrée :
 
 ---
 
+## 2026-11-12 — « Essayez Lotivio » V2 : réplique de l'app en visite guidée et exploration libre
+- Décision :
+  - La V1 en six étapes à valider une par une est remplacée par une réplique interactive de l'app, au langage de l'app réelle (DESIGN.md de ava-crm : sidebar noire, cartes blanches hairline, Archivo), dessinée en 1280 × 800 et réduite à la largeur de la page, sur une scène orange.
+  - Promotion fictive préremplie : « Les Vergers », Kerzers, 18 appartements (5 vendus, 2 réservés au départ). Agente de démonstration : Sarah Keller. Mêmes portraits que les panneaux du Parcours.
+  - Visite guidée automatique au défilement, 7 chapitres avec légende et barres de progression : Aujourd'hui (la promotion et les tâches, une demande Meta Ads arrive) → La demande (fiche contact et téléphone de l'acheteur : Max envoie la brochure sur WhatsApp, reçoit les critères, statut Qualifié) → Relance (Céline ouvre la brochure 3×, remonte en tête, « Chaud » ; relance de Marc en un clic) → Matching (« Pourquoi ce score ? », envoi des 3 meilleurs) → Pipeline (Céline glissée en Réservation, valeur mise à jour) → La promotion (stock, lot B3 passé en Réservé, diffusion) → Vue d'ensemble (KPI, provenance et conversion par canal jusqu'aux acheteurs, ce qui se vend, funnel).
+  - Un clic dans l'app met la visite en pause (exploration libre) : navigation, fiches, relances, « Avancer » dans le pipeline, choix du contact au matching. La légende suit l'écran ouvert. Bouton Pause / Reprendre, chapitres cliquables, flèches du clavier.
+  - Garde-fous à l'écran : Max seulement pour les leads Meta Ads (dit dans la légende), STOP dans la conversation, « Chaud » et priorité présentés comme des règles, score détaillé et présenté comme une règle. La Vue d'ensemble « provenance et conversion par source » existe dans l'app (vue-ensemble/types.ts) ; la mise en page « Ce qui se vend » (derniers lots réservés et vendus) est une présentation des données de stock.
+- Raison : retour de Diego sur la V1 (« niveau visuel, il faut que ce soit beaucoup mieux fait », « présélectionne déjà des trucs », « une vision globale […] la fenêtre d'aujourd'hui avec la promotion de Kerzers, que lorsqu'on clique ça s'ouvre […] pipeline […] ce qui se vend, d'où viennent les acheteurs »).
+- Limites : sur mobile, l'app réduite est illisible (une version mobile reste à concevoir). Chiffres de démonstration fictifs (42 leads, 27 qualifiés, 12 visites, délai 64 j).
+- Remplace / modifie : entrée « Section Essayez Lotivio en six étapes (V1) » du même jour. V1 archivée dans proofs/archive/*-v1-etapes.*
+- Statut : proposition à valider.
+- Source : message de Diego, 12 novembre 2026.
+
+## 2026-11-12 — Section « Essayez Lotivio » en six étapes (V1, page /essai)
+- Décision :
+  - Nouvelle section interactive S05B, construite sur une page de travail `/essai` (pas encore dans l'accueil). Rail des étapes avec les réglages à gauche, fenêtre sombre de l'app à droite.
+  - Six étapes, dans l'ordre demandé par Diego : 01 créer la promotion (nom, localité, 6/12/24 lots, diffusion) ; 02 une demande arrive avec sa source (Homegate, ImmoScout24, immobilier.ch, Meta Ads, votre site) ; 03 la brochure part (WhatsApp, e-mail ou déjà téléchargée ; premier contact automatique ou validé par l'agent) ; 04 relance sans réponse (WhatsApp, e-mail ou liste d'appels, après 2, 3 ou 5 jours) ; 05 qui appeler en premier (les clics sur la brochure font remonter le contact, « Chaud » à 3×) ; 06 score de matching réglable (pièces, budget, zone) avec « Pourquoi ce score ? ».
+  - Simulation dans la page : rien n'est envoyé ni enregistré. Fin : bouton « Voir Lotivio sur mes projets » vers le formulaire de démo (#demo).
+  - Garde-fous appliqués dans l'interface : WhatsApp grisé hors leads Meta Ads ; « déjà téléchargée » seulement pour une demande du site ; réglages « avec votre agence à la mise en place » ; classement et score présentés comme des règles ; seuls les clics sur le lien de brochure sont suivis.
+  - Usage prévu : support de la démonstration au rendez-vous Roccabella × Heritage, puis démonstration libre pour les visiteurs du site.
+- Raison : demande de Diego (« faire comme les étapes, création de la promotion et ensuite […] la brochure sur WhatsApp, par mail, déjà téléchargée, une relance automatique au bout de X temps, hiérarchiser ses appels avec ceux qui ont cliqué le plus sur la brochure, le score de matching »).
+- À vérifier : la relance automatique par e-mail et l'envoi automatique de brochure par e-mail. Au 5.10.2026, l'envoi automatique de brochure par e-mail n'existait pas dans le code (docs/DEMO_WELCOME.md de l'app) ; les délais 2/3/5 jours sont des exemples.
+- Remplace / modifie : rien (nouvelle section). Captation de leads dans la simulation : non, renvoi vers le formulaire existant.
+- Statut : proposition à valider.
+- Source : message de Diego, 12 novembre 2026.
+
+## 2026-11-12 — SEO technique, vitesse et pages légales avant la mise en ligne
+- Décision : aucun texte du site n'est modifié. Changements techniques :
+  - SEO :
+    - balises communes à toutes les pages (src/components/seo/Seo.astro) : canonique, robots, hreflang fr-CH, Open Graph et Twitter complets ;
+    - données structurées : Organization (Penaloza Lopez Vision, adresse, e-mail), WebSite, WebPage, SoftwareApplication avec les deux prix affichés (mise en place CHF 6'500, abonnement dès CHF 450/mois) ;
+    - favicon.ico, apple-touch-icon, manifeste ;
+    - sitemap avec date, sans /essai ni 404 ; robots.txt : Disallow /essai/ ; /essai est en noindex ;
+    - page 404.
+  - Vitesse :
+    - les scripts des sections sous le premier écran se lancent quand le navigateur est libre (flash, app, texhover, scènes S06 et S07) ;
+    - l'ancien bloc CSS des illustrations S07 (bento, environ 340 lignes) et bento.ts sont retirés (archive : proofs/archive/bento-v2.ts) ;
+    - la police Archivo est réduite aux graisses 450-700 et aux largeurs 100-118 (90 → 54 Ko ; src/styles/fonts.css), sans changement visuel vérifié.
+  - Vercel (vercel.json) :
+    - cache d'un an pour /_astro, d'une semaine pour /media et /brand ;
+    - en-têtes de sécurité (nosniff, Referrer-Policy, X-Frame-Options, Permissions-Policy, HSTS sans sous-domaines) ;
+    - barre finale imposée dans les adresses.
+  - Pages légales /mentions-legales/ et /confidentialite/ (mise en page légère, src/layouts/Legal.astro) :
+    - liens dans le footer (colonne Compte) ;
+    - le lien « Confidentialité » du formulaire de démo pointe vers la politique du site (avant : celle de l'app).
+- Mesures Lighthouse (local, serveur compressé comme Vercel) :
+  - accueil mobile : 75 → 92, blocage 590 ms → 0-30 ms ;
+  - accueil ordinateur : 100 ;
+  - pages légales : 100 dans les quatre catégories ;
+  - SEO 100 partout.
+- Reste : accessibilité 96, à cause du contraste de la 2e ligne grise du titre du hero et de l'étiquette « Développé pour la Suisse » (choix de DA, non modifié).
+- Faits légaux repris de la politique de l'app (ava-crm) : Penaloza Lopez Vision, Rue de l'hôpital 8a, 2024 La Grande-Béroche, info@ava-vision.com. Le site n'utilise ni cookie, ni outil de mesure, ni ressource tierce : pas de bannière.
+- À compléter :
+  - numéro IDE et forme juridique (config.ts, LEGAL) ;
+  - prestataire du formulaire de démo, dans la politique, dès qu'il est branché ;
+  - validation des deux textes légaux par Diego (projet, pas un avis juridique).
+- Statut : proposition à valider.
+- Source : messages de Diego, 12 novembre 2026 (« fais le SEO, tout ce qui est technique […] on ne change pas le copywriting […] mention légale et autres choses obligatoires »).
+
+---
+
+## 2026-11-12 — Mise en place (S07) v4 : une carte simple par étape
+- Décision : les scènes v3 (trois tuiles par carte, nombreuses animations) sont remplacées par une seule carte blanche par étape. Elle contient peu d'éléments, de grandes lignes lisibles et le même gabarit pour les quatre étapes.
+  - 01 Atelier : trois lignes question → réponse (« D'où viennent vos demandes ? » Portails, Meta Ads, votre site ; « Qui répond ? » Sarah K. ; « Qui relance ? » David L. · après 5 jours), puis « Rôles définis avec votre équipe ».
+  - 02 Canaux : Lotivio au centre, six canaux qui se branchent (Homegate, ImmoScout24, immobilier.ch, Meta, WhatsApp, votre site), puis une ligne « Contacts et demandes · Au même endroit » avec trois visages.
+  - 03 Déléguer : Thomas Rochat (nouvelle demande Meta Ads) et trois lignes.
+    - « Premier contact » et « Brochure · WhatsApp » sont marqués Auto et passent à « Envoyé(e) automatiquement ».
+    - « Relance · e-mail » est marquée Agent : « À valider par l'agent », puis « Validée par Sarah K. ».
+  - 04 Prise en main : quatre membres de l'équipe en ligne, puis « Traiter une demande », « Retrouver un acheteur », « Préparer une relance » (texte de Diego), cochés un à un.
+  - Animation : les lignes arrivent puis se cochent, une seule fois à chaque apparition de la carte. Ensuite, la carte reste immobile : pas de boucle, de curseur ni de texte qui s'écrit.
+  - Sur mobile, le texte est un peu agrandi et revient à la ligne.
+- Raison : retour de Diego (« trop chargé […] des choses qui te dépassent […] trop d'informations […] plus simple, moins d'animation […] meilleure visibilité »).
+- Remplace / modifie : S07 v3 du même jour (archives : proofs/archive/S07MiseEnPlace-v3-scenes-chargees.astro, s07-scenes-v3-chargees.css, s07-v3-chargees.ts).
+- Statut : proposition à valider.
+- Source : message de Diego, 12 novembre 2026 (captures des cartes 01 et 02).
+
+---
+
+## 2026-11-12 — Mise en place (S07) : scènes animées au niveau du parcours (remplacé par la v4)
+- Décision : les quatre illustrations de S07 sont refaites en scènes enchaînées, sur le modèle des panneaux du parcours (S06). Mêmes cartes, mêmes textes, même défilement horizontal.
+  - Points communs :
+    - entrée des tuiles floutée, depuis trois directions ;
+    - lecture en boucle seulement quand la carte est à l'écran ;
+    - portraits de démonstration existants, aucune génération d'image ;
+    - script src/scripts/s07.ts, styles src/styles/s07-scenes.css.
+  - 01 Atelier : trois questions s'écrivent dans la tuile sombre (« D'où viennent vos demandes ? », « Qui répond aux nouvelles demandes ? », « Qui relance, et quand ? »).
+    - Chaque réponse apparaît en pastille et dessine sa partie de la carte : sources (logos Homegate et Meta, votre site), demande, puis Sarah K. qui répond et David L. qui relance, avec des impulsions orange.
+    - L'équipe se remplit, puis « Rôles définis ».
+  - 02 Branchements : les huit canaux se branchent un à un. Ensuite, les demandes arrivent en direct :
+    - une impulsion part du portail ou de Meta, le compteur augmente et le contact s'insère avec son visage ;
+    - la brochure part par e-mail via Outlook, ou par WhatsApp pour un lead Meta Ads.
+  - 03 Déléguer : Thomas Rochat (lead Meta Ads) traverse le parcours.
+    - Le premier contact part seul.
+    - Le PDF de la brochure arrive dans une bulle WhatsApp.
+    - Le curseur bascule la relance de « Auto » à « Agent », la relance apparaît « à valider », puis l'agent valide.
+  - 04 Prise en main :
+    - les contacts du panneau 01 sortent de contacts.csv avec leur visage, le compteur monte à 1'248 et la barre avance jusqu'à « Terminé » ;
+    - les quatre membres de l'équipe passent en ligne ;
+    - une nouvelle demande (Laura Girardin, Homegate) est prise en charge.
+- Raison : demande de Diego (« plus travailler les animations […] de la même qualité que les animations […] de la section où on présente les différentes étapes »).
+- Remplace / modifie : les illustrations à étapes de bento.ts (archive : proofs/archive/S07MiseEnPlace-v2-bento-etapes.astro). Les styles .il de global.css et bento.ts restent en place, inutilisés par S07.
+- Garde-fou : l'agent qui valide la relance et le bascule Auto / Agent illustrent des réglages faits avec l'agence (capacité vérifiée). Aucun texte n'est présenté comme écrit par l'IA.
+- Statut : proposition à valider.
+- Source : message de Diego, 12 novembre 2026.
+
+---
+
+## 2026-11-12 — Tarifs (S09B) v2 : panneau gris chaud et vraies cartes de prix
+- Décision :
+  - La section passe dans un grand panneau gris chaud arrondi (#F1F0EC), pour rompre le blanc sur blanc entre la FAQ et la section Tarifs. Rythme de fin de page : FAQ blanche → Tarifs gris chaud → Démo noire.
+  - Titre et introduction de Diego inchangés.
+  - Carte claire « Mise en place » : en-tête teinté (01 · Une seule fois, titre, « Pour préparer Lotivio au fonctionnement de votre agence. »), prix CHF 6’500.– qui défile à l'apparition, frise des quatre étapes reliées par un fil orange qui se remplit, bouton « Parlons de votre mise en place ↗ ».
+    - Étapes : Atelier ; Contacts et canaux ; Réglages du suivi ; Prise en main. Elles reprennent S07 et l'introduction de Diego.
+  - Carte sombre « Abonnement » : en-tête (02 · Chaque mois, « Selon la formule choisie. »), prix dès CHF 450.–/mois, liste « Compris », trame de code et loupe en bas à droite, bouton clair « Découvrir Lotivio pour mon agence ↗ ».
+    - Compris : Lotivio configuré pour votre agence (demandes, matching, relances, pipeline et stock) ; hébergement ; maintenance et mises à jour ; support pour votre équipe.
+  - Un bouton par carte au lieu d'un seul sous les cartes.
+  - Version mobile empilée.
+- Raison : retour de Diego (« bien plus travaillé […] comme une vraie section de prix […] ça fait trop blanc sur blanc au niveau des sections »).
+- Garde-fou : l'abonnement ne liste que ce que le texte de Diego garantit (hébergement, maintenance, mises à jour, support), plus le CRM configuré. Max (WhatsApp), la dictée et la diffusion sur les portails ne sont pas listés, puisque le contenu dépend de « la formule choisie ».
+- Remplace / modifie : S09B v1 du même jour (archives : proofs/archive/S09BTarifs-v1-deux-cartes.astro, s09b-tarifs-v1-deux-cartes.css).
+- Questions ouvertes :
+  - Prix hors TVA ou TVA comprise : à afficher ?
+  - Que contiennent les formules au-dessus de CHF 450.– ?
+  - Le texte « Lotivio configuré pour votre agence (demandes, matching, relances, pipeline et stock) » est une formulation de Claude, à valider.
+- Statut : proposition à valider.
+- Source : message de Diego, 12 novembre 2026 (capture de la section Tarifs).
+
+---
+
+## 2026-11-12 — Panneaux 03 « Qualification » et 04 « Pilotage » animés, au niveau des panneaux 01 et 02
+- Décision :
+  - Panneau 03 : la scène de trois photos de biens est remplacée par trois colonnes, dans l'esprit du panneau 02.
+    - « Relance · N relances à traiter » : à chaque tour, un signal arrive sur un contact (brochure consultée 3×, qualifié par Max avec ses critères, sans réponse depuis 5 jours), qui remonte en tête de la liste.
+    - Sa fiche s'ouvre avec son portrait, la pastille « Chaud » (une règle), ses critères et ses signaux.
+    - « Compte rendu dicté » : micro et onde, transcription qui s'écrit, informations extraites surlignées (intérêt, objection, relance), brouillon à confirmer, puis « Confirmé ». Le contact traité quitte la liste et une nouvelle relance arrive.
+    - Script src/scripts/qualif.ts.
+  - Panneau 04 : la grille grise et la barre de pipeline sont remplacées par un tableau de bord.
+    - Onglets de trois projets ; stock de 24 lots (Disponible, Réservé, Vendu) qui se colore en vague ; anneau « % vendu », valeur du pipeline et délai moyen ; origine des acheteurs par canal ; pipeline Qualifié → Réservation → Notaire → Vendu.
+    - À chaque tour, un acheteur traverse le pipeline : son lot passe de Disponible à Réservé puis Vendu, les compteurs et la barre de son canal se mettent à jour. Ensuite, le projet suivant s'affiche et tout se recalcule.
+    - Script src/scripts/pilotage.ts.
+  - Entrées floutées comme aux panneaux 01 et 02 ; mêmes hauteurs (environ 400 px à 1440 × 900) ; version mobile empilée.
+  - Mêmes personnes de démonstration que les panneaux 01 et 02 : Céline Favre (matchée au B4, brochure consultée 3×, puis acheteuse du B4), Thomas Rochat (lead Meta Ads qualifié par Max), Pierre-Alain Droz (immobilier.ch, Lac & Lumière · D1). Aucune génération d'image : portraits existants.
+- Raison : demande de Diego (« le même niveau aussi pour les qualifications […] les personas, les gens qui ont cliqué sur les brochures, les signaux, les critères […] ce qui se vend, un beau dashboard »).
+- Remplace / modifie : scènes « relances en photos » (.rel) et « pipeline Lot B4 » (.sale) du 9.11 ; leurs styles restent dans global.css, inutilisés.
+- À vérifier : la répartition des acheteurs par canal comme tableau de bord. La source de chaque demande est suivie, mais cet écran agrégé ne figure pas dans la liste des capacités vérifiées (Vue d'ensemble : KPI et funnel). Le texte du panneau, de Diego, promet déjà « l'origine de vos acheteurs ».
+- Statut : proposition à valider.
+- Source : message de Diego, 12 novembre 2026 (captures des panneaux 03 et 04).
+
+---
+
+## 2026-11-12 — Bouton : même comportement partout
+- Décision :
+  - Le bouton ne bouge plus : il ne suit plus la souris (effet magnétique retiré) et ne s'enfonce plus au clic.
+  - Seule animation, identique sur les 13 boutons : remplissage orange de gauche à droite et flèche qui sort puis rentre dans le carré.
+  - Le bouton de la section CTA (« Découvrir Lotivio pour mon agence ») perd sa taille propre et sa rotation à 45° au survol : il a la même taille et le même survol que les autres.
+  - Les différences admises : couleur (noir ou blanc), petite taille dans la barre de menu, pleine largeur dans le menu déroulant et le formulaire de démo.
+- Raison : retour de Diego (« des fois il réagit différemment lorsqu'on clique dessus […] que l'animation soit comme elle est, avec le orange et la flèche qui bougent, mais pas que le bouton bouge […] ça doit être partout pareil »).
+- Remplace / modifie : l'effet magnétique sur les boutons du menu, du hero, du CTA, des tarifs et du footer ; l'enfoncement au clic ; les règles .cx-btn de s08-cta.css.
+- Statut : décidée.
+- Source : message de Diego, 12 novembre 2026.
+
+---
+
 
 
 
